@@ -1535,7 +1535,7 @@ public class InstituteController {
 	@RequestMapping(value = "/insertIctEnblFac", method = RequestMethod.POST)
 	public String insertIctEnblFac(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-
+		String returnString = null;
 		int instituteId = (int) session.getAttribute("instituteId");
 		int userId = (int) session.getAttribute("userId");
 		int yId = (int) session.getAttribute("acYearId");
@@ -1545,34 +1545,45 @@ public class InstituteController {
 		String curDateTime = dateFormat.format(cal.getTime());
 
 		try {
-			IctEnabledFacilities ictEnbFac = new IctEnabledFacilities();
 
-			ictEnbFac.setIctEnbFacId(Integer.parseInt(request.getParameter("ict_id")));
-			ictEnbFac.setNoOfClassroom(Integer.parseInt(request.getParameter("classroom")));
-			ictEnbFac.setNoClassromLcd(Integer.parseInt(request.getParameter("lcd")));
-			ictEnbFac.setNoClassroomWifi(Integer.parseInt(request.getParameter("wifi")));
-			ictEnbFac.setSeminarHall(Integer.parseInt(request.getParameter("seminar_hall")));
-			ictEnbFac.setIctSeminarHall(Integer.parseInt(request.getParameter("ict_seminar")));
-			ictEnbFac.setInstId(instituteId);
-			ictEnbFac.setYearId(yId);
-			ictEnbFac.setDelStatus(1);
-			ictEnbFac.setIsActive(1);
-			ictEnbFac.setMakerUserId(userId);
-			ictEnbFac.setMakerEnterDatetime(curDateTime);
-			ictEnbFac.setExInt1(Integer.parseInt(request.getParameter("lcd_led")));
-			ictEnbFac.setExInt2(0);
-			ictEnbFac.setExVar1("NA");
-			ictEnbFac.setExVar2("NA");
-			// System.out.println(ictEnbFac.toString());
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			IctEnabledFacilities ictEnb = rest.postForObject(Constants.url + "/saveIctEnabledFacility", ictEnbFac,
-					IctEnabledFacilities.class);
+			if (token.trim().equals(key.trim())) {
+
+				IctEnabledFacilities ictEnbFac = new IctEnabledFacilities();
+
+				ictEnbFac.setIctEnbFacId(Integer.parseInt(request.getParameter("ict_id")));
+				ictEnbFac.setNoOfClassroom(Integer.parseInt(request.getParameter("classroom")));
+				ictEnbFac.setNoClassromLcd(Integer.parseInt(request.getParameter("lcd")));
+				ictEnbFac.setNoClassroomWifi(Integer.parseInt(request.getParameter("wifi")));
+				ictEnbFac.setSeminarHall(Integer.parseInt(request.getParameter("seminar_hall")));
+				ictEnbFac.setIctSeminarHall(Integer.parseInt(request.getParameter("ict_seminar")));
+				ictEnbFac.setInstId(instituteId);
+				ictEnbFac.setYearId(yId);
+				ictEnbFac.setDelStatus(1);
+				ictEnbFac.setIsActive(1);
+				ictEnbFac.setMakerUserId(userId);
+				ictEnbFac.setMakerEnterDatetime(curDateTime);
+				ictEnbFac.setExInt1(Integer.parseInt(request.getParameter("lcd_led")));
+				ictEnbFac.setExInt2(0);
+				ictEnbFac.setExVar1("NA");
+				ictEnbFac.setExVar2("NA");
+				// System.out.println(ictEnbFac.toString());
+
+				IctEnabledFacilities ictEnb = rest.postForObject(Constants.url + "/saveIctEnabledFacility", ictEnbFac,
+						IctEnabledFacilities.class);
+				returnString = "redirect:/showICTEnblFaclities";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return "redirect:/showICTEnblFaclities";
+		return returnString;
 
 	}
 
@@ -1813,7 +1824,7 @@ public class InstituteController {
 	@RequestMapping(value = "/insertGoveScheme", method = RequestMethod.POST)
 	public String insertGoveScheme(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-
+		String returnString = null;
 		int instituteId = (int) session.getAttribute("instituteId");
 		int userId = (int) session.getAttribute("userId");
 		int yId = (int) session.getAttribute("acYearId");
@@ -1823,40 +1834,52 @@ public class InstituteController {
 		String curDateTime = dateFormat.format(cal.getTime());
 
 		try {
-			GovtScholarships govt = new GovtScholarships();
 
-			govt.setGovtScholarId(Integer.parseInt(request.getParameter("govt_scholr_id")));
-			govt.setNameOfScheme(XssEscapeUtils.jsoupParse(request.getParameter("name_scheme")));
-			govt.setNoOfStudBenftd(Integer.parseInt(request.getParameter("stud_bnfted")));
-			govt.setSchmOffrdBy(XssEscapeUtils.jsoupParse(request.getParameter("schm_ofrd")));
-			govt.setInstId(instituteId);
-			govt.setAcYearId(yId);
-			govt.setDelStatus(1);
-			govt.setIsActive(1);
-			govt.setMakerUserId(userId);
-			govt.setMakerEntrDatetime(curDateTime);
-			govt.setExInt1(0);
-			govt.setExInt2(0);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			String amt = request.getParameter("amount");
-			if (amt == "" || amt == null) {
-				govt.setExVar1("0");
-			} else {
+			if (token.trim().equals(key.trim())) {
 
-				govt.setExVar1(XssEscapeUtils.jsoupParse(amt));
+				GovtScholarships govt = new GovtScholarships();
 
+				govt.setGovtScholarId(Integer.parseInt(request.getParameter("govt_scholr_id")));
+				govt.setNameOfScheme(XssEscapeUtils.jsoupParse(request.getParameter("name_scheme")));
+				govt.setNoOfStudBenftd(Integer.parseInt(request.getParameter("stud_bnfted")));
+				govt.setSchmOffrdBy(XssEscapeUtils.jsoupParse(request.getParameter("schm_ofrd")));
+				govt.setInstId(instituteId);
+				govt.setAcYearId(yId);
+				govt.setDelStatus(1);
+				govt.setIsActive(1);
+				govt.setMakerUserId(userId);
+				govt.setMakerEntrDatetime(curDateTime);
+				govt.setExInt1(0);
+				govt.setExInt2(0);
+
+				String amt = request.getParameter("amount");
+				if (amt == "" || amt == null) {
+					govt.setExVar1("0");
+				} else {
+
+					govt.setExVar1(XssEscapeUtils.jsoupParse(amt));
+
+				}
+				govt.setExVar2("NA");
+				// System.out.println(govt.toString());
+
+				GovtScholarships ictEnb = rest.postForObject(Constants.url + "/saveGovtScheme", govt,
+						GovtScholarships.class);
+				returnString = "redirect:/showGovernmentScholarships";
 			}
-			govt.setExVar2("NA");
-			// System.out.println(govt.toString());
 
-			GovtScholarships ictEnb = rest.postForObject(Constants.url + "/saveGovtScheme", govt,
-					GovtScholarships.class);
+			else {
 
+				returnString = "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
 			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return "redirect:/showGovernmentScholarships";
+		return returnString;
 
 	}
 
@@ -2094,7 +2117,7 @@ public class InstituteController {
 		HttpSession session = request.getSession();
 		String token = request.getParameter("token");
 		String key = (String) session.getAttribute("generatedKey");
-		String returnString=null;
+		String returnString = null;
 		if (token.trim().equals(key.trim())) {
 
 			int instituteId = (int) session.getAttribute("instituteId");
@@ -2124,11 +2147,11 @@ public class InstituteController {
 
 			ActCndctPrmtngUnivrslVal saveAct = rest.postForObject(Constants.url + "/saveActivityConductPromtUniVal",
 					actCndct, ActCndctPrmtngUnivrslVal.class);
-			returnString="redirect:/showActCondctPromotUnivrslValus";
+			returnString = "redirect:/showActCondctPromotUnivrslValus";
 		} else {
 			returnString = "redirect:/accessDenied";
 		}
-		return returnString ;
+		return returnString;
 	}
 
 	@RequestMapping(value = "/editActCndctPromtUnivrsalValu/{actId}", method = RequestMethod.GET)
@@ -2360,43 +2383,47 @@ public class InstituteController {
 	@RequestMapping(value = "/insertInitiativeAdvDisadv", method = RequestMethod.POST)
 	public String insertInitiativeAdvDisadv(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
+		String returnString = null;
+		String token = request.getParameter("token");
+		String key = (String) session.getAttribute("generatedKey");
 
-		int instituteId = (int) session.getAttribute("instituteId");
-		int userId = (int) session.getAttribute("userId");
-		int yId = (int) session.getAttribute("acYearId");
+		if (token.trim().equals(key.trim())) {
 
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String curDateTime = dateFormat.format(cal.getTime());
+			int instituteId = (int) session.getAttribute("instituteId");
+			int userId = (int) session.getAttribute("userId");
+			int yId = (int) session.getAttribute("acYearId");
 
-		SpecificLocalAdvntgDisadvntg specify = new SpecificLocalAdvntgDisadvntg();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String curDateTime = dateFormat.format(cal.getTime());
 
-		specify.setSpciAdvId(Integer.parseInt(request.getParameter("initiative_id")));
-		specify.setNameOfInitiatives(XssEscapeUtils.jsoupParse(request.getParameter("name_inititatives")));
-		specify.setIssueAddress(XssEscapeUtils.jsoupParse(request.getParameter("issue_address")));
-		specify.setFromDate(request.getParameter("fromDate"));
-		specify.setToDate(request.getParameter("toDate"));
-		specify.setNoStudPart(Integer.parseInt(request.getParameter("no_stud_participate")));
-		specify.setInstId(instituteId);
-		specify.setAcYearId(yId);
-		specify.setDelStatus(1);
-		specify.setIsActive(1);
-		specify.setMakerUserId(userId);
-		specify.setMakerDatetime(curDateTime);
-		specify.setExInt1(0);
-		specify.setExInt2(0);
-		specify.setExVar1("NA");
-		specify.setExVar2("NA");
+			SpecificLocalAdvntgDisadvntg specify = new SpecificLocalAdvntgDisadvntg();
 
-		SpecificLocalAdvntgDisadvntg saveInit = rest.postForObject(Constants.url + "/saveInitiativeAdvDisadv", specify,
-				SpecificLocalAdvntgDisadvntg.class);
+			specify.setSpciAdvId(Integer.parseInt(request.getParameter("initiative_id")));
+			specify.setNameOfInitiatives(XssEscapeUtils.jsoupParse(request.getParameter("name_inititatives")));
+			specify.setIssueAddress(XssEscapeUtils.jsoupParse(request.getParameter("issue_address")));
+			specify.setFromDate(request.getParameter("fromDate"));
+			specify.setToDate(request.getParameter("toDate"));
+			specify.setNoStudPart(Integer.parseInt(request.getParameter("no_stud_participate")));
+			specify.setInstId(instituteId);
+			specify.setAcYearId(yId);
+			specify.setDelStatus(1);
+			specify.setIsActive(1);
+			specify.setMakerUserId(userId);
+			specify.setMakerDatetime(curDateTime);
+			specify.setExInt1(0);
+			specify.setExInt2(0);
+			specify.setExVar1("NA");
+			specify.setExVar2("NA");
 
-		try {
+			SpecificLocalAdvntgDisadvntg saveInit = rest.postForObject(Constants.url + "/saveInitiativeAdvDisadv",
+					specify, SpecificLocalAdvntgDisadvntg.class);
+			returnString = "redirect:/showSpecficInitiativeforLocAdvDisadv";
+		} else {
 
-		} catch (Exception e) {
-
+			returnString = "redirect:/accessDenied";
 		}
-		return "redirect:/showSpecficInitiativeforLocAdvDisadv";
+		return returnString;
 	}
 
 	@RequestMapping(value = "/editInitiative/{inItId}", method = RequestMethod.GET)

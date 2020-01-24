@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -44,10 +46,11 @@
 <!-- BEGIN BODY -->
 <body class=" " onload="getProgramTypeByProgram()()">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
-	
+
 	<c:url value="/getProgramTypeByProgram" var="getProgramTypeByProgram"></c:url>
-	<c:url value="/getStudAdmLocwiseByProgType" var="getStudAdmLocwiseByProgType"></c:url>
-	
+	<c:url value="/getStudAdmLocwiseByProgType"
+		var="getStudAdmLocwiseByProgType"></c:url>
+
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -111,161 +114,191 @@
 										<div class="tab-pane fade in active" id="home">
  -->
 
-											<form class="form-horizontal"
-												action="${pageContext.request.contextPath}/insertStudAdmLocwise"
-												method="post" name="form_sample_2" id="form_sample_2">
-												
-												<c:if test="${isEdit==0}">
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="programType">Program
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-4">
-											
-												<select id="programType" name="programType"
-													class="form-control" onchange="getProgramTypeByProgram()"
-													required>
-													<c:forEach items="${progTypeList}" var="progTypeList">
-														<c:choose>
-															<c:when
-																test="${progTypeList.programId==editProgram.programType}">
-																<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${progTypeList.programId}">${progTypeList.programName}</option>
-
-															</c:otherwise>
-
-														</c:choose>
-
-													</c:forEach>
-												</select>
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/insertStudAdmLocwise"
+										method="post" name="form_sample_2" id="form_sample_2">
 
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+										<c:if test="${isEdit==0}">
+											<div class="form-group">
+												<label class="control-label col-sm-2" for="programType">Program
+													<span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-4">
+
+													<select id="programType" name="programType"
+														class="form-control" onchange="getProgramTypeByProgram()"
+														required>
+														<c:forEach items="${progTypeList}" var="progTypeList">
+															<c:choose>
+																<c:when
+																	test="${progTypeList.programId==editProgram.programType}">
+																	<option selected value="${progTypeList.programId}">${progTypeList.programName}</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="${progTypeList.programId}">${progTypeList.programName}</option>
+
+																</c:otherwise>
+
+															</c:choose>
+
+														</c:forEach>
+													</select>
+
+
+												</div>
+
+												<label class="control-label col-sm-2" for="programTypeId">Program
+													Type <span class="text-danger">*</span>
+												</label>
+												<div class="col-sm-4">
+
+													<select id="programTypeId" name="programTypeId"
+														class="form-control" onchange="getStudAdmByProgType()"
+														required>
+
+													</select>
+
+
+												</div>
 											</div>
-
-											<label class="control-label col-sm-2" for="programTypeId">Program
-												Type <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-4">
-											
-												<select id="programTypeId" name="programTypeId"
-													class="form-control" onchange="getStudAdmByProgType()" required>
-
-												</select>
-
-
-											</div>
-										</div>
 										</c:if>
 										<c:if test="${isEdit==1}">
-										<div align="center">Program :<b>${progName}-${progType}</b></div>
-										<input type="hidden" id="programTypeId" name="programTypeId" value="${programType}">
+											<div align="center">
+												Program :<b>${progName}-${progType}</b>
+											</div>
+											<input type="hidden" id="programTypeId" name="programTypeId"
+												value="${programType}">
 										</c:if>
-												
-
-												<div class="row">
-													<div class="col-md-12">
-														<table class="table table-striped dt-responsive display">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th width="30%">Location</th>
-																	<th width="60%"  style="text-align: center; ma" colspan="3">No.
-																		of Students</th>
-
-																</tr>
-																<tr>
-																	<th width="10%"></th>
-																	<th width="30%"></th>
-																	<th width="20%">Male</th>
-																	<th width="20%">Female</th>
-																	<th width="20%">Transgender</th>
 
 
-																</tr>
-															</thead>
-															<tbody>
-															<c:choose>
+										<div class="row">
+											<div class="col-md-12">
+												<table class="table table-striped dt-responsive display">
+													<thead>
+														<tr>
+															<th width="10%">Sr No</th>
+															<th width="30%">Location</th>
+															<th width="60%" style="text-align: center;" colspan="3">No.
+																of Students</th>
+
+														</tr>
+														<tr>
+															<th width="10%"></th>
+															<th width="30%"></th>
+															<th width="20%">Male</th>
+															<th width="20%">Female</th>
+															<th width="20%">Transgender</th>
+
+
+														</tr>
+													</thead>
+													<tbody>
+														<c:choose>
 															<c:when test="${isEdit==0}">
-															
-															
+
+
 																<c:forEach items="${locList}" var="loc"
 																	varStatus="count">
 
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${loc.locationName}</td>
-																		<td><input type="number"  min="0" max="99999"
-																			class="txt" id="loc_m${loc.locationId}" onkeyup="calculateSum()"
+																		<td><input type="number" min="0" max="99999"
+																			class="txt" id="loc_m${loc.locationId}"
+																			onkeyup="calculateSum()"
 																			name="loc_m${loc.locationId}" value="0" required></td>
-																		<td><input type="number"  min="0" max="99999" onkeyup="calculateSum()"
-																			class="txt" id="loc_f${loc.locationId}"
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="loc_f${loc.locationId}"
 																			name="loc_f${loc.locationId}" value="0" required></td>
-																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
-																			class="txt" id="loc_t${loc.locationId}"
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="loc_t${loc.locationId}"
 																			name="loc_t${loc.locationId}" value="0" required></td>
 																	</tr>
 																</c:forEach>
-																
-																</c:when>
-																<c:otherwise>
-																
+
+															</c:when>
+															<c:otherwise>
+
 																<c:forEach items="${locAdmList}" var="loc"
 																	varStatus="count">
 
 																	<tr>
 																		<td>${count.index+1 }</td>
 																		<td>${loc.locationName}</td>
-																		<td><input type="number" min="0"  max="99999"
-																			class="txt" id="loc_m${loc.studentLocId}" onkeyup="calculateSum()"
-																			name="loc_m${loc.studentLocId}" value="${loc.maleStudent}" onkeypress="return allowOnlyNumber1(event)" required></td>
-																		<td><input type="number" min="0"  max="99999" onkeyup="calculateSum()"
-																			class="txt" id="loc_f${loc.studentLocId}"
-																			name="loc_f${loc.studentLocId}" value="${loc.femaleStudent}" required></td>
-																		<td><input type="number" min="0" max="99999" onkeyup="calculateSum()"
-																			class="txt" id="loc_t${loc.studentLocId}"
-																			name="loc_t${loc.studentLocId}" value="${loc.transStudent}" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			class="txt" id="loc_m${loc.studentLocId}"
+																			onkeyup="calculateSum()"
+																			name="loc_m${loc.studentLocId}"
+																			value="${loc.maleStudent}"
+																			onkeypress="return allowOnlyNumber1(event)" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="loc_f${loc.studentLocId}"
+																			name="loc_f${loc.studentLocId}"
+																			value="${loc.femaleStudent}" required></td>
+																		<td><input type="number" min="0" max="99999"
+																			onkeyup="calculateSum()" class="txt"
+																			id="loc_t${loc.studentLocId}"
+																			name="loc_t${loc.studentLocId}"
+																			value="${loc.transStudent}" required></td>
 																	</tr>
 																</c:forEach>
-																
-																</c:otherwise>
-																</c:choose>
 
-															</tbody>
-														</table>
+															</c:otherwise>
+														</c:choose>
 
-													</div>
+													</tbody>
+												</table>
 
-													<input type="hidden" id="isEdit" name="isEdit"
-														value="${isEdit}"> <input type="hidden" id="is_view"
-														name="is_view" value="0">
+											</div>
 
-													<div class="form-group">
-														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/showStudAddmitLoc"><button type="button" id="sub2" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
-															<input
-																type="text" readonly placeholder="Total Student" id="total_stud"
-																>
-																<span
-															class="error_form text-danger" id="total_stud_count_field"
-															style="display: none;">All fields can not be 0</span>
-														</div>
-													</div>
+											<input type="hidden" id="isEdit" name="isEdit"
+												value="${isEdit}"> <input type="hidden" id="is_view"
+												name="is_view" value="0">
 
-													<div class="clearfix"></div>
-
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-10">
+													<button type="submit" id="sub1" class="btn btn-primary"
+														onclick="submit_f(1)">
+														<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+													</button>
+													<a
+														href="${pageContext.request.contextPath}/showStudAddmitLoc"><button
+															type="button" id="sub2" class="btn btn-primary">
+															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+														</button></a> <input type="text" readonly placeholder="Total Student"
+														id="total_stud"> <span
+														class="error_form text-danger" id="total_stud_count_field"
+														style="display: none;">All fields can not be 0</span>
 												</div>
-											</form>
-										<!-- </div>
+											</div>
+
+											<div class="clearfix"></div>
+
+										</div>
+									</form>
+									<!-- </div>
 
 									</div>
  -->
 								</div>
 
 							</div>
-							</div>
+						</div>
 					</section>
 				</div>
 
@@ -276,9 +309,9 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-	
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
+
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
 	<script type="text/javascript">
 		function getProgramTypeByProgram() {
 			var isEdit=${isEdit};
@@ -374,9 +407,9 @@
 			
 		}
 	</script>
-	
-	
-	
+
+
+
 	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -527,7 +560,7 @@
 	</script>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		var wasSubmitted = false;
 		function checkBeforeSubmit() {
 			if (!wasSubmitted) {
@@ -547,8 +580,8 @@
 			document.getElementById("is_view").value = view;//create this 
 		}
 	</script>
-	
-<script type="text/javascript">
+
+	<script type="text/javascript">
 $(document).ready(function(){
 	$(".txt").each(function() {
 		$(this).keyup(function(){
@@ -567,7 +600,7 @@ function calculateSum() {
 }
 
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 	 function allowOnlyNumber1(evt){
 		 var valid=true;
 	  var charCode = (evt.which) ? evt.which : event.keyCode

@@ -503,52 +503,70 @@ public class YesNoController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			if (token.trim().equals(key.trim())) {
 
-			String transperentspeficytext = request.getParameter("transperentspeficytext");
+				
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			int transId = Integer.parseInt(request.getParameter("transId"));
+				String transperentspeficytext = request.getParameter("transperentspeficytext");
 
-			if (transId == 0) {
-				InstituteYesNo instituteYesNo = new InstituteYesNo();
-				instituteYesNo.setDelStatus(1);
-				instituteYesNo.setIsActive(1);
-				instituteYesNo.setMakerUserId(userObj.getUserId());
-				instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-				instituteYesNo.setMakerDatetime(sf.format(date));
-				instituteYesNo.setYesnoPagecode("tab1");
-				instituteYesNo.setSectionCode("tab1");
-				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
-				instituteYesNo.setYesnoDynamicTitle("transpernt");
-				instituteYesNo.setYearId(acYearId);
+				int transId = Integer.parseInt(request.getParameter("transId"));
 
-				// System.out.println(instituteYesNo);
-				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
-						InstituteYesNo.class);
-			} else {
-				System.err.println("In else Its Edit Call " + transperentspeficytext);
+				if (transId == 0) {
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode("tab1");
+					instituteYesNo.setSectionCode("tab1");
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
+					instituteYesNo.setYesnoDynamicTitle("transpernt");
+					instituteYesNo.setYearId(acYearId);
+
+					// System.out.println(instituteYesNo);
+					InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+							InstituteYesNo.class);
+				} else {
+					System.err.println("In else Its Edit Call " + transperentspeficytext);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("id", transId);
+					map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+
+					Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+				}
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				map.add("id", transId);
-				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab1");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
+			} else {
 
-				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab1");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
 			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab1");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
-
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -655,52 +673,69 @@ public class YesNoController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey1");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			if (token.trim().equals(key.trim())) {
+ 
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			String transperentspeficytext = request.getParameter("transperentspeficytext");
+				String transperentspeficytext = request.getParameter("transperentspeficytext");
 
-			int timeBoundId = Integer.parseInt(request.getParameter("timeBoundId"));
+				int timeBoundId = Integer.parseInt(request.getParameter("timeBoundId"));
 
-			if (timeBoundId == 0) {
-				InstituteYesNo instituteYesNo = new InstituteYesNo();
-				instituteYesNo.setDelStatus(1);
-				instituteYesNo.setIsActive(1);
-				instituteYesNo.setMakerUserId(userObj.getUserId());
-				instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-				instituteYesNo.setMakerDatetime(sf.format(date));
-				instituteYesNo.setYesnoPagecode("tab2");
-				instituteYesNo.setSectionCode("tab2");
-				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
-				instituteYesNo.setYesnoDynamicTitle("Time bound");
-				instituteYesNo.setYearId(acYearId);
+				if (timeBoundId == 0) {
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode("tab2");
+					instituteYesNo.setSectionCode("tab2");
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
+					instituteYesNo.setYesnoDynamicTitle("Time bound");
+					instituteYesNo.setYearId(acYearId);
 
-				// System.out.println(instituteYesNo);
-				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
-						InstituteYesNo.class);
-			} else {
-				System.err.println("In else Its Edit Call " + transperentspeficytext);
+					// System.out.println(instituteYesNo);
+					InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+							InstituteYesNo.class);
+				} else {
+					System.err.println("In else Its Edit Call " + transperentspeficytext);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("id", timeBoundId);
+					map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+
+					Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+				}
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				map.add("id", timeBoundId);
-				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab2");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab2List = new ArrayList<>(Arrays.asList(ary));
+			} else {
 
-				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab2");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab2List = new ArrayList<>(Arrays.asList(ary));
 			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab2");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab2List = new ArrayList<>(Arrays.asList(ary));
-
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -758,51 +793,68 @@ public class YesNoController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token2");
+			String key = (String) session.getAttribute("generatedKey2");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			if (token.trim().equals(key.trim())) {
+ 
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			String transperentspeficytext = request.getParameter("transperentspeficytext");
+				String transperentspeficytext = request.getParameter("transperentspeficytext");
 
-			int efficientId = Integer.parseInt(request.getParameter("efficientId"));
+				int efficientId = Integer.parseInt(request.getParameter("efficientId"));
 
-			if (efficientId == 0) {
-				InstituteYesNo instituteYesNo = new InstituteYesNo();
-				instituteYesNo.setDelStatus(1);
-				instituteYesNo.setIsActive(1);
-				instituteYesNo.setMakerUserId(userObj.getUserId());
-				instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-				instituteYesNo.setMakerDatetime(sf.format(date));
-				instituteYesNo.setYesnoPagecode("tab3");
-				instituteYesNo.setSectionCode("tab3");
-				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
-				instituteYesNo.setYesnoDynamicTitle("Efficient");
-				instituteYesNo.setYearId(acYearId);
+				if (efficientId == 0) {
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode("tab3");
+					instituteYesNo.setSectionCode("tab3");
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
+					instituteYesNo.setYesnoDynamicTitle("Efficient");
+					instituteYesNo.setYearId(acYearId);
 
-				// System.out.println(instituteYesNo);
-				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
-						InstituteYesNo.class);
-			} else {
-				System.err.println("In else Its Edit Call " + transperentspeficytext);
+					// System.out.println(instituteYesNo);
+					InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+							InstituteYesNo.class);
+				} else {
+					System.err.println("In else Its Edit Call " + transperentspeficytext);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("id", efficientId);
+					map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+
+					Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+				}
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				map.add("id", efficientId);
-				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab3");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab3List = new ArrayList<>(Arrays.asList(ary));
+			} else {
 
-				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab3");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab3List = new ArrayList<>(Arrays.asList(ary));
 			}
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab3");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab3List = new ArrayList<>(Arrays.asList(ary));
-
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -1454,7 +1506,7 @@ public class YesNoController {
 	@RequestMapping(value = "/submitYesNoPageFifth", method = RequestMethod.POST)
 	public String submitYesNoPageFifth(HttpServletRequest request, HttpServletResponse response) {
 
-		String returnString=null;
+		String returnString = null;
 		HttpSession session = request.getSession();
 		String token = request.getParameter("token");
 		String key = (String) session.getAttribute("generatedKey");
@@ -1565,7 +1617,7 @@ public class YesNoController {
 				} else {
 					session.setAttribute("successMsg", "Record Not Saved");
 				}
-				returnString="redirect:/selectYestNoPageFifth";
+				returnString = "redirect:/selectYestNoPageFifth";
 			}
 
 			else {
@@ -1581,7 +1633,7 @@ public class YesNoController {
 
 		}
 
-		return  returnString;
+		return returnString;
 
 	}
 
@@ -1651,7 +1703,10 @@ public class YesNoController {
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			Date date = new Date();
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+  			String token = request.getParameter("token");
+						String key = (String) session.getAttribute("generatedKey");
 
+						if (token.trim().equals(key.trim())) {
 			String transperentspeficytext = request.getParameter("transperentspeficytext");
 
 			int transId = Integer.parseInt(request.getParameter("transId"));
@@ -1693,8 +1748,19 @@ public class YesNoController {
 			InstituteYesNo[] ary = restTemplate.postForObject(
 					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
 			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+		}else {
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-		} catch (Exception e) {
+			map = new LinkedMultiValueMap<>();
+			map.add("instituteId", userObj.getGetData().getUserInstituteId());
+			map.add("yearId", acYearId);
+			map.add("secCode", "tab4");
+			InstituteYesNo[] ary = restTemplate.postForObject(
+					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
+			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+
+
+		} }catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
@@ -1750,54 +1816,72 @@ public class YesNoController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey1");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			Date date = new Date();
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			String transperentspeficytext = request.getParameter("transperentspeficytext");
+			if (token.trim().equals(key.trim())) {
 
-			int timeBoundId = Integer.parseInt(request.getParameter("timeBoundId"));
+			
+				String transperentspeficytext = request.getParameter("transperentspeficytext");
 
-			if (timeBoundId == 0) {
+				int timeBoundId = Integer.parseInt(request.getParameter("timeBoundId"));
 
-				InstituteYesNo instituteYesNo = new InstituteYesNo();
-				instituteYesNo.setDelStatus(1);
-				instituteYesNo.setIsActive(1);
-				instituteYesNo.setMakerUserId(userObj.getUserId());
-				instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-				instituteYesNo.setMakerDatetime(sf.format(date));
-				instituteYesNo.setYesnoPagecode("tab5");
-				instituteYesNo.setSectionCode("tab5");
-				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
-				instituteYesNo.setYesnoDynamicTitle("Environment");
-				instituteYesNo.setYearId(acYearId);
+				if (timeBoundId == 0) {
 
-				// System.out.println(instituteYesNo);
-				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
-						InstituteYesNo.class);
-			} else {
-				System.err.println("Edit time bound " + timeBoundId);
-				System.err.println("In else Its Edit Call " + transperentspeficytext);
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode("tab5");
+					instituteYesNo.setSectionCode("tab5");
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
+					instituteYesNo.setYesnoDynamicTitle("Environment");
+					instituteYesNo.setYearId(acYearId);
+
+					// System.out.println(instituteYesNo);
+					InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+							InstituteYesNo.class);
+				} else {
+					System.err.println("Edit time bound " + timeBoundId);
+					System.err.println("In else Its Edit Call " + transperentspeficytext);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("id", timeBoundId);
+					map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+
+					Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+				}
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				map.add("id", timeBoundId);
-				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab5");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
+			} else {
 
-				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab5");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
 			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab5");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
-
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
@@ -1855,52 +1939,70 @@ public class YesNoController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token2");
+			String key = (String) session.getAttribute("generatedKey2");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			if (token.trim().equals(key.trim())) {
 
-			String transperentspeficytext = request.getParameter("transperentspeficytext");
-			int efficientId = Integer.parseInt(request.getParameter("efficientId"));
+			
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			if (efficientId == 0) {
-				InstituteYesNo instituteYesNo = new InstituteYesNo();
-				instituteYesNo.setDelStatus(1);
-				instituteYesNo.setIsActive(1);
-				instituteYesNo.setMakerUserId(userObj.getUserId());
-				instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-				instituteYesNo.setMakerDatetime(sf.format(date));
-				instituteYesNo.setYesnoPagecode("tab6");
-				instituteYesNo.setSectionCode("tab6");
-				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
-				instituteYesNo.setYesnoDynamicTitle("HumanValues");
-				instituteYesNo.setYearId(acYearId);
+				String transperentspeficytext = request.getParameter("transperentspeficytext");
+				int efficientId = Integer.parseInt(request.getParameter("efficientId"));
 
-				// System.out.println(instituteYesNo);
-				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
-						InstituteYesNo.class);
-			} else {
+				if (efficientId == 0) {
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode("tab6");
+					instituteYesNo.setSectionCode("tab6");
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
+					instituteYesNo.setYesnoDynamicTitle("HumanValues");
+					instituteYesNo.setYearId(acYearId);
 
-				System.err.println("In else Its Edit Call " + transperentspeficytext);
+					// System.out.println(instituteYesNo);
+					InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+							InstituteYesNo.class);
+				} else {
+
+					System.err.println("In else Its Edit Call " + transperentspeficytext);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("id", efficientId);
+					map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+
+					Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+				}
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				map.add("id", efficientId);
-				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab6");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
+			} else {
 
-				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab6");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
 			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab6");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
-
 		} catch (Exception e) {
 
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());

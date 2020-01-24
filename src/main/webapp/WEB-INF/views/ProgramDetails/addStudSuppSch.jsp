@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -85,7 +88,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/showStudSupp"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showStudSupp"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
@@ -98,7 +101,17 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertStudentSuppurtScheme"
 										method="post" name="form_sample_2" id="form_sample_2">
-
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<div>
 
 											<div class="col-xs-12">
@@ -107,7 +120,7 @@
 
 												<input type="hidden" name="stud_suprt_schm"
 													value="${stud.sprtSchmId}">
-													
+
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">Level
 														<span class="text-danger">*</span>
@@ -115,7 +128,7 @@
 													<div class="col-sm-6">
 														<select id="approveValue1" name="level"
 															class="form-control">
-															
+
 															<c:choose>
 																<c:when test="${stud.level eq 'International'}">
 																	<option selected value="International">International</option>
@@ -136,7 +149,7 @@
 																</c:when>
 
 																<c:otherwise>
-																<option selected disabled value="-1">Select</option>
+																	<option selected disabled value="-1">Select</option>
 																	<option value="International">International</option>
 																	<option value="State">State</option>
 																	<option value="Regional">Regional</option>
@@ -146,7 +159,7 @@
 															style="display: none;">Please Select Level.</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">Type
 														<span class="text-danger">*</span>
@@ -155,8 +168,11 @@
 														<select id="approveValue" name="type" class="form-control">
 															<option selected disabled value="-1">Select</option>
 
-																<option  value="Govt." ${stud.type == 'Govt.' ? 'selected' : '' }>Govt.</option>
-																<option  value="Non Govt." ${stud.type == 'Non Govt.' ? 'selected' : '' }>Non Govt.</option>
+															<option value="Govt."
+																${stud.type == 'Govt.' ? 'selected' : '' }>Govt.</option>
+															<option value="Non Govt."
+																${stud.type == 'Non Govt.' ? 'selected' : '' }>Non
+																Govt.</option>
 															<%-- <c:choose>
 																<c:when test="${stud.type eq 'Govt.'}">
 																	<option selected value="Govt">Govt.</option>
@@ -180,8 +196,8 @@
 
 													</div>
 												</div>
-												
-												
+
+
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="status">Scheme
@@ -190,20 +206,45 @@
 													<div class="col-sm-6">
 														<select id="schemeName" name="schemeName"
 															class="form-control" onchange="showExtraField()">
-																<option selected disabled value="-1">Select</option>
-															<option value="Capability Enhancement" ${stud.schemeName == 'Capability Enhancement' ? 'selected' : ''} >Capability	Enhancement</option>
-															<option value="Career Counseling" ${stud.schemeName == 'Career Counseling' ? 'selected' : ''} >Career Counseling</option>
-															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)" ${stud.schemeName  == 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)' ? 'selected' : ''} >Competitive Exams(MPSC,UPSC,PSU,RRB,etc)</option>
-															<option	value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)" ${stud.schemeName  == 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)' ? 'selected' : ''}>Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
-															<option value="Vocational Education Training" ${stud.schemeName  == 'Vocational Education Training' ? 'selected' : ''}>Vocational Education Training</option>
-															<option value="Soft Skill Development" ${stud.schemeName  == 'Soft Skill Development' ? 'selected' : ''}>Soft Skill Development</option>
-															<option value="Language Lab" ${stud.schemeName  == 'Language Lab' ? 'selected' : ''}>Language Lab</option>
-															<option value="Remedial Coaching" ${stud.schemeName  == 'Remedial Coaching' ? 'selected' : ''}>Remedial Coaching</option>
-															<option value="Bridge Courses" ${stud.schemeName  == 'Bridge Courses' ? 'selected' : ''}>Bridge Courses</option>
-															<option value="Yoga and Meditation" ${stud.schemeName  == 'Yoga and Meditation' ? 'selected' : ''}>Yoga and Meditation</option>
-															<option value="Personal Counselling" ${stud.schemeName  == 'Personal Counselling' ? 'selected' : ''}>Personal Counselling</option>
-															<option value="7" ${stud.extraInt1  == 7 ? 'selected' : ''}>Any Other</option>
-															
+															<option selected disabled value="-1">Select</option>
+															<option value="Capability Enhancement"
+																${stud.schemeName == 'Capability Enhancement' ? 'selected' : ''}>Capability
+																Enhancement</option>
+															<option value="Career Counseling"
+																${stud.schemeName == 'Career Counseling' ? 'selected' : ''}>Career
+																Counseling</option>
+															<option value="Competitive Exams(MPSC,UPSC,PSU,RRB,etc)"
+																${stud.schemeName  == 'Competitive Exams(MPSC,UPSC,PSU,RRB,etc)' ? 'selected' : ''}>Competitive
+																Exams(MPSC,UPSC,PSU,RRB,etc)</option>
+															<option
+																value="Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)"
+																${stud.schemeName  == 'Higher Education Entrance Exams(GATE,MAT,GPAT,CAT etc)' ? 'selected' : ''}>Higher
+																Education Entrance Exams(GATE,MAT,GPAT,CAT etc)</option>
+															<option value="Vocational Education Training"
+																${stud.schemeName  == 'Vocational Education Training' ? 'selected' : ''}>Vocational
+																Education Training</option>
+															<option value="Soft Skill Development"
+																${stud.schemeName  == 'Soft Skill Development' ? 'selected' : ''}>Soft
+																Skill Development</option>
+															<option value="Language Lab"
+																${stud.schemeName  == 'Language Lab' ? 'selected' : ''}>Language
+																Lab</option>
+															<option value="Remedial Coaching"
+																${stud.schemeName  == 'Remedial Coaching' ? 'selected' : ''}>Remedial
+																Coaching</option>
+															<option value="Bridge Courses"
+																${stud.schemeName  == 'Bridge Courses' ? 'selected' : ''}>Bridge
+																Courses</option>
+															<option value="Yoga and Meditation"
+																${stud.schemeName  == 'Yoga and Meditation' ? 'selected' : ''}>Yoga
+																and Meditation</option>
+															<option value="Personal Counselling"
+																${stud.schemeName  == 'Personal Counselling' ? 'selected' : ''}>Personal
+																Counselling</option>
+															<option value="7"
+																${stud.extraInt1  == 7 ? 'selected' : ''}>Any
+																Other</option>
+
 														</select> <span class="error_form text-danger" id="error_scheme"
 															style="display: none;">Please Select Scheme.</span>
 
@@ -227,14 +268,15 @@
 													</div>
 												</div>
 
-											<div class="form-group">
+												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_order">
 														Name of Support Agency <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text" class="form-control" id="supportAgency" onchange="trim(this)"
-															value="${stud.supportAgencyName}" autocomplete="off" onFocus="clearDefault(this)" 
-															name="supportAgency" placeholder="Support Agency"> 
+														<input type="text" class="form-control" id="supportAgency"
+															onchange="trim(this)" value="${stud.supportAgencyName}"
+															autocomplete="off" onFocus="clearDefault(this)"
+															name="supportAgency" placeholder="Support Agency">
 														<span class="error_form text-danger" id="error_agency"
 															style="display: none;">Please Enter Name of
 															Support Agency. </span>
@@ -251,25 +293,29 @@
 													</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control datepicker"
-															id="yearofIntro" placeholder="dd-MM-YYYY" onkeypress='return restrictAlphabets(event)'
-															 autocomplete="off" value="${stud.implementationYear}" name="yearofIntro">
-															<span class="error_form text-danger" id="error_date" style="display:none;" >Please enter date of implementation .  </span>
+															id="yearofIntro" placeholder="dd-MM-YYYY"
+															onkeypress='return restrictAlphabets(event)'
+															autocomplete="off" value="${stud.implementationYear}"
+															name="yearofIntro"> <span
+															class="error_form text-danger" id="error_date"
+															style="display: none;">Please enter date of
+															implementation . </span>
 
 													</div>
 												</div>
-												
-												
+
+
 
 												<div class="form-group">
 													<label class="control-label col-sm-2" for="page_name">
 														No. of Students Benefited <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<input type="text"  class="form-control"
-															id="studBenifit" value="${stud.noStudentBenifited}"
-															name="studBenifit" placeholder="Students Benifited" onFocus="clearDefault(this)"
-															autocomplete="off"> <span
-															class="error_form text-danger" id="error_part"
+														<input type="text" class="form-control" id="studBenifit"
+															value="${stud.noStudentBenifited}" name="studBenifit"
+															placeholder="Students Benifited"
+															onFocus="clearDefault(this)" autocomplete="off">
+														<span class="error_form text-danger" id="error_part"
 															style="display: none;">Please Enter No. of
 															Students Benefited and value should be greater than 0.</span>
 													</div>
@@ -286,15 +332,20 @@
 
 
 										<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showStudSupp"><button id="sub1"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub_button"
+													class="btn btn-primary" onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a href="${pageContext.request.contextPath}/showStudSupp"><button
+														id="sub1" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 										<div class="clearfix"></div>
 										<!-- 
@@ -303,8 +354,8 @@
 										</div>
  -->
 									</form>
-									<p class="desc text-danger fontsize11">Notice : * Fields are
-										Mandatory.</p>
+									<p class="desc text-danger fontsize11">Notice : * Fields
+										are Mandatory.</p>
 								</div>
 
 							</div>
@@ -316,7 +367,7 @@
 			</section>
 		</section>
 
-	</div>                            
+	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
@@ -324,18 +375,20 @@
 
 
 	<script>
-	
-	$('#studBenifit').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-	function trim(el) {
-		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		replace(/\n +/, "\n"); // Removes spaces after newlines
-		return;
-	}  
-	
+		$('#studBenifit').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+
 		function numbersOnlyNotZero(id_number) {
 
 			var mob = /^[1-9]+$/;
@@ -359,20 +412,21 @@
 												var isError = false;
 												var errMsg = "";
 
-												if (!$("#yearofIntro").val()){
-						        					 //alert("Hi")
-						              				isError=true;
-						              				
-						              				
-						              				$("#yearofIntro").addClass("has-error")
-						              				$("#error_date").show()
-						              					//return false;
-						              				} else {
-						              					$("#error_date").hide()
-						              				}
-											
+												if (!$("#yearofIntro").val()) {
+													//alert("Hi")
+													isError = true;
 
-												if ($("#schemeName").val() == null|| $("#schemeName").val() == -1) {
+													$("#yearofIntro").addClass(
+															"has-error")
+													$("#error_date").show()
+													//return false;
+												} else {
+													$("#error_date").hide()
+												}
+
+												if ($("#schemeName").val() == null
+														|| $("#schemeName")
+																.val() == -1) {
 
 													isError = true;
 
@@ -382,7 +436,9 @@
 													$("#error_scheme").hide()
 												}
 
-												if ($("#approveValue").val() == -1 || $("#approveValue").val() ==null) {
+												if ($("#approveValue").val() == -1
+														|| $("#approveValue")
+																.val() == null) {
 
 													isError = true;
 
@@ -392,7 +448,9 @@
 													$("#error_type").hide()
 												}
 
-												if ($("#approveValue1").val() == -1 || $("#approveValue1").val() ==null) {
+												if ($("#approveValue1").val() == -1
+														|| $("#approveValue1")
+																.val() == null) {
 
 													isError = true;
 
@@ -419,7 +477,9 @@
 
 												}
 
-												if (!$("#studBenifit").val() || $("#studBenifit").val() <= 0) {
+												if (!$("#studBenifit").val()
+														|| $("#studBenifit")
+																.val() <= 0) {
 
 													isError = true;
 
@@ -442,11 +502,10 @@
 													$("#error_agency").hide()
 												}
 
-												
 												if (!isError) {
 													var x = confirm("Do you really want to submit the form?");
 													if (x == true) {
-														
+
 														document
 																.getElementById("sub_button").disabled = true;
 														document
@@ -461,27 +520,25 @@
 		//
 	</script>
 	<script type="text/javascript">
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
-			}
-	
-			function clearDefault(a){
-				if(a.defaultValue==0)
-				{
-					a.value=""
-				}
-				};
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
 
-		</script>
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = ""
+			}
+		};
+	</script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -543,7 +600,7 @@
 		}
 
 		function hideText() {
-		
+
 			//alert("hii"+x);
 			var qualType = document.getElementById("schemeName").value;
 			//alert("qualType::"+qualType);

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
- <%@ page import="java.util.UUID"%>
+<%@ page import="java.util.UUID"%>
 <%@ page import="java.security.MessageDigest"%>
 <%@ page import="java.math.BigInteger"%>
 
@@ -162,8 +162,6 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Institute Vission?');">
 
-
-
 												<%
 													UUID uuid = UUID.randomUUID();
 													MessageDigest md = MessageDigest.getInstance("MD5");
@@ -297,6 +295,17 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Mission?');">
+												<%
+													UUID uuid1 = UUID.randomUUID();
+													MessageDigest md1 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest1 = md1.digest(String.valueOf(uuid1).getBytes());
+													BigInteger number1 = new BigInteger(1, messageDigest1);
+													String hashtext1 = number1.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey1", hashtext1);
+												%>
+												<input type="hidden" value="<%out.println(hashtext1);%>"
+													name="token1" id="token1">
 												<div class="row">
 
 													<input type="hidden" id="inst_mission_id"
@@ -344,71 +353,65 @@
 											<div align="center" id="loader2" style="display: none;">
 												<img
 													src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
-													style="width: 50px; height: 50px;">
-											</div>
-	<%
-													UUID uuid = UUID.randomUUID();
-													MessageDigest md = MessageDigest.getInstance("MD5");
-													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-													BigInteger number = new BigInteger(1, messageDigest);
-													String hashtext = number.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey", hashtext);
-												%>
-											<div class="row">
+													style="width: 50px; height: 50px;"> v
+												<div class="row">
 
 
-												<div class="col-xs-12">
-													<div class="table-responsive">
-														<table class="table table-bordered" id="table2">
-															<thead>
-																<tr>
-																	<th width="10%">Sr No</th>
-																	<th>Mission</th>
-
-																	<th width="10%">Action</th>
-
-																</tr>
-															</thead>
-
-															<tbody>
-																<c:forEach items="${institueMissionList}" var="list"
-																	varStatus="count">
+													<div class="col-xs-12">
+														<div class="table-responsive">
+															<table class="table table-bordered" id="table2">
+																<thead>
 																	<tr>
+																		<th width="10%">Sr No</th>
+																		<th>Mission</th>
 
-																		<td style="text-align: center;">${count.index+1}</td>
-																		<td style="word-wrap: break-word; max-width: 200">${list.instMissionText}</td>
-																		<td style="text-align: center;"><a href="#"
-																			onclick="editInstituteMission(${list.instMissionId})"><span
-																				class="glyphicon glyphicon-edit" title="Edit"
-																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																		<th width="10%">Action</th>
 
-																			<a href="#"
-																			onclick="deleteInstituteMission(${list.instMissionId})"
-																			rel="tooltip" data-color-class="danger"
-																			title="Delete" data-animate=" animated fadeIn "
-																			data-toggle="tooltip"
-																			data-original-title="Delete  record"><span
-																				class="glyphicon glyphicon-remove"></span></a></td>
 																	</tr>
-																</c:forEach>
+																</thead>
 
-															</tbody>
-														</table>
+																<tbody>
+																	<c:forEach items="${institueMissionList}" var="list"
+																		varStatus="count">
+																		<tr>
+
+																			<td style="text-align: center;">${count.index+1}</td>
+																			<td style="word-wrap: break-word; max-width: 200">${list.instMissionText}</td>
+																			<td style="text-align: center;"><a href="#"
+																				onclick="editInstituteMission(${list.instMissionId})"><span
+																					class="glyphicon glyphicon-edit" title="Edit"
+																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+																				<a href="#"
+																				onclick="deleteInstituteMission(${list.instMissionId})"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</tr>
+																	</c:forEach>
+
+																</tbody>
+															</table>
+														</div>
 													</div>
+
 												</div>
+
 
 											</div>
 
 
 										</div>
 
+										<!-- 	poo-ps -->
+
+										<!-- 		</form>			 -->
+
+
 
 									</div>
-
-									<!-- 	poo-ps -->
-
-									<!-- 		</form>			 -->
 
 
 
@@ -416,15 +419,10 @@
 
 
 
+								<!--  -->
+
+
 							</div>
-
-
-
-							<!--  -->
-
-
-						</div>
-
 					</section>
 				</div>
 
@@ -447,6 +445,7 @@
 
 			var instVisionText = document.getElementById("inst_vision_text").value; 
 			var instituteVissionId = document.getElementById("instVisionId").value;
+			var token = document.getElementById("token").value;
 			
 			if (instVisionText.trim().length>0) {
 				//$('#example-1 td').remove(); 
@@ -458,6 +457,7 @@
 				{
 					instVisionText : instVisionText, 
 					instituteVissionId : instituteVissionId,
+					token:token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -600,6 +600,7 @@
 
 			var instMissionText = document.getElementById("inst_mission_text").value; 
 			var instMissionId = document.getElementById("instMissionId").value;
+			var token1 = document.getElementById("token1").value;
 			
 			if (instMissionText.trim().length>0) {
 				//$('#example-1 td').remove(); 
@@ -611,6 +612,7 @@
 				{
 					instMissionText : instMissionText, 
 					instMissionId : instMissionId,
+					token1:token1,
 					ajax : 'true'
 
 				}, function(data) {

@@ -2223,66 +2223,75 @@ public class InstituteProfInfoController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("insertStudGrievance", "showRedressdeStudGrievnce", "0", "1", "0",
-					"0", newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			// System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				List<ModuleJson> newModuleList = (List) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("insertStudGrievance", "showRedressdeStudGrievnce", "0", "1",
+						"0", "0", newModuleList);
 
-				System.err.println("Inside insertJournal method");
+				// System.out.println(view);
 
-				int inst_id = (int) session.getAttribute("instituteId");
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-				int maker_id = (int) session.getAttribute("userId");
-				int acYearId = (int) session.getAttribute("acYearId");
+					System.err.println("Inside insertJournal method");
 
-				RedressedStudGrievance redInfo = new RedressedStudGrievance();
+					int inst_id = (int) session.getAttribute("instituteId");
 
-				redInfo.setRedrsStudGrvncId(Integer.parseInt(request.getParameter("stud_griev_id")));
-				redInfo.setStudGrievnce(request.getParameter("stud_griev"));
-				redInfo.setIsTransparent(Integer.parseInt(request.getParameter("isTrans")));
-				redInfo.setNoTrnsprntGrievnceAppeld(Integer.parseInt(request.getParameter("trans_grivnc")));
-				redInfo.setNoTrnsprntRedrsed(Integer.parseInt(request.getParameter("trans_redressed")));
-				redInfo.setIsTimeBound(Integer.parseInt(request.getParameter("isTime")));
-				redInfo.setNoTimeGrievnceAppeld(Integer.parseInt(request.getParameter("time_griev")));
-				redInfo.setNoTimeRedrsed(Integer.parseInt(request.getParameter("time_redress")));
-				redInfo.setIsEfficient(Integer.parseInt(request.getParameter("isEfcint")));
-				redInfo.setNoEfficntGrievnceAppeld(Integer.parseInt(request.getParameter("effGriev")));
-				redInfo.setNoEfficntRedrsed(Integer.parseInt(request.getParameter("eff_redress")));
-				redInfo.setInstId(inst_id);
-				redInfo.setAcadYearId(acYearId);
-				redInfo.setMakerEnterDatetime(curDateTime);
-				redInfo.setMakerUserId(maker_id);
-				redInfo.setDelStatus(1);
-				redInfo.setIsActive(1);
-				redInfo.setExInt1(0);
-				redInfo.setExInt2(0);
-				redInfo.setExVar1("NA");
-				redInfo.setExVar2("NA");
+					int maker_id = (int) session.getAttribute("userId");
+					int acYearId = (int) session.getAttribute("acYearId");
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
+					RedressedStudGrievance redInfo = new RedressedStudGrievance();
 
-				String curDateTime = dateFormat.format(cal.getTime());
+					redInfo.setRedrsStudGrvncId(Integer.parseInt(request.getParameter("stud_griev_id")));
+					redInfo.setStudGrievnce(request.getParameter("stud_griev"));
+					redInfo.setIsTransparent(Integer.parseInt(request.getParameter("isTrans")));
+					redInfo.setNoTrnsprntGrievnceAppeld(Integer.parseInt(request.getParameter("trans_grivnc")));
+					redInfo.setNoTrnsprntRedrsed(Integer.parseInt(request.getParameter("trans_redressed")));
+					redInfo.setIsTimeBound(Integer.parseInt(request.getParameter("isTime")));
+					redInfo.setNoTimeGrievnceAppeld(Integer.parseInt(request.getParameter("time_griev")));
+					redInfo.setNoTimeRedrsed(Integer.parseInt(request.getParameter("time_redress")));
+					redInfo.setIsEfficient(Integer.parseInt(request.getParameter("isEfcint")));
+					redInfo.setNoEfficntGrievnceAppeld(Integer.parseInt(request.getParameter("effGriev")));
+					redInfo.setNoEfficntRedrsed(Integer.parseInt(request.getParameter("eff_redress")));
+					redInfo.setInstId(inst_id);
+					redInfo.setAcadYearId(acYearId);
+					redInfo.setMakerEnterDatetime(curDateTime);
+					redInfo.setMakerUserId(maker_id);
+					redInfo.setDelStatus(1);
+					redInfo.setIsActive(1);
+					redInfo.setExInt1(0);
+					redInfo.setExInt2(0);
+					redInfo.setExVar1("NA");
+					redInfo.setExVar2("NA");
 
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
 
-				String curDate = dateFormatStr.format(new Date());
+					String curDateTime = dateFormat.format(cal.getTime());
 
-				RedressedStudGrievance studGrivInfo = rest.postForObject(Constants.url + "saveStudGrievance", redInfo,
-						RedressedStudGrievance.class);
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
-				System.err.println("Student Grievance " + studGrivInfo.toString());
+					String curDate = dateFormatStr.format(new Date());
 
-				returnString = "redirect:/showRedressdeStudGrievnce";
+					RedressedStudGrievance studGrivInfo = rest.postForObject(Constants.url + "saveStudGrievance",
+							redInfo, RedressedStudGrievance.class);
 
+					System.err.println("Student Grievance " + studGrivInfo.toString());
+
+					returnString = "redirect:/showRedressdeStudGrievnce";
+
+				} else {
+
+					returnString = "redirect:/accessDenied";
+
+				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
 		}
 

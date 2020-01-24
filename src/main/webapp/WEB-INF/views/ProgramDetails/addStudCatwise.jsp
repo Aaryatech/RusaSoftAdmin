@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -124,6 +126,19 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertStudAdmCatwise"
 										method="post" name="form_sample_2" id="form_sample_2">
+
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<c:if test="${isEdit==0}">
 											<div class="form-group">
 												<label class="control-label col-sm-2" for="programType">Program
@@ -287,25 +302,21 @@
 													<a href="${pageContext.request.contextPath}/showStudAddmit"><button
 															type="button" id="sub2" class="btn btn-primary">
 															<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
-														</button></a> 
-														
-													
-
-													<label class="control-label" for="fPassingYear"><b>Total
+														</button></a> <label class="control-label" for="fPassingYear"><b>Total
 															Seats</b><span class="text-danger"></span> </label> <input
 														type="text"
 														style="color: black; border-radius: 15px; align-items: center;"
 														readonly placeholder="Total Seats" id="total_seat">
-														
-														
+
+
 													<label class="control-label" for="fPassingYear"><b>Total
 															Students</b><span class="text-danger"></span> </label> <input
 														type="text"
 														style="color: black; border-radius: 15px; align-items: center;"
 														readonly placeholder="Total Student" id="total_stud">
-														
-														
-														
+
+
+
 													<span class="error_form text-danger"
 														id="total_seat_count_field" style="display: none;">All
 														fields can not be 0</span>
@@ -335,7 +346,7 @@
 
 	</div>
 	<!-- MAIN CONTENT AREA ENDS -->
-	
+
 	<!-- END CONTENT -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

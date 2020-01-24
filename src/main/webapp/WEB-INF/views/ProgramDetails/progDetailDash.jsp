@@ -3,6 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 
 
 <!DOCTYPE html>
@@ -120,12 +126,14 @@
 										<label class="control-label col-sm-2" for="status">
 											Program Name:</label> <label class="control-label col-sm-10"
 											for="status"><strong>
-												${programDetail.programName} - ${programDetail.nameOfProgram} </strong></label>
+												${programDetail.programName} -
+												${programDetail.nameOfProgram} </strong></label>
 									</div>
 
 									<div class="form-group">
-										<label class="control-label col-sm-2" for="status"> Duration In(months) :</label> <label class="control-label col-sm-10" for="status">
-											<strong>${programDetail.monthDuration}</strong>
+										<label class="control-label col-sm-2" for="status">
+											Duration In(months) :</label> <label class="control-label col-sm-10"
+											for="status"> <strong>${programDetail.monthDuration}</strong>
 										</label>
 									</div>
 									<div class="form-group">
@@ -179,6 +187,19 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vision?');">
 
+
+												<%
+													UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+												%>
+												<input type="hidden" value="<%out.println(hashtext);%>"
+													name="token" id="token">
+
 												<div class="row">
 
 													<input type="hidden" id="programVissionId"
@@ -187,7 +208,7 @@
 														Vision<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<textarea  class="form-control"  maxlength="500"
+														<textarea class="form-control" maxlength="500"
 															id="programVission" name="programVission"
 															placeholder="Program Vision" required></textarea>
 													</div>
@@ -205,8 +226,10 @@
 													</div>
 
 													<div class="col-sm-4">
-		<button type="button" id="sub_button" class="btn btn-primary"
-													onclick="saveProgramVission()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+														<button type="button" id="sub_button"
+															class="btn btn-primary" onclick="saveProgramVission()">
+															<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
 												</div>
 												<br>
@@ -245,7 +268,7 @@
 																	<tr>
 
 																		<td>${count.index+1}</td>
-																		<td style="word-wrap:break-word; max-width: 200;">${list.visionText}</td>
+																		<td style="word-wrap: break-word; max-width: 200;">${list.visionText}</td>
 																		<td>${list.visionRemark}</td>
 																		<td><a href="#"
 																			onclick="editProgramVission(${list.visionId})"><span
@@ -284,9 +307,20 @@
 												onsubmit="return confirm('Do you really want to add Program Mission?');">
 												<div class="row">
 
-													<input type="hidden" id="programMissionId"
-														name="programMissionId" value="0"> <label
-														class="col-sm-2 text-left" for="programMission">
+
+													<%
+														UUID uuid1 = UUID.randomUUID();
+														MessageDigest md1 = MessageDigest.getInstance("MD5");
+														byte[] messageDigest1 = md1.digest(String.valueOf(uuid1).getBytes());
+														BigInteger number1 = new BigInteger(1, messageDigest1);
+														String hashtext1 = number1.toString(16);
+														session = request.getSession();
+														session.setAttribute("generatedKey1", hashtext1);
+													%>
+													<input type="hidden" value="<%out.println(hashtext);%>"
+														name="token1" id="token1"> <input type="hidden"
+														id="programMissionId" name="programMissionId" value="0">
+													<label class="col-sm-2 text-left" for="programMission">
 														Mission<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
@@ -309,9 +343,11 @@
 
 													<div class="col-sm-4">
 
-														
-				<button type="button" id="sub_button" class="btn btn-primary"
-													onclick="saveProgramMission()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+														<button type="button" id="sub_button"
+															class="btn btn-primary" onclick="saveProgramMission()">
+															<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
 												</div>
 											</form>
@@ -424,6 +460,20 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Objective?');">
+
+												<%
+													UUID uuid2 = UUID.randomUUID();
+													MessageDigest md2 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest2 = md2.digest(String.valueOf(uuid2).getBytes());
+													BigInteger number2 = new BigInteger(1, messageDigest2);
+													String hashtext2 = number2.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey2", hashtext2);
+												%>
+												<input type="hidden" value="<%out.println(hashtext);%>"
+													name="token2" id="token2">
+
+
 												<div class="row">
 
 													<input type="hidden" id="programPeoId" name="programPeoId"
@@ -431,9 +481,9 @@
 														for="peoText"> PEO<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-6">
-														<textarea class="form-control" id="peoText" maxlength="500"
-															name="peoText" placeholder="Program Education Objective"
-															required></textarea>
+														<textarea class="form-control" id="peoText"
+															maxlength="500" name="peoText"
+															placeholder="Program Education Objective" required></textarea>
 													</div>
 												</div>
 
@@ -450,10 +500,12 @@
 
 													<div class="col-sm-4">
 
-													
-															
-															<button type="button" id="sub_button" class="btn btn-primary"
-													 onclick="saveProgramPeo()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+
+														<button type="button" id="sub_button"
+															class="btn btn-primary" onclick="saveProgramPeo()">
+															<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
 												</div>
 											</form>
@@ -563,6 +615,19 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Outcome?');">
+
+												<%
+													UUID uuid3 = UUID.randomUUID();
+													MessageDigest md3 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest3 = md3.digest(String.valueOf(uuid3).getBytes());
+													BigInteger number3 = new BigInteger(1, messageDigest3);
+													String hashtext3 = number3.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey3", hashtext3);
+												%>
+												<input type="hidden" value="<%out.println(hashtext3);%>"
+													name="token1" id="token1">
+
 												<div class="row">
 													<input type="hidden" id="poId" name="poId" value="0">
 													<label class="col-sm-2 text-left" for="poText"> PO<span
@@ -586,9 +651,11 @@
 
 													<div class="col-sm-4">
 
-														
-																<button type="button" id="sub_button" class="btn btn-primary"
-													onclick="saveProgramPo()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+														<button type="button" id="sub_button"
+															class="btn btn-primary" onclick="saveProgramPo()">
+															<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
 												</div>
 												<!-- 		</form>			 -->
@@ -698,6 +765,20 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Outcome?');">
+
+												<%
+													UUID uuid4 = UUID.randomUUID();
+													MessageDigest md4 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest4 = md4.digest(String.valueOf(uuid4).getBytes());
+													BigInteger number4 = new BigInteger(1, messageDigest4);
+													String hashtext4 = number4.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey4", hashtext4);
+												%>
+												<input type="hidden" value="<%out.println(hashtext4);%>"
+													name="token4" id="token4">
+
+
 												<div class="row">
 
 													<input type="hidden" id="psoId" name="psoId" value="0">
@@ -705,9 +786,9 @@
 														PSO<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-10">
-														<textarea maxlength="500" class="form-control" id="psoText"
-															name="psoText" placeholder="Program Specific Outcome"
-															required></textarea>
+														<textarea maxlength="500" class="form-control"
+															id="psoText" name="psoText"
+															placeholder="Program Specific Outcome" required></textarea>
 													</div>
 												</div>
 
@@ -724,12 +805,14 @@
 
 													<div class="col-sm-4">
 
-														
-															
-																<button type="button" id="sub_button" class="btn btn-primary"
-													onclick="saveProgramPso()"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
+
+
+														<button type="button" id="sub_button"
+															class="btn btn-primary" onclick="saveProgramPso()">
+															<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
 													</div>
-												
+
 												</div>
 											</form>
 											<!-- 		</form>			 -->
@@ -917,6 +1000,7 @@
 					.getElementById("programVissionRemark").value;
 			var programId = document.getElementById("programId").value;
 			var programVissionId = document.getElementById("programVissionId").value;
+			var token = document.getElementById("token").value;
 			
 			if (programVission != "") {
 				//$('#example-1 td').remove(); 
@@ -932,6 +1016,7 @@
 					programVissionRemark : programVissionRemark,
 					programId : programId,
 					programVissionId : programVissionId,
+					token:token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1048,6 +1133,7 @@
 					.getElementById("programMissionRemark").value;
 			var programId = document.getElementById("programId").value;
 			var programMissionId = document.getElementById("programMissionId").value;
+			var token1 = document.getElementById("token1").value;
 			
 			if (programMission != "") {
 				//$('#example-2 td').remove();
@@ -1062,6 +1148,7 @@
 					programMissionRemark : programMissionRemark,
 					programId : programId,
 					programMissionId : programMissionId,
+					token1:token1,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1176,6 +1263,7 @@
 					.getElementById("peoRemark").value;
 			var programId = document.getElementById("programId").value;
 			var programPeoId = document.getElementById("programPeoId").value;
+			var token2 = document.getElementById("token2").value;
 			
 			if (peoText != "") {
 				//$('#example-5 td').remove();
@@ -1190,6 +1278,7 @@
 					peoRemark : peoRemark,
 					programId : programId,
 					programPeoId : programPeoId,
+					token2:token2,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1305,7 +1394,7 @@
 					.getElementById("poRemark").value;
 			var programId = document.getElementById("programId").value;
 			var poId = document.getElementById("poId").value;
-			
+			var token3 = document.getElementById("token3").value;
 			if (poText != "") {
 				//$('#example-3 td').remove();
 				$("#loader4").show();
@@ -1319,6 +1408,7 @@
 					poRemark : poRemark,
 					programId : programId,
 					poId : poId,
+					token3:token3,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1433,6 +1523,7 @@
 					.getElementById("psoRemark").value;
 			var programId = document.getElementById("programId").value;
 			var psoId = document.getElementById("psoId").value;
+			var token4 = document.getElementById("token4").value;
 			
 			if (psoText != "") {
 				/* $('#example-4 td').remove(); */
@@ -1447,6 +1538,7 @@
 					psoRemark : psoRemark,
 					programId : programId,
 					psoId : psoId,
+					token4:token4,
 					ajax : 'true'
 
 				}, function(data) {

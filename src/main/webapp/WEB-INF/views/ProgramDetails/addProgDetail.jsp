@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -100,11 +101,24 @@
 										method="post" name="form_sample_2" id="form_sample_2">
 
 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
+
+
 
 
 										<div class="form-group">
-											<label class="control-label col-sm-2" for="programType">Program Type
-												 <span class="text-danger">*</span>
+											<label class="control-label col-sm-2" for="programType">Program
+												Type <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<select id="programType" name="programType"
@@ -135,34 +149,38 @@
 												Duration (in months)<span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="monthDuration" autocomplete="off"
-													value="${editProgram.monthDuration}" name="monthDuration"
-													placeholder="Duration (in months)" pattern="\d*">
-													<span class="error_form text-danger" id="error_formfield1" style="display:none;" >Please enter duration.</span>
+												<input type="text" class="form-control" id="monthDuration"
+													autocomplete="off" value="${editProgram.monthDuration}"
+													name="monthDuration" placeholder="Duration (in months)"
+													pattern="\d*"> <span class="error_form text-danger"
+													id="error_formfield1" style="display: none;">Please
+													enter duration.</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="nameOfProgram">
-												  Program <span class="text-danger">*</span>
+												Program <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="nameOfProgram"
 													value="${editProgram.nameOfProgram}" name="nameOfProgram"
-													placeholder="Name of Program ">
-													<span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name  of program.</span>
+													placeholder="Name of Program "> <span
+													class="error_form text-danger" id="error_formfield2"
+													style="display: none;">Please enter name of
+													program.</span>
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="nameOfProgram">Program
-												  Code<span class="text-danger"></span>
+												Code<span class="text-danger"></span>
 											</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="programCode"
 													value="${editProgram.exVar1}" name="programCode"
 													placeholder="Program Code (optional)">
-													<!-- <span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name  of program.</span> -->
+												<!-- <span class="error_form text-danger" id="error_formfield2" style="display:none;" >Please enter name  of program.</span> -->
 											</div>
 										</div>
 
@@ -173,8 +191,10 @@
 											<div class="col-sm-3">
 												<input type="text" class="form-control " id="intake"
 													value="${editProgram.sanctionalIntake}" name="intake"
-													placeholder=" Sanctioned Intake"  pattern="\d*">
-											<span class="error_form text-danger" id="error_formfield3" style="display:none;" >Please enter sanctioned intake.</span>
+													placeholder=" Sanctioned Intake" pattern="\d*"> <span
+													class="error_form text-danger" id="error_formfield3"
+													style="display: none;">Please enter sanctioned
+													intake.</span>
 											</div>
 										</div>
 
@@ -184,10 +204,13 @@
 												of Introduction <span class="text-danger">*</span>
 											</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control datepicker"  data-end-date="0d" data-format="dd-mm-yyyy" id="date"
+												<input type="text" class="form-control datepicker"
+													data-end-date="0d" data-format="dd-mm-yyyy" id="date"
 													value="${editProgram.dateOfIntroduction}" name="date"
-													placeholder="Date of Introduction">
-											<span class="error_form text-danger" id="error_formfield4" style="display:none;" >Please enter date of introduction.</span>
+													placeholder="Date of Introduction"> <span
+													class="error_form text-danger" id="error_formfield4"
+													style="display: none;">Please enter date of
+													introduction.</span>
 											</div>
 										</div>
 										<c:set var="findOther" value="0"></c:set>
@@ -204,7 +227,8 @@
 														<c:when test="${editProgram.programId>0}">
 
 															<c:choose>
-																<c:when test="${editProgram.approvedBy eq 'BOS/AC/University'}">
+																<c:when
+																	test="${editProgram.approvedBy eq 'BOS/AC/University'}">
 																	<option value="BOS/AC/University" selected>BOS/AC/University</option>
 																	<option value="Industry">Industry</option>
 																	<option value="AICTE">AICTE</option>
@@ -334,16 +358,21 @@
 
 										<input type="hidden" id="findOtherName" name="findOtherName"
 											value="${findOther}">
-<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+										<div class="form-group">
+											<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showProgramList"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
-												</div>
+												<button type="submit" id="sub1" class="btn btn-primary"
+													onclick="submit_f(1)">
+													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+												</button>
+
+												<a href="${pageContext.request.contextPath}/showProgramList"><button
+														id="sub2" type="button" class="btn btn-primary">
+														<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+													</button></a>
+											</div>
+										</div>
 
 									</form>
 									<p class="desc text-danger fontsize11">Notice : * Fields
@@ -365,110 +394,101 @@
 	<!-- END CONTENT -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script>
-	
-	$('#monthDuration').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-	$('#intake').on(
-			'input',
-			function() {
-				this.value = this.value.replace(/[^0-9]/g, '').replace(
-						/(\..*)\./g, '$1');
-			});
-	
-	$('#date').on(
-			'input',
-			function() {
-				this.value = this.value.replace(/[^0-9]/g, '').replace(
-						/(\..*)\./g, '$1');
-			});
-	
-	function trim(el) {
-		el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
-		replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
-		replace(/\n +/, "\n"); // Removes spaces after newlines
-		return;
-	}
-	
-               
-            	$(document).ready(function($){  nameOfProgram  
-            		
-            		$("#form_sample_2").submit(function(e) {
-            		
-            			var isError=false;
-            			 var errMsg="";
-            				
-           				if(!$("#monthDuration").val()){
-            					 
-            				isError=true;
-            				
-            				
-            				$("#monthDuration").addClass("has-error")
-            				$("#error_formfield1").show()
-            					//return false;
-            				} else {
-            					$("#error_formfield1").hide()
-            				}
-            				
-            				            				
-            				if(!$("#nameOfProgram").val()){
-             					 
-                				isError=true;
-                			
-                				
-                				$("#nameOfProgram").addClass("has-error")
-                				$("#error_formfield2").show()
-                					//return false;
-                				} else {
-                					$("#error_formfield2").hide()
-                				}
-            				 
-            				
-            				
-            				if(!$("#intake").val()){
-             					 
-                				isError=true;
-                			
-                				
-                				$("#intake").addClass("has-error")
-                				$("#error_formfield3").show()
-                					//return false;
-                				} else {
-                					$("#error_formfield3").hide()
-                				}
-            				
-            				if(!$("#date").val()){
-             					 
-                				isError=true;
-                			
-                				
-                				$("#date").addClass("has-error")
-                				$("#error_formfield4").show()
-                					//return false;
-                				} else {
-                					$("#error_formfield4").hide()
-                				}
-            				
-								
-								
-            				
-			            	 if (!isError) {
-			            		 
-								var x = confirm("Do you really want to submit the form?");
-								if (x == true) {
-									
-									document.getElementById("sub1").disabled = true;
-									document.getElementById("sub2").disabled = true;
-									return  true;
-								}
-							}
-            					   return false;
-            			});
-        });
+		$('#monthDuration').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
 
-</script>
-	
+		$('#intake').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		$('#date').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		function trim(el) {
+			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
+			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
+			replace(/\n +/, "\n"); // Removes spaces after newlines
+			return;
+		}
+
+		$(document).ready(function($) {
+			nameOfProgram
+
+			$("#form_sample_2").submit(function(e) {
+
+				var isError = false;
+				var errMsg = "";
+
+				if (!$("#monthDuration").val()) {
+
+					isError = true;
+
+					$("#monthDuration").addClass("has-error")
+					$("#error_formfield1").show()
+					//return false;
+				} else {
+					$("#error_formfield1").hide()
+				}
+
+				if (!$("#nameOfProgram").val()) {
+
+					isError = true;
+
+					$("#nameOfProgram").addClass("has-error")
+					$("#error_formfield2").show()
+					//return false;
+				} else {
+					$("#error_formfield2").hide()
+				}
+
+				if (!$("#intake").val()) {
+
+					isError = true;
+
+					$("#intake").addClass("has-error")
+					$("#error_formfield3").show()
+					//return false;
+				} else {
+					$("#error_formfield3").hide()
+				}
+
+				if (!$("#date").val()) {
+
+					isError = true;
+
+					$("#date").addClass("has-error")
+					$("#error_formfield4").show()
+					//return false;
+				} else {
+					$("#error_formfield4").hide()
+				}
+
+				if (!isError) {
+
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+						return true;
+					}
+				}
+				return false;
+			});
+		});
+	</script>
+
 	<script type="text/javascript">
 		function submit_f(view) {
 			document.getElementById("is_view").value = view;//create this 
@@ -507,24 +527,24 @@
 		}
 	</script>
 
-<script type="text/javascript">
-/* $(function () {
-	 
-    $('.datepicker').datepicker({
-		autoclose: true,
-        format: "dd-mm-yyyy",
-        changeYear:true,
-        changeMonth:true
+	<script type="text/javascript">
+		/* $(function () {
+		
+		 $('.datepicker').datepicker({
+		 autoclose: true,
+		 format: "dd-mm-yyyy",
+		 changeYear:true,
+		 changeMonth:true
 
-	});
-}); */
-</script>
+		 });
+		 }); */
+	</script>
 
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	
+
 
 
 

@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -111,7 +115,7 @@
 									</button>
 									<strong>Success : </strong>${msg}</div>
 							</div> --%>
-											
+
 
 							<%-- <div class="col-lg-12" id="fail_msg" style="display: none;">
 								<div class="alert alert-success alert-dismissible fade in">
@@ -121,7 +125,7 @@
 									</button>
 									<strong>Fail : </strong>${msg}</div>
 							</div> --%>
-							
+
 						</header>
 
 						<div class="content-body">
@@ -162,6 +166,17 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
+												<%
+													UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+												%>
+												<input type="hidden" value="<%out.println(hashtext);%>"
+													name="token" id="token">
 
 												<c:if test="${instituteYesNoTab1List.size()==0}">
 													<div class="row">
@@ -303,6 +318,17 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
+												<%
+													UUID uuid1 = UUID.randomUUID();
+													MessageDigest md1 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest1 = md1.digest(String.valueOf(uuid1).getBytes());
+													BigInteger number1 = new BigInteger(1, messageDigest1);
+													String hashtext1 = number1.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey1", hashtext1);
+												%>
+												<input type="hidden" value="<%out.println(hashtext1);%>"
+													name="token1" id="token1">
 												<c:if test="${instituteYesNoTab2List.size()==0}">
 													<div class="row">
 														<label class="col-sm-2 text-left" for="programVission">
@@ -442,6 +468,18 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
+
+												<%
+													UUID uuid2 = UUID.randomUUID();
+													MessageDigest md2 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest2 = md2.digest(String.valueOf(uuid2).getBytes());
+													BigInteger number2 = new BigInteger(1, messageDigest2);
+													String hashtext2 = number2.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey2", hashtext2);
+												%>
+												<input type="hidden" value="<%out.println(hashtext1);%>"
+													name="token2" id="token2">
 												<c:if test="${instituteYesNoTab3List.size()==0}">
 													<div class="row">
 														<label class="col-sm-2 text-left" for="efficientyesno">
@@ -886,6 +924,7 @@
 		function addTransperent() {
 			transId=document.getElementById("transId").value
 			var id = document.getElementById("transId").value; 
+			var token = document.getElementById("token").value; 
 			
 			var transperentspeficytext = document.getElementById("transperentspeficytext").value; 
 			 
@@ -901,6 +940,7 @@
 				{
 					transperentspeficytext : transperentspeficytext, 
 					transId : transId,
+					token:token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1015,7 +1055,7 @@ function editTranspernt(instYesnoId){
 			var timeBoundId=document.getElementById("timeBoundId").value;
 
 			var transperentspeficytext = document.getElementById("timeboundspeficytext").value; 
-			 
+			var token1 = document.getElementById("token1").value; 
 			if (transperentspeficytext != "") {
 				 
 				
@@ -1028,6 +1068,7 @@ function editTranspernt(instYesnoId){
 				{
 					transperentspeficytext : transperentspeficytext, 
 					timeBoundId : timeBoundId,
+					token1:token1,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1145,7 +1186,7 @@ function editTimebound(instYesnoId){
 	<script type="text/javascript">
 		function addEfficient() {
 			var efficientId=document.getElementById("efficientId").value;
-
+			var token2 = document.getElementById("token2").value; 
 			var transperentspeficytext = document.getElementById("efficientspeficytext").value; 
 			 
 			if (transperentspeficytext != "") {
@@ -1160,7 +1201,7 @@ function editTimebound(instYesnoId){
 				{
 					transperentspeficytext : transperentspeficytext, 
 					efficientId : efficientId,
-
+					token2:token2,
 					ajax : 'true'
 
 				}, function(data) {

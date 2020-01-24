@@ -3,6 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 
 <!DOCTYPE html>
@@ -105,8 +108,8 @@
 
 							</div>
  --%>
- 
- 						<%-- <div class="col-lg-12" id="sucess_msg" style="display: none;">
+
+							<%-- <div class="col-lg-12" id="sucess_msg" style="display: none;">
 								<!-- onclick="location.reload();" -->
 								<div class="alert alert-success alert-dismissible fade in">
 									<button type="button" class="close" onclick="hideAlert()">
@@ -125,7 +128,7 @@
 
 
 							</div> --%>
-							
+
 						</header>
 
 						<div class="content-body">
@@ -171,6 +174,22 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
+
+
+												<%
+													UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+												%>
+												<input type="hidden" value="<%out.println(hashtext);%>"
+													name="token" id="token">
+
+
+
 												<c:if test="${instituteYesNoTab1List.size()==0}">
 													<div class="row">
 														<label class="col-sm-2 text-left" for="programVission">
@@ -204,8 +223,8 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTransperent()" value="Add">
-																	<input type="hidden" id="transId" name="transId" value="0">
+																	onclick="addTransperent()" value="Add"> <input
+																	type="hidden" id="transId" name="transId" value="0">
 															</div>
 														</div>
 													</c:when>
@@ -220,16 +239,17 @@
 															<div class="col-sm-6">
 																<input type="text" class="form-control"
 																	id="transperentspeficytext"
-																	name="transperentspeficytext" value="${editInstyn.instYesnoResponse}"
+																	name="transperentspeficytext"
+																	value="${editInstyn.instYesnoResponse}"
 																	placeholder="Please Specify Here" onchange="trim(this)">
 															</div>
 
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTransperent()" value="Add">
-																<input type="hidden" id="transId" name="transId" value="0">
-																	
+																	onclick="addTransperent()" value="Add"> <input
+																	type="hidden" id="transId" name="transId" value="0">
+
 															</div>
 														</div>
 													</c:otherwise>
@@ -273,15 +293,14 @@
 
 																		<td>${count.index+1}</td>
 																		<td>${list.instYesnoResponse}</td>
-																		<td>
-																					
-																			<a href="#" onclick="editTranspernt(${list.instYesnoId})"
-																			
-																			rel="tooltip" data-color-class="danger"
-																			title="Edit" data-animate=" animated fadeIn "
+																		<td><a href="#"
+																			onclick="editTranspernt(${list.instYesnoId})"
+																			rel="tooltip" data-color-class="danger" title="Edit"
+																			data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Edit  record"><span
-																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																			href="#"
 																			onclick="deleteTranspernt(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -309,6 +328,21 @@
 											<form class="form-horizontal" action="#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
+
+
+
+												<%
+													UUID uuid1 = UUID.randomUUID();
+													MessageDigest md1 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest1 = md1.digest(String.valueOf(uuid1).getBytes());
+													BigInteger number1 = new BigInteger(1, messageDigest1);
+													String hashtext1 = number1.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey1", hashtext1);
+												%>
+												<input type="hidden" value="<%out.println(hashtext1);%>"
+													name="token1" id="token1">
+
 
 												<c:if test="${instituteYesNoTab2List.size()==0}">
 													<div class="row">
@@ -342,9 +376,10 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTimeboundAddDive()" value="Add">
-																<input type="hidden" id="timeBoundId" name="timeBoundId" value="0">
-																	
+																	onclick="addTimeboundAddDive()" value="Add"> <input
+																	type="hidden" id="timeBoundId" name="timeBoundId"
+																	value="0">
+
 															</div>
 														</div>
 													</c:when>
@@ -365,8 +400,9 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addTimeboundAddDive()" value="Add">
-																	<input type="hidden" id="timeBoundId" name="timeBoundId" value="0">
+																	onclick="addTimeboundAddDive()" value="Add"> <input
+																	type="hidden" id="timeBoundId" name="timeBoundId"
+																	value="0">
 															</div>
 														</div>
 													</c:otherwise>
@@ -412,11 +448,12 @@
 																		<td>${list.instYesnoResponse}</td>
 																		<td><a href="#"
 																			onclick="editTimebound(${list.instYesnoId})"
-																			rel="tooltip" data-color-class="danger"
-																			title="Edit" data-animate=" animated fadeIn "
+																			rel="tooltip" data-color-class="danger" title="Edit"
+																			data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Edit  record"><span
-																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																			href="#"
 																			onclick="deleteTimebound(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -445,6 +482,18 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
+
+												<%
+													UUID uuid2 = UUID.randomUUID();
+													MessageDigest md2 = MessageDigest.getInstance("MD5");
+													byte[] messageDigest2 = md2.digest(String.valueOf(uuid2).getBytes());
+													BigInteger number2 = new BigInteger(1, messageDigest2);
+													String hashtext2 = number2.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey2", hashtext2);
+												%>
+												<input type="hidden" value="<%out.println(hashtext1);%>"
+													name="token2" id="token2">
 												<c:if test="${instituteYesNoTab3List.size()==0}">
 													<div class="row">
 														<label class="col-sm-2 text-left" for="efficientyesno">
@@ -478,8 +527,9 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addEfficient()" value="Add">
-																	<input type="hidden" id="efficientId" name="efficientId" value="0">
+																	onclick="addEfficient()" value="Add"> <input
+																	type="hidden" id="efficientId" name="efficientId"
+																	value="0">
 															</div>
 														</div>
 													</c:when>
@@ -500,10 +550,11 @@
 															<div class="col-sm-4">
 
 																<input type="button" class="btn btn-info"
-																	onclick="addEfficient()" value="Add">
-															<input type="hidden" id="efficientId" name="efficientId" value="0">
-																	
-																	
+																	onclick="addEfficient()" value="Add"> <input
+																	type="hidden" id="efficientId" name="efficientId"
+																	value="0">
+
+
 															</div>
 														</div>
 													</c:otherwise>
@@ -549,11 +600,12 @@
 																		<td>${list.instYesnoResponse}</td>
 																		<td><a href="#"
 																			onclick="editEfficient(${list.instYesnoId})"
-																			rel="tooltip" data-color-class="danger"
-																			title="Edit" data-animate=" animated fadeIn "
+																			rel="tooltip" data-color-class="danger" title="Edit"
+																			data-animate=" animated fadeIn "
 																			data-toggle="tooltip"
 																			data-original-title="Edit  record"><span
-																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
+																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+																			href="#"
 																			onclick="deleteEfficient(${list.instYesnoId})"
 																			rel="tooltip" data-color-class="danger"
 																			title="Delete" data-animate=" animated fadeIn "
@@ -888,7 +940,8 @@
 	<script type="text/javascript">
 		function addTransperent() {
 			transId=document.getElementById("transId").value
-			var transperentspeficytext = document.getElementById("transperentspeficytext").value; 
+			var transperentspeficytext = document.getElementById("transperentspeficytext").value;
+			var token = document.getElementById("token").value;
 			 
 			if (transperentspeficytext != "") {
 				 
@@ -902,6 +955,7 @@
 				{
 					transperentspeficytext : transperentspeficytext, 
 					transId : transId,
+					token:token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1015,7 +1069,7 @@
  
 			var timeBoundId=document.getElementById("timeBoundId").value;
 			var transperentspeficytext = document.getElementById("timeboundspeficytext").value; 
-			 
+			var token1 = document.getElementById("token1").value;
 			if (transperentspeficytext != "") {
 				 
 				
@@ -1028,6 +1082,7 @@
 				{
 					transperentspeficytext : transperentspeficytext, 
 					timeBoundId : timeBoundId,
+					token1 : token1,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1144,7 +1199,7 @@
 			var efficientId=document.getElementById("efficientId").value;
 //alert(efficientId)
 			var transperentspeficytext = document.getElementById("efficientspeficytext").value; 
-			 
+			var token2 = document.getElementById("token2").value;
 			if (transperentspeficytext != "") {
 				 
 				
@@ -1157,6 +1212,7 @@
 				{
 					transperentspeficytext : transperentspeficytext, 
 					efficientId : efficientId,
+					token2:token2;
 					ajax : 'true'
 
 				}, function(data) {

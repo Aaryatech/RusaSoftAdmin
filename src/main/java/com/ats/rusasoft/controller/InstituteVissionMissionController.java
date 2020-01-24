@@ -78,9 +78,9 @@ public class InstituteVissionMissionController {
 			String token = request.getParameter("token");
 			String key = (String) session.getAttribute("generatedKey");
 
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			if (token.trim().equals(key.trim())) {
 
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				Date date = new Date();
 
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -125,6 +125,13 @@ public class InstituteVissionMissionController {
 				info.setError(true);
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
+						InstitueVision[].class);
+				List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setInstitueVisionList(list);
 			}
 
 		} catch (Exception e) {
@@ -210,12 +217,12 @@ public class InstituteVissionMissionController {
 		try {
 
 			HttpSession session = request.getSession();
-			String token = request.getParameter("token");
-			String key = (String) session.getAttribute("generatedKey");
-
+			String token = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey1");
+			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			if (token.trim().equals(key.trim())) {
 
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				
 				Date date = new Date();
 
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -259,6 +266,12 @@ public class InstituteVissionMissionController {
 				info.setError(true);
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
+						InstitueMission[].class);
+				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setInstitueMissionList(list);
 			}
 
 		} catch (Exception e) {

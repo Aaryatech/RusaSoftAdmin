@@ -64,7 +64,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showStudOrgnizedActivity", "showStudOrgnizedActivity", "1", "0",
 					"0", "0", newModuleList);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -123,7 +123,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
 					"1", "0", "0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -153,67 +153,72 @@ public class StudentActivityController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
-					"1", "0", "0", newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddStudentOrgnizedActivity", "showStudOrgnizedActivity",
+						"0", "1", "0", "0", newModuleList);
 
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				Date maleDate = new Date();
-				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+				// System.out.println(view);
 
-				String activityName = request.getParameter("activityName");
-				String date = request.getParameter("date");
-				String year = request.getParameter("year");
-				String branch = request.getParameter("branch");
-				int noStudent = Integer.parseInt(request.getParameter("noStudent"));
-				String level = request.getParameter("level");
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				int acYearId = (Integer) session.getAttribute("acYearId");
-				int activityId = Integer.parseInt(request.getParameter("activityId"));
-				
-			
-				ProgramActivity programActivity = new ProgramActivity();
-				
-				if (activityName.equals("7")) {
-					String otherActivityName = request.getParameter("otherActivityName");
-					programActivity.setActivityName(XssEscapeUtils.jsoupParse(otherActivityName));
-				} else {
-					programActivity.setActivityName(activityName);
+				if (view.isError() == false) {
+
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					Date maleDate = new Date();
+					SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+					String activityName = request.getParameter("activityName");
+					String date = request.getParameter("date");
+					String year = request.getParameter("year");
+					String branch = request.getParameter("branch");
+					int noStudent = Integer.parseInt(request.getParameter("noStudent"));
+					String level = request.getParameter("level");
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int acYearId = (Integer) session.getAttribute("acYearId");
+					int activityId = Integer.parseInt(request.getParameter("activityId"));
+
+					ProgramActivity programActivity = new ProgramActivity();
+
+					if (activityName.equals("7")) {
+						String otherActivityName = request.getParameter("otherActivityName");
+						programActivity.setActivityName(XssEscapeUtils.jsoupParse(otherActivityName));
+					} else {
+						programActivity.setActivityName(activityName);
+					}
+
+					if (activityId != 0) {
+
+						programActivity.setStudentActivityId(activityId);
+					}
+
+					programActivity.setDate(date);
+					programActivity.setYear(year);
+					programActivity.setParticipatedStudent(noStudent);
+					programActivity.setBranch(XssEscapeUtils.jsoupParse(branch));
+					programActivity.setDelStatus(1);
+					programActivity.setInstituteId(userObj.getGetData().getUserInstituteId());
+					programActivity.setLevel(level);
+					programActivity.setAddDate(sf.format(maleDate));
+					programActivity.setMakerUserId(userObj.getUserId());
+					programActivity.setYearId(acYearId);
+					programActivity.setIsActive(1);
+					programActivity.setType(0);
+					programActivity.setRawActivityName(XssEscapeUtils.jsoupParse(request.getParameter("actvtName")));
+
+					// System.out.println(programActivity);
+
+					ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
+							programActivity, ProgramActivity.class);
+					if (is_view == 1) {
+						returnString = "redirect:/showStudOrgnizedActivity";
+					} else {
+						returnString = "redirect:/showAddStudentOrgnizedActivity";
+					}
+
 				}
-
-				if (activityId != 0) {
-
-					programActivity.setStudentActivityId(activityId);
-				}
-
-				programActivity.setDate(date);
-				programActivity.setYear(year);
-				programActivity.setParticipatedStudent(noStudent);
-				programActivity.setBranch(XssEscapeUtils.jsoupParse(branch));
-				programActivity.setDelStatus(1);
-				programActivity.setInstituteId(userObj.getGetData().getUserInstituteId());
-				programActivity.setLevel(level);
-				programActivity.setAddDate(sf.format(maleDate));
-				programActivity.setMakerUserId(userObj.getUserId());
-				programActivity.setYearId(acYearId);
-				programActivity.setIsActive(1);
-				programActivity.setType(0);
-				programActivity.setRawActivityName(XssEscapeUtils.jsoupParse(request.getParameter("actvtName")));
-				
-				//System.out.println(programActivity);
-				
-				ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
-						programActivity, ProgramActivity.class);
-				if (is_view == 1) {
-					returnString = "redirect:/showStudOrgnizedActivity";
-				} else {
-					returnString = "redirect:/showAddStudentOrgnizedActivity";
-				}
-
 			} else {
 
 				returnString = "redirect:/accessDenied";
@@ -241,7 +246,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("editStudentOrgnizedActivity", "showStudOrgnizedActivity", "0", "0",
 					"1", "0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -282,7 +287,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("deleteStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
 					"0", "0", "1", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -318,7 +323,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showStudAttendActivity", "showStudAttendActivity", "1", "0", "0",
 					"0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == false) {
@@ -379,7 +384,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showAddStudentAttendActivity", "showStudAttendActivity", "0", "1",
 					"0", "0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -409,91 +414,100 @@ public class StudentActivityController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("submitAttendedActivity", "showStudAttendActivity", "0", "1", "0",
-					"0", newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("submitAttendedActivity", "showStudAttendActivity", "0", "1",
+						"0", "0", newModuleList);
 
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				Date maleDate = new Date();
-				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-				String stud = "NA";
-				String awrd = "NA";
-				String adhar = "NA";
-				String activityName = request.getParameter("activityName");
-				String date = request.getParameter("date");
-				String year = request.getParameter("year");
-				String branch = request.getParameter("branch");
-				String venue = request.getParameter("venue");
-				int noStudent = Integer.parseInt(request.getParameter("noStudent"));
-				String level = request.getParameter("level");
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				int acYearId = (Integer) session.getAttribute("acYearId");
-				int activityId = Integer.parseInt(request.getParameter("activityId"));
-				String actName = request.getParameter("activity_name");
-				ProgramActivity programActivity = new ProgramActivity();
-				if (activityName.equals("7")) {
-					String otherActivityName = request.getParameter("otherActivityName");
-					programActivity.setActivityName(XssEscapeUtils.jsoupParse(otherActivityName));
+				// System.out.println(view);
+
+				if (view.isError() == false) {
+
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					Date maleDate = new Date();
+					SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+					String stud = "NA";
+					String awrd = "NA";
+					String adhar = "NA";
+					String activityName = request.getParameter("activityName");
+					String date = request.getParameter("date");
+					String year = request.getParameter("year");
+					String branch = request.getParameter("branch");
+					String venue = request.getParameter("venue");
+					int noStudent = Integer.parseInt(request.getParameter("noStudent"));
+					String level = request.getParameter("level");
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int acYearId = (Integer) session.getAttribute("acYearId");
+					int activityId = Integer.parseInt(request.getParameter("activityId"));
+					String actName = request.getParameter("activity_name");
+					ProgramActivity programActivity = new ProgramActivity();
+					if (activityName.equals("7")) {
+						String otherActivityName = request.getParameter("otherActivityName");
+						programActivity.setActivityName(XssEscapeUtils.jsoupParse(otherActivityName));
+					} else {
+						programActivity.setActivityName(activityName);
+					}
+
+					if (activityId != 0) {
+
+						programActivity.setStudentActivityId(activityId);
+					}
+
+					programActivity.setDate(date);
+					programActivity.setYear(year);
+					programActivity.setParticipatedStudent(noStudent);
+					programActivity.setBranch(XssEscapeUtils.jsoupParse(branch));
+					programActivity.setDelStatus(1);
+					programActivity.setInstituteId(userObj.getGetData().getUserInstituteId());
+					programActivity.setLevel(level);
+					programActivity.setAddDate(sf.format(maleDate));
+					programActivity.setMakerUserId(userObj.getUserId());
+					programActivity.setYearId(acYearId);
+					programActivity.setType(1);
+					programActivity.setIsActive(1);
+					programActivity.setVenue(XssEscapeUtils.jsoupParse(venue));
+					programActivity.setRawActivityName(XssEscapeUtils.jsoupParse(actName));
+					stud = request.getParameter("stud_name");
+					if (stud != null) {
+						programActivity.setExVar1(XssEscapeUtils.jsoupParse(stud));
+					} else {
+						programActivity.setExVar1(XssEscapeUtils.jsoupParse(stud));
+					}
+
+					awrd = request.getParameter("name_award");
+					if (awrd != null) {
+						programActivity.setExVar2(XssEscapeUtils.jsoupParse(awrd));
+					} else {
+						programActivity.setExVar2(XssEscapeUtils.jsoupParse(awrd));
+					}
+
+					adhar = request.getParameter("adhar_no");
+					if (adhar != null) {
+						programActivity.setAadharNo(XssEscapeUtils.jsoupParse(adhar));
+					} else {
+						programActivity.setAadharNo(XssEscapeUtils.jsoupParse(adhar));
+					}
+
+					ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
+							programActivity, ProgramActivity.class);
+					if (is_view == 1) {
+						returnString = "redirect:/showStudAttendActivity";
+					} else {
+						returnString = "redirect:/showAddStudentAttendActivity";
+					}
+
 				} else {
-					programActivity.setActivityName(activityName);
-				}
 
-				if (activityId != 0) {
-
-					programActivity.setStudentActivityId(activityId);
-				}
-
-				programActivity.setDate(date);
-				programActivity.setYear(year);
-				programActivity.setParticipatedStudent(noStudent);
-				programActivity.setBranch(XssEscapeUtils.jsoupParse(branch));
-				programActivity.setDelStatus(1);
-				programActivity.setInstituteId(userObj.getGetData().getUserInstituteId());
-				programActivity.setLevel(level);
-				programActivity.setAddDate(sf.format(maleDate));
-				programActivity.setMakerUserId(userObj.getUserId());
-				programActivity.setYearId(acYearId);
-				programActivity.setType(1);
-				programActivity.setIsActive(1);
-				programActivity.setVenue(XssEscapeUtils.jsoupParse(venue));
-				programActivity.setRawActivityName(XssEscapeUtils.jsoupParse(actName));
-				 stud = request.getParameter("stud_name");
-				if(stud!=null) {
-					programActivity.setExVar1(XssEscapeUtils.jsoupParse(stud));
-				}else {
-					programActivity.setExVar1(XssEscapeUtils.jsoupParse(stud));
-				}
-			
-				 awrd = request.getParameter("name_award");
-				if(awrd!=null) {
-					programActivity.setExVar2(XssEscapeUtils.jsoupParse(awrd));
-				}else {
-					programActivity.setExVar2(XssEscapeUtils.jsoupParse(awrd));
-				}
-				
-				 adhar = request.getParameter("adhar_no");
-				if(adhar!=null) {				
-				programActivity.setAadharNo(XssEscapeUtils.jsoupParse(adhar));
-				}else {
-					programActivity.setAadharNo(XssEscapeUtils.jsoupParse(adhar));
-				}
-				
-				ProgramActivity res = restTemplate.postForObject(Constants.url + "/saveStudentActivity",
-						programActivity, ProgramActivity.class);
-				if (is_view == 1) {
-					returnString = "redirect:/showStudAttendActivity";
-				} else {
+					returnString = "redirect:/accessDenied";
 					returnString = "redirect:/showAddStudentAttendActivity";
 				}
-
 			} else {
 
 				returnString = "redirect:/accessDenied";
-				returnString = "redirect:/showAddStudentAttendActivity";
 			}
 
 		} catch (Exception e) {
@@ -505,6 +519,7 @@ public class StudentActivityController {
 		return returnString;
 
 	}
+
 	@RequestMapping(value = "/editStudentAttendActivity/{activityId}", method = RequestMethod.GET)
 	public ModelAndView editStudentAttendActivity(@PathVariable("activityId") int activityId,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -517,7 +532,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("editStudentAttendActivity", "showStudAttendActivity", "0", "0", "1",
 					"0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -558,7 +573,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("deleteStudentAttendActivity", "showStudAttendActivity", "0", "0",
 					"0", "1", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -598,7 +613,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showProgramList", "showProgramList", "1", "0", "0", "0",
 					newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -656,7 +671,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("showAddProgram", "showProgramList", "0", "1", "0", "0",
 					newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 				model = new ModelAndView("ProgramDetails/addProgDetail");
@@ -691,60 +706,69 @@ public class StudentActivityController {
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("submitAddProgram", "showProgramList", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				Date maleDate = new Date();
-				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("submitAddProgram", "showProgramList", "0", "1", "0", "0",
+						newModuleList);
 
-				int programType = Integer.parseInt(request.getParameter("programType"));
-				int monthDuration = Integer.parseInt(request.getParameter("monthDuration"));
-				String date = request.getParameter("date");
-				String nameOfProgram = request.getParameter("nameOfProgram");
-				int intake = Integer.parseInt(request.getParameter("intake"));
-				String approvedBy = request.getParameter("approvedBy");
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				int programId = Integer.parseInt(request.getParameter("programId"));
-				String progCode = XssEscapeUtils.jsoupParse(request.getParameter("programCode"));
+				// System.out.println(view);
 
-				Program program = new Program();
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					Date maleDate = new Date();
+					SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-				if (approvedBy.equals("7")) {
-					String otherApprovedBy = request.getParameter("otherApprovedBy");
-					program.setApprovedBy(XssEscapeUtils.jsoupParse(otherApprovedBy));
+					int programType = Integer.parseInt(request.getParameter("programType"));
+					int monthDuration = Integer.parseInt(request.getParameter("monthDuration"));
+					String date = request.getParameter("date");
+					String nameOfProgram = request.getParameter("nameOfProgram");
+					int intake = Integer.parseInt(request.getParameter("intake"));
+					String approvedBy = request.getParameter("approvedBy");
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int programId = Integer.parseInt(request.getParameter("programId"));
+					String progCode = XssEscapeUtils.jsoupParse(request.getParameter("programCode"));
+
+					Program program = new Program();
+
+					if (approvedBy.equals("7")) {
+						String otherApprovedBy = request.getParameter("otherApprovedBy");
+						program.setApprovedBy(XssEscapeUtils.jsoupParse(otherApprovedBy));
+					} else {
+						program.setApprovedBy(approvedBy);
+					}
+
+					if (programId != 0) {
+
+						program.setProgramId(programId);
+					}
+
+					program.setNameOfProgram(XssEscapeUtils.jsoupParse(nameOfProgram));
+					program.setDateOfIntroduction(XssEscapeUtils.jsoupParse(date));
+					program.setSanctionalIntake(intake);
+					program.setProgramType(programType);
+					program.setMonthDuration(monthDuration);
+					program.setDelStatus(1);
+					program.setInstituteId(userObj.getGetData().getUserInstituteId());
+					program.setMakerdatetime(sf.format(maleDate));
+					program.setMakerUserId(userObj.getUserId());
+					program.setIsActive(1);
+					program.setExInt1(0);
+					program.setExInt2(0);
+					program.setExVar1(progCode); // program code
+					Program res = restTemplate.postForObject(Constants.url + "/saveProgram", program, Program.class);
+
+					if (is_view == 1) {
+						returnString = "redirect:/showProgramList";
+					} else {
+						returnString = "redirect:/showAddProgram";
+					}
 				} else {
-					program.setApprovedBy(approvedBy);
-				}
 
-				if (programId != 0) {
-
-					program.setProgramId(programId);
-				}
-
-				program.setNameOfProgram(XssEscapeUtils.jsoupParse(nameOfProgram));
-				program.setDateOfIntroduction(XssEscapeUtils.jsoupParse(date));
-				program.setSanctionalIntake(intake);
-				program.setProgramType(programType);
-				program.setMonthDuration(monthDuration);
-				program.setDelStatus(1);
-				program.setInstituteId(userObj.getGetData().getUserInstituteId());
-				program.setMakerdatetime(sf.format(maleDate));
-				program.setMakerUserId(userObj.getUserId());
-				program.setIsActive(1);
-				program.setExInt1(0);
-				program.setExInt2(0);
-				program.setExVar1(progCode); //program code
-				Program res = restTemplate.postForObject(Constants.url + "/saveProgram", program, Program.class);
-
-				if (is_view == 1) {
-					returnString = "redirect:/showProgramList";
-				} else {
-					returnString = "redirect:/showAddProgram";
+					returnString = "redirect:/accessDenied";
 				}
 			} else {
 
@@ -772,7 +796,7 @@ public class StudentActivityController {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("editProgram", "showProgramList", "0", "0", "1", "0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -817,7 +841,7 @@ public class StudentActivityController {
 			Info view = AccessControll.checkAccess("deleteProgram", "showProgramList", "0", "0", "0", "1",
 					newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -905,39 +929,58 @@ public class StudentActivityController {
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
-
-			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
-
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-			String programVission = request.getParameter("programVission");
-			String programVissionRemark = request.getParameter("programVissionRemark");
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int programVissionId = Integer.parseInt(request.getParameter("programVissionId"));
-			ProgramVision ProgramVision = new ProgramVision();
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			ProgramVision.setVisionId(programVissionId);
-			ProgramVision.setDelStatus(1);
-			ProgramVision.setIsActive(1);
-			ProgramVision.setVisionRemark(XssEscapeUtils.jsoupParse(programVissionRemark));
-			ProgramVision.setVisionText(XssEscapeUtils.jsoupParse(programVission));
-			ProgramVision.setInstituteId(userObj.getGetData().getUserInstituteId());
-			ProgramVision.setMakerUserId(userObj.getUserId());
-			ProgramVision.setMakerdatetime(sf.format(date));
-			ProgramVision.setProgramId(programId);
+			if (token.trim().equals(key.trim())) {
 
-			ProgramVision res = restTemplate.postForObject(Constants.url + "/saveProgramVision", ProgramVision,
-					ProgramVision.class);
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
 
-			if (res == null) {
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+				String programVission = request.getParameter("programVission");
+				String programVissionRemark = request.getParameter("programVissionRemark");
+
+				int programVissionId = Integer.parseInt(request.getParameter("programVissionId"));
+				ProgramVision ProgramVision = new ProgramVision();
+
+				ProgramVision.setVisionId(programVissionId);
+				ProgramVision.setDelStatus(1);
+				ProgramVision.setIsActive(1);
+				ProgramVision.setVisionRemark(XssEscapeUtils.jsoupParse(programVissionRemark));
+				ProgramVision.setVisionText(XssEscapeUtils.jsoupParse(programVission));
+				ProgramVision.setInstituteId(userObj.getGetData().getUserInstituteId());
+				ProgramVision.setMakerUserId(userObj.getUserId());
+				ProgramVision.setMakerdatetime(sf.format(date));
+				ProgramVision.setProgramId(programId);
+
+				ProgramVision res = restTemplate.postForObject(Constants.url + "/saveProgramVision", ProgramVision,
+						ProgramVision.class);
+
+				if (res == null) {
+					info.setError(true);
+					info.setMsg("error while saving");
+					programDetailSaveResponse.setInfo(info);
+				} else {
+					info.setError(false);
+					info.setMsg("saved");
+					programDetailSaveResponse.setInfo(info);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("programId", programId);
+					ProgramVision[] arry = restTemplate.postForObject(Constants.url + "/getProgramVisionList", map,
+							ProgramVision[].class);
+					List<ProgramVision> list = new ArrayList<>(Arrays.asList(arry));
+					programDetailSaveResponse.setProgramVissionList(list);
+				}
+			}
+
+			else {
 				info.setError(true);
 				info.setMsg("error while saving");
-				programDetailSaveResponse.setInfo(info);
-			} else {
-				info.setError(false);
-				info.setMsg("saved");
 				programDetailSaveResponse.setInfo(info);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -947,7 +990,6 @@ public class StudentActivityController {
 				List<ProgramVision> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramVissionList(list);
 			}
-
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -1030,39 +1072,53 @@ public class StudentActivityController {
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
-
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-			String programMission = request.getParameter("programMission");
-			String programMissionRemark = request.getParameter("programMissionRemark");
+			String token = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey1");
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int programMissionId = Integer.parseInt(request.getParameter("programMissionId"));
+			if (token.trim().equals(key.trim())) {
 
-			ProgramMission save = new ProgramMission();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
 
-			save.setMissionId(programMissionId);
-			save.setDelStatus(1);
-			save.setIsActive(1);
-			save.setMissionRemark(XssEscapeUtils.jsoupParse(programMissionRemark));
-			save.setMissionText(XssEscapeUtils.jsoupParse(programMission));
-			save.setInstituteId(userObj.getGetData().getUserInstituteId());
-			save.setMakerUserId(userObj.getUserId());
-			save.setMakerdatetime(sf.format(date));
-			save.setProgramId(programId);
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			ProgramMission res = restTemplate.postForObject(Constants.url + "/saveProgramMission", save,
-					ProgramMission.class);
+				String programMission = request.getParameter("programMission");
+				String programMissionRemark = request.getParameter("programMissionRemark");
 
-			if (res == null) {
-				info.setError(true);
-				info.setMsg("error while saving");
-				programDetailSaveResponse.setInfo(info);
+				int programMissionId = Integer.parseInt(request.getParameter("programMissionId"));
+
+				ProgramMission save = new ProgramMission();
+
+				save.setMissionId(programMissionId);
+				save.setDelStatus(1);
+				save.setIsActive(1);
+				save.setMissionRemark(XssEscapeUtils.jsoupParse(programMissionRemark));
+				save.setMissionText(XssEscapeUtils.jsoupParse(programMission));
+				save.setInstituteId(userObj.getGetData().getUserInstituteId());
+				save.setMakerUserId(userObj.getUserId());
+				save.setMakerdatetime(sf.format(date));
+				save.setProgramId(programId);
+
+				ProgramMission res = restTemplate.postForObject(Constants.url + "/saveProgramMission", save,
+						ProgramMission.class);
+
+				if (res == null) {
+					info.setError(true);
+					info.setMsg("error while saving");
+					programDetailSaveResponse.setInfo(info);
+				} else {
+					info.setError(false);
+					info.setMsg("saved");
+					programDetailSaveResponse.setInfo(info);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("programId", programId);
+					ProgramMission[] arry = restTemplate.postForObject(Constants.url + "/getProgramMissionList", map,
+							ProgramMission[].class);
+					List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
+					programDetailSaveResponse.setProgramMissionList(list);
+				}
 			} else {
-				info.setError(false);
-				info.setMsg("saved");
-				programDetailSaveResponse.setInfo(info);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("programId", programId);
@@ -1070,6 +1126,9 @@ public class StudentActivityController {
 						ProgramMission[].class);
 				List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramMissionList(list);
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
 			}
 
 		} catch (Exception e) {
@@ -1152,41 +1211,57 @@ public class StudentActivityController {
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
-
-			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
-
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-			String peoText = request.getParameter("peoText");
-			String peoRemark = request.getParameter("peoRemark");
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int programPeoId = Integer.parseInt(request.getParameter("programPeoId"));
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token2");
+			String key = (String) session.getAttribute("generatedKey2");
 
-			ProgramEducationObjective programEducationObjective = new ProgramEducationObjective();
+			if (token.trim().equals(key.trim())) {
 
-			programEducationObjective.setPeoId(programPeoId);
-			programEducationObjective.setDelStatus(1);
-			programEducationObjective.setIsActive(1);
-			programEducationObjective.setPeoRemark(XssEscapeUtils.jsoupParse(peoRemark));
-			programEducationObjective.setPeoText(XssEscapeUtils.jsoupParse(peoText));
-			programEducationObjective.setInstituteId(userObj.getGetData().getUserInstituteId());
-			programEducationObjective.setMakerUserId(userObj.getUserId());
-			programEducationObjective.setMakerdatetime(sf.format(date));
-			programEducationObjective.setProgramId(programId);
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
 
-			ProgramEducationObjective res = restTemplate.postForObject(Constants.url + "/saveProgramEducationObjective",
-					programEducationObjective, ProgramEducationObjective.class);
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			if (res == null) {
-				info.setError(true);
-				info.setMsg("error while saving");
-				programDetailSaveResponse.setInfo(info);
+				String peoText = request.getParameter("peoText");
+				String peoRemark = request.getParameter("peoRemark");
+
+				int programPeoId = Integer.parseInt(request.getParameter("programPeoId"));
+
+				ProgramEducationObjective programEducationObjective = new ProgramEducationObjective();
+
+				programEducationObjective.setPeoId(programPeoId);
+				programEducationObjective.setDelStatus(1);
+				programEducationObjective.setIsActive(1);
+				programEducationObjective.setPeoRemark(XssEscapeUtils.jsoupParse(peoRemark));
+				programEducationObjective.setPeoText(XssEscapeUtils.jsoupParse(peoText));
+				programEducationObjective.setInstituteId(userObj.getGetData().getUserInstituteId());
+				programEducationObjective.setMakerUserId(userObj.getUserId());
+				programEducationObjective.setMakerdatetime(sf.format(date));
+				programEducationObjective.setProgramId(programId);
+
+				ProgramEducationObjective res = restTemplate.postForObject(
+						Constants.url + "/saveProgramEducationObjective", programEducationObjective,
+						ProgramEducationObjective.class);
+
+				if (res == null) {
+					info.setError(true);
+					info.setMsg("error while saving");
+					programDetailSaveResponse.setInfo(info);
+				} else {
+					info.setError(false);
+					info.setMsg("saved");
+					programDetailSaveResponse.setInfo(info);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("programId", programId);
+					ProgramEducationObjective[] arry = restTemplate.postForObject(
+							Constants.url + "/getProgramEducationObjectiveList", map,
+							ProgramEducationObjective[].class);
+					List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
+					programDetailSaveResponse.setProgramEducationObjectiveList(list);
+				}
 			} else {
-				info.setError(false);
-				info.setMsg("saved");
-				programDetailSaveResponse.setInfo(info);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("programId", programId);
@@ -1194,6 +1269,9 @@ public class StudentActivityController {
 						Constants.url + "/getProgramEducationObjectiveList", map, ProgramEducationObjective[].class);
 				List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramEducationObjectiveList(list);
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
 			}
 
 		} catch (Exception e) {
@@ -1279,38 +1357,52 @@ public class StudentActivityController {
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
-
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-			String poText = request.getParameter("poText");
-			String poRemark = request.getParameter("poRemark");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int poId = Integer.parseInt(request.getParameter("poId"));
-			ProgramOutcome programOutcome = new ProgramOutcome();
+			if (token.trim().equals(key.trim())) {
 
-			programOutcome.setPoId(poId);
-			programOutcome.setDelStatus(1);
-			programOutcome.setIsActive(1);
-			programOutcome.setPoRemark(XssEscapeUtils.jsoupParse(poRemark));
-			programOutcome.setPoText(XssEscapeUtils.jsoupParse(poText));
-			programOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
-			programOutcome.setMakerUserId(userObj.getUserId());
-			programOutcome.setMakerdatetime(sf.format(date));
-			programOutcome.setProgramId(programId);
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
 
-			ProgramOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramOutcome", programOutcome,
-					ProgramOutcome.class);
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			if (res == null) {
-				info.setError(true);
-				info.setMsg("error while saving");
-				programDetailSaveResponse.setInfo(info);
+				String poText = request.getParameter("poText");
+				String poRemark = request.getParameter("poRemark");
+
+				int poId = Integer.parseInt(request.getParameter("poId"));
+				ProgramOutcome programOutcome = new ProgramOutcome();
+
+				programOutcome.setPoId(poId);
+				programOutcome.setDelStatus(1);
+				programOutcome.setIsActive(1);
+				programOutcome.setPoRemark(XssEscapeUtils.jsoupParse(poRemark));
+				programOutcome.setPoText(XssEscapeUtils.jsoupParse(poText));
+				programOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
+				programOutcome.setMakerUserId(userObj.getUserId());
+				programOutcome.setMakerdatetime(sf.format(date));
+				programOutcome.setProgramId(programId);
+
+				ProgramOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramOutcome", programOutcome,
+						ProgramOutcome.class);
+
+				if (res == null) {
+					info.setError(true);
+					info.setMsg("error while saving");
+					programDetailSaveResponse.setInfo(info);
+				} else {
+					info.setError(false);
+					info.setMsg("saved");
+					programDetailSaveResponse.setInfo(info);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("programId", programId);
+					ProgramOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramOutcomeList", map,
+							ProgramOutcome[].class);
+					List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
+					programDetailSaveResponse.setProgramOutcomeList(list);
+				}
 			} else {
-				info.setError(false);
-				info.setMsg("saved");
-				programDetailSaveResponse.setInfo(info);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("programId", programId);
@@ -1318,6 +1410,9 @@ public class StudentActivityController {
 						ProgramOutcome[].class);
 				List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramOutcomeList(list);
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
 			}
 
 		} catch (Exception e) {
@@ -1400,41 +1495,55 @@ public class StudentActivityController {
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
-
-			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
-
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-			String psoText = request.getParameter("psoText");
-			String psoRemark = request.getParameter("psoRemark");
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int psoId = Integer.parseInt(request.getParameter("psoId"));
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			ProgramSpeceficOutcome programSpeceficOutcome = new ProgramSpeceficOutcome();
+			if (token.trim().equals(key.trim())) {
 
-			programSpeceficOutcome.setPsoId(psoId);
-			programSpeceficOutcome.setDelStatus(1);
-			programSpeceficOutcome.setIsActive(1);
-			programSpeceficOutcome.setPsoRemark(XssEscapeUtils.jsoupParse(psoRemark));
-			programSpeceficOutcome.setPsoText(XssEscapeUtils.jsoupParse(psoText));
-			programSpeceficOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
-			programSpeceficOutcome.setMakerUserId(userObj.getUserId());
-			programSpeceficOutcome.setMakerdatetime(sf.format(date));
-			programSpeceficOutcome.setProgramId(programId);
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
 
-			ProgramSpeceficOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramSpeceficOutcome",
-					programSpeceficOutcome, ProgramSpeceficOutcome.class);
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			if (res == null) {
-				info.setError(true);
-				info.setMsg("error while saving");
-				programDetailSaveResponse.setInfo(info);
+				String psoText = request.getParameter("psoText");
+				String psoRemark = request.getParameter("psoRemark");
+
+				int psoId = Integer.parseInt(request.getParameter("psoId"));
+
+				ProgramSpeceficOutcome programSpeceficOutcome = new ProgramSpeceficOutcome();
+
+				programSpeceficOutcome.setPsoId(psoId);
+				programSpeceficOutcome.setDelStatus(1);
+				programSpeceficOutcome.setIsActive(1);
+				programSpeceficOutcome.setPsoRemark(XssEscapeUtils.jsoupParse(psoRemark));
+				programSpeceficOutcome.setPsoText(XssEscapeUtils.jsoupParse(psoText));
+				programSpeceficOutcome.setInstituteId(userObj.getGetData().getUserInstituteId());
+				programSpeceficOutcome.setMakerUserId(userObj.getUserId());
+				programSpeceficOutcome.setMakerdatetime(sf.format(date));
+				programSpeceficOutcome.setProgramId(programId);
+
+				ProgramSpeceficOutcome res = restTemplate.postForObject(Constants.url + "/saveProgramSpeceficOutcome",
+						programSpeceficOutcome, ProgramSpeceficOutcome.class);
+
+				if (res == null) {
+					info.setError(true);
+					info.setMsg("error while saving");
+					programDetailSaveResponse.setInfo(info);
+				} else {
+					info.setError(false);
+					info.setMsg("saved");
+					programDetailSaveResponse.setInfo(info);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("programId", programId);
+					ProgramSpeceficOutcome[] arry = restTemplate.postForObject(
+							Constants.url + "/getProgramSpeceficOutcomeList", map, ProgramSpeceficOutcome[].class);
+					List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
+					programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
+				}
 			} else {
-				info.setError(false);
-				info.setMsg("saved");
-				programDetailSaveResponse.setInfo(info);
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("programId", programId);
@@ -1442,8 +1551,10 @@ public class StudentActivityController {
 						Constants.url + "/getProgramSpeceficOutcomeList", map, ProgramSpeceficOutcome[].class);
 				List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
+				info.setError(true);
+				info.setMsg("error while saving");
+				programDetailSaveResponse.setInfo(info);
 			}
-
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -1517,9 +1628,10 @@ public class StudentActivityController {
 		return programSpeceficOutcome;
 
 	}
-	
-	
-	/*********************************Student Performance in final year********************************/
+
+	/*********************************
+	 * Student Performance in final year
+	 ********************************/
 
 	@RequestMapping(value = "/getProgramTypeByProgramId", method = RequestMethod.GET)
 	public @ResponseBody List<Program> getProgramTypeByProgram(HttpServletRequest request,
@@ -1550,7 +1662,7 @@ public class StudentActivityController {
 		return list;
 
 	}
-	
+
 	@RequestMapping(value = "/showStudPerformInFinlYr", method = RequestMethod.GET)
 	public ModelAndView showStudPerformInFinlYr(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1562,42 +1674,41 @@ public class StudentActivityController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "1", "0", "0", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "1", "0", "0",
+					"0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 				MultiValueMap<String, Object> map = null;
-				
+
 				model = new ModelAndView("ProgramDetails/studentPerformanceList");
 				model.addObject("title", "Student Performance in Final Year");
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", userObj.getGetData().getUserInstituteId());
-				
+
 				Program[] program = restTemplate.postForObject(Constants.url + "/getProgramList", map, Program[].class);
 				List<Program> list = new ArrayList<Program>(Arrays.asList(program));
-				
+
 				model.addObject("list", list);
-				
-				
+
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("instituteId", userObj.getGetData().getUserInstituteId());
 				map.add("yearId", session.getAttribute("acYearId"));
-				
-				StudPerformFinalYrList[] passedStudArr = restTemplate.postForObject(Constants.url + "getstudPassingPer",map,
-						StudPerformFinalYrList[].class);
+
+				StudPerformFinalYrList[] passedStudArr = restTemplate.postForObject(Constants.url + "getstudPassingPer",
+						map, StudPerformFinalYrList[].class);
 				List<StudPerformFinalYrList> passedStudList = new ArrayList<>(Arrays.asList(passedStudArr));
-				
+
 				model.addObject("passedStudList", passedStudList);
 
-				Info add = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "1", "0", "0",
-						newModuleList);
-				Info edit = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "0", "1", "0",
-						newModuleList);
-				Info delete = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "0", "0", "1",
-						newModuleList);
+				Info add = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "1",
+						"0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "0",
+						"1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showStudPerformInFinlYr", "showStudPerformInFinlYr", "0", "0",
+						"0", "1", newModuleList);
 
 				if (add.isError() == false) {
 					model.addObject("isAdd", 1);
@@ -1608,8 +1719,7 @@ public class StudentActivityController {
 				if (delete.isError() == false) {
 					model.addObject("isDelete", 1);
 				}
-				
-				
+
 			} else {
 
 				model = new ModelAndView("accessDenied");
@@ -1627,42 +1737,46 @@ public class StudentActivityController {
 
 	}
 
-	
 	@RequestMapping(value = "/addStudPerfromancInFinalYear", method = RequestMethod.GET)
 	public ModelAndView addStudPerfromancInFinalYear(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+
 		try {
 
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("addStudPerfromancInFinalYear", "showStudPerformInFinlYr", "0", "1", "0", "0",
-					newModuleList);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			//System.out.println(view);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == false) {
-				model = new ModelAndView("ProgramDetails/addstudPerform");
-				model.addObject("title", " Add Student Performance in Final Year ");
-				StudPerformFinalYr studPer = new StudPerformFinalYr();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("addStudPerfromancInFinalYear", "showStudPerformInFinlYr", "0",
+						"1", "0", "0", newModuleList);
 
-				
-				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
-						ProgramType[].class);
-				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
-				model.addObject("progTypeList", progTypeList);
-				model.addObject("studPer", studPer);
-				
-				
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("instituteId", userObj.getGetData().getUserInstituteId());
-				map.add("yearId", session.getAttribute("acYearId"));
-				
-				StudPerformFinalYr passedStud = restTemplate.postForObject(Constants.url + "getstudPassingPerByAcdYrId",map,
-				StudPerformFinalYr.class);			
-				
-				model.addObject("studPer", passedStud);
+				// System.out.println(view);
+
+				if (view.isError() == false) {
+					model = new ModelAndView("ProgramDetails/addstudPerform");
+					model.addObject("title", " Add Student Performance in Final Year ");
+					StudPerformFinalYr studPer = new StudPerformFinalYr();
+
+					ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
+							ProgramType[].class);
+					List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
+					model.addObject("progTypeList", progTypeList);
+					model.addObject("studPer", studPer);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					map.add("instituteId", userObj.getGetData().getUserInstituteId());
+					map.add("yearId", session.getAttribute("acYearId"));
+
+					StudPerformFinalYr passedStud = restTemplate
+							.postForObject(Constants.url + "getstudPassingPerByAcdYrId", map, StudPerformFinalYr.class);
+
+					model.addObject("studPer", passedStud);
+				}
 			} else {
 
 				model = new ModelAndView("accessDenied");
@@ -1679,55 +1793,67 @@ public class StudentActivityController {
 		return model;
 
 	}
+
 	@RequestMapping(value = "/insertStudPerformInFinalYr", method = RequestMethod.POST)
 	public String insertStudPerformInFinalYr(HttpServletRequest request, HttpServletResponse response) {
-		
+		String returnString = null;
 		try {
+
 			HttpSession session = request.getSession();
-			int yId = (int) session.getAttribute("acYearId");
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = new Date();
-		
-			StudPerformFinalYr studPer = new StudPerformFinalYr();
-			int appear = Integer.parseInt(request.getParameter("stud_appeared"));
-			int passed = Integer.parseInt(request.getParameter("stud_passed"));
-			double passingper = Double.parseDouble(request.getParameter("stud_pass_per"));
-			int studPrfmId= 0;
-			try {
-			studPrfmId = Integer.parseInt(request.getParameter("stud_perform_id"));			
-			}catch(Exception e){
-				e.getMessage();
-				studPrfmId = 0;
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+				int yId = (int) session.getAttribute("acYearId");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date();
+
+				StudPerformFinalYr studPer = new StudPerformFinalYr();
+				int appear = Integer.parseInt(request.getParameter("stud_appeared"));
+				int passed = Integer.parseInt(request.getParameter("stud_passed"));
+				double passingper = Double.parseDouble(request.getParameter("stud_pass_per"));
+				int studPrfmId = 0;
+				try {
+					studPrfmId = Integer.parseInt(request.getParameter("stud_perform_id"));
+				} catch (Exception e) {
+					e.getMessage();
+					studPrfmId = 0;
+				}
+				studPer.setStudPerformId(studPrfmId);
+
+				studPer.setProgName(Integer.parseInt(request.getParameter("programType")));
+				studPer.setProgType(Integer.parseInt(request.getParameter("programTypeId")));
+				studPer.setNoStudAppear(appear);
+				studPer.setNoStudPass(passed);
+				studPer.setPassingPer(passingper);
+				studPer.setDelStatus(1);
+				studPer.setIsActive(1);
+				studPer.setInstId(userObj.getGetData().getUserInstituteId());
+				studPer.setMakerUserId(userObj.getUserId());
+				studPer.setMakingTime(sf.format(date));
+				studPer.setExInt1(yId); // Academic Year
+				studPer.setExInt2(0);
+				studPer.setExVar1("NA");
+				studPer.setExVar2("NA");
+				// System.out.println(studPer.toString());
+
+				StudPerformFinalYr saveStudPerform = restTemplate
+						.postForObject(Constants.url + "/addStudPerformFinalYear", studPer, StudPerformFinalYr.class);
+
+				returnString = "redirect:/showStudPerformInFinlYr";
+			} else {
+
+				returnString = "redirect:/accessDenied";
 			}
-			studPer.setStudPerformId(studPrfmId);
-			
-			studPer.setProgName(Integer.parseInt(request.getParameter("programType")));
-			studPer.setProgType(Integer.parseInt(request.getParameter("programTypeId")));
-			studPer.setNoStudAppear(appear);
-			studPer.setNoStudPass(passed);
-			studPer.setPassingPer(passingper);
-			studPer.setDelStatus(1);
-			studPer.setIsActive(1);
-			studPer.setInstId(userObj.getGetData().getUserInstituteId());
-			studPer.setMakerUserId(userObj.getUserId());
-			studPer.setMakingTime(sf.format(date));
-			studPer.setExInt1(yId); // Academic Year
-			studPer.setExInt2(0);
-			studPer.setExVar1("NA");
-			studPer.setExVar2("NA");
-			//System.out.println(studPer.toString());
-			
-			StudPerformFinalYr saveStudPerform = restTemplate.postForObject(Constants.url+"/addStudPerformFinalYear", studPer, StudPerformFinalYr.class);
-			
-		}catch(Exception e){
-			//System.out.println(e.getMessage());
+		} catch (Exception e) {
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		
-		
-		return "redirect:/showStudPerformInFinlYr";
-		
+
+		return returnString;
+
 	}
 
 	@RequestMapping(value = "/editStudPerform/{studperId}", method = RequestMethod.GET)
@@ -1739,8 +1865,8 @@ public class StudentActivityController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("editStudPerform/{studperId}", "showStudPerformInFinlYr", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("editStudPerform/{studperId}", "showStudPerformInFinlYr", "0", "0",
+					"1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1750,18 +1876,17 @@ public class StudentActivityController {
 			else {
 				model = new ModelAndView("ProgramDetails/addstudPerform");
 				model.addObject("title", " Edit Student Performance in Final Year ");
-				
+
 				map.add("studperId", studperId);
-				StudPerformFinalYr studPer = restTemplate.postForObject(Constants.url + "getStudPerformanceById",map,
+				StudPerformFinalYr studPer = restTemplate.postForObject(Constants.url + "getStudPerformanceById", map,
 						StudPerformFinalYr.class);
 				model.addObject("studPer", studPer);
-				
+
 				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 						ProgramType[].class);
 				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
 				model.addObject("progTypeList", progTypeList);
-				
-				
+
 			}
 		} catch (Exception e) {
 
@@ -1771,7 +1896,7 @@ public class StudentActivityController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteStudPerform/{studperId}", method = RequestMethod.GET)
 	public String deleteTExtActivity(@PathVariable("studperId") int studperId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1781,8 +1906,8 @@ public class StudentActivityController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteStudPerform/{studperId}", "showStudPerformInFinlYr", "0", "0", "0",
-					"1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteStudPerform/{studperId}", "showStudPerformInFinlYr", "0",
+					"0", "0", "1", newModuleList);
 
 			if (view.isError() == true)
 
@@ -1796,7 +1921,8 @@ public class StudentActivityController {
 				map = new LinkedMultiValueMap<>();
 				map.add("studperId", studperId);
 
-				StudPerformFinalYr delAct = restTemplate.postForObject(Constants.url + "/deleteStudPerformanceById", map, StudPerformFinalYr.class);
+				StudPerformFinalYr delAct = restTemplate.postForObject(Constants.url + "/deleteStudPerformanceById",
+						map, StudPerformFinalYr.class);
 			}
 		} catch (Exception e) {
 
@@ -1806,16 +1932,15 @@ public class StudentActivityController {
 		return "redirect:/showStudPerformInFinlYr";
 
 	}
-	
+
 	@RequestMapping(value = "/deleteSeldata/{studInfo}", method = RequestMethod.GET)
-	public String deleteSeldata(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int studInfo) {
+	public String deleteSeldata(HttpServletRequest request, HttpServletResponse response, @PathVariable int studInfo) {
 		HttpSession session = request.getSession();
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteSelExtsnActivities/{exActId}", "showStudPerformInFinlYr", "0", "0", "0",
-				"1", newModuleList);
+		Info view = AccessControll.checkAccess("deleteSelExtsnActivities/{exActId}", "showStudPerformInFinlYr", "0",
+				"0", "0", "1", newModuleList);
 
 		try {
 			if (view.isError() == true) {
@@ -1831,7 +1956,7 @@ public class StudentActivityController {
 
 					System.err.println("Multiple records delete ");
 					String[] studInfos = request.getParameterValues("studInfo");
-					//System.out.println("id are" + studInfo);
+					// System.out.println("id are" + studInfo);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1861,10 +1986,11 @@ public class StudentActivityController {
 		return a;
 
 	}
-	
-/*************************************Students Qualifying Exam Details*************************************/
-	
-	
+
+	/*************************************
+	 * Students Qualifying Exam Details
+	 *************************************/
+
 	@RequestMapping(value = "/showStudentsQualifyingExamDetails", method = RequestMethod.GET)
 	public ModelAndView showStudentsQualifyingExamDetails(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1873,10 +1999,10 @@ public class StudentActivityController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "1", "0", "0",
-					"0", newModuleList);
+			Info view = AccessControll.checkAccess("showStudentsQualifyingExamDetails",
+					"showStudentsQualifyingExamDetails", "1", "0", "0", "0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 			if (view.isError() == false) {
@@ -1884,12 +2010,12 @@ public class StudentActivityController {
 				model = new ModelAndView("ProgramDetails/studQualifyExamDtl");
 				model.addObject("title", "Students Qualifying Exam Details");
 
-				Info add = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "0", "1", "0",
-						"0", newModuleList);
-				Info edit = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "0", "0",
-						"1", "0", newModuleList);
-				Info delete = AccessControll.checkAccess("showStudentsQualifyingExamDetails", "showStudentsQualifyingExamDetails", "0", "0",
-						"0", "1", newModuleList);
+				Info add = AccessControll.checkAccess("showStudentsQualifyingExamDetails",
+						"showStudentsQualifyingExamDetails", "0", "1", "0", "0", newModuleList);
+				Info edit = AccessControll.checkAccess("showStudentsQualifyingExamDetails",
+						"showStudentsQualifyingExamDetails", "0", "0", "1", "0", newModuleList);
+				Info delete = AccessControll.checkAccess("showStudentsQualifyingExamDetails",
+						"showStudentsQualifyingExamDetails", "0", "0", "0", "1", newModuleList);
 
 				if (add.isError() == false) {
 					model.addObject("isAdd", 1);
@@ -1907,7 +2033,8 @@ public class StudentActivityController {
 				map.add("instituteId", userObj.getGetData().getUserInstituteId());
 				StudQualifyingExam[] studQlifExamArr = restTemplate
 						.postForObject(Constants.url + "getStudQualifiedExamList", map, StudQualifyingExam[].class);
-				List<StudQualifyingExam> studQlifExamList = new ArrayList<StudQualifyingExam>(Arrays.asList(studQlifExamArr));
+				List<StudQualifyingExam> studQlifExamList = new ArrayList<StudQualifyingExam>(
+						Arrays.asList(studQlifExamArr));
 				model.addObject("studQlifExamList", studQlifExamList);
 
 			} else {
@@ -1924,6 +2051,7 @@ public class StudentActivityController {
 		return model;
 
 	}
+
 	@RequestMapping(value = "/addStudQualifyExmDtl", method = RequestMethod.GET)
 	public ModelAndView addStudQualifyExmDtl(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1932,10 +2060,10 @@ public class StudentActivityController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("addStudQualifyExmDtl", "showStudentsQualifyingExamDetails", "0", "1",
-					"0", "0", newModuleList);
+			Info view = AccessControll.checkAccess("addStudQualifyExmDtl", "showStudentsQualifyingExamDetails", "0",
+					"1", "0", "0", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 				StudQualifyingExam studQlifyExam = new StudQualifyingExam();
@@ -1956,47 +2084,62 @@ public class StudentActivityController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertStudQualifyExamDtl", method = RequestMethod.POST)
 	public String insertStudQualifyExamDtl(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			
-			HttpSession session = request.getSession();
-
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
-
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
-			
-			StudQualifyingExam stud = new StudQualifyingExam();
-			//XssEscapeUtils.jsoupParse(iqacName)
-			stud.setStudExmId(Integer.parseInt(request.getParameter("studExmId")));
-			stud.setNameQualifExam(request.getParameter("qualify_exam"));
-			stud.setLevelExam(request.getParameter("exam_level"));
-			stud.setNoStudAppeared(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_appear"))));
-			stud.setNoStudQualified(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_qualify"))));
-			stud.setInstId(instituteId);
-			stud.setAcYearId(yId);
-			stud.setDelStatus(1);
-			stud.setIsActive(1);
-			stud.setMakerUserId(userId);
-			stud.setMakerEnterDatetime(curDateTime);
-			stud.setExInt1(0);
-			stud.setExInt2(0);
-			stud.setExVar1("NA");
-			stud.setExVar2("NA");
-			////System.out.println(stud.toString());
-			StudQualifyingExam addStudQalifyExam = restTemplate.postForObject(Constants.url+"/saveStudQualifyExam", stud, StudQualifyingExam.class);
+		String returnString=null;
 		
-		}catch(Exception e) {
-			//System.out.println(e.getMessage());
+		try {
+
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
+
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
+
+				StudQualifyingExam stud = new StudQualifyingExam();
+				// XssEscapeUtils.jsoupParse(iqacName)
+				stud.setStudExmId(Integer.parseInt(request.getParameter("studExmId")));
+				stud.setNameQualifExam(request.getParameter("qualify_exam"));
+				stud.setLevelExam(request.getParameter("exam_level"));
+				stud.setNoStudAppeared(
+						Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_appear"))));
+				stud.setNoStudQualified(
+						Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_qualify"))));
+				stud.setInstId(instituteId);
+				stud.setAcYearId(yId);
+				stud.setDelStatus(1);
+				stud.setIsActive(1);
+				stud.setMakerUserId(userId);
+				stud.setMakerEnterDatetime(curDateTime);
+				stud.setExInt1(0);
+				stud.setExInt2(0);
+				stud.setExVar1("NA");
+				stud.setExVar2("NA");
+				//// System.out.println(stud.toString());
+				StudQualifyingExam addStudQalifyExam = restTemplate
+						.postForObject(Constants.url + "/saveStudQualifyExam", stud, StudQualifyingExam.class);
+
+				returnString = "redirect:/showStudentsQualifyingExamDetails";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
+
+		} catch (Exception e) {
+			// System.out.println(e.getMessage());
 		}
-		return "redirect:/showStudentsQualifyingExamDetails";
+		return returnString;
 	}
-	
+
 	@RequestMapping(value = "/editStudQualifyExam/{studExmId}", method = RequestMethod.GET)
 	public ModelAndView editStudQualifyExam(@PathVariable("studExmId") int studExmId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2006,8 +2149,8 @@ public class StudentActivityController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("/editStudQualifyExam/{studExmId}", "showStudentsQualifyingExamDetails", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("/editStudQualifyExam/{studExmId}",
+					"showStudentsQualifyingExamDetails", "0", "0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2015,17 +2158,15 @@ public class StudentActivityController {
 			}
 
 			else {
-				
+
 				model = new ModelAndView("ProgramDetails/addStudQualifyExamDetail");
 				model.addObject("title", "Edit Students Qualifying Exam Details");
-				
+
 				map.add("studExmId", studExmId);
-				StudQualifyingExam studQlifyExam = restTemplate.postForObject(Constants.url + "getStudQulifExmById",map,
-						StudQualifyingExam.class);
+				StudQualifyingExam studQlifyExam = restTemplate.postForObject(Constants.url + "getStudQulifExmById",
+						map, StudQualifyingExam.class);
 				model.addObject("studQlifyExam", studQlifyExam);
-				
-				
-				
+
 			}
 		} catch (Exception e) {
 
@@ -2035,7 +2176,7 @@ public class StudentActivityController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteStudQualifyExam/{studExmId}", method = RequestMethod.GET)
 	public String deleteStudQualifyExam(@PathVariable("studExmId") int studExmId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2045,8 +2186,8 @@ public class StudentActivityController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteStudQualifyExam/{studExmId}", "showStudentsQualifyingExamDetails", "0", "0", "0",
-					"1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteStudQualifyExam/{studExmId}",
+					"showStudentsQualifyingExamDetails", "0", "0", "0", "1", newModuleList);
 
 			if (view.isError() == true)
 
@@ -2060,7 +2201,8 @@ public class StudentActivityController {
 				map = new LinkedMultiValueMap<>();
 				map.add("studExmId", studExmId);
 
-				StudQualifyingExam delAct = restTemplate.postForObject(Constants.url + "/deleteStudQulifExmByById", map, StudQualifyingExam.class);
+				StudQualifyingExam delAct = restTemplate.postForObject(Constants.url + "/deleteStudQulifExmByById", map,
+						StudQualifyingExam.class);
 			}
 		} catch (Exception e) {
 
@@ -2078,8 +2220,8 @@ public class StudentActivityController {
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedStudQlifExmDtl/{studQlfExmId}", "showStudentsQualifyingExamDetails", "0", "0", "0",
-				"1", newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedStudQlifExmDtl/{studQlfExmId}",
+				"showStudentsQualifyingExamDetails", "0", "0", "0", "1", newModuleList);
 
 		try {
 			if (view.isError() == true) {
@@ -2095,7 +2237,7 @@ public class StudentActivityController {
 
 					System.err.println("Multiple records delete ");
 					String[] studQlfExmIds = request.getParameterValues("studQlfExmId");
-					//System.out.println("id are" + studQlfExmId);
+					// System.out.println("id are" + studQlfExmId);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -2125,6 +2267,5 @@ public class StudentActivityController {
 		return a;
 
 	}
-	
-	
+
 }

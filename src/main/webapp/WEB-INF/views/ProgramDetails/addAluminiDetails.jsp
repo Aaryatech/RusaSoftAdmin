@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -42,7 +44,8 @@
 </style>
 
 
-<!-- BEGIN BODY --><!-- onload="hideText()" -->
+<!-- BEGIN BODY -->
+<!-- onload="hideText()" -->
 <body class=" " onload="showIsReg(${alumni.exInt2})">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
@@ -85,7 +88,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/showAlumini"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showAlumini"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
@@ -102,7 +105,18 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertAlumni"
 										method="post" name="form_sample_2" id="form_sample_2">
-
+ 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<div class="row">
 											<div class="col-md-12">
 
@@ -111,24 +125,28 @@
 														Name of Alumni<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder="Full Name of Alumni" id="alum_name" autocomplete="off"
-															value="${alumni.alumniName}" name="alum_name">
-															<span class="error_form text-danger" id="alum_name_field"
+														<input type="text" class="form-control"
+															onchange="trim(this)" placeholder="Full Name of Alumni"
+															id="alum_name" autocomplete="off"
+															value="${alumni.alumniName}" name="alum_name"> <span
+															class="error_form text-danger" id="alum_name_field"
 															style="display: none;">Please enter name of alumni</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Current Position/
-														 Designation<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">Current
+														Position/ Designation<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder="Current Position/Designation" id="designation"
-															value="${alumni.exVar1}" name="designation" autocomplete="off">
-															<span class="error_form text-danger" id="designation_field"
-															style="display: none;">Please enter current position/designation</span>
+														<input type="text" class="form-control"
+															onchange="trim(this)"
+															placeholder="Current Position/Designation"
+															id="designation" value="${alumni.exVar1}"
+															name="designation" autocomplete="off"> <span
+															class="error_form text-danger" id="designation_field"
+															style="display: none;">Please enter current
+															position/designation</span>
 													</div>
 												</div>
 
@@ -142,9 +160,10 @@
 															data-min-view-mode="years" data-start-view="2"
 															data-format="yyyy" placeholder="Enter Year of Passing"
 															id="year_of_pass" value="${alumni.passingYear}"
-															name="year_of_pass" autocomplete="off">
-															<span class="error_form text-danger" id="year_of_pass_field"
-															style="display: none;">Please select year of passing</span>
+															name="year_of_pass" autocomplete="off"> <span
+															class="error_form text-danger" id="year_of_pass_field"
+															style="display: none;">Please select year of
+															passing</span>
 													</div>
 												</div>
 
@@ -156,32 +175,38 @@
 													<div class="col-sm-9">
 														<select id="contr_type" name="contr_type"
 															class="form-control" onclick="checkPhdGuide(this.value)">
-															
-																	<option value="1" ${alumni.contributionType==1 ? 'Selected' : ''}>Financial</option>
-																	<option value="0" ${alumni.contributionType==0 ? 'Selected' : ''}>Non Financial</option>
-															
 
-														</select>
-														<span class="error_form text-danger" id="contr_type_field"
-															style="display: none;">Please select nature of contribution</span>
+															<option value="1"
+																${alumni.contributionType==1 ? 'Selected' : ''}>Financial</option>
+															<option value="0"
+																${alumni.contributionType==0 ? 'Selected' : ''}>Non
+																Financial</option>
+
+
+														</select> <span class="error_form text-danger"
+															id="contr_type_field" style="display: none;">Please
+															select nature of contribution</span>
 
 
 													</div>
 												</div>
-												
+
 												<div class="form-group" id="ihide" style="display: none;">
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="smallheading">Amount
-																(Rs.)<span class="text-danger">*</span>
-															</label>
-															<div  class="col-sm-9">
-																<input type="text" class="form-control" id="alumini_amt" onchange="trim(this)"
-																	name="alumini_amt" placeholder="Amount (Rs.)" onfocus="this.value=''"	
-																	value="${alumni.exInt1}" autocomplete="off"  onkeypress='return restrictAlphabets(event)'>
-																	<span class="error_form text-danger" id="error_formfield0" style="display:none;" >Please enter amount.</span>
-															</div>
+													<div class="form-group">
+														<label class="control-label col-sm-3" for="smallheading">Amount
+															(Rs.)<span class="text-danger">*</span>
+														</label>
+														<div class="col-sm-9">
+															<input type="text" class="form-control" id="alumini_amt"
+																onchange="trim(this)" name="alumini_amt"
+																placeholder="Amount (Rs.)" onfocus="this.value=''"
+																value="${alumni.exInt1}" autocomplete="off"
+																onkeypress='return restrictAlphabets(event)'> <span
+																class="error_form text-danger" id="error_formfield0"
+																style="display: none;">Please enter amount.</span>
 														</div>
 													</div>
+												</div>
 
 
 
@@ -195,9 +220,10 @@
 															data-min-view-mode="years" data-start-view="2"
 															data-format="yyyy"
 															placeholder="Enter Year of Contribution" id="contr_year"
-															value="${alumni.contributionYear}" name="contr_year"
-															><span class="error_form text-danger" id="contr_year_field"
-															style="display: none;">Please select year of contribution</span>
+															value="${alumni.contributionYear}" name="contr_year"><span
+															class="error_form text-danger" id="contr_year_field"
+															style="display: none;">Please select year of
+															contribution</span>
 													</div>
 												</div>
 
@@ -286,8 +312,7 @@
 															</c:choose>
 
 
-														</select>
-														<span class="error_form text-danger" id="benif_to_field"
+														</select> <span class="error_form text-danger" id="benif_to_field"
 															style="display: none;">Please select beneficiary</span>
 
 													</div>
@@ -298,11 +323,13 @@
 														Other<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" onchange="trim(this)" class="form-control" id="other_benif"
+														<input type="text" onchange="trim(this)"
+															class="form-control" id="other_benif"
 															value="${alumni.benefitTo}" name="other_benif"
 															placeholder="Other Beneficiary" autocomplete="off">
-															<span class="error_form text-danger" id="other_benif_field"
-															style="display: none;">Please enter name of other beneficiary</span>
+														<span class="error_form text-danger"
+															id="other_benif_field" style="display: none;">Please
+															enter name of other beneficiary</span>
 													</div>
 												</div>
 
@@ -311,11 +338,16 @@
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showAlumini"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+														<button type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
+
+														<a href="${pageContext.request.contextPath}/showAlumini"><button
+																id="sub2" type="button" class="btn btn-primary">
+																<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+															</button></a>
+													</div>
 												</div>
 
 											</div>
@@ -345,7 +377,7 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 	$('#year_of_pass').on(
 			'input',
@@ -399,9 +431,9 @@
 			}
 			
 		</script>
-	
-	
-		<script>
+
+
+	<script>
 		function validateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 			if (eml.test($.trim(email)) == false) {
@@ -704,7 +736,7 @@
 		
 		
 	</script>
-	
+
 	<script type="text/javascript">
 	
 	function trim(el) {
@@ -737,7 +769,7 @@
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-<script type="text/javascript">
+	<script type="text/javascript">
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key

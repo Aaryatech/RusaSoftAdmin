@@ -3,6 +3,13 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -97,85 +104,106 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertDifrnDisStudent"
 										method="post" name="form_sample_2" id="form_sample_2">
-										
+ 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<div class="row">
 											<div class="col-md-12">
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Name of  
-														Student<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">Name
+														of Student<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)" id="studentName"
-															value="${difDisStud.nameOfStud}" name="studentName" autocomplete="off"
-															placeholder="Name of Student" maxlength="100">
-															<span class="error_form text-danger" id="stude_name_field"
-															style="display: none;">Please enter name of the student.</span>
+														<input type="text" class="form-control"
+															onchange="trim(this)" id="studentName"
+															value="${difDisStud.nameOfStud}" name="studentName"
+															autocomplete="off" placeholder="Name of Student"
+															maxlength="100"> <span
+															class="error_form text-danger" id="stude_name_field"
+															style="display: none;">Please enter name of the
+															student.</span>
 													</div>
 												</div>
 
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="status">Gender 
+													<label class="control-label col-sm-3" for="status">Gender
 														<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="radio" ${difDisStud.gender == 1 ? 'checked' : ''} name="gender" value="1">Male &nbsp;&nbsp;&nbsp;&nbsp;
-														<input type="radio" ${difDisStud.gender == 0 ? 'checked' : ''} name="gender" value="0">Female &nbsp;&nbsp;&nbsp;&nbsp;
-														<input type="radio" ${difDisStud.gender == 2 ? 'checked' : ''} name="gender" value="2">Transgender
+														<input type="radio"
+															${difDisStud.gender == 1 ? 'checked' : ''} name="gender"
+															value="1">Male &nbsp;&nbsp;&nbsp;&nbsp; <input
+															type="radio" ${difDisStud.gender == 0 ? 'checked' : ''}
+															name="gender" value="0">Female
+														&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+															${difDisStud.gender == 2 ? 'checked' : ''} name="gender"
+															value="2">Transgender
 														<!-- <span class="error_form text-danger" id="gender_errfield"
 															style="display: none;">Please select Gender</span> -->
 
 
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">UDID 
+													<label class="control-label col-sm-3" for="page_order">UDID
 														Card No.<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="udid" onchange="trim(this)"
-															value="${difDisStud.udidCardNo}"
+														<input type="text" class="form-control" id="udid"
+															onchange="trim(this)" value="${difDisStud.udidCardNo}"
 															name="udid" maxlength="18" autocomplete="off"
-															placeholder="Unique Disability ID (UDID)">
-															<span class="error_form text-danger" id="udid_errfield"
-															style="display: none;">Please enter unique disability ID (UDID).</span>
+															placeholder="Unique Disability ID (UDID)"> <span
+															class="error_form text-danger" id="udid_errfield"
+															style="display: none;">Please enter unique
+															disability ID (UDID).</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">Type of 
-														Disability<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">Type
+														of Disability<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="disablityType" onchange="trim(this)"
+														<input type="text" class="form-control" id="disablityType"
+															onchange="trim(this)"
 															value="${difDisStud.typeOfDisability}" autocomplete="off"
 															name="disablityType" maxlength="100"
-															placeholder="Type of Disability">
-															<span class="error_form text-danger" id="disablity_errfield"
-															style="display: none;">Please enter type of disability.</span>
+															placeholder="Type of Disability"> <span
+															class="error_form text-danger" id="disablity_errfield"
+															style="display: none;">Please enter type of
+															disability.</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_order">% of 
-														Disability<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_order">%
+														of Disability<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="disablity" onchange="trim(this)" autocomplete="off"
-															value="${difDisStud.percntOfDisability}" onFocus="clearDefault(this)" 
-															name="disablity" maxlength="3"
-															placeholder="% of Disability">
-															<span class="error_form text-danger" id="per_disablity_errfield"
-															style="display: none;">Please enter % of disability and value must be greater than 0.</span>
+														<input type="text" class="form-control" id="disablity"
+															onchange="trim(this)" autocomplete="off"
+															value="${difDisStud.percntOfDisability}"
+															onFocus="clearDefault(this)" name="disablity"
+															maxlength="3" placeholder="% of Disability"> <span
+															class="error_form text-danger"
+															id="per_disablity_errfield" style="display: none;">Please
+															enter % of disability and value must be greater than 0.</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="status">Program
 														Name<span class="text-danger">*</span>
@@ -198,48 +226,54 @@
 														</select>
 													</div>
 												</div>
-												
-											<div class="form-group">
+
+												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_order">
 														Type of Program<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 
-													<select id="prog_type" name="prog_type"
-													class="form-control">
-												</select>													
-													
+														<select id="prog_type" name="prog_type"
+															class="form-control">
+														</select>
+
 													</div>
-											</div>
-												
-													<div class="form-group">
-											<label class="control-label col-sm-3" for="year">Year of										
-												Enrollment <span class="text-danger">*</span>
-											</label>
+												</div>
 
-											<div class="col-sm-9">
-												<input type="text" class="form-control datepickeryear"
-													data-min-view-mode="years" data-start-view="2"
-													data-format="yyyy"
-													placeholder="Year of Enrollment"
-													id="enrolledYear"
-													value="${difDisStud.yearOfEnrollement}"
-													name="enrolledYear" autocomplete="off"
-													onkeypress='return restrictAlphabets(event)'
-													onchange="trim(this)"> <span
-													class="error_form text-danger" id="year_errfield"
-													style="display: none;">Please enter year of enrollment.</span>
-											</div>
+												<div class="form-group">
+													<label class="control-label col-sm-3" for="year">Year
+														of Enrollment <span class="text-danger">*</span>
+													</label>
 
-										</div>			
+													<div class="col-sm-9">
+														<input type="text" class="form-control datepickeryear"
+															data-min-view-mode="years" data-start-view="2"
+															data-format="yyyy" placeholder="Year of Enrollment"
+															id="enrolledYear" value="${difDisStud.yearOfEnrollement}"
+															name="enrolledYear" autocomplete="off"
+															onkeypress='return restrictAlphabets(event)'
+															onchange="trim(this)"> <span
+															class="error_form text-danger" id="year_errfield"
+															style="display: none;">Please enter year of
+															enrollment.</span>
+													</div>
 
-										<input type="hidden" id="studDifDisId" name="studDifDisId"
+												</div>
+
+												<input type="hidden" id="studDifDisId" name="studDifDisId"
 													value="${difDisStud.difAbleStudId}">
 
 												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-9">
-														<button type="submit" id="sub1" class="btn btn-primary" onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														<a href="${pageContext.request.contextPath}/showDifferentlyAbledStudent"><button id="sub2" type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>
+														<button type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
+														<a
+															href="${pageContext.request.contextPath}/showDifferentlyAbledStudent"><button
+																id="sub2" type="button" class="btn btn-primary">
+																<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+															</button></a>
 													</div>
 												</div>
 												<input type="hidden" id="progTypeId" name="progTypeId"
@@ -273,21 +307,23 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-	
+
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
-	
-	$('#disablity').on('input', function() {
-		  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
+		$('#disablity').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
 		function getProgramTypeByProgram() {
 
 			var programType = document.getElementById("prog_name").value;
-			var progTypeId=document.getElementById("progTypeId").value;
+			var progTypeId = document.getElementById("progTypeId").value;
 			//alert("programType" + programType);
-			
+
 			var valid = true;
 
 			if (programType == null || programType == "") {
@@ -297,31 +333,36 @@
 
 			if (valid == true) {
 
-				$.getJSON('${getProgramTypeByProgram}', {
-					programType : programType,
-					ajax : 'true',
-				},
+				$
+						.getJSON(
+								'${getProgramTypeByProgram}',
+								{
+									programType : programType,
+									ajax : 'true',
+								},
 
-				function(data) {
-					//alert(data);
-				
-					var html;
-					var len = data.length;
-					for (var i = 0; i < len; i++) {
-						if(progTypeId==data[i].programId){
-							html += '<option  selected value="' + data[i].programId + '">'
-								+ data[i].nameOfProgram + '</option>';
-							}else{
-						html += '<option value="' + data[i].programId + '">'
-								+ data[i].nameOfProgram + '</option>';
-							}
-					}
-					html += '</option>';
+								function(data) {
+									//alert(data);
 
-					$('#prog_type').html(html);
-					$("#prog_type").trigger("chosen:updated");
+									var html;
+									var len = data.length;
+									for (var i = 0; i < len; i++) {
+										if (progTypeId == data[i].programId) {
+											html += '<option  selected value="' + data[i].programId + '">'
+													+ data[i].nameOfProgram
+													+ '</option>';
+										} else {
+											html += '<option value="' + data[i].programId + '">'
+													+ data[i].nameOfProgram
+													+ '</option>';
+										}
+									}
+									html += '</option>';
 
-				});
+									$('#prog_type').html(html);
+									$("#prog_type").trigger("chosen:updated");
+
+								});
 			}//end of if
 
 		}
@@ -341,81 +382,68 @@
 			}
 			return true;
 		}
-		$(document)
-				.ready(
-						function($) {		// 			
+		$(document).ready(function($) { // 			
 
-							$("#form_sample_2")
-									.submit(
-											function(e) {	
-												var isError = false;
-												var errMsg = "";
+			$("#form_sample_2").submit(function(e) {
+				var isError = false;
+				var errMsg = "";
 
-												if (!$("#studentName").val()) {
-													isError = true;
+				if (!$("#studentName").val()) {
+					isError = true;
 
-													$("#studentName").addClass(
-															"has-error")
-													$("#stude_name_field")
-															.show()
-												} else {
-													$("#stude_name_field")
-															.hide()
-												}
+					$("#studentName").addClass("has-error")
+					$("#stude_name_field").show()
+				} else {
+					$("#stude_name_field").hide()
+				}
 
-											
+				if (!$("#udid").val()) {
+					isError = true;
 
-												if (!$("#udid").val()) {	
-													isError = true;
+					$("#udid").addClass("has-error")
+					$("#udid_errfield").show()
+				} else {
+					$("#udid_errfield").hide()
+				}
 
-													$("#udid").addClass(
-															"has-error")
-													$("#udid_errfield").show()
-												} else {
-													$("#udid_errfield").hide()
-												}
-												
-												if (!$("#disablityType").val()) {
-													isError = true;
+				if (!$("#disablityType").val()) {
+					isError = true;
 
-													$("#disablityType").addClass(
-															"has-error")
-													$("#disablity_errfield").show()
-												} else {
-													$("#disablity_errfield").hide()
-												}
-												
-												if ($("#disablity").val()<=0 || !$("#disablity").val()) {		
-													isError = true;
+					$("#disablityType").addClass("has-error")
+					$("#disablity_errfield").show()
+				} else {
+					$("#disablity_errfield").hide()
+				}
 
-													$("#disablity").addClass(
-															"has-error")
-													$("#per_disablity_errfield").show()
-												} else {
-													$("#per_disablity_errfield").hide()
-												}
-												 
-												if (!$("#enrolledYear").val()) {
-													isError = true;
+				if ($("#disablity").val() <= 0 || !$("#disablity").val()) {
+					isError = true;
 
-													$("#enrolledYear").addClass(
-															"has-error")
-													$("#year_errfield").show()
-												} else {
-													$("#year_errfield").hide()
-												}
-												
-												if (!isError) {				
-													var x = confirm("Do you really want to submit the form?");
-													if (x == true) {
-														document.getElementById("sub1").disabled = true;
-														document.getElementById("sub2").disabled = true;
-														return  true;
-													}	
-												}
-												return false;
-											});
-						});
+					$("#disablity").addClass("has-error")
+					$("#per_disablity_errfield").show()
+				} else {
+					$("#per_disablity_errfield").hide()
+				}
+
+				if (!$("#enrolledYear").val()) {
+					isError = true;
+
+					$("#enrolledYear").addClass("has-error")
+					$("#year_errfield").show()
+				} else {
+					$("#year_errfield").hide()
+				}
+
+				if (!isError) {
+					var x = confirm("Do you really want to submit the form?");
+					if (x == true) {
+						document.getElementById("sub1").disabled = true;
+						document.getElementById("sub2").disabled = true;
+						return true;
+					}
+				}
+				return false;
+			});
+		});
 	</script>
 	<script type="text/javascript">
 		function submit_f(view) {
@@ -523,7 +551,7 @@
 			//alert("hii");
 			getProgramTypeByProgram();
 			document.getElementById("abc").style = "display:none"
-				
+
 		}
 	</script>
 	<script type="text/javascript">
@@ -548,7 +576,7 @@
 			}
 			return false;
 		}
-		
+
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
 			replace(/[ ]{2,}/gi, " "). // replaces multiple spaces with one space 
@@ -556,42 +584,41 @@
 			return;
 		}
 	</script>
-<script type="text/javascript">
-function clearDefault(a){
-	if(a.defaultValue==0)
-	{
-		a.value=""
-	}
-	};
-			/*code: 48-57 Numbers
-			  8  - Backspace,
-			  35 - home key, 36 - End key
-			  37-40: Arrow keys, 46 - Delete key*/
-			function restrictAlphabets(e){
-				var x=e.which||e.keycode;
-				if((x>=48 && x<=57) || x==8 ||
-					(x>=35 && x<=40)|| x==46)
-					return true;
-				else
-					return false;
+	<script type="text/javascript">
+		function clearDefault(a) {
+			if (a.defaultValue == 0) {
+				a.value = ""
 			}
-	
-			$(function() {
+		};
+		/*code: 48-57 Numbers
+		  8  - Backspace,
+		  35 - home key, 36 - End key
+		  37-40: Arrow keys, 46 - Delete key*/
+		function restrictAlphabets(e) {
+			var x = e.which || e.keycode;
+			if ((x >= 48 && x <= 57) || x == 8 || (x >= 35 && x <= 40)
+					|| x == 46)
+				return true;
+			else
+				return false;
+		}
 
-				$('.datepickeryear').datepicker({
-					autoclose : true,
-					minViewMode : 2,
-					format : 'yyyy'
+		$(function() {
 
-				});
+			$('.datepickeryear').datepicker({
+				autoclose : true,
+				minViewMode : 2,
+				format : 'yyyy'
+
 			});
-		</script>
+		});
+	</script>
 
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
-	
+
 
 </body>
 </html>

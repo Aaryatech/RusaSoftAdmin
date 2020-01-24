@@ -172,6 +172,7 @@ public class AlumniTrainingController {
 	public ModelAndView showAddAlumini(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
+
 		try {
 
 			HttpSession session = request.getSession();
@@ -214,143 +215,152 @@ public class AlumniTrainingController {
 		int amount = 0;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int alumniId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			try {
-				alumniId = Integer.parseInt(request.getParameter("alumni_id"));
-
-			} catch (Exception e) {
-				alumniId = 0;
-			}
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info editAccess = null;
-			if (alumniId == 0) {
+				RestTemplate restTemplate = new RestTemplate();
 
-				editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "1", "0", "0",
-						newModuleList);
-			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-				editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "0", "1", "0",
-						newModuleList);
-			}
+				int alumniId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+				try {
+					alumniId = Integer.parseInt(request.getParameter("alumni_id"));
 
-			System.err.println("alumniId id  " + alumniId);
-
-			// editAccess.setError(false);
-
-			if (editAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				if (alumniId == 0) {
-					AlumniDetail alumni = new AlumniDetail();
-
-					String almName = request.getParameter("alum_name");
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					alumni.setAddDate(curDate);
-					alumni.setDelStatus(1);
-					alumni.setAlumniDetailId(alumniId);
-
-					alumni.setAlumniName(XssEscapeUtils.jsoupParse(almName));
-
-					amount = Integer.parseInt(request.getParameter("alumini_amt"));
-					if (amount > 0) {
-						alumni.setExInt1(amount);
-						alumni.setExInt2(1);
-					} else {
-						alumni.setExInt1(0);
-						alumni.setExInt2(0);
-					}
-					String exVar1 = "NA";
-					alumni.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("designation")));
-					alumni.setExVar2(exVar1);
-					alumni.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
-					alumni.setIsActive(1);
-					alumni.setMakerUserId(userObj.getUserId());// get from Session
-					if (request.getParameter("benif_to").equals("7")) {
-						alumni.setBenefitTo(XssEscapeUtils.jsoupParse(request.getParameter("other_benif")));
-
-					} else {
-						alumni.setBenefitTo(request.getParameter("benif_to"));
-
-					}
-
-					alumni.setContributionType(Integer.parseInt(request.getParameter("contr_type")));
-					alumni.setContributionYear(request.getParameter("contr_year"));
-					alumni.setMakerDatetime(curDateTime);
-					alumni.setPassingYear(request.getParameter("year_of_pass"));
-					alumni.setProgramId(1);
-					int yearId = (int) session.getAttribute("acYearId");
-					alumni.setYearId(yearId);
-				//	//System.out.println(alumni.toString());
-					AlumniDetail editInst = restTemplate.postForObject(Constants.url + "saveAlumni", alumni,
-							AlumniDetail.class);
-
-				} else {
-
-					map.add("alumniId", alumniId);
-					AlumniDetail alumni = restTemplate.postForObject(Constants.url + "getAlumni", map,
-							AlumniDetail.class);
-
-					String almName = request.getParameter("alum_name");
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					String curDate = dateFormatStr.format(new Date());
-
-					alumni.setAddDate(curDate);
-					alumni.setDelStatus(1);
-					alumni.setAlumniDetailId(alumniId);
-
-					alumni.setAlumniName(XssEscapeUtils.jsoupParse(almName));
-					// alumni.setInstituteId(userObj.getGetData().getUserInstituteId());// get from
-					// Session
-					// alumni.setIsActive(1);
-					alumni.setMakerUserId(userObj.getUserId());// get from Session
-					if (request.getParameter("benif_to").equals("7")) {
-						alumni.setBenefitTo(XssEscapeUtils.jsoupParse(request.getParameter("other_benif")));
-
-					} else {
-						alumni.setBenefitTo(request.getParameter("benif_to"));
-
-					}
-					alumni.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("designation")));
-					alumni.setContributionType(Integer.parseInt(request.getParameter("contr_type")));
-					alumni.setContributionYear(request.getParameter("contr_year"));
-					alumni.setMakerDatetime(curDateTime);
-					alumni.setPassingYear(request.getParameter("year_of_pass"));
-					// alumni.setProgramId(1);
-					int yearId = (int) session.getAttribute("acYearId");
-					alumni.setYearId(yearId);
-
-					AlumniDetail editInst = restTemplate.postForObject(Constants.url + "saveAlumni", alumni,
-							AlumniDetail.class);
-
+				} catch (Exception e) {
+					alumniId = 0;
 				}
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/showAlumini";
-				else
-					redirect = "redirect:/showAddAlumini";
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info editAccess = null;
+				if (alumniId == 0) {
+
+					editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "1", "0", "0",
+							newModuleList);
+				} else {
+
+					editAccess = AccessControll.checkAccess("insertAlumni", "showAlumini", "0", "0", "1", "0",
+							newModuleList);
+				}
+
+				System.err.println("alumniId id  " + alumniId);
+
+				// editAccess.setError(false);
+
+				if (editAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					if (alumniId == 0) {
+						AlumniDetail alumni = new AlumniDetail();
+
+						String almName = request.getParameter("alum_name");
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						alumni.setAddDate(curDate);
+						alumni.setDelStatus(1);
+						alumni.setAlumniDetailId(alumniId);
+
+						alumni.setAlumniName(XssEscapeUtils.jsoupParse(almName));
+
+						amount = Integer.parseInt(request.getParameter("alumini_amt"));
+						if (amount > 0) {
+							alumni.setExInt1(amount);
+							alumni.setExInt2(1);
+						} else {
+							alumni.setExInt1(0);
+							alumni.setExInt2(0);
+						}
+						String exVar1 = "NA";
+						alumni.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("designation")));
+						alumni.setExVar2(exVar1);
+						alumni.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
+						alumni.setIsActive(1);
+						alumni.setMakerUserId(userObj.getUserId());// get from Session
+						if (request.getParameter("benif_to").equals("7")) {
+							alumni.setBenefitTo(XssEscapeUtils.jsoupParse(request.getParameter("other_benif")));
+
+						} else {
+							alumni.setBenefitTo(request.getParameter("benif_to"));
+
+						}
+
+						alumni.setContributionType(Integer.parseInt(request.getParameter("contr_type")));
+						alumni.setContributionYear(request.getParameter("contr_year"));
+						alumni.setMakerDatetime(curDateTime);
+						alumni.setPassingYear(request.getParameter("year_of_pass"));
+						alumni.setProgramId(1);
+						int yearId = (int) session.getAttribute("acYearId");
+						alumni.setYearId(yearId);
+						// //System.out.println(alumni.toString());
+						AlumniDetail editInst = restTemplate.postForObject(Constants.url + "saveAlumni", alumni,
+								AlumniDetail.class);
+
+					} else {
+
+						map.add("alumniId", alumniId);
+						AlumniDetail alumni = restTemplate.postForObject(Constants.url + "getAlumni", map,
+								AlumniDetail.class);
+
+						String almName = request.getParameter("alum_name");
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						String curDate = dateFormatStr.format(new Date());
+
+						alumni.setAddDate(curDate);
+						alumni.setDelStatus(1);
+						alumni.setAlumniDetailId(alumniId);
+
+						alumni.setAlumniName(XssEscapeUtils.jsoupParse(almName));
+						// alumni.setInstituteId(userObj.getGetData().getUserInstituteId());// get from
+						// Session
+						// alumni.setIsActive(1);
+						alumni.setMakerUserId(userObj.getUserId());// get from Session
+						if (request.getParameter("benif_to").equals("7")) {
+							alumni.setBenefitTo(XssEscapeUtils.jsoupParse(request.getParameter("other_benif")));
+
+						} else {
+							alumni.setBenefitTo(request.getParameter("benif_to"));
+
+						}
+						alumni.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("designation")));
+						alumni.setContributionType(Integer.parseInt(request.getParameter("contr_type")));
+						alumni.setContributionYear(request.getParameter("contr_year"));
+						alumni.setMakerDatetime(curDateTime);
+						alumni.setPassingYear(request.getParameter("year_of_pass"));
+						// alumni.setProgramId(1);
+						int yearId = (int) session.getAttribute("acYearId");
+						alumni.setYearId(yearId);
+
+						AlumniDetail editInst = restTemplate.postForObject(Constants.url + "saveAlumni", alumni,
+								AlumniDetail.class);
+
+					}
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/showAlumini";
+					else
+						redirect = "redirect:/showAddAlumini";
+				}
+			} else {
+
+				redirect = "redirect:/accessDenied";
 			}
 
 		} catch (Exception e) {
@@ -432,7 +442,7 @@ public class AlumniTrainingController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("instIds");
-					//System.out.println("id are" + instIds);
+					// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -563,7 +573,6 @@ public class AlumniTrainingController {
 
 				model.addObject("title", "Add Student Placement Details");
 				model.addObject("figure", Names.Rupees);
-				
 
 				ProgramType[] progTypes = restTemplate.getForObject(Constants.url + "getAllProgramType",
 						ProgramType[].class);
@@ -586,174 +595,181 @@ public class AlumniTrainingController {
 
 	@RequestMapping(value = "/insertTrainPlace", method = RequestMethod.POST)
 	public String insertTrainPlace(HttpServletRequest request, HttpServletResponse response) {
-		System.err.println("in insert insertTrainPlace");
+
 		ModelAndView model = null;
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int placeId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			String minPackge = "-";
-			String maxPackge = "-";
-			String suuppAgnc = "NA";
-			try {
-				placeId = Integer.parseInt(request.getParameter("place_id"));
-			} catch (Exception e) {
-				placeId = 0;
-			}
-
-			System.err.println("placeId id  " + placeId);
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info access = null;
+			if (token.trim().equals(key.trim())) {
 
-			if (placeId == 0) {
+				RestTemplate restTemplate = new RestTemplate();
 
-				access = AccessControll.checkAccess("insertTrainPlace", "showStudTran", "0", "1", "0", "0",
-						newModuleList);
-			} else {
-				access = AccessControll.checkAccess("insertTrainPlace", "showStudTran", "0", "0", "1", "0",
-						newModuleList);
-			}
-			/// editAccess.setError(false);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			if (access.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				if (placeId == 0) {
-
-					TrainPlacement trainPlace = new TrainPlacement();
-
-					String almName = request.getParameter("alum_name");
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					trainPlace.setContactDetail(request.getParameter("contact_detail"));
-					trainPlace.setDelStatus(1);
-					trainPlace.setEmpyrAdd(XssEscapeUtils.jsoupParse(request.getParameter("employer_address")));
-					trainPlace.setEmpyrName(XssEscapeUtils.jsoupParse(request.getParameter("employer_name")));
-					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
-					
-					minPackge = request.getParameter("package_offered");
-					maxPackge = request.getParameter("max_package_offered");
-					if (minPackge == null) {
-						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
-					} else {
-						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
-					}
-					
-					if (maxPackge == null) {
-						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
-					} else {
-						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
-					}
-					
-
-					trainPlace.setPlacementId(placeId);
-					trainPlace.setProgramName(request.getParameter("prog_name"));
-					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-
-					suuppAgnc = request.getParameter("sup_agency_name");
-					if (suuppAgnc == null) {
-						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
-					} else {
-						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
-					}
-					trainPlace.setDelStatus(1);
-
-					int exInt1 = 0;
-					trainPlace.setExInt1(exInt1);
-					trainPlace.setExInt2(exInt1);
-					trainPlace.setExVar2("NA");
-					trainPlace.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
-					trainPlace.setIsActive(1);
-					trainPlace.setMakerUserId(userObj.getUserId());// get from Session
-
-					trainPlace.setMakerDatetime(curDateTime);
-					int yearId = (int) session.getAttribute("acYearId");
-					trainPlace.setYearId(yearId);
-
-					//System.out.println("Placements:" + trainPlace.toString());
-
-					TrainPlacement trainPlaceRes = restTemplate.postForObject(Constants.url + "saveTrainPlacement",
-							trainPlace, TrainPlacement.class);
-
-				} else {
-
-					TrainPlacement trainPlace = new TrainPlacement();
-
-					String almName = request.getParameter("alum_name");
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-					trainPlace.setContactDetail(request.getParameter("contact_detail"));
-					trainPlace.setDelStatus(1);
-					trainPlace.setEmpyrAdd(XssEscapeUtils.jsoupParse(request.getParameter("employer_address")));
-					trainPlace.setEmpyrName(XssEscapeUtils.jsoupParse(request.getParameter("employer_name")));
-					trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
-					
-					minPackge = request.getParameter("package_offered");
-					maxPackge = request.getParameter("max_package_offered");
-					if (minPackge == null) {
-						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
-					} else {
-						trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
-					}
-					
-					if (maxPackge == null) {
-						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
-					} else {
-						trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
-					}
-					
-					trainPlace.setPlacementId(placeId);
-					trainPlace.setProgramName(request.getParameter("prog_name"));
-					trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-					suuppAgnc = request.getParameter("sup_agency_name");
-					if (suuppAgnc == null) {
-						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
-					} else {
-						trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
-					}
-
-					trainPlace.setDelStatus(1);
-
-					int exInt1 = 0;
-					trainPlace.setExInt1(exInt1);
-					trainPlace.setExInt2(exInt1);
-					trainPlace.setExVar2("NA");
-					trainPlace.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
-					trainPlace.setIsActive(1);
-					trainPlace.setMakerUserId(userObj.getUserId());// get from Session
-
-					trainPlace.setMakerDatetime(curDateTime);
-					int yearId = (int) session.getAttribute("acYearId");
-					trainPlace.setYearId(yearId);
-
-					TrainPlacement trainPlaceRes = restTemplate.postForObject(Constants.url + "saveTrainPlacement",
-							trainPlace, TrainPlacement.class);
-
+				int placeId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+				String minPackge = "-";
+				String maxPackge = "-";
+				String suuppAgnc = "NA";
+				try {
+					placeId = Integer.parseInt(request.getParameter("place_id"));
+				} catch (Exception e) {
+					placeId = 0;
 				}
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/showStudTran";
-				else
-					redirect = "redirect:/showAddStudTran";
+				System.err.println("placeId id  " + placeId);
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info access = null;
+
+				if (placeId == 0) {
+
+					access = AccessControll.checkAccess("insertTrainPlace", "showStudTran", "0", "1", "0", "0",
+							newModuleList);
+				} else {
+					access = AccessControll.checkAccess("insertTrainPlace", "showStudTran", "0", "0", "1", "0",
+							newModuleList);
+				}
+				/// editAccess.setError(false);
+
+				if (access.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					if (placeId == 0) {
+
+						TrainPlacement trainPlace = new TrainPlacement();
+
+						String almName = request.getParameter("alum_name");
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						trainPlace.setContactDetail(request.getParameter("contact_detail"));
+						trainPlace.setDelStatus(1);
+						trainPlace.setEmpyrAdd(XssEscapeUtils.jsoupParse(request.getParameter("employer_address")));
+						trainPlace.setEmpyrName(XssEscapeUtils.jsoupParse(request.getParameter("employer_name")));
+						trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
+
+						minPackge = request.getParameter("package_offered");
+						maxPackge = request.getParameter("max_package_offered");
+						if (minPackge == null) {
+							trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
+						} else {
+							trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
+						}
+
+						if (maxPackge == null) {
+							trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
+						} else {
+							trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
+						}
+
+						trainPlace.setPlacementId(placeId);
+						trainPlace.setProgramName(request.getParameter("prog_name"));
+						trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
+
+						suuppAgnc = request.getParameter("sup_agency_name");
+						if (suuppAgnc == null) {
+							trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
+						} else {
+							trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
+						}
+						trainPlace.setDelStatus(1);
+
+						int exInt1 = 0;
+						trainPlace.setExInt1(exInt1);
+						trainPlace.setExInt2(exInt1);
+						trainPlace.setExVar2("NA");
+						trainPlace.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
+						trainPlace.setIsActive(1);
+						trainPlace.setMakerUserId(userObj.getUserId());// get from Session
+
+						trainPlace.setMakerDatetime(curDateTime);
+						int yearId = (int) session.getAttribute("acYearId");
+						trainPlace.setYearId(yearId);
+
+						// System.out.println("Placements:" + trainPlace.toString());
+
+						TrainPlacement trainPlaceRes = restTemplate.postForObject(Constants.url + "saveTrainPlacement",
+								trainPlace, TrainPlacement.class);
+
+					} else {
+
+						TrainPlacement trainPlace = new TrainPlacement();
+
+						String almName = request.getParameter("alum_name");
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+						trainPlace.setContactDetail(request.getParameter("contact_detail"));
+						trainPlace.setDelStatus(1);
+						trainPlace.setEmpyrAdd(XssEscapeUtils.jsoupParse(request.getParameter("employer_address")));
+						trainPlace.setEmpyrName(XssEscapeUtils.jsoupParse(request.getParameter("employer_name")));
+						trainPlace.setNoStudentPlaced(Integer.parseInt(request.getParameter("no_stud_placed")));
+
+						minPackge = request.getParameter("package_offered");
+						maxPackge = request.getParameter("max_package_offered");
+						if (minPackge == null) {
+							trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
+						} else {
+							trainPlace.setPakageOfferd(XssEscapeUtils.jsoupParse(minPackge));
+						}
+
+						if (maxPackge == null) {
+							trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
+						} else {
+							trainPlace.setExVar1(XssEscapeUtils.jsoupParse(maxPackge));
+						}
+
+						trainPlace.setPlacementId(placeId);
+						trainPlace.setProgramName(request.getParameter("prog_name"));
+						trainPlace.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
+						suuppAgnc = request.getParameter("sup_agency_name");
+						if (suuppAgnc == null) {
+							trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
+						} else {
+							trainPlace.setSupportAgencyName(XssEscapeUtils.jsoupParse(suuppAgnc));
+						}
+
+						trainPlace.setDelStatus(1);
+
+						int exInt1 = 0;
+						trainPlace.setExInt1(exInt1);
+						trainPlace.setExInt2(exInt1);
+						trainPlace.setExVar2("NA");
+						trainPlace.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
+						trainPlace.setIsActive(1);
+						trainPlace.setMakerUserId(userObj.getUserId());// get from Session
+
+						trainPlace.setMakerDatetime(curDateTime);
+						int yearId = (int) session.getAttribute("acYearId");
+						trainPlace.setYearId(yearId);
+
+						TrainPlacement trainPlaceRes = restTemplate.postForObject(Constants.url + "saveTrainPlacement",
+								trainPlace, TrainPlacement.class);
+
+					}
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/showStudTran";
+					else
+						redirect = "redirect:/showAddStudTran";
+				}
+			} else {
+
+				redirect = "redirect:/accessDenied";
 			}
 
 		} catch (Exception e) {
@@ -848,7 +864,7 @@ public class AlumniTrainingController {
 
 					System.err.println("Multiple records delete ");
 					String[] instIds = request.getParameterValues("placementId");
-					//System.out.println("id are" + instIds);
+					// System.out.println("id are" + instIds);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -976,18 +992,18 @@ public class AlumniTrainingController {
 				// System.err.println("progTypeList " + progTypeList.toString());
 
 				model.addObject("progTypeList", progTypeList);
-				
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				
+
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 
 				map.add("yearId", session.getAttribute("acYearId"));
 
-				HigherEducDetail configuredhighEdu = restTemplate.postForObject(Constants.url + "getHigherEduDetailByAcdYr",
-						map, HigherEducDetail.class);
-		
-				 System.err.println("configuredhighEdu " + configuredhighEdu.toString());
+				HigherEducDetail configuredhighEdu = restTemplate
+						.postForObject(Constants.url + "getHigherEduDetailByAcdYr", map, HigherEducDetail.class);
+
+				System.err.println("configuredhighEdu " + configuredhighEdu.toString());
 
 				model.addObject("highEduDet", configuredhighEdu);
 			} else {
@@ -1044,83 +1060,91 @@ public class AlumniTrainingController {
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			int eduDetailId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			try {
-				eduDetailId = Integer.parseInt(request.getParameter("high_edu_id"));
-			} catch (Exception e) {
-				eduDetailId = 0;
-			}
-
-			// System.err.println("eduDetailId id " + eduDetailId);
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info access = null;
-			if (eduDetailId == 0) {
-				access = AccessControll.checkAccess("insertHigherEduDetail", "showHighEdu", "0", "1", "0", "0",
-						newModuleList);
-			} else {
-				access = AccessControll.checkAccess("insertHigherEduDetail", "showHighEdu", "0", "0", "1", "0",
-						newModuleList);
-			}
+				RestTemplate restTemplate = new RestTemplate();
 
-			if (access.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				if (eduDetailId == 0 || eduDetailId > 0) {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-					HigherEducDetail higherEdu = new HigherEducDetail();
-
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					Calendar cal = Calendar.getInstance();
-
-					String curDateTime = dateFormat.format(cal.getTime());
-
-					higherEdu.setEducationDetailId(eduDetailId);
-
-					higherEdu.setNoStudent(Integer.parseInt(request.getParameter("no_of_student")));
-					higherEdu.setProceedingTo(Integer.parseInt(request.getParameter("proceed_prog_type")));
-					higherEdu.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-
-					int exInt1 = 0;
-					String exVar1 = "NA";
-
-					higherEdu.setExInt1(exInt1);
-					higherEdu.setExInt2(exInt1);
-					higherEdu.setExVar1(exVar1);
-					higherEdu.setExVar2(exVar1);
-
-					higherEdu.setIsActive(1);
-					higherEdu.setDelStatus(1);
-
-					higherEdu.setMakerUserId(userObj.getUserId());// get from Session
-					higherEdu.setMakerDatetime(curDateTime);
-
-					int yearId = (int) session.getAttribute("acYearId");
-
-					higherEdu.setYearId(yearId);
-					higherEdu.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
-
-					HigherEducDetail trainPlaceRes = restTemplate.postForObject(Constants.url + "saveHigherEducDetail",
-							higherEdu, HigherEducDetail.class);
-
-				} else {
-
+				int eduDetailId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+				try {
+					eduDetailId = Integer.parseInt(request.getParameter("high_edu_id"));
+				} catch (Exception e) {
+					eduDetailId = 0;
 				}
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				System.err.println("is View  " + isView);
-				if (isView == 1)
-					redirect = "redirect:/showHighEdu";
-				else
-					redirect = "redirect:/showAddHighEdu";
+				// System.err.println("eduDetailId id " + eduDetailId);
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info access = null;
+				if (eduDetailId == 0) {
+					access = AccessControll.checkAccess("insertHigherEduDetail", "showHighEdu", "0", "1", "0", "0",
+							newModuleList);
+				} else {
+					access = AccessControll.checkAccess("insertHigherEduDetail", "showHighEdu", "0", "0", "1", "0",
+							newModuleList);
+				}
+
+				if (access.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					if (eduDetailId == 0 || eduDetailId > 0) {
+
+						HigherEducDetail higherEdu = new HigherEducDetail();
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						higherEdu.setEducationDetailId(eduDetailId);
+
+						higherEdu.setNoStudent(Integer.parseInt(request.getParameter("no_of_student")));
+						higherEdu.setProceedingTo(Integer.parseInt(request.getParameter("proceed_prog_type")));
+						higherEdu.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
+
+						int exInt1 = 0;
+						String exVar1 = "NA";
+
+						higherEdu.setExInt1(exInt1);
+						higherEdu.setExInt2(exInt1);
+						higherEdu.setExVar1(exVar1);
+						higherEdu.setExVar2(exVar1);
+
+						higherEdu.setIsActive(1);
+						higherEdu.setDelStatus(1);
+
+						higherEdu.setMakerUserId(userObj.getUserId());// get from Session
+						higherEdu.setMakerDatetime(curDateTime);
+
+						int yearId = (int) session.getAttribute("acYearId");
+
+						higherEdu.setYearId(yearId);
+						higherEdu.setInstituteId(userObj.getGetData().getUserInstituteId());// get from Session
+
+						HigherEducDetail trainPlaceRes = restTemplate.postForObject(
+								Constants.url + "saveHigherEducDetail", higherEdu, HigherEducDetail.class);
+
+					} else {
+
+					}
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					System.err.println("is View  " + isView);
+					if (isView == 1)
+						redirect = "redirect:/showHighEdu";
+					else
+						redirect = "redirect:/showAddHighEdu";
+				}
+			} else {
+
+				redirect = "redirect:/accessDenied";
 			}
 
 		} catch (Exception e) {
@@ -1335,23 +1359,21 @@ public class AlumniTrainingController {
 					"0", "1", "0", "0", newModuleList);
 			if (addAccess.isError() == false) {
 
-				
 				int instituteId = (int) session.getAttribute("instituteId");
 				int yId = (int) session.getAttribute("acYearId");
-				
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				
+
 				map.add("instituteId", instituteId);
 				map.add("yId", yId);
-				
+
 				AlumniAssocAct alumni = rest.postForObject(Constants.url + "getAlumniAssocActByIds", map,
 						AlumniAssocAct.class);
-				
-				
+
 				model = new ModelAndView("ProgramDetails/addAlmniAssocAct");
 
 				model.addObject("title", "Add Alumni Association Activity");
-				//AlumniAssocAct alumni = new AlumniAssocAct();
+				// AlumniAssocAct alumni = new AlumniAssocAct();
 				model.addObject("alumni", alumni);
 			} else {
 
@@ -1372,49 +1394,59 @@ public class AlumniTrainingController {
 
 	@RequestMapping(value = "/insertAlumniAssocAct", method = RequestMethod.POST)
 	public String insertAlumniAssocAct(HttpServletRequest request, HttpServletResponse response) {
-
+		String returnString = null;
 		try {
+
 			HttpSession session = request.getSession();
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
+			if (token.trim().equals(key.trim())) {
 
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			AlumniAssocAct alumni = new AlumniAssocAct();
-			alumni.setAlmAssocActId(Integer.parseInt(request.getParameter("alumni_assoc_act_id")));
-			alumni.setAlumniMeetngAgnda(request.getParameter("alum_meet_agnd"));
-			alumni.setDateOfMeeting(request.getParameter("date_meet"));
-			alumni.setNameAlumniAssoc(request.getParameter("name_alumini_assoc"));
-			alumni.setAlumniRegNo(Integer.parseInt(request.getParameter("almni_reg_no")));
-			alumni.setDateAlumniReg(request.getParameter("date_of_almni_reg"));
-			alumni.setNoAlumniReg(Integer.parseInt(request.getParameter("registred_almni_no")));
-			alumni.setNoMemberAttended(Integer.parseInt(request.getParameter("no_member_attnd")));
-			alumni.setTtlNoAlumniEnrolled(Integer.parseInt(request.getParameter("ttl_no_almni_enrolled")));
-			alumni.setInstId(instituteId);
-			alumni.setAcYearId(yId);
-			alumni.setDelStatus(1);
-			alumni.setIsActive(1);
-			alumni.setMakerUserId(userId);
-			alumni.setMakerEnterDatetime(curDateTime);
-			alumni.setExInt1(0);
-			alumni.setExInt2(0);
-			alumni.setExVar1("NA");
-			alumni.setExVar2("NA");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
 
-			AlumniAssocAct almAct = rest.postForObject(Constants.url + "/saveAlumniAssoAct", alumni,
-					AlumniAssocAct.class);
+				String curDateTime = dateFormat.format(cal.getTime());
 
+				AlumniAssocAct alumni = new AlumniAssocAct();
+				alumni.setAlmAssocActId(Integer.parseInt(request.getParameter("alumni_assoc_act_id")));
+				alumni.setAlumniMeetngAgnda(request.getParameter("alum_meet_agnd"));
+				alumni.setDateOfMeeting(request.getParameter("date_meet"));
+				alumni.setNameAlumniAssoc(request.getParameter("name_alumini_assoc"));
+				alumni.setAlumniRegNo(Integer.parseInt(request.getParameter("almni_reg_no")));
+				alumni.setDateAlumniReg(request.getParameter("date_of_almni_reg"));
+				alumni.setNoAlumniReg(Integer.parseInt(request.getParameter("registred_almni_no")));
+				alumni.setNoMemberAttended(Integer.parseInt(request.getParameter("no_member_attnd")));
+				alumni.setTtlNoAlumniEnrolled(Integer.parseInt(request.getParameter("ttl_no_almni_enrolled")));
+				alumni.setInstId(instituteId);
+				alumni.setAcYearId(yId);
+				alumni.setDelStatus(1);
+				alumni.setIsActive(1);
+				alumni.setMakerUserId(userId);
+				alumni.setMakerEnterDatetime(curDateTime);
+				alumni.setExInt1(0);
+				alumni.setExInt2(0);
+				alumni.setExVar1("NA");
+				alumni.setExVar2("NA");
+
+				AlumniAssocAct almAct = rest.postForObject(Constants.url + "/saveAlumniAssoAct", alumni,
+						AlumniAssocAct.class);
+				returnString = "redirect:/showAlumniAssociationActivity";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 
-		return "redirect:/showAlumniAssociationActivity";
+		return returnString;
 
 	}
 
@@ -1512,7 +1544,7 @@ public class AlumniTrainingController {
 
 					System.err.println("Multiple records delete ");
 					String[] alumnis = request.getParameterValues("alumni");
-					//System.out.println("id are" + alumnis);
+					// System.out.println("id are" + alumnis);
 
 					StringBuilder sb = new StringBuilder();
 
@@ -1592,7 +1624,8 @@ public class AlumniTrainingController {
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 
 				map.add("yearId", session.getAttribute("acYearId"));
-				//System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " " + session.getAttribute("acYearId"));
+				// System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() +
+				// " " + session.getAttribute("acYearId"));
 
 				NewCourseInfoList[] courseArr = restTemplate.postForObject(Constants.url + "getAllNewCourseList", map,
 						NewCourseInfoList[].class);
@@ -1672,46 +1705,60 @@ public class AlumniTrainingController {
 
 	@RequestMapping(value = "/insertNewCourseInfo", method = RequestMethod.POST)
 	public String insertNewCourseInfo(HttpServletRequest request, HttpServletResponse response) {
+		String returnString = null;
+
 		try {
+
 			HttpSession session = request.getSession();
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
+			if (token.trim().equals(key.trim())) {
 
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			NewCourseInfo course = new NewCourseInfo();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
 
-			course.setCourseId(Integer.parseInt(request.getParameter("course_id")));
-			course.setProgName(Integer.parseInt(request.getParameter("prog_name")));
-			course.setProgType(Integer.parseInt(request.getParameter("prog_type")));
-			course.setApplicableYear(request.getParameter("applicabl_year"));
-			course.setCourseName(XssEscapeUtils.jsoupParse(request.getParameter("courseName")));
-			course.setCourseCode(Integer.parseInt(request.getParameter("courseCode")));
-			course.setIntroduceFrom(request.getParameter("acadYear"));
-			course.setDocument(XssEscapeUtils.jsoupParse(request.getParameter("document")));
-			course.setDelStatus(1);
-			course.setIsActive(1);
-			course.setMakerUserId(userId);
-			course.setMakerDatetime(curDateTime);
-			course.setInstId(instituteId);
-			course.setExInt1(0);
-			course.setExInt2(0);
-			course.setExVar1("NA");
-			course.setExVar2("NA");
-			//System.out.println("Course=" + course.toString());
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			NewCourseInfo saveCourse = rest.postForObject(Constants.url + "/saveNewCourseInfo", course,
-					NewCourseInfo.class);
+				NewCourseInfo course = new NewCourseInfo();
+
+				course.setCourseId(Integer.parseInt(request.getParameter("course_id")));
+				course.setProgName(Integer.parseInt(request.getParameter("prog_name")));
+				course.setProgType(Integer.parseInt(request.getParameter("prog_type")));
+				course.setApplicableYear(request.getParameter("applicabl_year"));
+				course.setCourseName(XssEscapeUtils.jsoupParse(request.getParameter("courseName")));
+				course.setCourseCode(Integer.parseInt(request.getParameter("courseCode")));
+				course.setIntroduceFrom(request.getParameter("acadYear"));
+				course.setDocument(XssEscapeUtils.jsoupParse(request.getParameter("document")));
+				course.setDelStatus(1);
+				course.setIsActive(1);
+				course.setMakerUserId(userId);
+				course.setMakerDatetime(curDateTime);
+				course.setInstId(instituteId);
+				course.setExInt1(0);
+				course.setExInt2(0);
+				course.setExVar1("NA");
+				course.setExVar2("NA");
+				// System.out.println("Course=" + course.toString());
+
+				NewCourseInfo saveCourse = rest.postForObject(Constants.url + "/saveNewCourseInfo", course,
+						NewCourseInfo.class);
+				returnString = "redirect:/showNewCourseInfo";
+
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return "redirect:/showNewCourseInfo";
+		return returnString;
 
 	}
 
@@ -1751,7 +1798,6 @@ public class AlumniTrainingController {
 
 				model.addObject("acaYearList", acaYearList);
 
-				
 				map = new LinkedMultiValueMap<>();
 				map.add("courseId", courseId);
 				NewCourseInfo newCourse = rest.postForObject(Constants.url + "/getByCourseId", map,
@@ -1770,7 +1816,7 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteCourseInfo/{courseId}", method = RequestMethod.GET)
 	public String deleteCourseInfo(@PathVariable("courseId") int courseId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1780,8 +1826,8 @@ public class AlumniTrainingController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteCourseInfo/{courseId}",
-					"showNewCourseInfo", "0", "0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteCourseInfo/{courseId}", "showNewCourseInfo", "0", "0", "0",
+					"1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -1800,8 +1846,10 @@ public class AlumniTrainingController {
 
 		return "redirect:/showNewCourseInfo";
 	}
-	
-	/*************************************Value Added Courses************************************/
+
+	/*************************************
+	 * Value Added Courses
+	 ************************************/
 	@RequestMapping(value = "/showValueAddedCourses", method = RequestMethod.GET)
 	public ModelAndView showVlaueAddedCourses(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1818,19 +1866,19 @@ public class AlumniTrainingController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info viewAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "1", "0", "0", "0",
-					newModuleList);
+			Info viewAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "1", "0",
+					"0", "0", newModuleList);
 
 			if (viewAccess.isError() == false) {
 
-				Info addAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "1", "0", "0",
-						newModuleList);
+				Info addAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "1",
+						"0", "0", newModuleList);
 
-				Info editAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "0", "1", "0",
-						newModuleList);
+				Info editAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "0",
+						"1", "0", newModuleList);
 
-				Info deleteAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0", "0", "0", "1",
-						newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("showValueAddedCourses", "showValueAddedCourses", "0",
+						"0", "0", "1", newModuleList);
 
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
@@ -1849,8 +1897,8 @@ public class AlumniTrainingController {
 
 				map.add("yearId", session.getAttribute("acYearId"));
 
-				ValueAddedCourses[] courseArray = restTemplate.postForObject(Constants.url + "getValueAddedCurseList", map,
-						ValueAddedCourses[].class);
+				ValueAddedCourses[] courseArray = restTemplate.postForObject(Constants.url + "getValueAddedCurseList",
+						map, ValueAddedCourses[].class);
 				List<ValueAddedCourses> courseList = new ArrayList<>(Arrays.asList(courseArray));
 				// System.err.println("alumList " + alumList.toString());
 
@@ -1872,7 +1920,7 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addValAddCourse", method = RequestMethod.GET)
 	public ModelAndView addValAddCourse(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1908,54 +1956,69 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/insertValueAddedCourse", method = RequestMethod.POST)
 	public String insertValueAddedCourse(HttpServletRequest request, HttpServletResponse response) {
+
+		String returnString = null;
 		try {
+
 			HttpSession session = request.getSession();
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
+			if (token.trim().equals(key.trim())) {
 
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			ValueAddedCourses course = new ValueAddedCourses();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
 
-			course.setValueAddedCourseId(Integer.parseInt(request.getParameter("alumni_id")));
-			course.setValueAddedCourseName(XssEscapeUtils.jsoupParse(request.getParameter("course_name")));
-			course.setCourseCode(XssEscapeUtils.jsoupParse(request.getParameter("course_code")));
-			course.setYearOfOffering(request.getParameter("year_of_offering"));
-			course.setNoOfTimesOffer(Integer.parseInt(request.getParameter("no_times_offer")));
-			course.setYearOfDiscontinuation(request.getParameter("year_of_discontinue"));
-			course.setNoOfStudentsEnrolled(Integer.parseInt(request.getParameter("no_student_enrolled")));
-			course.setNoOfStudentsCompletedCourse(Integer.parseInt(request.getParameter("no_student_completed_course")));
-			course.setDelStatus(1);
-			course.setIsActive(1);
-			course.setAcademicYearId(yId);
-			course.setMakerUserId(userId);
-			course.setMakerEnterDatetime(curDateTime);
-			course.setInstId(instituteId);
-			course.setExInt1(0);
-			course.setExInt2(0);
-			course.setExVar1("NA");
-			course.setExVar2("NA");
-			//System.out.println("Course=" + course.toString());
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			ValueAddedCourses saveValAddCourse = rest.postForObject(Constants.url + "/saveValueAddedCourse", course,
-					ValueAddedCourses.class);
+				ValueAddedCourses course = new ValueAddedCourses();
+
+				course.setValueAddedCourseId(Integer.parseInt(request.getParameter("alumni_id")));
+				course.setValueAddedCourseName(XssEscapeUtils.jsoupParse(request.getParameter("course_name")));
+				course.setCourseCode(XssEscapeUtils.jsoupParse(request.getParameter("course_code")));
+				course.setYearOfOffering(request.getParameter("year_of_offering"));
+				course.setNoOfTimesOffer(Integer.parseInt(request.getParameter("no_times_offer")));
+				course.setYearOfDiscontinuation(request.getParameter("year_of_discontinue"));
+				course.setNoOfStudentsEnrolled(Integer.parseInt(request.getParameter("no_student_enrolled")));
+				course.setNoOfStudentsCompletedCourse(
+						Integer.parseInt(request.getParameter("no_student_completed_course")));
+				course.setDelStatus(1);
+				course.setIsActive(1);
+				course.setAcademicYearId(yId);
+				course.setMakerUserId(userId);
+				course.setMakerEnterDatetime(curDateTime);
+				course.setInstId(instituteId);
+				course.setExInt1(0);
+				course.setExInt2(0);
+				course.setExVar1("NA");
+				course.setExVar2("NA");
+				// System.out.println("Course=" + course.toString());
+
+				ValueAddedCourses saveValAddCourse = rest.postForObject(Constants.url + "/saveValueAddedCourse", course,
+						ValueAddedCourses.class);
+				returnString = "redirect:/showValueAddedCourses";
+
+			}
+
+			else {
+
+				returnString = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return "redirect:/showValueAddedCourses";
+		return returnString;
 
 	}
-
 
 	@RequestMapping(value = "/editCourse/{courseId}", method = RequestMethod.GET)
 	public ModelAndView editCourse(@PathVariable("courseId") int courseId, HttpServletRequest request,
@@ -1978,7 +2041,7 @@ public class AlumniTrainingController {
 			} else {
 
 				MultiValueMap<String, Object> map = null;
-				
+
 				map = new LinkedMultiValueMap<>();
 				map.add("courseId", courseId);
 				ValueAddedCourses value = rest.postForObject(Constants.url + "/getValueAddedCourseById", map,
@@ -1996,7 +2059,7 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteCourse/{courseId}", method = RequestMethod.GET)
 	public String deleteCourse(@PathVariable("courseId") int courseId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2006,8 +2069,8 @@ public class AlumniTrainingController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteCourse/{courseId}",
-					"showValueAddedCourses", "0", "0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteCourse/{courseId}", "showValueAddedCourses", "0", "0", "0",
+					"1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2026,9 +2089,11 @@ public class AlumniTrainingController {
 
 		return "redirect:/showValueAddedCourses";
 	}
-	
-	/*************************************Field Projects/Internships************************************/
-	
+
+	/*************************************
+	 * Field Projects/Internships
+	 ************************************/
+
 	@RequestMapping(value = "/showFieldProjectIntern", method = RequestMethod.GET)
 	public ModelAndView showFieldProjectIntern(HttpServletRequest request, HttpServletResponse response) {
 
@@ -2045,19 +2110,19 @@ public class AlumniTrainingController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info viewAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "1", "0", "0", "0",
-					newModuleList);
+			Info viewAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "1", "0",
+					"0", "0", newModuleList);
 
 			if (viewAccess.isError() == false) {
 
-				Info addAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0", "1", "0", "0",
-						newModuleList);
+				Info addAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0",
+						"1", "0", "0", newModuleList);
 
-				Info editAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0", "0", "1", "0",
-						newModuleList);
+				Info editAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0",
+						"0", "1", "0", newModuleList);
 
-				Info deleteAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0", "0", "0", "1",
-						newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("showFieldProjectIntern", "showFieldProjectIntern", "0",
+						"0", "0", "1", newModuleList);
 
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
@@ -2069,15 +2134,13 @@ public class AlumniTrainingController {
 				if (deleteAccess.isError() == false)
 					model.addObject("deleteAccess", 0);
 
-				
-
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 
 				map.add("yearId", session.getAttribute("acYearId"));
 
-				FieldProjectsInternList[] fieldArray = restTemplate.postForObject(Constants.url + "getProjectInternFieldList", map,
-						FieldProjectsInternList[].class);
+				FieldProjectsInternList[] fieldArray = restTemplate.postForObject(
+						Constants.url + "getProjectInternFieldList", map, FieldProjectsInternList[].class);
 				List<FieldProjectsInternList> fieldList = new ArrayList<>(Arrays.asList(fieldArray));
 				// System.err.println("alumList " + alumList.toString());
 
@@ -2099,7 +2162,7 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addFieldProject", method = RequestMethod.GET)
 	public ModelAndView addFieldProject(HttpServletRequest request, HttpServletResponse response) {
 
@@ -2143,51 +2206,65 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertFieldProject", method = RequestMethod.POST)
 	public String insertFieldProject(HttpServletRequest request, HttpServletResponse response) {
+		String returnString = null;
+
 		try {
+
 			HttpSession session = request.getSession();
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
+			if (token.trim().equals(key.trim())) {
 
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			FieldProjectsIntern field = new FieldProjectsIntern();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
 
-			field.setFieldProjectInternId(Integer.parseInt(request.getParameter("field_id")));
-			field.setProgramName(Integer.parseInt(request.getParameter("prog_name")));
-			field.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
-			field.setProvisionForUndertaking(XssEscapeUtils.jsoupParse(request.getParameter("pro_undertake")));
-			field.setNoOfStudUndertaking(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_undertake"))));
-			field.setDocument(XssEscapeUtils.jsoupParse(request.getParameter("document")));
-			field.setDelStatus(1);
-			field.setIsActive(1);
-			field.setAcYearId(yId);
-			field.setMakerUserId(userId);
-			field.setMakerEnterDatetime(curDateTime);
-			field.setInstId(instituteId);
-			field.setExInt1(0);
-			field.setExInt2(0);
-			field.setExVar1("NA");
-			field.setExVar2("NA");
-			//System.out.println("field=" + field.toString());
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			FieldProjectsIntern saveValAddCourse = rest.postForObject(Constants.url + "/saveFieldProjectsIntern", field,
-					FieldProjectsIntern.class);
+				FieldProjectsIntern field = new FieldProjectsIntern();
 
+				field.setFieldProjectInternId(Integer.parseInt(request.getParameter("field_id")));
+				field.setProgramName(Integer.parseInt(request.getParameter("prog_name")));
+				field.setProgramType(Integer.parseInt(request.getParameter("prog_type")));
+				field.setProvisionForUndertaking(XssEscapeUtils.jsoupParse(request.getParameter("pro_undertake")));
+				field.setNoOfStudUndertaking(
+						Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("no_stud_undertake"))));
+				field.setDocument(XssEscapeUtils.jsoupParse(request.getParameter("document")));
+				field.setDelStatus(1);
+				field.setIsActive(1);
+				field.setAcYearId(yId);
+				field.setMakerUserId(userId);
+				field.setMakerEnterDatetime(curDateTime);
+				field.setInstId(instituteId);
+				field.setExInt1(0);
+				field.setExInt2(0);
+				field.setExVar1("NA");
+				field.setExVar2("NA");
+				// System.out.println("field=" + field.toString());
+
+				FieldProjectsIntern saveValAddCourse = rest.postForObject(Constants.url + "/saveFieldProjectsIntern",
+						field, FieldProjectsIntern.class);
+
+				returnString = "redirect:/showFieldProjectIntern";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return "redirect:/showFieldProjectIntern";
+		return returnString;
 
 	}
-	
+
 	@RequestMapping(value = "/editProjectintern/{fieldId}", method = RequestMethod.GET)
 	public ModelAndView editProjectintern(@PathVariable("fieldId") int fieldId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2199,8 +2276,8 @@ public class AlumniTrainingController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("editProjectintern/{fieldId}", "showFieldProjectIntern", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("editProjectintern/{fieldId}", "showFieldProjectIntern", "0", "0",
+					"1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2209,21 +2286,20 @@ public class AlumniTrainingController {
 			} else {
 
 				MultiValueMap<String, Object> map = null;
-				
+
 				map = new LinkedMultiValueMap<>();
 				map.add("fieldId", fieldId);
 				FieldProjectsIntern fieldProject = rest.postForObject(Constants.url + "/getFieldProjectInternById", map,
 						FieldProjectsIntern.class);
 				System.err.println("Project " + fieldProject.toString());
-				
+
 				model.addObject("fieldProject", fieldProject);
-				
-				ProgramType[] progTypes = rest.getForObject(Constants.url + "getAllProgramType",
-						ProgramType[].class);
+
+				ProgramType[] progTypes = rest.getForObject(Constants.url + "getAllProgramType", ProgramType[].class);
 				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
 				System.err.println("Prg List " + progTypeList.toString());
 				model.addObject("progTypeList", progTypeList);
-				
+
 				model.addObject("title", "Edit Field Projects/Internships");
 			}
 		} catch (Exception e) {
@@ -2235,7 +2311,7 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteProjectintern/{fieldId}", method = RequestMethod.GET)
 	public String deleteProjectintern(@PathVariable("fieldId") int fieldId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2245,8 +2321,8 @@ public class AlumniTrainingController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteProjectintern/{fieldId}",
-					"showFieldProjectIntern", "0", "0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteProjectintern/{fieldId}", "showFieldProjectIntern", "0", "0",
+					"0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2265,8 +2341,10 @@ public class AlumniTrainingController {
 
 		return "redirect:/showFieldProjectIntern";
 	}
-	
-	/******************************Differently Abled_Student*******************************/
+
+	/******************************
+	 * Differently Abled_Student
+	 *******************************/
 
 	@RequestMapping(value = "/showDifferentlyAbledStudent", method = RequestMethod.GET)
 	public ModelAndView showDifferentlyAbledStudent(HttpServletRequest request, HttpServletResponse response) {
@@ -2277,20 +2355,20 @@ public class AlumniTrainingController {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info viewAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "1", "0", "0", "0",
-					newModuleList);
+			Info viewAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent",
+					"1", "0", "0", "0", newModuleList);
 
 			if (viewAccess.isError() == false) {
 				model = new ModelAndView("ProgramDetails/showDifrntlyDisbldStud");
 
-				Info addAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "0", "1", "0",
-						"0", newModuleList);
+				Info addAccess = AccessControll.checkAccess("showDifferentlyAbledStudent",
+						"showDifferentlyAbledStudent", "0", "1", "0", "0", newModuleList);
 
-				Info editAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "0", "0", "1",
-						"0", newModuleList);
+				Info editAccess = AccessControll.checkAccess("showDifferentlyAbledStudent",
+						"showDifferentlyAbledStudent", "0", "0", "1", "0", newModuleList);
 
-				Info deleteAccess = AccessControll.checkAccess("showDifferentlyAbledStudent", "showDifferentlyAbledStudent", "0", "0", "0",
-						"1", newModuleList);
+				Info deleteAccess = AccessControll.checkAccess("showDifferentlyAbledStudent",
+						"showDifferentlyAbledStudent", "0", "0", "0", "1", newModuleList);
 
 				model.addObject("viewAccess", viewAccess);
 				if (addAccess.isError() == false)
@@ -2311,13 +2389,14 @@ public class AlumniTrainingController {
 				map.add("instId", userObj.getGetData().getUserInstituteId());
 
 				map.add("yearId", session.getAttribute("acYearId"));
-				//System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() + " "
-					//	+ session.getAttribute("acYearId"));
+				// System.out.println("Sess Data=" + userObj.getGetData().getUserInstituteId() +
+				// " "
+				// + session.getAttribute("acYearId"));
 
-				DifrentlyAbledStudList[] difStudArr = restTemplate.postForObject(Constants.url + "getAllDifferentlyDisableStudentsList", map,
-						DifrentlyAbledStudList[].class);
+				DifrentlyAbledStudList[] difStudArr = restTemplate.postForObject(
+						Constants.url + "getAllDifferentlyDisableStudentsList", map, DifrentlyAbledStudList[].class);
 				List<DifrentlyAbledStudList> difStudList = new ArrayList<>(Arrays.asList(difStudArr));
-				//System.out.println("difStudList " + difStudList.toString());
+				// System.out.println("difStudList " + difStudList.toString());
 
 				model.addObject("difStudList", difStudList);
 			} else {
@@ -2337,7 +2416,7 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/addNewDifAbldStudent", method = RequestMethod.GET)
 	public ModelAndView addNewDifAbldStudent(HttpServletRequest request, HttpServletResponse response) {
 
@@ -2381,67 +2460,81 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/insertDifrnDisStudent", method = RequestMethod.POST)
 	public String insertDifrnDisStudent(HttpServletRequest request, HttpServletResponse response) {
+
+		String returnString = null;
 		try {
+
 			HttpSession session = request.getSession();
-			int instituteId = (int) session.getAttribute("instituteId");
-			int userId = (int) session.getAttribute("userId");
-			int yId = (int) session.getAttribute("acYearId");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
+			if (token.trim().equals(key.trim())) {
 
-			String curDateTime = dateFormat.format(cal.getTime());
+				int instituteId = (int) session.getAttribute("instituteId");
+				int userId = (int) session.getAttribute("userId");
+				int yId = (int) session.getAttribute("acYearId");
 
-			DifrentlyAbledStud stud = new DifrentlyAbledStud();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
 
-			stud.setDifAbleStudId(Integer.parseInt(request.getParameter("studDifDisId")));
-			stud.setNameOfStud(XssEscapeUtils.jsoupParse(request.getParameter("studentName")));
-			stud.setGender(Integer.parseInt(request.getParameter("gender")));
-			stud.setUdidCardNo(XssEscapeUtils.jsoupParse(request.getParameter("udid")));
-			stud.setTypeOfDisability(XssEscapeUtils.jsoupParse(request.getParameter("disablityType")));
-			stud.setPercntOfDisability(Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("disablity"))));
-			stud.setYearOfEnrollement(request.getParameter("enrolledYear"));
-			stud.setProgramId(Integer.parseInt(request.getParameter("prog_name")));
-			stud.setProgTypeId(Integer.parseInt(request.getParameter("prog_type")));
-			stud.setDelStatus(1);
-			stud.setIsActive(1);
-			stud.setAcadYearId(yId);
-			stud.setMakerUserId(userId);
-			stud.setMakerEnterDatetime(curDateTime);
-			stud.setInstId(instituteId);
-			stud.setExInt1(0);
-			stud.setExInt2(0);
-			stud.setExVar1("NA");
-			stud.setExVar2("NA");
-			//System.out.println("stud=" + stud.toString());
+				String curDateTime = dateFormat.format(cal.getTime());
 
-			DifrentlyAbledStud saveValAddCourse = rest.postForObject(Constants.url + "/saveDifferentlyDisabledStudent", stud,
-					DifrentlyAbledStud.class);
+				DifrentlyAbledStud stud = new DifrentlyAbledStud();
+
+				stud.setDifAbleStudId(Integer.parseInt(request.getParameter("studDifDisId")));
+				stud.setNameOfStud(XssEscapeUtils.jsoupParse(request.getParameter("studentName")));
+				stud.setGender(Integer.parseInt(request.getParameter("gender")));
+				stud.setUdidCardNo(XssEscapeUtils.jsoupParse(request.getParameter("udid")));
+				stud.setTypeOfDisability(XssEscapeUtils.jsoupParse(request.getParameter("disablityType")));
+				stud.setPercntOfDisability(
+						Integer.parseInt(XssEscapeUtils.jsoupParse(request.getParameter("disablity"))));
+				stud.setYearOfEnrollement(request.getParameter("enrolledYear"));
+				stud.setProgramId(Integer.parseInt(request.getParameter("prog_name")));
+				stud.setProgTypeId(Integer.parseInt(request.getParameter("prog_type")));
+				stud.setDelStatus(1);
+				stud.setIsActive(1);
+				stud.setAcadYearId(yId);
+				stud.setMakerUserId(userId);
+				stud.setMakerEnterDatetime(curDateTime);
+				stud.setInstId(instituteId);
+				stud.setExInt1(0);
+				stud.setExInt2(0);
+				stud.setExVar1("NA");
+				stud.setExVar2("NA");
+				// System.out.println("stud=" + stud.toString());
+
+				DifrentlyAbledStud saveValAddCourse = rest.postForObject(
+						Constants.url + "/saveDifferentlyDisabledStudent", stud, DifrentlyAbledStud.class);
+
+				returnString = "redirect:/showDifferentlyAbledStudent";
+			} else {
+
+				returnString = "redirect:/accessDenied";
+			}
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return "redirect:/showDifferentlyAbledStudent";
+		return returnString;
 
 	}
-	
 
 	@RequestMapping(value = "/editDisableStudInfo/{studId}", method = RequestMethod.GET)
 	public ModelAndView editDisableStudInfo(@PathVariable("studId") int studId, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("ProgramDetails/addDifAbldStud");		
+		ModelAndView model = new ModelAndView("ProgramDetails/addDifAbldStud");
 		try {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("editDisableStudInfo/{studId}", "showDifferentlyAbledStudent", "0", "0", "1", "0",
-					newModuleList);
+			Info view = AccessControll.checkAccess("editDisableStudInfo/{studId}", "showDifferentlyAbledStudent", "0",
+					"0", "1", "0", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2450,20 +2543,19 @@ public class AlumniTrainingController {
 			} else {
 
 				MultiValueMap<String, Object> map = null;
-				
+
 				map = new LinkedMultiValueMap<>();
 				map.add("studId", studId);
-				DifrentlyAbledStud difDisStud = rest.postForObject(Constants.url + "/getDifferntDisabelStudentById", map,
-						DifrentlyAbledStud.class);
+				DifrentlyAbledStud difDisStud = rest.postForObject(Constants.url + "/getDifferntDisabelStudentById",
+						map, DifrentlyAbledStud.class);
 				model.addObject("difDisStud", difDisStud);
 
-				ProgramType[] progTypes = rest.getForObject(Constants.url + "getAllProgramType",
-						ProgramType[].class);
+				ProgramType[] progTypes = rest.getForObject(Constants.url + "getAllProgramType", ProgramType[].class);
 				List<ProgramType> progTypeList = new ArrayList<>(Arrays.asList(progTypes));
 				System.err.println("progTypeList " + progTypeList.toString());
 
 				model.addObject("progTypeList", progTypeList);
-				
+
 				model.addObject("title", "Edit Differently Abled Students (Divyangjan)");
 			}
 		} catch (Exception e) {
@@ -2475,7 +2567,7 @@ public class AlumniTrainingController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/deleteDisableStudInfo/{studId}", method = RequestMethod.GET)
 	public String deleteDisableStudInfo(@PathVariable("studId") int studId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2485,8 +2577,8 @@ public class AlumniTrainingController {
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteDisableStudInfo/{studId}",
-					"showDifferentlyAbledStudent", "0", "0", "0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("/deleteDisableStudInfo/{studId}", "showDifferentlyAbledStudent",
+					"0", "0", "0", "1", newModuleList);
 
 			if (view.isError() == true) {
 
@@ -2505,5 +2597,5 @@ public class AlumniTrainingController {
 
 		return "redirect:/showDifferentlyAbledStudent";
 	}
-	
+
 }

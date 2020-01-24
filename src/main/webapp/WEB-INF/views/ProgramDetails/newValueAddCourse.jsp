@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -42,7 +43,8 @@
 </style>
 
 
-<!-- BEGIN BODY --><!-- onload="hideText()" -->
+<!-- BEGIN BODY -->
+<!-- onload="hideText()" -->
 <body class=" " onload="showIsReg(${alumni.exInt2})">
 	<c:url value="/checkUniqueField" var="checkUniqueField"></c:url>
 	<!-- START TOPBAR -->
@@ -85,7 +87,7 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							<%-- 	<a href="${pageContext.request.contextPath}/showAlumini"><button
+								<%-- 	<a href="${pageContext.request.contextPath}/showAlumini"><button
 										type="button" class="btn btn-info">Back</button></a> --%>
 							</div>
 
@@ -103,123 +105,162 @@
 										action="${pageContext.request.contextPath}/insertValueAddedCourse"
 										method="post" name="form_sample_2" id="form_sample_2">
 
+
+
+
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<div class="row">
 											<div class="col-md-12">
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Name of Value Added 
-														Courses (More than 30 hrs)<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">Name
+														of Value Added Courses (More than 30 hrs)<span
+														class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder="Name of Value Added Courses (More than 30 hrs)" 
+														<input type="text" class="form-control"
+															onchange="trim(this)"
+															placeholder="Name of Value Added Courses (More than 30 hrs)"
 															id="course_name" autocomplete="off"
 															value="${value.valueAddedCourseName}" name="course_name">
-															<span class="error_form text-danger" id="course_name_field"
-															style="display: none;">Please enter name of value added courses (More than 30 hrs)</span>
+														<span class="error_form text-danger"
+															id="course_name_field" style="display: none;">Please
+															enter name of value added courses (More than 30 hrs)</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Course 
-														 Code<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">Course
+														Code<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" onchange="trim(this)"
-															placeholder="Course Code" id="course_code"
-															value="${value.courseCode}" name="course_code" autocomplete="off">
-															<span class="error_form text-danger" id="course_code_field"
+														<input type="text" class="form-control"
+															onchange="trim(this)" placeholder="Course Code"
+															id="course_code" value="${value.courseCode}"
+															name="course_code" autocomplete="off"> <span
+															class="error_form text-danger" id="course_code_field"
 															style="display: none;">Please enter course code</span>
 													</div>
 												</div>
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Year of
-														 Offering <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">Year
+														of Offering <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control datepickeryear"
 															data-min-view-mode="years" data-start-view="2"
 															data-format="yyyy" placeholder="Year of Offering"
 															id="year_of_offering" value="${value.yearOfOffering}"
-															name="year_of_offering" autocomplete="off">
-															<span class="error_form text-danger" id="year_of_offering_field"
-															style="display: none;">Please select year of offering</span>
+															name="year_of_offering" autocomplete="off"> <span
+															class="error_form text-danger"
+															id="year_of_offering_field" style="display: none;">Please
+															select year of offering</span>
 													</div>
 												</div>
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">No. of Times 
-														 Offer (In Same Year) <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">No.
+														of Times Offer (In Same Year) <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="number" class="form-control" onchange="trim(this)" onFocus="clearDefault(this)"
-															placeholder="No.of Times Offer (In Same Year)" id="no_times_offer"
-															value="${value.noOfTimesOffer}" name="no_times_offer" autocomplete="off">
-															<span class="error_form text-danger" id="time_offer_field"
-															style="display: none;">Please enter No. of times offer (In Same Year)</span>
+														<input type="number" class="form-control"
+															onchange="trim(this)" onFocus="clearDefault(this)"
+															placeholder="No.of Times Offer (In Same Year)"
+															id="no_times_offer" value="${value.noOfTimesOffer}"
+															name="no_times_offer" autocomplete="off"> <span
+															class="error_form text-danger" id="time_offer_field"
+															style="display: none;">Please enter No. of times
+															offer (In Same Year)</span>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">Year of
-														 Discontinuation <span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">Year
+														of Discontinuation <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control datepickeryear"
 															data-min-view-mode="years" data-start-view="2"
 															data-format="yyyy" placeholder="Year of Discontinuation"
-															id="year_of_discontinue" value="${value.yearOfDiscontinuation}"
-															name="year_of_discontinue" autocomplete="off">
-															<span class="error_form text-danger" id="year_of_discontinue_field"
-															style="display: none;">Please select year of discontinuation</span>
+															id="year_of_discontinue"
+															value="${value.yearOfDiscontinuation}"
+															name="year_of_discontinue" autocomplete="off"> <span
+															class="error_form text-danger"
+															id="year_of_discontinue_field" style="display: none;">Please
+															select year of discontinuation</span>
 													</div>
 												</div>
 
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">No. of 
-														 Students Enrolled<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">No.
+														of Students Enrolled<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="number" class="form-control" onchange="trim(this)" onFocus="clearDefault(this)"
-															placeholder="No.of Times Offer(In Same Year)" id="no_student_enrolled"
-															value="${value.noOfStudentsEnrolled}" name="no_student_enrolled" autocomplete="off">
-															<span class="error_form text-danger" id="student_enrolled_field"
-															style="display: none;">Please enter No. of students enrolled</span>
+														<input type="number" class="form-control"
+															onchange="trim(this)" onFocus="clearDefault(this)"
+															placeholder="No.of Times Offer(In Same Year)"
+															id="no_student_enrolled"
+															value="${value.noOfStudentsEnrolled}"
+															name="no_student_enrolled" autocomplete="off"> <span
+															class="error_form text-danger"
+															id="student_enrolled_field" style="display: none;">Please
+															enter No. of students enrolled</span>
 													</div>
 												</div>
 
 
 
 												<div class="form-group">
-													<label class="control-label col-sm-3" for="page_name">No. of Students
-													 Completed Course<span class="text-danger">*</span>
+													<label class="control-label col-sm-3" for="page_name">No.
+														of Students Completed Course<span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-9">
-														<input type="number" class="form-control" onchange="trim(this)" onFocus="clearDefault(this)"
-															placeholder="No of Students Completed Course" id="no_student_completed_course"
-															value="${value.noOfStudentsCompletedCourse}" name="no_student_completed_course" autocomplete="off">
-															<span class="error_form text-danger" id="student_course_completed_field"
-															style="display: none;">Please enter No. of students completed course</span>
-															
-															<span class="error_form text-danger" id="batch"
-															style="display: none;">No. of students completed course can not be greater than no of appeared students</span>
+														<input type="number" class="form-control"
+															onchange="trim(this)" onFocus="clearDefault(this)"
+															placeholder="No of Students Completed Course"
+															id="no_student_completed_course"
+															value="${value.noOfStudentsCompletedCourse}"
+															name="no_student_completed_course" autocomplete="off">
+														<span class="error_form text-danger"
+															id="student_course_completed_field"
+															style="display: none;">Please enter No. of
+															students completed course</span> <span
+															class="error_form text-danger" id="batch"
+															style="display: none;">No. of students completed
+															course can not be greater than no of appeared students</span>
 													</div>
 												</div>
 
-											<div class="form-group">
+												<div class="form-group">
 													<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)"><i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-<a href="${pageContext.request.contextPath}/showValueAddedCourses"><button id="sub2"
-										type="button" class="btn btn-primary"><i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel</button></a>													</div>
+														<button type="submit" id="sub1" class="btn btn-primary"
+															onclick="submit_f(1)">
+															<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+														</button>
+
+														<a
+															href="${pageContext.request.contextPath}/showValueAddedCourses"><button
+																id="sub2" type="button" class="btn btn-primary">
+																<i class="${sessionScope.cancelIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Cancel
+															</button></a>
+													</div>
 												</div>
 
 											</div>
@@ -249,9 +290,9 @@
 	<!-- MAIN CONTENT AREA ENDS -->
 
 	<!-- END CONTENT -->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-		<script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+	<script>
 		$('#no_student_enrolled').on('input', function() {
 			  this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
 			});
@@ -467,7 +508,7 @@
 		 */
 	</script>
 
-	
+
 
 	<script type="text/javascript">
 		
@@ -483,7 +524,7 @@
 		
 		
 	</script>
-	
+
 	<script type="text/javascript">
 	
 	function trim(el) {
@@ -516,7 +557,7 @@
 
 	<!-- END CONTAINER -->
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
-<script type="text/javascript">
+	<script type="text/javascript">
 			/*code: 48-57 Numbers
 			  8  - Backspace,
 			  35 - home key, 36 - End key
