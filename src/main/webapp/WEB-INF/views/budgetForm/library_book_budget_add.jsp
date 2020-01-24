@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 
 <!DOCTYPE html>
@@ -98,6 +100,18 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertLibBookBudget"
 										method="post" name="form_sample_2" id="form_sample_2">
+										
+											<%
+												UUID uuid = UUID.randomUUID();
+												MessageDigest md = MessageDigest.getInstance("MD5");
+												byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+												BigInteger number = new BigInteger(1, messageDigest);
+												String hashtext = number.toString(16);
+												session = request.getSession();
+												session.setAttribute("generatedKey", hashtext);
+											%>
+												<input type="hidden" value="<%out.println(hashtext);%>"
+														name="token" id="token">
 
 
 										<div class="form-group">
@@ -574,7 +588,7 @@
 							
 							if(data==0){
 								
-								alert("zero ");
+								//alert("zero ");
 								document.getElementById("expenditure_on_book_purchase").value="0"
 								document.getElementById("expenditure_on_journals_purchase").value="0"
 								document.getElementById("expenditure_on_ejournals_purchase").value="0"

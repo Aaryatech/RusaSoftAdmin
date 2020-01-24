@@ -919,80 +919,90 @@ public class BudgetConSac {
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			map = new LinkedMultiValueMap<String, Object>();
-
-			int wasteMngtBudgetId = 0;
-			try {
-				wasteMngtBudgetId = Integer.parseInt(request.getParameter("wasteMngtBudgetId"));
-			} catch (Exception e) {
-				wasteMngtBudgetId = 0;
-			}
-
-			System.err.println("wasteMngtBudgetId   " + wasteMngtBudgetId);
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info aceess = null;
+				RestTemplate restTemplate = new RestTemplate();
 
-			if (wasteMngtBudgetId == 0) {
+				map = new LinkedMultiValueMap<String, Object>();
 
-				aceess = AccessControll.checkAccess("insertWasteMngtBudget", "budgetOnGreenInitiativesAndWasteMngmnt",
-						"0", "1", "0", "0", newModuleList);
+				int wasteMngtBudgetId = 0;
+				try {
+					wasteMngtBudgetId = Integer.parseInt(request.getParameter("wasteMngtBudgetId"));
+				} catch (Exception e) {
+					wasteMngtBudgetId = 0;
+				}
+
+				System.err.println("wasteMngtBudgetId   " + wasteMngtBudgetId);
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+				Info aceess = null;
+
+				if (wasteMngtBudgetId == 0) {
+
+					aceess = AccessControll.checkAccess("insertWasteMngtBudget",
+							"budgetOnGreenInitiativesAndWasteMngmnt", "0", "1", "0", "0", newModuleList);
+				} else {
+
+					aceess = AccessControll.checkAccess("insertWasteMngtBudget",
+							"budgetOnGreenInitiativesAndWasteMngmnt", "0", "0", "1", "0", newModuleList);
+
+				}
+
+				if (aceess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+					WasteMngtBudget wasteAndGreenMngtBudget = new WasteMngtBudget();
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					wasteAndGreenMngtBudget.setAcYearId((int) session.getAttribute("acYearId"));
+					wasteAndGreenMngtBudget.setAddBy(userObj.getUserId());
+					wasteAndGreenMngtBudget.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+					wasteAndGreenMngtBudget.setAddDatetime(curDateTime);
+
+					wasteAndGreenMngtBudget.setWasteMngtBudgetId(wasteMngtBudgetId);
+
+					wasteAndGreenMngtBudget
+							.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
+					wasteAndGreenMngtBudget
+							.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
+					wasteAndGreenMngtBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
+					wasteAndGreenMngtBudget.setWasteMngtBudgetTitle("");
+
+					int exInt1 = 0;
+					wasteAndGreenMngtBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
+					wasteAndGreenMngtBudget.setExInt2(exInt1);
+
+					wasteAndGreenMngtBudget.setExVar1(request.getParameter("funding_from"));
+					wasteAndGreenMngtBudget.setExVar2(request.getParameter("otherSource"));
+
+					wasteAndGreenMngtBudget.setIsActive(1);
+					wasteAndGreenMngtBudget.setDelStatus(1);
+
+					WasteMngtBudget wasteMngtBudgetRes = restTemplate.postForObject(
+							Constants.url + "saveWasteMngtBudget", wasteAndGreenMngtBudget, WasteMngtBudget.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/budgetOnGreenInitiativesAndWasteMngmnt";
+					else
+						redirect = "redirect:/budgetAddOnGreenInitiativesAndWasteMngmnt";
+				}
 			} else {
-
-				aceess = AccessControll.checkAccess("insertWasteMngtBudget", "budgetOnGreenInitiativesAndWasteMngmnt",
-						"0", "0", "1", "0", newModuleList);
-
-			}
-
-			if (aceess.isError() == true) {
+				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-
-				WasteMngtBudget wasteAndGreenMngtBudget = new WasteMngtBudget();
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				wasteAndGreenMngtBudget.setAcYearId((int) session.getAttribute("acYearId"));
-				wasteAndGreenMngtBudget.setAddBy(userObj.getUserId());
-				wasteAndGreenMngtBudget.setInstituteId(userObj.getGetData().getUserInstituteId());
-
-				wasteAndGreenMngtBudget.setAddDatetime(curDateTime);
-
-				wasteAndGreenMngtBudget.setWasteMngtBudgetId(wasteMngtBudgetId);
-
-				wasteAndGreenMngtBudget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
-				wasteAndGreenMngtBudget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
-				wasteAndGreenMngtBudget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				wasteAndGreenMngtBudget.setWasteMngtBudgetTitle("");
-
-				int exInt1 = 0;
-				wasteAndGreenMngtBudget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
-				wasteAndGreenMngtBudget.setExInt2(exInt1);
-			
-				wasteAndGreenMngtBudget.setExVar1(request.getParameter("funding_from"));
-				wasteAndGreenMngtBudget.setExVar2(request.getParameter("otherSource"));
-
-				wasteAndGreenMngtBudget.setIsActive(1);
-				wasteAndGreenMngtBudget.setDelStatus(1);
-
-				WasteMngtBudget wasteMngtBudgetRes = restTemplate.postForObject(Constants.url + "saveWasteMngtBudget",
-						wasteAndGreenMngtBudget, WasteMngtBudget.class);
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/budgetOnGreenInitiativesAndWasteMngmnt";
-				else
-					redirect = "redirect:/budgetAddOnGreenInitiativesAndWasteMngmnt";
 			}
 
 		} catch (Exception e) {

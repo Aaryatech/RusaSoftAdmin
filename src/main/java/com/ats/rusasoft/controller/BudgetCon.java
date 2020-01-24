@@ -464,80 +464,89 @@ public class BudgetCon {
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
-
-			map = new LinkedMultiValueMap<String, Object>();
-
-			int academicBudgetId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			try {
-				academicBudgetId = Integer.parseInt(request.getParameter("academicBudgetId"));
-			} catch (Exception e) {
-				academicBudgetId = 0;
-			}
-
-			System.err.println("academicBudgetId id  " + academicBudgetId);
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info aceess = null;
+				RestTemplate restTemplate = new RestTemplate();
 
-			if (academicBudgetId == 0) {
+				map = new LinkedMultiValueMap<String, Object>();
 
-				aceess = AccessControll.checkAccess("insertAcademicBudget", "budgetOnAcadamicSupportFacilities", "0",
-						"1", "0", "0", newModuleList);
-			} else {
+				int academicBudgetId = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+				try {
+					academicBudgetId = Integer.parseInt(request.getParameter("academicBudgetId"));
+				} catch (Exception e) {
+					academicBudgetId = 0;
+				}
 
-				aceess = AccessControll.checkAccess("insertAcademicBudget", "budgetOnAcadamicSupportFacilities", "0",
-						"0", "1", "0", newModuleList);
-
-			}
-
-			if (aceess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-
-				AcademicBudget budget = new AcademicBudget();
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				budget.setAcYearId((int) session.getAttribute("acYearId"));
-				budget.setAddBy(userObj.getUserId());
-				budget.setInstituteId(userObj.getGetData().getUserInstituteId());
-
-				budget.setAddDatetime(curDateTime);
-
-				budget.setAcademicBudgetId(academicBudgetId);
-
-				budget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
-				budget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
-				budget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
-				budget.setAcademicBudgetTitle(XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
-
-				int exInt1 = 0;
-				budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
-				budget.setExInt2(exInt1);
+				System.err.println("academicBudgetId id  " + academicBudgetId);
 				
-				budget.setExVar1(request.getParameter("funding_from"));
-				budget.setExVar2(request.getParameter("otherSource"));
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				budget.setIsActive(1);
-				budget.setDelStatus(1);
+				Info aceess = null;
 
-				AcademicBudget budgetRes = restTemplate.postForObject(Constants.url + "saveAcademicBudget", budget,
-						AcademicBudget.class);
+				if (academicBudgetId == 0) {
 
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/budgetOnAcadamicSupportFacilities";
-				else
-					redirect = "redirect:/budgetAddOnAcadamicSupportFacilities";
+					aceess = AccessControll.checkAccess("insertAcademicBudget", "budgetOnAcadamicSupportFacilities",
+							"0", "1", "0", "0", newModuleList);
+				} else {
+
+					aceess = AccessControll.checkAccess("insertAcademicBudget", "budgetOnAcadamicSupportFacilities",
+							"0", "0", "1", "0", newModuleList);
+
+				}
+
+				if (aceess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+					AcademicBudget budget = new AcademicBudget();
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					budget.setAcYearId((int) session.getAttribute("acYearId"));
+					budget.setAddBy(userObj.getUserId());
+					budget.setInstituteId(userObj.getGetData().getUserInstituteId());
+
+					budget.setAddDatetime(curDateTime);
+
+					budget.setAcademicBudgetId(academicBudgetId);
+
+					budget.setBudgetAllocated(Integer.parseInt(request.getParameter("budget_allocated")));
+					budget.setBudgetUtilized(Integer.parseInt(request.getParameter("budget_utilized")));
+					budget.setFinYearId(Integer.parseInt(request.getParameter("fin_year_id")));
+					budget.setAcademicBudgetTitle(
+							XssEscapeUtils.jsoupParse(request.getParameter("infra_budget_title")));
+
+					int exInt1 = 0;
+					budget.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
+					budget.setExInt2(exInt1);
+
+					budget.setExVar1(request.getParameter("funding_from"));
+					budget.setExVar2(request.getParameter("otherSource"));
+
+					budget.setIsActive(1);
+					budget.setDelStatus(1);
+
+					AcademicBudget budgetRes = restTemplate.postForObject(Constants.url + "saveAcademicBudget", budget,
+							AcademicBudget.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/budgetOnAcadamicSupportFacilities";
+					else
+						redirect = "redirect:/budgetAddOnAcadamicSupportFacilities";
+				}
+			} else {
+				System.err.println("in else");
+				redirect = "redirect:/accessDenied";
 			}
 
 		} catch (Exception e) {

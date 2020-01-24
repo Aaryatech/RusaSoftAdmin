@@ -285,101 +285,110 @@ public class BudgetController {
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			map = new LinkedMultiValueMap<String, Object>();
+			if (token.trim().equals(key.trim())) {
 
-			int budget_id = 0;// Integer.parseInt(request.getParameter("alumni_id"));
-			try {
-				budget_id = Integer.parseInt(request.getParameter("budget_id"));
+				RestTemplate restTemplate = new RestTemplate();
+
+				map = new LinkedMultiValueMap<String, Object>();
+
+				int budget_id = 0;// Integer.parseInt(request.getParameter("alumni_id"));
+				try {
+					budget_id = Integer.parseInt(request.getParameter("budget_id"));
+					System.err.println("budget_id id  " + budget_id);
+
+				} catch (Exception e) {
+					budget_id = 0;
+				}
+
 				System.err.println("budget_id id  " + budget_id);
 
-			} catch (Exception e) {
-				budget_id = 0;
-			}
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			System.err.println("budget_id id  " + budget_id);
+				Info aceess = null;
 
-			HttpSession session = request.getSession();
+				if (budget_id == 0) {
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+					aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "1", "0",
+							"0", newModuleList);
+				} else {
 
-			Info aceess = null;
+					aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "0", "1",
+							"0", newModuleList);
 
-			if (budget_id == 0) {
+				}
 
-				aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "1", "0", "0",
-						newModuleList);
+				if (aceess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+
+					int expenditure_on_book_purchase = Integer
+							.parseInt(request.getParameter("expenditure_on_book_purchase"));
+
+					int fin_year_id = Integer.parseInt(request.getParameter("fin_year_id"));
+
+					int expenditure_on_journals_purchase = Integer
+							.parseInt(request.getParameter("expenditure_on_journals_purchase"));
+
+					// int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
+
+					int expenditure_on_eresources_purchase = Integer
+							.parseInt(request.getParameter("expenditure_on_eresources_purchase"));
+					int expenditure_on_ejournals_purchase = Integer
+							.parseInt(request.getParameter("expenditure_on_ejournals_purchase"));
+
+					int inst_id = (int) session.getAttribute("instituteId");
+					int maker_id = (int) session.getAttribute("userId");
+					int acYearId = (int) session.getAttribute("acYearId");
+
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+
+					LibraryBookBudget lib = new LibraryBookBudget();
+					lib.setExpenditureOnBookPurchase(expenditure_on_book_purchase);
+					lib.setExpenditureOnEjournalsPurchase(expenditure_on_ejournals_purchase);
+					lib.setExpenditureOnEresourcesPurchase(expenditure_on_eresources_purchase);
+					lib.setExpenditureOnJournalsPurchase(expenditure_on_journals_purchase);
+
+					lib.setLibraryBookBudgetId(budget_id);
+					lib.setAddBy(maker_id);
+					lib.setFinYearId(fin_year_id);
+					lib.setAcYearId(acYearId);
+
+					lib.setInstituteId(inst_id);
+					lib.setDelStatus(1);
+					lib.setIsActive(1);
+					lib.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
+					lib.setExInt2(Integer.parseInt(request.getParameter("sanctn_book_budgt")));
+					lib.setExVar1(request.getParameter("funding_from"));
+					lib.setExVar2(request.getParameter("otherSource"));
+
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
+
+					String curDateTime = dateFormat.format(cal.getTime());
+
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+					String curDate = dateFormatStr.format(new Date());
+
+					lib.setAddDatetime(curDateTime);
+
+					LibraryBookBudget editInst = rest.postForObject(Constants.url + "saveLibBookBudget", lib,
+							LibraryBookBudget.class);
+
+					int isView = Integer.parseInt(request.getParameter("is_view"));
+					if (isView == 1)
+						redirect = "redirect:/budgetOnLibraryBooks";
+					else
+						redirect = "redirect:/budgetAddOnLibraryBooks";
+				}
+
 			} else {
-
-				aceess = AccessControll.checkAccess("insertLibBookBudget", "budgetOnLibraryBooks", "0", "0", "1", "0",
-						newModuleList);
-
-			}
-
-			if (aceess.isError() == true) {
+				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
-			} else {
-
-				int expenditure_on_book_purchase = Integer
-						.parseInt(request.getParameter("expenditure_on_book_purchase"));
-
-				int fin_year_id = Integer.parseInt(request.getParameter("fin_year_id"));
-
-				int expenditure_on_journals_purchase = Integer
-						.parseInt(request.getParameter("expenditure_on_journals_purchase"));
-
-				// int lib_quolf = Integer.parseInt(request.getParameter("lib_quolf"));
-
-				int expenditure_on_eresources_purchase = Integer
-						.parseInt(request.getParameter("expenditure_on_eresources_purchase"));
-				int expenditure_on_ejournals_purchase = Integer
-						.parseInt(request.getParameter("expenditure_on_ejournals_purchase"));
-
-				int inst_id = (int) session.getAttribute("instituteId");
-				int maker_id = (int) session.getAttribute("userId");
-				int acYearId = (int) session.getAttribute("acYearId");
-
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-
-				LibraryBookBudget lib = new LibraryBookBudget();
-				lib.setExpenditureOnBookPurchase(expenditure_on_book_purchase);
-				lib.setExpenditureOnEjournalsPurchase(expenditure_on_ejournals_purchase);
-				lib.setExpenditureOnEresourcesPurchase(expenditure_on_eresources_purchase);
-				lib.setExpenditureOnJournalsPurchase(expenditure_on_journals_purchase);
-
-				lib.setLibraryBookBudgetId(budget_id);
-				lib.setAddBy(maker_id);
-				lib.setFinYearId(fin_year_id);
-				lib.setAcYearId(acYearId);
-
-				lib.setInstituteId(inst_id);
-				lib.setDelStatus(1);
-				lib.setIsActive(1);
-				lib.setExInt1(Integer.parseInt(request.getParameter("ttl_exp")));
-				lib.setExInt2(Integer.parseInt(request.getParameter("sanctn_book_budgt")));
-				lib.setExVar1(request.getParameter("funding_from"));
-				lib.setExVar2(request.getParameter("otherSource"));
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				String curDate = dateFormatStr.format(new Date());
-
-				lib.setAddDatetime(curDateTime);
-
-				LibraryBookBudget editInst = rest.postForObject(Constants.url + "saveLibBookBudget", lib,
-						LibraryBookBudget.class);
-
-				int isView = Integer.parseInt(request.getParameter("is_view"));
-				if (isView == 1)
-					redirect = "redirect:/budgetOnLibraryBooks";
-				else
-					redirect = "redirect:/budgetAddOnLibraryBooks";
 			}
 
 		} catch (Exception e) {
