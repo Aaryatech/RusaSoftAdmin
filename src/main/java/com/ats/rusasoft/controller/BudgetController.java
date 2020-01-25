@@ -26,6 +26,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.commons.Names;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.Librarian;
 import com.ats.rusasoft.model.LibraryInfo;
@@ -217,57 +218,64 @@ public class BudgetController {
 
 	}
 
-	@RequestMapping(value = "/deleteLibBookBudget/{bookBudgetId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteLibBookBudget/{bookBudgetId}/{token}", method = RequestMethod.GET)
 	public String deleteStudents(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int bookBudgetId) {
+			@PathVariable int bookBudgetId, @PathVariable String token) {
 
-		HttpSession session = request.getSession();
 		String a = null;
-
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
-		Info view = AccessControll.checkAccess("deleteLibBookBudget/{libBookBudgetId}", "budgetOnLibraryBooks", "0",
-				"0", "0", "1", newModuleList);
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-			}
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			else {
+				Info view = AccessControll.checkAccess("deleteLibBookBudget/{libBookBudgetId}", "budgetOnLibraryBooks",
+						"0", "0", "0", "1", newModuleList);
+				if (view.isError() == true) {
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (bookBudgetId == 0) {
+					a = "redirect:/accessDenied";
 
-					System.err.println("Multiple records delete ");
-					String[] bookIds = request.getParameterValues("bookIds");
-					//System.out.println("id are" + bookIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < bookIds.length; i++) {
-						sb = sb.append(bookIds[i] + ",");
-
-					}
-
-					String bookIdList = sb.toString();
-					bookIdList = bookIdList.substring(0, bookIdList.length() - 1);
-					//System.out.println("stud id list" + bookIdList);
-
-					map.add("libBookBudgetIdList", bookIdList);
-				} else {
-
-					System.err.println("Single Record delete id  " + bookBudgetId);
-					map.add("libBookBudgetIdList", bookBudgetId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteLibBookBudget", map, Info.class);
-				a = "redirect:/budgetOnLibraryBooks";
+				else {
 
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (bookBudgetId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] bookIds = request.getParameterValues("bookIds");
+						// System.out.println("id are" + bookIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < bookIds.length; i++) {
+							sb = sb.append(bookIds[i] + ",");
+
+						}
+
+						String bookIdList = sb.toString();
+						bookIdList = bookIdList.substring(0, bookIdList.length() - 1);
+						// System.out.println("stud id list" + bookIdList);
+
+						map.add("libBookBudgetIdList", bookIdList);
+					} else {
+
+						System.err.println("Single Record delete id  " + bookBudgetId);
+						map.add("libBookBudgetIdList", bookBudgetId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteLibBookBudget", map, Info.class);
+					a = "redirect:/budgetOnLibraryBooks";
+
+				}
+			} else {
+				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
 
 			e.printStackTrace();

@@ -27,6 +27,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.Names;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.accessright.ModuleJson;
@@ -392,20 +393,22 @@ public class BudgetConSac {
 	}
 
 	// deleteInfraBudget
-	@RequestMapping(value = "/deleteInfraBudget/{infraBudgetId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteInfraBudget/{infraBudgetId}/{token}", method = RequestMethod.GET)
 	public String deleteDepts(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int infraBudgetId) {
+			@PathVariable int infraBudgetId, @PathVariable String token) {
 
 		String redirect = null;
 		try {
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
+			
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("deleteInfraBudget", "budgetInfrastructureFacility", "0",
+			Info deleteAccess = AccessControll.checkAccess("deleteInfraBudget/{infraBudgetId}/{token}", "budgetInfrastructureFacility", "0",
 					"0", "0", "1", newModuleList);
 			if (deleteAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
@@ -435,7 +438,12 @@ public class BudgetConSac {
 				Info errMsg = rest.postForObject(Constants.url + "deleteInfraBudget", map, Info.class);
 				redirect = "redirect:/budgetInfrastructureFacility";
 			}
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 
 			System.err.println(" Exception In deleteDepts at Master Contr " + e.getMessage());
 
@@ -733,51 +741,57 @@ public class BudgetConSac {
 	// deleteLibBudget
 	// deleteLibBudget/
 
-	@RequestMapping(value = "/deleteLibBudget/{libBudgetId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteLibBudget/{libBudgetId}/{token}", method = RequestMethod.GET)
 	public String deleteLibBudget(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int libBudgetId) {
+			@PathVariable int libBudgetId, @PathVariable String token) {
 
 		String redirect = null;
 		try {
+			HttpSession session = request.getSession();			
+			String key = (String) session.getAttribute("generatedKey");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			if (token.trim().equals(key.trim())) {
 
-			HttpSession session = request.getSession();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("deleteLibBudget", "budgetOnLibrary", "0", "0", "0", "1",
-					newModuleList);
-			if (deleteAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				if (libBudgetId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("libBudgetId");
-					// //System.out.println("id are" + instIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String libBudgetIdList = sb.toString();
-					libBudgetIdList = libBudgetIdList.substring(0, libBudgetIdList.length() - 1);
-
-					map.add("libBudgetIdList", libBudgetIdList);
+				Info deleteAccess = AccessControll.checkAccess("deleteLibBudget/{libBudgetId}/{token}",
+						"budgetOnLibrary", "0", "0", "0", "1", newModuleList);
+				if (deleteAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
 				} else {
+					if (libBudgetId == 0) {
 
-					System.err.println("Single Record delete ");
-					map.add("libBudgetIdList", libBudgetId);
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("libBudgetId");
+						// //System.out.println("id are" + instIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String libBudgetIdList = sb.toString();
+						libBudgetIdList = libBudgetIdList.substring(0, libBudgetIdList.length() - 1);
+
+						map.add("libBudgetIdList", libBudgetIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("libBudgetIdList", libBudgetId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteLibBudget", map, Info.class);
+					redirect = "redirect:/budgetOnLibrary";
 				}
-
-				Info errMsg = rest.postForObject(Constants.url + "deleteLibBudget", map, Info.class);
-				redirect = "redirect:/budgetOnLibrary";
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteLibBudget at BudgeConSac Contr " + e.getMessage());
 
 			e.printStackTrace();
@@ -1069,16 +1083,18 @@ public class BudgetConSac {
 
 	}
 
-	@RequestMapping(value = "/deleteWasteMngtBudget/{wasteMngtBudgetId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteWasteMngtBudget/{wasteMngtBudgetId}/{token}", method = RequestMethod.GET)
 	public String deleteWasteMngtBudget(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int wasteMngtBudgetId) {
+			@PathVariable int wasteMngtBudgetId, @PathVariable String token) {
 
 		String redirect = null;
 		try {
+			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
@@ -1112,8 +1128,13 @@ public class BudgetConSac {
 				Info errMsg = rest.postForObject(Constants.url + "deleteWasteMngtBudget", map, Info.class);
 				redirect = "redirect:/budgetOnGreenInitiativesAndWasteMngmnt";
 			}
-		} catch (Exception e) {
 
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteWasteMngtBudget at BudgeConSac Contr " + e.getMessage());
 
 			e.printStackTrace();

@@ -27,6 +27,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.commons.Names;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.LoginResponse;
@@ -315,26 +316,40 @@ public class BudgetCon {
 		return model;
 	}
 
-	@RequestMapping(value = "/deletePhyBudget/{physicalFacilityBudgetId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deletePhyBudget/{physicalFacilityBudgetId}/{token}", method = RequestMethod.GET)
 	public String deletePhyBudget(@PathVariable("physicalFacilityBudgetId") int physicalFacilityBudgetId,
-			HttpServletRequest request) {
+			@PathVariable("token") String token, HttpServletRequest request) {
 		String value = null;
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("budgetAddPhysicalFacility", "budgetPhysicalFacility", "0", "0", "0",
-				"1", newModuleList);
-		if (view.isError() == true) {
+		try {
 
-			value = "redirect:/accessDenied";
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-		} else {
-			Info inf = new Info();
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("budgetAddPhysicalFacility", "budgetPhysicalFacility", "0", "0",
+						"0", "1", newModuleList);
+				if (view.isError() == true) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("phyBudgetIdList", physicalFacilityBudgetId);
-			Info miqc = rest.postForObject(Constants.url + "/deletePhysicalFacilityBudget", map, Info.class);
-			value = "redirect:/budgetPhysicalFacility";
+					value = "redirect:/accessDenied";
+
+				} else {
+					Info inf = new Info();
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("phyBudgetIdList", physicalFacilityBudgetId);
+					Info miqc = rest.postForObject(Constants.url + "/deletePhysicalFacilityBudget", map, Info.class);
+					value = "redirect:/budgetPhysicalFacility";
+				}
+			} else {
+				value = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+			e.getStackTrace();
 		}
+
 		return value;
 
 	}
@@ -603,24 +618,39 @@ public class BudgetCon {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteAcademicBudget/{academicIdList}", method = RequestMethod.GET)
-	public String deleteAcademicBudget(@PathVariable("academicIdList") int academicIdList, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteAcademicBudget/{academicIdList}/{token}", method = RequestMethod.GET)
+	public String deleteAcademicBudget(@PathVariable("academicIdList") int academicIdList,
+			@PathVariable("token") String token, HttpServletRequest request) {
 		String value = null;
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("budgetAddPhysicalFacility", "budgetPhysicalFacility", "0", "0", "0",
-				"1", newModuleList);
-		if (view.isError() == true) {
+		try {
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-			value = "redirect:/accessDenied";
+			if (token.trim().equals(key.trim())) {
 
-		} else {
-			Info inf = new Info();
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("budgetAddPhysicalFacility", "budgetPhysicalFacility", "0", "0",
+						"0", "1", newModuleList);
+				if (view.isError() == true) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("academicIdList", academicIdList);
-			Info miqc = rest.postForObject(Constants.url + "/deleteAcademicBudget", map, Info.class);
-			value = "redirect:/budgetOnAcadamicSupportFacilities";
+					value = "redirect:/accessDenied";
+
+				} else {
+					Info inf = new Info();
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("academicIdList", academicIdList);
+					Info miqc = rest.postForObject(Constants.url + "/deleteAcademicBudget", map, Info.class);
+					value = "redirect:/budgetOnAcadamicSupportFacilities";
+				}
+
+			} else {
+				value = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
 		return value;
 
