@@ -26,6 +26,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.model.PlagiarismCodeEthics;
 import com.ats.rusasoft.model.AwrdRecgAgnstExtActivity;
 import com.ats.rusasoft.model.EContentDevFacility;
@@ -255,34 +256,43 @@ public class ResearchAndInnovation {
 
 	}
 	
-	@RequestMapping(value = "/deleteTExtActivity/{extActId}", method = RequestMethod.GET)
-	public String deleteTExtActivity(@PathVariable("extActId") int extActId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteTExtActivity/{extActId}/{token}", method = RequestMethod.GET)
+	public String deleteTExtActivity(@PathVariable("extActId") int extActId, @PathVariable("token") String token,HttpServletRequest request,
 			HttpServletResponse response) {
 
 		try {
 			String a = null;
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("deleteTExtActivity/{extActId}", "showExtensionActivity", "0", "0", "0",
-					"1", newModuleList);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == true)
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			{
+				Info view = AccessControll.checkAccess("deleteTExtActivity/{extActId}", "showExtensionActivity", "0",
+						"0", "0", "1", newModuleList);
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true)
 
+				{
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("extActId", extActId);
+
+					TExtensionActivity delAct = rest.postForObject(Constants.url + "/deleteTExtActById", map,
+							TExtensionActivity.class);
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("extActId", extActId);
-
-				TExtensionActivity delAct = rest.postForObject(Constants.url + "/deleteTExtActById", map, TExtensionActivity.class);
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -553,34 +563,39 @@ public class ResearchAndInnovation {
 
 	}
 	
-	@RequestMapping(value = "/deleteRsrchMou/{mouRsrchDevId}", method = RequestMethod.GET)
-	public String deleteRsrchMou(@PathVariable("mouRsrchDevId") int mouRsrchDevId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteRsrchMou/{mouRsrchDevId}/{token}", method = RequestMethod.GET)
+	public String deleteRsrchMou(@PathVariable("mouRsrchDevId") int mouRsrchDevId, 
+			@PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		try {
 			String a = null;
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("deleteRsrchMou/{mouRsrchDevId}", "showInstResrchDevMous", "0", "0", "0",
-					"1", newModuleList);
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			if (view.isError() == true)
+				Info view = AccessControll.checkAccess("deleteRsrchMou/{mouRsrchDevId}/{token}", "showInstResrchDevMous", "0",
+						"0", "0", "1", newModuleList);
 
-			{
+				if (view.isError() == true) {
+					a = "redirect:/accessDenied";
+				}
 
-				a = "redirect:/accessDenied";
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("mouRsrchDevId", mouRsrchDevId);
 
+					InstResearchDevMous delAct = rest.postForObject(Constants.url + "/deleteRsrchMouById", map,
+							InstResearchDevMous.class);
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("mouRsrchDevId", mouRsrchDevId);
-
-				InstResearchDevMous delAct = rest.postForObject(Constants.url + "/deleteRsrchMouById", map, InstResearchDevMous.class);
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -829,40 +844,49 @@ public class ResearchAndInnovation {
 		return model;
 	}
 	
-	@RequestMapping(value = "/deleteLinkage/{linkId}", method = RequestMethod.GET)
-	public String  deleteLinkage(@PathVariable("linkId") int linkId, HttpServletRequest request) {
-		
+	@RequestMapping(value = "/deleteLinkage/{linkId}/{token}", method = RequestMethod.GET)
+	public String deleteLinkage(@PathVariable("linkId") int linkId, @PathVariable("token") String token,
+			HttpServletRequest request) {
+
 		String a = null;
 		try {
-			
+
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			Info view = AccessControll.checkAccess("deleteLinkage/{linkId}", "showStudFacultyLinkage", "0", "0", "0",
-					"1", newModuleList);
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == true)
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				Info view = AccessControll.checkAccess("deleteLinkage/{linkId}", "showStudFacultyLinkage", "0", "0",
+						"0", "1", newModuleList);
 
-			{
+				if (view.isError() == true)
 
-				a = "redirect:/accessDenied";
+				{
 
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("linkId", linkId);
+
+					TFacultyStudLinkage delLink = rest.postForObject(Constants.url + "/deleteLinkById", map,
+							TFacultyStudLinkage.class);
+					a = "redirect:/showStudFacultyLinkage";
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("linkId", linkId);
-
-				TFacultyStudLinkage delLink = rest.postForObject(Constants.url + "/deleteLinkById", map, TFacultyStudLinkage.class);
-				a="redirect:/showStudFacultyLinkage";
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
 		return a;
-		
+
 	}
 
 	
@@ -1109,40 +1133,49 @@ public class ResearchAndInnovation {
 		return model;
 	}
 	
-	@RequestMapping(value = "/deleteNeighbCommActivity/{neighbCommActId}", method = RequestMethod.GET)
-	public String  deleteNeighbCommActivity(@PathVariable("neighbCommActId") int neighbCommActId, HttpServletRequest request) {
-		
+	@RequestMapping(value = "/deleteNeighbCommActivity/{neighbCommActId}/{token}", method = RequestMethod.GET)
+	public String deleteNeighbCommActivity(@PathVariable("neighbCommActId") int neighbCommActId,
+			@PathVariable("token") String token, HttpServletRequest request) {
+
 		String a = null;
 		try {
-			
+
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			Info view = AccessControll.checkAccess("deleteNeighbCommActivity/{neighbCommActId}", "showNeighbourhoodCommActivities", "0", "0", "0",
-					"1", newModuleList);
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == true)
+			if (token.trim().equals(key.trim())) {
 
-			{
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				Info view = AccessControll.checkAccess("deleteNeighbCommActivity/{neighbCommActId}",
+						"showNeighbourhoodCommActivities", "0", "0", "0", "1", newModuleList);
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true)
 
+				{
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("neighbCommActId", neighbCommActId);
+
+					TNeighbourhoodCommActivities delNeighbourCommAct = rest.postForObject(
+							Constants.url + "/deleteneghCommActivityId", map, TNeighbourhoodCommActivities.class);
+					a = "redirect:/showNeighbourhoodCommActivities";
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("neighbCommActId", neighbCommActId);
-
-				TNeighbourhoodCommActivities delNeighbourCommAct = rest.postForObject(Constants.url + "/deleteneghCommActivityId", map, TNeighbourhoodCommActivities.class);
-				a="redirect:/showNeighbourhoodCommActivities";
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
 		return a;
-		
 	}
 	
 	@RequestMapping(value = "/deleteSelNeghbCommActivities/{actId}", method = RequestMethod.GET)
@@ -1389,40 +1422,45 @@ public class ResearchAndInnovation {
 		return model;
 	}
 	
-	@RequestMapping(value = "/deleteAwrdRecg/{awrdRecgid}", method = RequestMethod.GET)
-	public String  deleteAwrdRecg(@PathVariable("awrdRecgid") int awrdRecgid, HttpServletRequest request) {
-		
+	@RequestMapping(value = "/deleteAwrdRecg/{awrdRecgid}/{token}", method = RequestMethod.GET)
+	public String deleteAwrdRecg(@PathVariable("awrdRecgid") int awrdRecgid, @PathVariable("token") String token,
+			HttpServletRequest request) {
+
 		String a = null;
 		try {
-			
+
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			Info view = AccessControll.checkAccess("deleteAwrdRecg/{awrdRecgid}", "awrdRecogAgnstExtAct", "0", "0", "0",
-					"1", newModuleList);
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == true)
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				Info view = AccessControll.checkAccess("deleteAwrdRecg/{awrdRecgid}/{token}", "awrdRecogAgnstExtAct", "0", "0",
+						"0", "1", newModuleList);
 
-			{
+				if (view.isError() == true) {
+					a = "redirect:/accessDenied";
+				}
 
-				a = "redirect:/accessDenied";
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("awrdRecgid", awrdRecgid);
 
+					AwrdRecgAgnstExtActivity delNeighbourCommAct = rest.postForObject(
+							Constants.url + "/deleteAwrdRecgAgnstExtActById", map, AwrdRecgAgnstExtActivity.class);
+					a = "redirect:/awrdRecogAgnstExtAct";
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("awrdRecgid", awrdRecgid);
-
-				AwrdRecgAgnstExtActivity delNeighbourCommAct = rest.postForObject(Constants.url + "/deleteAwrdRecgAgnstExtActById", map, AwrdRecgAgnstExtActivity.class);
-				a="redirect:/awrdRecogAgnstExtAct";
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
 		return a;
-		
+
 	}
 	
 	@RequestMapping(value = "/deleteSelAwrdRecgExtAct/{exActId}", method = RequestMethod.GET)
@@ -1667,40 +1705,50 @@ public class ResearchAndInnovation {
 		return model;
 	}
 	
-	@RequestMapping(value = "/deletePlagrismEthicsCode/{plagId}", method = RequestMethod.GET)
-	public String  deletePlagrismEthicsCode(@PathVariable("plagId") int plagId, HttpServletRequest request) {
-		
+	@RequestMapping(value = "/deletePlagrismEthicsCode/{plagId}/{token}", method = RequestMethod.GET)
+	public String deletePlagrismEthicsCode(@PathVariable("plagId") int plagId, @PathVariable("token") String token,
+			HttpServletRequest request) {
+
 		String a = null;
 		try {
-			
+
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			Info view = AccessControll.checkAccess("deletePlagrismEthicsCode/{plagId}", "showPlagiarismCodeEthics", "0", "0", "0",
-					"1", newModuleList);
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == true)
+			if (token.trim().equals(key.trim())) {
 
-			{
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				Info view = AccessControll.checkAccess("deletePlagrismEthicsCode/{plagId}/{token}",
+						"showPlagiarismCodeEthics", "0", "0", "0", "1", newModuleList);
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true)
 
+				{
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("plagId", plagId);
+
+					PlagiarismCodeEthics delPlagrismDetectSoft = rest.postForObject(
+							Constants.url + "/deletePlagiarismCodeEthicsById", map, PlagiarismCodeEthics.class);
+					a = "redirect:/showPlagiarismCodeEthics";
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("plagId", plagId);
-
-				PlagiarismCodeEthics delPlagrismDetectSoft = rest.postForObject(Constants.url + "/deletePlagiarismCodeEthicsById", map, PlagiarismCodeEthics.class);
-				a="redirect:/showPlagiarismCodeEthics";
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
 		return a;
-		
+
 	}
 	
 	@RequestMapping(value = "/deleteSelPlagiarismCodeEthics/{plagIds}", method = RequestMethod.GET)

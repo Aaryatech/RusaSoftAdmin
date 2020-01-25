@@ -1078,57 +1078,62 @@ public class InstituteProfInfoController {
 
 	}
 
-	@RequestMapping(value = "/deleteInstLinkages/{linkId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteInstLinkages/{linkId}/{token}", method = RequestMethod.GET)
 	public String deleteinstLinkages(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int linkId) {
+			@PathVariable int linkId, @PathVariable String token) {
 		HttpSession session = request.getSession();
 		String a = null;
-
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
-		Info view = AccessControll.checkAccess("deleteiInstLinkages/{linkId}", "showCollaborationLinkages", "0", "0",
-				"0", "1", newModuleList);
-
 		try {
-			if (view.isError() == true) {
+			String key = (String) session.getAttribute("generatedKey");
 
-				a = "redirect:/accessDenied";
+			if (token.trim().equals(key.trim())) {
 
-			}
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			else {
+				Info view = AccessControll.checkAccess("deleteiInstLinkages/{linkId}/{token}",
+						"showCollaborationLinkages", "0", "0", "0", "1", newModuleList);
+				if (view.isError() == true) {
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (linkId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] linkIds = request.getParameterValues("linkIds");
-					// System.out.println("id are" + linkIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < linkIds.length; i++) {
-						sb = sb.append(linkIds[i] + ",");
-
-					}
-					String linkIdList = sb.toString();
-					linkIdList = linkIdList.substring(0, linkIdList.length() - 1);
-
-					map.add("linkIdList", linkIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("linkIdList", linkId);
+					a = "redirect:/accessDenied";
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteInstLinkages", map, Info.class);
+				else {
 
-				a = "redirect:/showCollaborationLinkages";
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (linkId == 0) {
 
+						System.err.println("Multiple records delete ");
+						String[] linkIds = request.getParameterValues("linkIds");
+						// System.out.println("id are" + linkIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < linkIds.length; i++) {
+							sb = sb.append(linkIds[i] + ",");
+
+						}
+						String linkIdList = sb.toString();
+						linkIdList = linkIdList.substring(0, linkIdList.length() - 1);
+
+						map.add("linkIdList", linkIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("linkIdList", linkId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteInstLinkages", map, Info.class);
+
+					a = "redirect:/showCollaborationLinkages";
+				}
+
+			} else {
+				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
 
 			e.printStackTrace();
