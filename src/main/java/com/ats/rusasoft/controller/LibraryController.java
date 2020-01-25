@@ -29,7 +29,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
-
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
@@ -1407,51 +1407,57 @@ public class LibraryController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteLibrarians/{facultyId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteLibrarians/{facultyId}/{hashKey}", method = RequestMethod.GET)
 	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int facultyId) {
+			@PathVariable int facultyId, @PathVariable String hashKey) {
 		String redirect = null;
 		try {
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
 			HttpSession session = request.getSession();
+
+			String key = (String) session.getAttribute("generatedKey");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("showRegLib", "showLibList", "0", "0", "0", "1",
-					newModuleList);
-			if (deleteAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				if (facultyId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("hodIds");
-					// System.out.println("id are" + instIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String hodIdList = sb.toString();
-					hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
-
-					map.add("staffIdList", hodIdList);
+			Info deleteAccess = AccessControll.checkAccess("deleteLibrarians/{facultyId}/{hashKey}", "showLibList", "0",
+					"0", "0", "1", newModuleList);
+			if (hashKey.trim().equals(key.trim())) {
+				if (deleteAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
 				} else {
+					if (facultyId == 0) {
 
-					System.err.println("Single Record delete ");
-					map.add("staffIdList", facultyId);
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("hodIds");
+						// System.out.println("id are" + instIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String hodIdList = sb.toString();
+						hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
+
+						map.add("staffIdList", hodIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("staffIdList", facultyId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
+
+					redirect = "redirect:/showLibList";
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
-
+			} else {
 				redirect = "redirect:/showLibList";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteLibrarians at Library Contr " + e.getMessage());
 
 			e.printStackTrace();
@@ -1712,8 +1718,10 @@ public class LibraryController {
 
 				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save lib  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -1787,57 +1795,63 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/deleteStudents/{studId}", method = RequestMethod.GET)
-	public String deleteStudents(HttpServletRequest request, HttpServletResponse response, @PathVariable int studId) {
-
+	@RequestMapping(value = "/deleteStudents/{studId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteStudents(HttpServletRequest request, HttpServletResponse response, @PathVariable int studId,
+			@PathVariable String hashKey) {
 		HttpSession session = request.getSession();
 		String a = null;
+		String key = (String) session.getAttribute("generatedKey");
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteStudents/{studId}", "showStudList", "0", "0", "0", "1",
+		Info view = AccessControll.checkAccess("deleteStudents/{studId}/{hashKey}", "showStudList", "0", "0", "0", "1",
 				newModuleList);
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			}
+					a = "redirect:/accessDenied";
 
-			else {
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (studId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] studIds = request.getParameterValues("studIds");
-					// System.out.println("id are" + studIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < studIds.length; i++) {
-						sb = sb.append(studIds[i] + ",");
-
-					}
-
-					String studIdList = sb.toString();
-					studIdList = studIdList.substring(0, studIdList.length() - 1);
-					// System.out.println("stud id list" + studIdList);
-
-					map.add("studIdList", studIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("studIdList", studId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteStudents", map, Info.class);
+				else {
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (studId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] studIds = request.getParameterValues("studIds");
+						// System.out.println("id are" + studIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < studIds.length; i++) {
+							sb = sb.append(studIds[i] + ",");
+
+						}
+
+						String studIdList = sb.toString();
+						studIdList = studIdList.substring(0, studIdList.length() - 1);
+						// System.out.println("stud id list" + studIdList);
+
+						map.add("studIdList", studIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("studIdList", studId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteStudents", map, Info.class);
+					a = "redirect:/showStudList";
+				}
+			} else {
 				a = "redirect:/showStudList";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
-
-			e.printStackTrace();
+ 			e.printStackTrace();
 
 		}
 

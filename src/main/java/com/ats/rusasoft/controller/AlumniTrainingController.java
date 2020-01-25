@@ -28,6 +28,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.Names;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.model.NewCourseInfo;
 import com.ats.rusasoft.master.model.NewCourseInfoList;
 import com.ats.rusasoft.master.model.prodetail.AlumniAssocAct;
@@ -64,30 +65,39 @@ public class AlumniTrainingController {
 
 			int userId = Integer.parseInt(request.getParameter("userId"));
 			String listMapping = request.getParameter("listMapping");
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			RestTemplate restTemplate = new RestTemplate();
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
 
-			Info blockAccess = AccessControll.checkAccess("blockUser", listMapping, "0", "0", "0", "1", newModuleList);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				RestTemplate restTemplate = new RestTemplate();
 
-			if (blockAccess.isError() == false) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				map.add("userId", userId);
+				Info blockAccess = AccessControll.checkAccess("blockUser", listMapping, "0", "0", "0", "1",
+						newModuleList);
 
-				Info errMsg = restTemplate.postForObject(Constants.url + "blockUser", map, Info.class);
+				if (blockAccess.isError() == false) {
 
-				redirect = "redirect:/" + listMapping;
+					map.add("userId", userId);
 
+					Info errMsg = restTemplate.postForObject(Constants.url + "blockUser", map, Info.class);
+
+					redirect = "redirect:/" + listMapping;
+
+				} else {
+
+					redirect = "redirect:/accessDenied";
+				}
 			} else {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In blockUser at AlumniTrainingController Contr " + e.getMessage());
 			e.printStackTrace();
 

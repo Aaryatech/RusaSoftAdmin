@@ -2,8 +2,11 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
+ 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+ 
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -52,6 +55,16 @@
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
+<%
+												UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+											%>
+										 
 
 
 				<div class="col-lg-12">
@@ -69,7 +82,7 @@
 							</div>
 
 						</header>
-						<form action="${pageContext.request.contextPath}/deleteHod/0"
+						<form action="${pageContext.request.contextPath}/deleteHod/0/<%out.println(hashtext);%>"
 							method="get" id="insListForm">
 							<div class="content-body">
 								<div class="row">
@@ -136,7 +149,7 @@
 															</c:if>
 															&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${deleteAccess==0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteHod/${hod.facultyId}"
+																	href="${pageContext.request.contextPath}/deleteHod/${hod.facultyId}/<%out.println(hashtext);%>"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -182,6 +195,8 @@
 
 										<input type="hidden" id="userId" name="userId"
 											value="0">
+											<input type="hidden" value="<%out.println(hashtext);%>"
+												name="token" id="token">
 
 									</div>
 								</div>

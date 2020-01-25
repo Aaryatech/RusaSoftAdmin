@@ -4,6 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+ 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -78,6 +85,18 @@
 
 								<div class="col-xs-12">
 									<form id="libListForm" >
+									
+
+<%
+												UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+											%>
+										 
 
 									<table id="example-1"
 										class="table table-striped dt-responsive display">
@@ -129,7 +148,7 @@
 														</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <c:if
 															test="${deleteAccess == 0}">
 															<a
-																href="${pageContext.request.contextPath}/deleteIqac/${QList.facultyId}"
+																href="${pageContext.request.contextPath}/deleteIqac/${QList.facultyId}/<%out.println(hashtext);%>"
 																onClick="return confirm('Are you sure want to delete this record');"
 																rel="tooltip" data-color-class="danger" title="Delete"
 																data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -184,6 +203,8 @@
 
 <input type="hidden" id="listMapping" name="listMapping"
 										value="${listMapping}">
+										<input type="hidden" value="<%out.println(hashtext);%>"
+												name="token" id="token">
 
 <input type="hidden" id="userId" name="userId"
 										value="0">

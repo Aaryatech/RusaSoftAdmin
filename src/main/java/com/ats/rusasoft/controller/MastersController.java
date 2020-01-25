@@ -27,6 +27,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
@@ -171,7 +172,7 @@ public class MastersController {
 
 			try {
 
- 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				int instituteId = (int) session.getAttribute("instituteId");
 
 				int userId = (int) session.getAttribute("userId");
@@ -315,14 +316,14 @@ public class MastersController {
 					redirect = "redirect:/hodList";
 				else
 					redirect = "redirect:/hodRegistration";
+				SessionKeyGen.changeSessionKey(request);
 			} catch (Exception e) {
-
+				SessionKeyGen.changeSessionKey(request);
 				System.err.println("exception In hodRegistration at Masters Contr" + e.getMessage());
 				e.printStackTrace();
 
 			}
-		}
- 		else {
+		} else {
 			System.err.println("in else");
 			redirect = "redirect:/accessDenied";
 		}
@@ -460,19 +461,23 @@ public class MastersController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteHod/{facultyId}", method = RequestMethod.GET)
-	public String deleteHod(HttpServletRequest request, HttpServletResponse response, @PathVariable int facultyId) {
+	@RequestMapping(value = "/deleteHod/{facultyId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteHod(HttpServletRequest request, HttpServletResponse response, @PathVariable int facultyId,@PathVariable String hashKey) {
 		String redirect = null;
 		try {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			HttpSession session = request.getSession();
+ 			String a = null;
+			String key = (String) session.getAttribute("generatedKey");
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info deleteAccess = AccessControll.checkAccess("deleteHod/{hodId}", "hodList", "0", "0", "0", "1",
+			Info deleteAccess = AccessControll.checkAccess("/deleteHod/{facultyId}/{hashKey}", "hodList", "0", "0", "0", "1",
 					newModuleList);
+			
+			if (hashKey.trim().equals(key.trim())) {
 			if (deleteAccess.isError() == true) {
 				redirect = "redirect:/accessDenied";
 			} else {
@@ -500,6 +505,9 @@ public class MastersController {
 
 				Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
 
+				redirect = "redirect:/hodList";
+			}
+			}else {
 				redirect = "redirect:/hodList";
 			}
 		} catch (Exception e) {

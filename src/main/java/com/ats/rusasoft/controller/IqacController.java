@@ -28,6 +28,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.commons.ExportToExcel;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.model.AcademicYear;
 import com.ats.rusasoft.model.Dean;
 import com.ats.rusasoft.model.DeansList;
@@ -354,15 +355,16 @@ public class IqacController {
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
 					redirect = "redirect:/showIqacList";
-
+				SessionKeyGen.changeSessionKey(request);
 			} catch (Exception e) {
-
+				SessionKeyGen.changeSessionKey(request);
 				System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
 				e.printStackTrace();
 
 			}
 
 		} else {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("in else");
 			redirect = "redirect:/accessDenied";
 		}
@@ -511,30 +513,39 @@ public class IqacController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteIqac/{iqacId}", method = RequestMethod.GET)
-	public String deleteIqac(@PathVariable("iqacId") int iqacId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteIqac/{iqacId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteIqac(@PathVariable("iqacId") int iqacId, HttpServletRequest request,
+			@PathVariable String hashKey) {
+		HttpSession session = request.getSession();
 
 		String a = null;
+		String key = (String) session.getAttribute("generatedKey");
 		try {
 
-			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteIqac/{iqacId}", "showIqacList", "0", "0", "0", "1",
-					newModuleList);
-			if (view.isError() == true) {
+			if (hashKey.trim().equals(key.trim())) {
 
-				a = "redirect:/accessDenied";
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteIqac/{iqacId}/{hashKey}", "showIqacList", "0", "0", "0",
+						"1", newModuleList);
+				if (view.isError() == true) {
 
+					a = "redirect:/accessDenied";
+
+				} else {
+					Info inf = new Info();
+					// //System.out.println("Id:" + iqacId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("id", iqacId);
+					Info iqac = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
+					a = "redirect:/showIqacList";
+				}
 			} else {
-				Info inf = new Info();
-				// //System.out.println("Id:" + iqacId);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("id", iqacId);
-				Info iqac = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
 				a = "redirect:/showIqacList";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -1007,9 +1018,9 @@ public class IqacController {
 			} else {
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showRegisterInstitute at Master Contr" + e.getMessage());
 			e.printStackTrace();
 
@@ -1216,87 +1227,103 @@ public class IqacController {
 
 	}
 
-	@RequestMapping(value = "/deleteFaculity/{facultyId}", method = RequestMethod.GET)
-	public String deleteStaff(@PathVariable("facultyId") int facultyId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteFaculity/{facultyId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteStaff(@PathVariable("facultyId") int facultyId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 
 		String a = null;
+		HttpSession session = request.getSession();
+		String key = (String) session.getAttribute("generatedKey");
+
 		try {
-			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteFaculity/{facultyId}", "showStaffList", "0", "0", "0", "1",
-					newModuleList);
 
-			if (view.isError() == true) {
+			if (hashKey.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteFaculity/{facultyId}/{hashKey}", "showStaffList", "0",
+						"0", "0", "1", newModuleList);
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true) {
 
+					a = "redirect:/accessDenied";
+
+				} else {
+
+					Info inf = new Info();
+					// System.out.println("Id:" + facultyId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("id", facultyId);
+					Info faculty = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
+
+					a = "redirect:/showStaffList";
+
+				}
 			} else {
-
-				Info inf = new Info();
-				// System.out.println("Id:" + facultyId);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("id", facultyId);
-				Info faculty = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
-
 				a = "redirect:/showStaffList";
-
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 		return a;
 
 	}
 
-	@RequestMapping(value = "/delSlectedStaff/{staffId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delSlectedStaff/{staffId}/{hashKey}", method = RequestMethod.GET)
 	public String deletSelectedStaff(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int staffId) {
+			@PathVariable int staffId, @PathVariable String hashKey) {
 		HttpSession session = request.getSession();
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-
-		Info view = AccessControll.checkAccess("delSlectedStaff/{staffId}", "showStaffList", "0", "0", "0", "1",
-				newModuleList);
+		String key = (String) session.getAttribute("generatedKey");
+		Info view = AccessControll.checkAccess("delSlectedStaff/{staffId}/{hashKey}", "showStaffList", "0", "0", "0",
+				"1", newModuleList);
 
 		try {
-			if (view.isError() == true) {
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+					a = "redirect:/accessDenied";
 
-			}
-
-			else {
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (staffId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] staffIds = request.getParameterValues("staffIds");
-					// System.out.println("id are" + staffIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < staffIds.length; i++) {
-						sb = sb.append(staffIds[i] + ",");
-
-					}
-					String staffIdList = sb.toString();
-					staffIdList = staffIdList.substring(0, staffIdList.length() - 1);
-
-					map.add("staffIdList", staffIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("staffIdList", staffId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
+				else {
 
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (staffId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] staffIds = request.getParameterValues("staffIds");
+						// System.out.println("id are" + staffIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < staffIds.length; i++) {
+							sb = sb.append(staffIds[i] + ",");
+
+						}
+						String staffIdList = sb.toString();
+						staffIdList = staffIdList.substring(0, staffIdList.length() - 1);
+
+						map.add("staffIdList", staffIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("staffIdList", staffId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteStaffSlected", map, Info.class);
+
+					a = "redirect:/showStaffList";
+
+				}
+			} else {
 				a = "redirect:/showStaffList";
-
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -1574,8 +1601,9 @@ public class IqacController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In iqacNewRegistration at showIqacList Contr" + e.getMessage());
 			e.printStackTrace();
 
@@ -1765,30 +1793,38 @@ public class IqacController {
 
 	}
 
-	@RequestMapping(value = "/deleteDean/{deanId}", method = RequestMethod.GET)
-	public String deleteDean(@PathVariable("deanId") int deanId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteDean/{deanId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteDean(@PathVariable("deanId") int deanId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String a = null;
 		try {
 			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
+
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteDean/{deanId}", "showDeanList", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deleteDean/{deanId}/{hashKey}", "showDeanList", "0", "0", "0", "1",
 					newModuleList);
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			if (view.isError() == true) {
+					a = "redirect:/accessDenied";
 
-				a = "redirect:/accessDenied";
+				} else {
 
+					Info inf = new Info();
+					// System.out.println("Id:" + deanId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("id", deanId);
+					Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
+					a = "redirect:/showDeanList";
+				}
 			} else {
-
-				Info inf = new Info();
-				// System.out.println("Id:" + deanId);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("id", deanId);
-				Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
 				a = "redirect:/showDeanList";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 		return a;
@@ -2138,9 +2174,10 @@ public class IqacController {
 
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(
 					"exception In Training & Placement Officer Registration at showIqacList Contr" + e.getMessage());
 			e.printStackTrace();
@@ -2219,30 +2256,38 @@ public class IqacController {
 
 	}
 
-	@RequestMapping(value = "/deleteTpo/{tpoId}", method = RequestMethod.GET)
-	public String deleteTpo(@PathVariable("tpoId") int tpoId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteTpo/{tpoId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteTpo(@PathVariable("tpoId") int tpoId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String a = null;
+		HttpSession session = request.getSession();
+		String key = (String) session.getAttribute("generatedKey");
 		try {
-			HttpSession session = request.getSession();
+
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteDean/{tpoId}", "showTrainingAndPlacementOfficer", "0", "0",
-					"0", "1", newModuleList);
+			Info view = AccessControll.checkAccess("deleteTpo/{tpoId}/{hashKey}", "showTrainingAndPlacementOfficer",
+					"0", "0", "0", "1", newModuleList);
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			if (view.isError() == true) {
+					a = "redirect:/accessDenied";
 
-				a = "redirect:/accessDenied";
+				} else {
 
+					Info inf = new Info();
+					// System.out.println("Id:" + tpoId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("id", tpoId);
+					Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
+					a = "redirect:/showTrainingAndPlacementOfficer";
+				}
 			} else {
-
-				Info inf = new Info();
-				// System.out.println("Id:" + tpoId);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("id", tpoId);
-				Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
 				a = "redirect:/showTrainingAndPlacementOfficer";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 		return a;
@@ -2538,13 +2583,13 @@ public class IqacController {
 				int isView = Integer.parseInt(request.getParameter("is_view"));
 				if (isView == 1)
 					redirect = "redirect:/showExternalActivities";
-			} 
-			else {
+			} else {
 
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(
 					"exception In Traning & Placement Officer Registration at showIqacList Contr" + e.getMessage());
 			e.printStackTrace();
@@ -2623,30 +2668,37 @@ public class IqacController {
 
 	}
 
-	@RequestMapping(value = "/deleteExtAxtOff/{extOffId}", method = RequestMethod.GET)
-	public String deleteExtAxtOff(@PathVariable("extOffId") int extOffId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteExtAxtOff/{extOffId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteExtAxtOff(@PathVariable("extOffId") int extOffId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String a = null;
+		HttpSession session = request.getSession();
+		String key = (String) session.getAttribute("generatedKey");
 		try {
-			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("deleteExtAxtOff/{extOffId}", "showExternalActivities", "0", "0",
 					"0", "1", newModuleList);
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			if (view.isError() == true) {
+					a = "redirect:/accessDenied";
 
-				a = "redirect:/accessDenied";
+				} else {
 
+					Info inf = new Info();
+					// System.out.println("Id:" + extOffId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("id", extOffId);
+					Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
+					a = "redirect:/showExternalActivities";
+				}
 			} else {
-
-				Info inf = new Info();
-				// System.out.println("Id:" + extOffId);
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("id", extOffId);
-				Info dean = rest.postForObject(Constants.url + "/deleteStaffById", map, Info.class);
 				a = "redirect:/showExternalActivities";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 		return a;

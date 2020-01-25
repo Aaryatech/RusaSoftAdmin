@@ -3,6 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -69,12 +72,22 @@
 							</div>
 
 						</header>
+
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 						<form
-							action="${pageContext.request.contextPath}/deleteLibrarians/0"
+							action="${pageContext.request.contextPath}/deleteLibrarians/0/<%out.println(hashtext);%>"
 							method="get" id="libListForm">
 							<div class="content-body">
 								<div class="row">
-								<%-- 	<c:if test="${sessionScope.successMsg!=null}">
+									<%-- 	<c:if test="${sessionScope.successMsg!=null}">
 										<div class="col-lg-12">
 											<div class="alert alert-success alert-dismissible fade in">
 												<button type="button" class="close" data-dismiss="alert"
@@ -138,7 +151,7 @@
 															</c:if>&nbsp;&nbsp;&nbsp;&nbsp; <c:if
 																test="${deleteAccess == 0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteLibrarians/${institute.facultyId}"
+																	href="${pageContext.request.contextPath}/deleteLibrarians/${institute.facultyId}/<%out.println(hashtext);%>"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-original-title="Delete"
@@ -147,12 +160,11 @@
 																	class="glyphicon glyphicon-remove"></span></a>
 																	
 																&nbsp;&nbsp;
-																	<a
-																	href="#" onclick="blockUser(${institute.facultyId})"
+																	<a href="#" onclick="blockUser(${institute.facultyId})"
 																	onClick="return confirm('Are you sure want to block this user');"
-																	rel="tooltip" data-color-class="danger" title="Block user"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Block user"><span
+																	rel="tooltip" data-color-class="danger"
+																	title="Block user" data-animate=" animated fadeIn "
+																	data-toggle="tooltip" data-original-title="Block user"><span
 																	class="glyphicon glyphicon-ban-circle"></span></a>
 															</c:if></td>
 													</tr>
@@ -160,10 +172,10 @@
 											</tbody>
 										</table>
 										<input type="hidden" id="listMapping" name="listMapping"
-												value="${listMapping}">
-
-											<input type="hidden" id="userId" name="userId"
-													value="0">
+											value="${listMapping}"> <input type="hidden"
+											id="userId" name="userId" value="0"> <input
+											type="hidden" value="<%out.println(hashtext);%>" name="token"
+											id="token">
 										<div class="col-lg-1"></div>
 
 									</div>
