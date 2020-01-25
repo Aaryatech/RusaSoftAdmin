@@ -25,6 +25,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.model.prodetail.StudentSchemeList;
 import com.ats.rusasoft.model.GetProgram;
 import com.ats.rusasoft.model.GetStudentDetail;
@@ -602,9 +603,9 @@ public class ProgramDetailModuleController {
 	 * }
 	 */
 
-	@RequestMapping(value = "/deleteStudSchm/{stdSchmId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteStudSchm/{stdSchmId}/{token}", method = RequestMethod.GET)
 	public String deleteStudSchm(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int stdSchmId) {
+			@PathVariable int stdSchmId, @PathVariable String token) {
 
 		HttpSession session = request.getSession();
 		String a = null;
@@ -626,6 +627,10 @@ public class ProgramDetailModuleController {
 		/* else { */
 
 		try {
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			if (stdSchmId == 0) {
 
@@ -653,8 +658,12 @@ public class ProgramDetailModuleController {
 			Info errMsg = rest.postForObject(Constants.url + "deleteStudentSchemesRecordById", map, Info.class);
 			a = "redirect:/showStudSupp";
 			/* } */
+			}else {				
+				a = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
 
 			e.printStackTrace();

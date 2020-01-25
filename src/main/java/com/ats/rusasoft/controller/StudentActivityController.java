@@ -27,6 +27,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.ProgramMission;
 import com.ats.rusasoft.master.ProgramSpeceficOutcome;
 import com.ats.rusasoft.master.model.Program;
@@ -829,16 +830,18 @@ public class StudentActivityController {
 
 	}
 
-	@RequestMapping(value = "/deleteProgram/{programId}", method = RequestMethod.GET)
-	public String deleteProgram(@PathVariable("programId") int programId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteProgram/{programId}/{token}", method = RequestMethod.GET)
+	public String deleteProgram(@PathVariable("programId") int programId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		String returnString = new String();
 		try {
-
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteProgram", "showProgramList", "0", "0", "0", "1",
+			Info view = AccessControll.checkAccess("deleteProgram/{programId}/{token}", "showProgramList", "0", "0", "0", "1",
 					newModuleList);
 
 			// System.out.println(view);
@@ -855,9 +858,13 @@ public class StudentActivityController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			}else {				
+				returnString = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}

@@ -851,13 +851,16 @@ public class AlumniTrainingController {
 
 	// deleteTranPlace
 
-	@RequestMapping(value = "/deleteTranPlace/{placementId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteTranPlace/{placementId}/{token}", method = RequestMethod.GET)
 	public String deleteTranPlace(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int placementId) {
+			@PathVariable int placementId, @PathVariable String token) {
 		String redirect = null;
 		try {
 
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info access = null;
@@ -895,6 +898,10 @@ public class AlumniTrainingController {
 				Info errMsg = restTemplate.postForObject(Constants.url + "deleteTrainPlacement", map, Info.class);
 				redirect = "redirect:/showStudTran";
 			}
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
 
 			System.err.println(" Exception In deleteTranPlace at AlumTrain  Contr " + e.getMessage());
@@ -1827,16 +1834,20 @@ public class AlumniTrainingController {
 
 	}
 
-	@RequestMapping(value = "/deleteCourseInfo/{courseId}", method = RequestMethod.GET)
-	public String deleteCourseInfo(@PathVariable("courseId") int courseId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteCourseInfo/{courseId}/{token}", method = RequestMethod.GET)
+	public String deleteCourseInfo(@PathVariable("courseId") int courseId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
-
+		String redirect = null;
 		try {
+			HttpSession session = request.getSession();	
+		String key=(String) session.getAttribute("generatedKey");
+		
+		if(token.trim().equals(key.trim())) {
+			
 			ModelAndView model = null;
-			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info view = AccessControll.checkAccess("/deleteCourseInfo/{courseId}", "showNewCourseInfo", "0", "0", "0",
+			Info view = AccessControll.checkAccess("/deleteCourseInfo/{courseId}/{token}", "showNewCourseInfo", "0", "0", "0",
 					"1", newModuleList);
 
 			if (view.isError() == true) {
@@ -1849,12 +1860,18 @@ public class AlumniTrainingController {
 
 				NewCourseInfo delCourseId = rest.postForObject(Constants.url + "/delCourseById", map,
 						NewCourseInfo.class);
+				redirect = "redirect:/showNewCourseInfo";
 			}
+		}else {				
+			redirect = "redirect:/accessDenied";
+		}
+		SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
-		return "redirect:/showNewCourseInfo";
+		return redirect;
 	}
 
 	/*************************************
