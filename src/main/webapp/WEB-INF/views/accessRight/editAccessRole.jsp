@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -102,7 +104,18 @@
 										action="${pageContext.request.contextPath}/submitCreateRole"
 										method="post" name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
-
+ 
+										<%
+											UUID uuid = UUID.randomUUID();
+											MessageDigest md = MessageDigest.getInstance("MD5");
+											byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+											BigInteger number = new BigInteger(1, messageDigest);
+											String hashtext = number.toString(16);
+											session = request.getSession();
+											session.setAttribute("generatedKey", hashtext);
+										%>
+										<input type="hidden" value="<%out.println(hashtext);%>"
+											name="token" id="token">
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> ${title}
@@ -122,8 +135,8 @@
 															<input type="text" class="form-control" id="roleName"
 																name="roleName" placeholder="Enter Role Name"
 																autocomplete="off" value="${editRole.roleName}" required>
-															<input type="hidden"  id="roleId"
-																name="roleId"  value="${editRole.roleId}"  >
+															<input type="hidden" id="roleId" name="roleId"
+																value="${editRole.roleId}">
 														</div>
 													</div>
 
@@ -160,7 +173,7 @@
 																				class="select_all"
 																				onclick="checkSubmodule(${allModuleList.moduleId})"
 																				value="0"></td>
-																			<td colspan="5">${allModuleList.iconDiv} &nbsp; <b><c:out
+																			<td colspan="5">${allModuleList.iconDiv}&nbsp; <b><c:out
 																						value="${allModuleList.moduleName}" /></b></td>
 																		</tr>
 
@@ -191,7 +204,8 @@
 																						</c:otherwise>
 																					</c:choose></td>
 																				<td><c:choose>
-																						<c:when test="${allSubModuleList.addApproveConfig==1}">
+																						<c:when
+																							test="${allSubModuleList.addApproveConfig==1}">
 																							<input type="checkbox"
 																								id="${allSubModuleList.subModuleId}add${allSubModuleList.moduleId}"
 																								class="check${allModuleList.moduleId}"
@@ -229,7 +243,8 @@
 																						</c:otherwise>
 																					</c:choose></td>
 																				<td><c:choose>
-																						<c:when test="${allSubModuleList.deleteRejectApprove==1}">
+																						<c:when
+																							test="${allSubModuleList.deleteRejectApprove==1}">
 																							<input type="checkbox"
 																								class="check${allModuleList.moduleId}"
 																								id="${allSubModuleList.subModuleId}delete${allSubModuleList.moduleId}"
@@ -256,18 +271,20 @@
 															</table>
 
 														</div>
-														
-														
+
+
 														<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
+															<div class="col-sm-offset-3 col-sm-9">
 
 
-<button type="submit" id="sub_button" class="btn btn-primary"
-													><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>
-														
-				</div>
-												</div>
-														
+																<button type="submit" id="sub_button"
+																	class="btn btn-primary">
+																	<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
+																</button>
+
+															</div>
+														</div>
+
 
 													</div>
 

@@ -27,6 +27,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.FacultiContributionList;
 import com.ats.rusasoft.faculty.model.FacultyBookList;
 import com.ats.rusasoft.faculty.model.FacultyConferenceList;
@@ -2488,12 +2489,17 @@ public class FacultyModuleController {
 				returnString = "redirect:/showFacultyEmpowerment";
 			} else {
 
+				
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			// System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+
+		
 		return returnString;
 	}
 
