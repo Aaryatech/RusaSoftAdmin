@@ -973,27 +973,39 @@ public class InfraStructureModController {
 
 	}
 
-	@RequestMapping(value = "/deleteItInfrastructInfo/{infraId}", method = RequestMethod.GET)
-	public String deleteItInfrastructInfo(@PathVariable("infraId") int infraId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteItInfrastructInfo/{infraId}/{token}", method = RequestMethod.GET)
+	public String deleteItInfrastructInfo(@PathVariable("infraId") int infraId, @PathVariable("token") String token, HttpServletRequest request) {
 		String value = null;
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("deleteItInfrastructInfo/{infraId}", "showItInfrastructure", "0", "0",
-				"0", "1", newModuleList);
-		if (view.isError() == true) {
+		try {
+			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			Info view = AccessControll.checkAccess("deleteItInfrastructInfo/{infraId}/{token}", "showItInfrastructure", "0", "0",
+					"0", "1", newModuleList);
+			if (view.isError() == true) {
 
-			value = "redirect:/accessDenied";
+				value = "redirect:/accessDenied";
 
-		} else {
+			} else {
 
-			// System.out.println("Id:" + infraId);
+				// System.out.println("Id:" + infraId);
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("infraId", infraId);
-			Info itInfra = rest.postForObject(Constants.url + "/deletetInfraById", map, Info.class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("infraId", infraId);
+				Info itInfra = rest.postForObject(Constants.url + "/deletetInfraById", map, Info.class);
 
-			value = "redirect:/showItInfrastructure";
+				value = "redirect:/showItInfrastructure";
 
+			}
+			SessionKeyGen.changeSessionKey(request);
+			}else {				
+				value = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
 		return value;
 
