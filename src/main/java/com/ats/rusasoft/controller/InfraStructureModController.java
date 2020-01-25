@@ -1260,29 +1260,44 @@ public class InfraStructureModController {
 
 	}
 
-	@RequestMapping(value = "/deleteLanConnectionDetails/{connectionId}", method = RequestMethod.GET)
-	public String deleteLanConnectionDetails(@PathVariable("connectionId") int connectionId,
+	@RequestMapping(value = "/deleteLanConnectionDetails/{connectionId}/{token}", method = RequestMethod.GET)
+	public String deleteLanConnectionDetails(@PathVariable("connectionId") int connectionId,@PathVariable("token") String token,
 			HttpServletRequest request) {
 		String value = null;
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("deleteLanConnectionDetails/{connectionId}",
-				"showAllInternetConnectionInfo", "0", "0", "0", "1", newModuleList);
-		if (view.isError() == true) {
+		try {
 
-			value = "redirect:/accessDenied";
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-		} else {
+			if (token.trim().equals(key.trim())) {
 
-			// System.out.println("Id:" + connectionId);
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteLanConnectionDetails/{connectionId}/{token}",
+						"showAllInternetConnectionInfo", "0", "0", "0", "1", newModuleList);
+				if (view.isError() == true) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("connectionId", connectionId);
-			Info itInfra = rest.postForObject(Constants.url + "/deletetLanConectionById", map, Info.class);
+					value = "redirect:/accessDenied";
 
-			value = "redirect:/showAllInternetConnectionInfo";
+				} else {
 
+					// System.out.println("Id:" + connectionId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("connectionId", connectionId);
+					Info itInfra = rest.postForObject(Constants.url + "/deletetLanConectionById", map, Info.class);
+
+					value = "redirect:/showAllInternetConnectionInfo";
+
+				}
+			} else {
+				value = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+			e.getStackTrace();
 		}
+
 		return value;
 
 	}
