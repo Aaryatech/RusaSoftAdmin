@@ -1005,11 +1005,12 @@
  
 				//$('#example-1 td').remove();
 				$("#loader1").show();
-				
+				var token = document.getElementById("token").value;
 				$.getJSON('${deleteGender}',
 
 				{
 					instYesnoId : instYesnoId,  
+					token:token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1150,11 +1151,12 @@
 			 
 			//$('#example-1 td').remove();
 			$("#loader2").show();
-			
+			var token1 = document.getElementById("token1").value;
 			$.getJSON('${deleteEnvironmant}',
 
 			{
 				instYesnoId : instYesnoId,  
+				token1:token1,
 				ajax : 'true'
 
 			}, function(data) {
@@ -1212,7 +1214,7 @@
 				{
 					transperentspeficytext : transperentspeficytext, 
 					efficientId : efficientId,
-					token2:token2;
+					token2:token2,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1283,11 +1285,12 @@
 			 
 			//$('#example-1 td').remove();
 			$("#loader3").show();
-			
+			var token2 = document.getElementById("token2").value;
 			$.getJSON('${deleteHumanValues}',
 
 			{
 				instYesnoId : instYesnoId,  
+				token2:token2,
 				ajax : 'true'
 
 			}, function(data) {

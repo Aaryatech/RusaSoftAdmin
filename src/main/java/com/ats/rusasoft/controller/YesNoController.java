@@ -511,7 +511,6 @@ public class YesNoController {
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			if (token.trim().equals(key.trim())) {
 
-				
 				Date date = new Date();
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -569,8 +568,9 @@ public class YesNoController {
 						InstituteYesNo[].class);
 				instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -631,33 +631,49 @@ public class YesNoController {
 	@RequestMapping(value = "/deleteTranspernt", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> deleteTranspernt(HttpServletRequest request,
 			HttpServletResponse response) {
-
+		HttpSession session = request.getSession();
 		try {
-
-			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("id", instYesnoId);
-			System.err.println();
+			if (token.trim().equals(key.trim())) {
 
-			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab1");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
+				int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", instYesnoId);
+				System.err.println();
+
+				Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab1");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab1");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab1List = new ArrayList<>(Arrays.asList(ary));
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -680,7 +696,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			if (token.trim().equals(key.trim())) {
- 
+
 				Date date = new Date();
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -738,8 +754,9 @@ public class YesNoController {
 						InstituteYesNo[].class);
 				instituteYesNoTab2List = new ArrayList<>(Arrays.asList(ary));
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -757,28 +774,45 @@ public class YesNoController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token1 = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey1");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+			if (token1.trim().equals(key.trim())) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("id", instYesnoId);
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+				int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab2");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab2List = new ArrayList<>(Arrays.asList(ary));
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", instYesnoId);
 
+				Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab2");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab2List = new ArrayList<>(Arrays.asList(ary));
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab2");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab2List = new ArrayList<>(Arrays.asList(ary));
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -800,7 +834,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			if (token.trim().equals(key.trim())) {
- 
+
 				Date date = new Date();
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -857,8 +891,9 @@ public class YesNoController {
 						InstituteYesNo[].class);
 				instituteYesNoTab3List = new ArrayList<>(Arrays.asList(ary));
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -876,28 +911,45 @@ public class YesNoController {
 		try {
 
 			HttpSession session = request.getSession();
+			String token2 = request.getParameter("token2");
+			String key = (String) session.getAttribute("generatedKey2");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+			if (token2.trim().equals(key.trim())) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("id", instYesnoId);
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+				int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab3");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab3List = new ArrayList<>(Arrays.asList(ary));
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", instYesnoId);
 
+				Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab3");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab3List = new ArrayList<>(Arrays.asList(ary));
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab3");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab3List = new ArrayList<>(Arrays.asList(ary));
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1069,11 +1121,11 @@ public class YesNoController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (
 
 		Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce In submitInsertLeaveStructure method  " + e.getMessage());
 			e.printStackTrace();
 
@@ -1254,8 +1306,9 @@ public class YesNoController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1440,9 +1493,9 @@ public class YesNoController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1626,9 +1679,10 @@ public class YesNoController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1705,65 +1759,68 @@ public class YesNoController {
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			Date date = new Date();
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-  			String token = request.getParameter("token");
-						String key = (String) session.getAttribute("generatedKey");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-						if (token.trim().equals(key.trim())) {
-			String transperentspeficytext = request.getParameter("transperentspeficytext");
+			if (token.trim().equals(key.trim())) {
+				String transperentspeficytext = request.getParameter("transperentspeficytext");
 
-			int transId = Integer.parseInt(request.getParameter("transId"));
+				int transId = Integer.parseInt(request.getParameter("transId"));
 
-			if (transId == 0) {
+				if (transId == 0) {
 
-				InstituteYesNo instituteYesNo = new InstituteYesNo();
-				instituteYesNo.setDelStatus(1);
-				instituteYesNo.setIsActive(1);
-				instituteYesNo.setMakerUserId(userObj.getUserId());
-				instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
-				instituteYesNo.setMakerDatetime(sf.format(date));
-				instituteYesNo.setYesnoPagecode("tab4");
-				instituteYesNo.setSectionCode("tab4");
-				instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
-				instituteYesNo.setYesnoDynamicTitle("Gender");
-				instituteYesNo.setYearId(acYearId);
+					InstituteYesNo instituteYesNo = new InstituteYesNo();
+					instituteYesNo.setDelStatus(1);
+					instituteYesNo.setIsActive(1);
+					instituteYesNo.setMakerUserId(userObj.getUserId());
+					instituteYesNo.setInstituteId(userObj.getGetData().getUserInstituteId());
+					instituteYesNo.setMakerDatetime(sf.format(date));
+					instituteYesNo.setYesnoPagecode("tab4");
+					instituteYesNo.setSectionCode("tab4");
+					instituteYesNo.setInstYesnoResponse(XssEscapeUtils.jsoupParse(transperentspeficytext));
+					instituteYesNo.setYesnoDynamicTitle("Gender");
+					instituteYesNo.setYearId(acYearId);
 
-				// System.out.println(instituteYesNo);
-				InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
-						InstituteYesNo.class);
-			} else {
-				System.err.println("In else Its Edit Call " + transperentspeficytext);
+					// System.out.println(instituteYesNo);
+					InstituteYesNo resp = restTemplate.postForObject(Constants.url + "/saveYesNoSingle", instituteYesNo,
+							InstituteYesNo.class);
+				} else {
+					System.err.println("In else Its Edit Call " + transperentspeficytext);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("id", transId);
+					map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+
+					Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+
+				}
+
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				map.add("id", transId);
-				map.add("yesNoResponse", XssEscapeUtils.jsoupParse(transperentspeficytext));
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab4");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-				Info resp = restTemplate.postForObject(Constants.url + "/editYesNoRecord", map, Info.class);
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab4");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
 
 			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab4");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
-		}else {
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab4");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
-
-
-		} }catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1778,30 +1835,46 @@ public class YesNoController {
 	public @ResponseBody List<InstituteYesNo> deleteGender(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
-
 			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			if (token.trim().equals(key.trim())) {
 
-			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("id", instYesnoId);
+				int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
 
-			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", instYesnoId);
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab4");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+				Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
 
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab4");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab4");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab4List = new ArrayList<>(Arrays.asList(ary));
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1827,7 +1900,6 @@ public class YesNoController {
 
 			if (token.trim().equals(key.trim())) {
 
-			
 				String transperentspeficytext = request.getParameter("transperentspeficytext");
 
 				int timeBoundId = Integer.parseInt(request.getParameter("timeBoundId"));
@@ -1884,8 +1956,9 @@ public class YesNoController {
 						InstituteYesNo[].class);
 				instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1905,26 +1978,43 @@ public class YesNoController {
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String token1 = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey1");
 
-			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+			if (token1.trim().equals(key.trim())) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("id", instYesnoId);
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+				int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab5");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", instYesnoId);
 
+				Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab5");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab5");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab5List = new ArrayList<>(Arrays.asList(ary));
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -1947,7 +2037,6 @@ public class YesNoController {
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			if (token.trim().equals(key.trim())) {
 
-			
 				Date date = new Date();
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -2005,8 +2094,9 @@ public class YesNoController {
 						InstituteYesNo[].class);
 				instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -2026,26 +2116,44 @@ public class YesNoController {
 			HttpSession session = request.getSession();
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
+			String token2 = request.getParameter("token2");
+			String key = (String) session.getAttribute("generatedKey2");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("id", instYesnoId);
+			if (token2.trim().equals(key.trim())) {
 
-			Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			map.add("yearId", acYearId);
-			map.add("secCode", "tab6");
-			InstituteYesNo[] ary = restTemplate.postForObject(
-					Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map, InstituteYesNo[].class);
-			instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
+				int instYesnoId = Integer.parseInt(request.getParameter("instYesnoId"));
 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("id", instYesnoId);
+
+				Info resp = restTemplate.postForObject(Constants.url + "/deleteYesNoRecord", map, Info.class);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab6");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
+				SessionKeyGen.changeSessionKey(request);
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				map.add("yearId", acYearId);
+				map.add("secCode", "tab6");
+				InstituteYesNo[] ary = restTemplate.postForObject(
+						Constants.url + "/getInstituteYesNoListByInstituteIdAndSectionCode", map,
+						InstituteYesNo[].class);
+				instituteYesNoTab6List = new ArrayList<>(Arrays.asList(ary));
+			}
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showStaffList at Master Contr" + e.getMessage());
 
 			e.printStackTrace();

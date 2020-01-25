@@ -1008,11 +1008,12 @@ function editTranspernt(instYesnoId){
  
 				//$('#example-1 td').remove();
 				$("#loader1").show();
-				
+				var token = document.getElementById("token").value; 
 				$.getJSON('${deleteTranspernt}',
 
 				{
 					instYesnoId : instYesnoId,  
+					token:token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1137,11 +1138,13 @@ function editTimebound(instYesnoId){
 			 
 			//$('#example-1 td').remove();
 			$("#loader2").show();
+			var token1 = document.getElementById("token1").value; 
 			
 			$.getJSON('${deleteTimebound}',
 
 			{
 				instYesnoId : instYesnoId,  
+				token1:token1,
 				ajax : 'true'
 
 			}, function(data) {
@@ -1269,11 +1272,12 @@ function editEfficient(instYesnoId){
 			 
 			//$('#example-1 td').remove();
 			$("#loader3").show();
-			
+			var token2 = document.getElementById("token2").value; 
 			$.getJSON('${deleteEfficient}',
 
 			{
 				instYesnoId : instYesnoId,  
+				token2:token2,
 				ajax : 'true'
 
 			}, function(data) {

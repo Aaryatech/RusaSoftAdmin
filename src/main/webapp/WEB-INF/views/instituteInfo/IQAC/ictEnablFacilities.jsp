@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -81,7 +86,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
-									<a href="${pageContext.request.contextPath}/addICTEnblFaclities"><button
+									<a
+										href="${pageContext.request.contextPath}/addICTEnblFaclities"><button
 											type="button" class="btn btn-success">
 											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 										</button></a>
@@ -91,11 +97,22 @@
 						</header>
 
 
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
+
+
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/deleteSelICtEnbFacilities/0"
+										action="${pageContext.request.contextPath}/deleteSelICtEnbFacilities/0/<%out.println(hashtext);%>"
 										method="get" name="form_sample_2" id="form_sample_2">
 										<div>
 
@@ -126,8 +143,9 @@
 															<c:forEach items="${ictEnbFacList}" var="ictEnbFacList"
 																varStatus="count">
 																<tr>
-																	<td align="center"><input type="checkbox" class="chk"
-																		name="exActId" id="exActIds${count.index+1}"
+																	<td align="center"><input type="checkbox"
+																		class="chk" name="exActId"
+																		id="exActIds${count.index+1}"
 																		value="${ictEnbFacList.ictEnbFacId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>
 																	<td>${ictEnbFacList.noOfClassroom}</td>
@@ -141,10 +159,9 @@
 																				href="${pageContext.request.contextPath}/editIct/${ictEnbFacList.ictEnbFacId}"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-																			 </c:if>
-																			<c:if test="${deleteAccess==0}">
+																			 </c:if> <c:if test="${deleteAccess==0}">
 																			<a
-																				href="${pageContext.request.contextPath}/deleteIct/${ictEnbFacList.ictEnbFacId}"
+																				href="${pageContext.request.contextPath}/deleteIct/${ictEnbFacList.ictEnbFacId}/<%out.println(hashtext);%>"
 																				onClick="return confirm('Are you sure want to delete this record');"
 																				rel="tooltip" data-color-class="danger"
 																				title="Delete" data-animate=" animated fadeIn "
@@ -211,8 +228,6 @@
 			}
 
 		}
-
-	
 	</script>
 
 </body>
