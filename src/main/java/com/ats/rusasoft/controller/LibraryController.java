@@ -295,13 +295,17 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/deleteLibInfo/{libInfoId}", method = RequestMethod.GET)
-	public String deleteLibInfo(@PathVariable("libInfoId") int libInfoId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteLibInfo/{libInfoId}/{token}", method = RequestMethod.GET)
+	public String deleteLibInfo(@PathVariable("libInfoId") int libInfoId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+			
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("deleteLibInfo/{libInfoId}", "showLibraryBasicInfo", "0", "0", "0",
 					"1", newModuleList);
@@ -317,6 +321,10 @@ public class LibraryController {
 				LibraryInfo libInfo = rest.postForObject(Constants.url + "/deletelibBasicInfoById", map,
 						LibraryInfo.class);
 			}
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -558,34 +566,42 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/deleteRareBookInfo/{bookId}", method = RequestMethod.GET)
-	public String deleteRareBookInfo(@PathVariable("bookId") int bookId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteRareBookInfo/{bookId}/{token}", method = RequestMethod.GET)
+	public String deleteRareBookInfo(@PathVariable("bookId") int bookId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		try {
 			String a = null;
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("deleteRareBookInfo/{bookId}", "showRareBookInfo", "0", "0", "0",
-					"1", newModuleList);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == true)
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			{
+				Info view = AccessControll.checkAccess("deleteRareBookInfo/{bookId}/{token}", "showRareBookInfo", "0",
+						"0", "0", "1", newModuleList);
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true)
 
+				{
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("bookId", bookId);
+
+					RareBook editBook = rest.postForObject(Constants.url + "/deleteRareBookById", map, RareBook.class);
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("bookId", bookId);
-
-				RareBook editBook = rest.postForObject(Constants.url + "/deleteRareBookById", map, RareBook.class);
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -834,37 +850,39 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/deleteLibBook/{bookId}", method = RequestMethod.GET)
-	public String deleteLibBookInfo(@PathVariable("bookId") int bookId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteLibBook/{bookId}/{token}", method = RequestMethod.GET)
+	public String deleteLibBookInfo(@PathVariable("bookId") int bookId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		try {
 			String a = null;
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("deleteLibBook/{bookId}", "showlibBookPurchased", "0", "0", "0", "1",
-					newModuleList);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == true)
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			{
+				Info view = AccessControll.checkAccess("deleteLibBook/{bookId}", "showlibBookPurchased", "0", "0", "0",
+						"1", newModuleList);
+				if (view.isError() == true) {
+					a = "redirect:/accessDenied";
+				}
 
-				a = "redirect:/accessDenied";
+				else {
+					map = new LinkedMultiValueMap<>();
+					map.add("bookId", bookId);
 
+					LibBookPurchase editBook = rest.postForObject(Constants.url + "/deleteLibBookById", map,
+							LibBookPurchase.class);
+				}
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
-
-			else {
-				map = new LinkedMultiValueMap<>();
-				map.add("bookId", bookId);
-
-				LibBookPurchase editBook = rest.postForObject(Constants.url + "/deleteLibBookById", map,
-						LibBookPurchase.class);
-			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
-
 		}
 		return "redirect:/showlibBookPurchased";
 
