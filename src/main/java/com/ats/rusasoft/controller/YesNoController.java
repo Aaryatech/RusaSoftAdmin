@@ -25,6 +25,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.Names;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.model.prodetail.GetStudAdmLocwise;
 import com.ats.rusasoft.master.model.prodetail.Location;
 import com.ats.rusasoft.master.model.prodetail.NameIdBean;
@@ -418,8 +419,9 @@ public class YesNoController {
 
 				return "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In submitYesNo at YesNo Contr" + e.getMessage());
 
 			e.printStackTrace();

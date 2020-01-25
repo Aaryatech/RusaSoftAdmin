@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -89,16 +91,25 @@
 										type="button" class="btn btn-success">Add</button></a> --%>
 
 								<c:if test="${addAccess == 0}">
-								<a title="Add"
-									href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a>
-									</c:if>
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddProgDistinctive"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 							</div>
 
 						</header>
 
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 
 						<div class="content-body">
 							<div class="row">
@@ -146,7 +157,7 @@
 																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															</c:if> <c:if test="${deleteAccess == 0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteDist/${dist.distId}"
+																	href="${pageContext.request.contextPath}/deleteDist/${dist.distId}/<%out.println(hashtext);%>"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"

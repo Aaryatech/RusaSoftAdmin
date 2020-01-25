@@ -25,6 +25,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.InstituteSupport;
@@ -277,24 +278,32 @@ public class InstituteDistController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteDist/{distId}", method = RequestMethod.GET)
-	public String deleteDist(@PathVariable("distId") int distId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteDist/{distId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteDist(@PathVariable("distId") int distId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String value = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showAddProgDistinctive", "showProgDistinctive", "0", "0", "0", "1",
-				newModuleList);
-		if (view.isError() == true) {
+		Info view = AccessControll.checkAccess("deleteDist/{distId}/{hashKey}", "showProgDistinctive", "0", "0", "0",
+				"1", newModuleList);
+		String key = (String) session.getAttribute("generatedKey");
 
-			value = "redirect:/accessDenied";
+		if (hashKey.trim().equals(key.trim())) {
+			if (view.isError() == true) {
 
+				value = "redirect:/accessDenied";
+
+			} else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("distIdList", distId);
+				Info info = rest.postForObject(Constants.url + "/deleteDists", map, Info.class);
+				value = "redirect:/showProgDistinctive";
+			}
 		} else {
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("distIdList", distId);
-			Info info = rest.postForObject(Constants.url + "/deleteDists", map, Info.class);
 			value = "redirect:/showProgDistinctive";
 		}
+		SessionKeyGen.changeSessionKey(request);
 		return value;
 
 	}
@@ -544,24 +553,32 @@ public class InstituteDistController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteHumanValues/{valueId}", method = RequestMethod.GET)
-	public String deleteHumanValues(@PathVariable("valueId") int valueId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteHumanValues/{valueId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteHumanValues(@PathVariable("valueId") int valueId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String value = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("showAddHumanValues", "showHumanValues", "0", "0", "0", "1",
 				newModuleList);
-		if (view.isError() == true) {
+		String key = (String) session.getAttribute("generatedKey");
 
-			value = "redirect:/accessDenied";
+		if (hashKey.trim().equals(key.trim())) {
+			if (view.isError() == true) {
 
+				value = "redirect:/accessDenied";
+
+			} else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("valueIdList", valueId);
+				Info info = rest.postForObject(Constants.url + "/deleteHumanVlaues", map, Info.class);
+				value = "redirect:/showHumanValues";
+			}
 		} else {
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("valueIdList", valueId);
-			Info info = rest.postForObject(Constants.url + "/deleteHumanVlaues", map, Info.class);
 			value = "redirect:/showHumanValues";
 		}
+		SessionKeyGen.changeSessionKey(request);
 		return value;
 
 	}
@@ -746,9 +763,11 @@ public class InstituteDistController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		}
 
 		catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("EXCE in valueInsertRes " + e.getMessage());
 			e.printStackTrace();
 
@@ -798,24 +817,33 @@ public class InstituteDistController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteResearchCenter/{rcId}", method = RequestMethod.GET)
-	public String deleteResearchCenter(@PathVariable("rcId") int rcId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteResearchCenter/{rcId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteResearchCenter(@PathVariable("rcId") int rcId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String value = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showAddResearchCenter", "showResearchCenter", "0", "0", "0", "1",
-				newModuleList);
-		if (view.isError() == true) {
+		Info view = AccessControll.checkAccess("deleteResearchCenter/{rcId}/{hashKey}", "showResearchCenter", "0", "0",
+				"0", "1", newModuleList);
 
-			value = "redirect:/accessDenied";
+		String key = (String) session.getAttribute("generatedKey");
 
+		if (hashKey.trim().equals(key.trim())) {
+			if (view.isError() == true) {
+
+				value = "redirect:/accessDenied";
+
+			} else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("rcIdList", rcId);
+				Info info = rest.postForObject(Constants.url + "/deleteResearchCenter", map, Info.class);
+				value = "redirect:/showResearchCenter";
+			}
 		} else {
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("rcIdList", rcId);
-			Info info = rest.postForObject(Constants.url + "/deleteResearchCenter", map, Info.class);
 			value = "redirect:/showResearchCenter";
 		}
+		SessionKeyGen.changeSessionKey(request);
 		return value;
 
 	}

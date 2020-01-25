@@ -531,7 +531,7 @@
 		}
 		
 		function deleteInstituteVission(instVisionId) {
- 
+			var token = document.getElementById("token").value;
 				//$('#example-1 td').remove();
 				
 				var x=confirm("Are you sure want to delete this record")
@@ -540,7 +540,8 @@
 				$.getJSON('${deleteInstituteVission}',
 
 				{
-					instVisionId : instVisionId,  
+					instVisionId : instVisionId, 
+					token:token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -663,6 +664,7 @@
 		function deleteInstituteMission(instMissionId) {
 			 
 			//$('#example-1 td').remove();
+			var token1 = document.getElementById("token1").value;
 				var x=confirm("Are you sure want to delete this record")
 				if(x==true){
 			$("#loader2").show();
@@ -670,7 +672,8 @@
 			$.getJSON('${deleteInstituteMission}',
 
 			{
-				instMissionId : instMissionId,  
+				instMissionId : instMissionId,
+				token1:token1,
 				ajax : 'true'
 
 			}, function(data) {

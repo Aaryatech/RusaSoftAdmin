@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -93,6 +96,17 @@ legend.scheduler-border {
 
 
 
+				<%
+					UUID uuid = UUID.randomUUID();
+					MessageDigest md = MessageDigest.getInstance("MD5");
+					byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+					BigInteger number = new BigInteger(1, messageDigest);
+					String hashtext = number.toString(16);
+					session = request.getSession();
+					session.setAttribute("generatedKey", hashtext);
+				%>
+
+
 
 
 				<div class="col-lg-12">
@@ -105,11 +119,12 @@ legend.scheduler-border {
 								<%-- <a href="${pageContext.request.contextPath}/showAddHumanValues"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
 								<c:if test="${addAccess == 0}">
-								<a title="Add"
-									href="${pageContext.request.contextPath}/showAddHumanValues"><button
-										type="button" class="btn btn-success">
-										<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-									</button></a></c:if>
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddHumanValues"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 							</div>
 
 						</header>
@@ -147,7 +162,7 @@ legend.scheduler-border {
 														<th rowspan="2">Sr No</th>
 														<th rowspan="2">Title of Programme</th>
 														<th style="text-align: center;" colspan="2">Duration</th>
-														<th rowspan="2">No. of  Participants</th>
+														<th rowspan="2">No. of Participants</th>
 														<th rowspan="2">Action</th>
 													</tr>
 													<tr>
@@ -175,10 +190,10 @@ legend.scheduler-border {
 
 															</c:forEach>
  --%>
- 															
+
 															<td style="text-align: center"><c:out
 																	value="${value.activityName}" /></td>
-																	
+
 															<td style="text-align: center"><c:out
 																	value="${value.activityFromdt}" /></td>
 															<td style="text-align: center"><c:out
@@ -196,7 +211,7 @@ legend.scheduler-border {
 																		class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 																</c:if> <c:if test="${deleteAccess == 0}">
 																	<a
-																		href="${pageContext.request.contextPath}/deleteHumanValues/${value.valueId}"
+																		href="${pageContext.request.contextPath}/deleteHumanValues/${value.valueId}/<%out.println(hashtext);%>"
 																		onClick="return confirm('Are you sure want to delete this record');"
 																		rel="tooltip" data-color-class="danger" title="Delete"
 																		data-animate=" animated fadeIn " data-toggle="tooltip"

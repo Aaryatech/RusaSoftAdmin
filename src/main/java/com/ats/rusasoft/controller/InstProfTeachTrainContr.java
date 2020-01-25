@@ -26,6 +26,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.model.prodetail.GetAlumni;
 import com.ats.rusasoft.model.Hod;
 import com.ats.rusasoft.model.Info;
@@ -240,7 +241,9 @@ public class InstProfTeachTrainContr {
 
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save insertTeachTraing  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -393,64 +396,76 @@ public class InstProfTeachTrainContr {
 
 	}
 
-	@RequestMapping(value = "/deleteInstTraining/{trainingId}/{trainingType}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteInstTraining/{trainingId}/{trainingType}/{hashKey}", method = RequestMethod.GET)
 	public String deleteInstTraining(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int trainingId, @PathVariable int trainingType) {
+			@PathVariable int trainingId, @PathVariable int trainingType, @PathVariable String hashKey) {
 		String redirect = null;
 		try {
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			String viewMapping = null;
-			if (trainingType == 1) {
-				viewMapping = "showProfDevelopment";
+			if (hashKey.trim().equals(key.trim())) {
+				if (trainingType == 1) {
+					viewMapping = "showProfDevelopment";
 
-			} else {
-
-				viewMapping = "showAdminDevelopment";
-			}
-			Info deleteAccess = AccessControll.checkAccess("deleteQualiInit/{hodId}", viewMapping, "0", "0", "0", "1",
-					newModuleList);
-
-			if (deleteAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				if (trainingId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("trainingId");
-					// System.out.println("id are" + instIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String quaInitList = sb.toString();
-					quaInitList = quaInitList.substring(0, quaInitList.length() - 1);
-
-					map.add("trainingIdList", quaInitList);
 				} else {
 
-					System.err.println("Single Record delete ");
-					map.add("trainingIdList", trainingId);
+					viewMapping = "showAdminDevelopment";
 				}
+				Info deleteAccess = AccessControll.checkAccess(
+						"deleteInstTraining/{trainingId}/{trainingType}/{hashKey}", viewMapping, "0", "0", "0", "1",
+						newModuleList);
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteInstTraining", map, Info.class);
+				if (deleteAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
+				} else {
+					if (trainingId == 0) {
 
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("trainingId");
+						// System.out.println("id are" + instIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String quaInitList = sb.toString();
+						quaInitList = quaInitList.substring(0, quaInitList.length() - 1);
+
+						map.add("trainingIdList", quaInitList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("trainingIdList", trainingId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteInstTraining", map, Info.class);
+
+					if (trainingType == 1) {
+						redirect = "redirect:/showProfDevelopment";
+					} else {
+						redirect = "redirect:/showAdminDevelopment";
+					}
+					// redirect = "redirect:/showAddQualityInitiative";
+				}
+			} else {
 				if (trainingType == 1) {
 					redirect = "redirect:/showProfDevelopment";
 				} else {
 					redirect = "redirect:/showAdminDevelopment";
 				}
-				// redirect = "redirect:/showAddQualityInitiative";
+
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 
 			System.err.println(" Exception In deleteQualiInit at InstProfTeachTrainCont Contr " + e.getMessage());
 

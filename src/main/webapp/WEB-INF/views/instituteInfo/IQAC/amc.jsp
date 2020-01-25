@@ -3,6 +3,12 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
+
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -54,21 +60,35 @@
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
 
-								  <c:if test="${addAccess == 0}"> 
-								<%-- <a
+								<c:if test="${addAccess == 0}">
+									<%-- <a
 									href="${pageContext.request.contextPath}/showAddAMC"><button
 										type="button" class="btn btn-success">Add</button></a>  --%>
-					<a title="Add"
-											href="${pageContext.request.contextPath}/showAddAMC"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>
-									</c:if>
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddAMC"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 
-							
+
 
 							</div>
 
 						</header>
-						<form action="${pageContext.request.contextPath}/deleteAMCS/0"
+
+
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
+						<form
+							action="${pageContext.request.contextPath}/deleteAMCS/0/<%out.println(hashtext);%>"
 							method="get" id="libListForm">
 							<div class="content-body">
 								<div class="row">
@@ -87,70 +107,73 @@
 									<div class="col-xs-12">
 
 
-										
 
-											<table id="example-1" class="display dataTable" role="grid"
-												aria-describedby="example-4_info" style="width: 100%;">
-												<thead>
 
+										<table id="example-1" class="display dataTable" role="grid"
+											aria-describedby="example-4_info" style="width: 100%;">
+											<thead>
+
+												<tr>
+													<th class="check" style="text-align: center; width: 5%;"><input
+														type="checkbox" name="selAll" id="selAll"
+														onClick="selectedInst(this)" /> Select All</th>
+													<th>Sr No</th>
+													<th>Title of Maintenance</th>
+													<th>Name of Company</th>
+													<th>AMC Expenditure</th>
+													<th>Action</th>
+
+												</tr>
+
+
+											</thead>
+
+
+
+
+											<tbody>
+												<c:forEach items="${amcList}" var="amcList"
+													varStatus="count">
 													<tr>
-														<th class="check" style="text-align: center; width: 5%;"
-															><input type="checkbox" name="selAll"
-															id="selAll" onClick="selectedInst(this)" /> Select All</th>
-														<th >Sr No</th>
-														<th >Title of Maintenance</th>
-														<th >Name of Company</th>
-														<th >AMC Expenditure</th>
-														<th>Action</th>
-
-													</tr>
-												
-
-												</thead>
+														<td style="text-align: center;"><input
+															type="checkbox" class="chk" name="amcIds"
+															id="amcIds${count.index+1}" value="${amcList.amcId}" /></td>
+														<td style="text-align: center;">${count.index+1}</td>
+														<td>${amcList.amcTitle}</td>
+														<td>${amcList.amcCompany}</td>
+														<td style="text-align: right;">${amcList.amcExpenditure}</td>
 
 
 
-
-												<tbody>
-													<c:forEach items="${amcList}" var="amcList"
-														varStatus="count">
-														<tr>
-															<td style="text-align: center; "><input type="checkbox" class="chk" name="amcIds"
-																id="amcIds${count.index+1}" value="${amcList.amcId}" /></td>
-															<td style="text-align: center; ">${count.index+1}</td>
-															<td>${amcList.amcTitle}</td>
-															<td>${amcList.amcCompany}</td>
-															<td style="text-align: right; ">${amcList.amcExpenditure}</td>
-													
-
-
-															<td style="text-align: center;">
-																  <c:if test="${editAccess == 0}">  <a
-																href="#" onclick="showEditAmc(${amcList.amcId})"><span
-																	class="glyphicon glyphicon-edit"  title="Edit" data-original-title="Edit"
+														<td style="text-align: center;"><c:if
+																test="${editAccess == 0}">
+																<a href="#" onclick="showEditAmc(${amcList.amcId})"><span
+																	class="glyphicon glyphicon-edit" title="Edit"
+																	data-original-title="Edit"
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-																</c:if> 
-																  <c:if test="${deleteAccess == 0}">
+															</c:if> <c:if test="${deleteAccess == 0}">
 																&nbsp;&nbsp;&nbsp;&nbsp; <a
-																href="${pageContext.request.contextPath}/deleteAMCS/${amcList.amcId}"
-																onClick="return confirm('Are you sure want to delete this record');"
-																rel="tooltip" data-color-class="danger" title="Delete" data-original-title="Delete"
-																data-animate=" animated fadeIn " data-toggle="tooltip"
-																data-original-title="Delete  record"><span
+																	href="${pageContext.request.contextPath}/deleteAMCS/${amcList.amcId}/<%out.println(hashtext);%>"
+																	onClick="return confirm('Are you sure want to delete this record');"
+																	rel="tooltip" data-color-class="danger" title="Delete"
+																	data-original-title="Delete"
+																	data-animate=" animated fadeIn " data-toggle="tooltip"
+																	data-original-title="Delete  record"><span
 																	class="glyphicon glyphicon-remove"></span></a>
-																	 	</c:if>
-															</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-									
+															</c:if></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+
 										<div class="col-lg-1">
-  <c:if test="${deleteAccess==0}">
-											<button class="btn btn-primary" 
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
+											<c:if test="${deleteAccess==0}">
+												<button class="btn btn-primary" id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;">
+													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+												</button>
+											</c:if>
 											<input type="hidden" id="edit_amc_id" name="edit_amc_id"
 												value="0">
 
@@ -257,7 +280,7 @@
 		}
 
 	</script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	function hideText() {
 		//alert("hii");
 		var qualType = document.getElementById("MOU_agency").value

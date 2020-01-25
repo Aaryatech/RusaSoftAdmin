@@ -30,6 +30,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.SettingKeyValue;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Info;
@@ -406,7 +407,6 @@ public class QualityInitiativeController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
- 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
 				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -515,7 +515,9 @@ public class QualityInitiativeController {
 
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save insertInstQuaInitiative  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -609,50 +611,56 @@ public class QualityInitiativeController {
 
 	// deleteInstiQuality/${instTrain.qualityId}
 
-	@RequestMapping(value = "/deleteInstiQuality/{qualityId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteInstiQuality/{qualityId}/{hashKey}", method = RequestMethod.GET)
 	public String deleteInstiQuality(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int qualityId) {
+			@PathVariable int qualityId, @PathVariable String hashKey) {
 		String redirect = null;
+		HttpSession session = request.getSession();
+		String key = (String) session.getAttribute("generatedKey");
 		try {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
-			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info deleteAccess = AccessControll.checkAccess("deleteInstiQuality/{qualityId}",
 					"showInternalQualityInitiative", "0", "0", "0", "1", newModuleList);
-			if (deleteAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				if (qualityId == 0) {
 
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("qualityId");
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String qualityIdList = sb.toString();
-					qualityIdList = qualityIdList.substring(0, qualityIdList.length() - 1);
-
-					map.add("qualityIdList", qualityIdList);
+			if (hashKey.trim().equals(key.trim())) {
+				if (deleteAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
 				} else {
+					if (qualityId == 0) {
 
-					System.err.println("Single Record delete ");
-					map.add("qualityIdList", qualityId);
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("qualityId");
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String qualityIdList = sb.toString();
+						qualityIdList = qualityIdList.substring(0, qualityIdList.length() - 1);
+
+						map.add("qualityIdList", qualityIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("qualityIdList", qualityId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteInstQualities", map, Info.class);
+
+					redirect = "redirect:/showInternalQualityInitiative";
 				}
-
-				Info errMsg = rest.postForObject(Constants.url + "deleteInstQualities", map, Info.class);
-
+			} else {
 				redirect = "redirect:/showInternalQualityInitiative";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteInstiQuality at QualInitiave  Contr " + e.getMessage());
 			e.printStackTrace();
 

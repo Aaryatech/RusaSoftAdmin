@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.model.Info;
 import com.ats.rusasoft.model.InstitueMission;
 import com.ats.rusasoft.model.InstitueVision;
@@ -133,9 +134,9 @@ public class InstituteVissionMissionController {
 				List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setInstitueVisionList(list);
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -154,25 +155,39 @@ public class InstituteVissionMissionController {
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
-
-			int instVisionId = Integer.parseInt(request.getParameter("instVisionId"));
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("instVisionId", instVisionId);
-			info = rest.postForObject(Constants.url + "/deleteInstiuteVision", map, Info.class);
-			programDetailSaveResponse.setInfo(info);
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			map = new LinkedMultiValueMap<>();
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
-					InstitueVision[].class);
-			List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
-			programDetailSaveResponse.setInstitueVisionList(list);
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
+			if (token.trim().equals(key.trim())) {
+
+				int instVisionId = Integer.parseInt(request.getParameter("instVisionId"));
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instVisionId", instVisionId);
+				info = rest.postForObject(Constants.url + "/deleteInstiuteVision", map, Info.class);
+				programDetailSaveResponse.setInfo(info);
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
+						InstitueVision[].class);
+				List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setInstitueVisionList(list);
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map = new LinkedMultiValueMap<>();
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				InstitueVision[] arry = rest.postForObject(Constants.url + "/getInsituteVisionList", map,
+						InstitueVision[].class);
+				List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setInstitueVisionList(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -222,7 +237,6 @@ public class InstituteVissionMissionController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			if (token.trim().equals(key.trim())) {
 
-				
 				Date date = new Date();
 
 				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -273,9 +287,9 @@ public class InstituteVissionMissionController {
 				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setInstitueMissionList(list);
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -294,24 +308,35 @@ public class InstituteVissionMissionController {
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
-
-			int instMissionId = Integer.parseInt(request.getParameter("instMissionId"));
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("instMissionId", instMissionId);
-			info = rest.postForObject(Constants.url + "/deleteInstiuteMission", map, Info.class);
-			programDetailSaveResponse.setInfo(info);
-
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			map.add("instituteId", userObj.getGetData().getUserInstituteId());
-			InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
-					InstitueMission[].class);
-			List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
-			programDetailSaveResponse.setInstitueMissionList(list);
+			String token = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey1");
+			if (token.trim().equals(key.trim())) {
+				int instMissionId = Integer.parseInt(request.getParameter("instMissionId"));
 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("instMissionId", instMissionId);
+				info = rest.postForObject(Constants.url + "/deleteInstiuteMission", map, Info.class);
+				programDetailSaveResponse.setInfo(info);
+
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
+						InstitueMission[].class);
+				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setInstitueMissionList(list);
+			} else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				map.add("instituteId", userObj.getGetData().getUserInstituteId());
+				InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
+						InstitueMission[].class);
+				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setInstitueMissionList(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");

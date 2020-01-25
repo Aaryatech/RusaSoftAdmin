@@ -2061,7 +2061,12 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/insertInstituteInfo", method = RequestMethod.POST)
+
+
+
+
+
+@RequestMapping(value = "/insertInstituteInfo", method = RequestMethod.POST)
 	public String insertInstituteInfo(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertInstituteInfo");
 		ModelAndView model = null;
@@ -2218,8 +2223,9 @@ public class LibraryController {
 					a = "redirect:/showInstituteInfoList";
 
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save innfo stitute I  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -2228,56 +2234,59 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/deleteInstituteInfo/{instId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteInstituteInfo/{instId}/{hashKey}", method = RequestMethod.GET)
 	public String deleteInstituteInfo(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int instId) {
+			@PathVariable int instId, @PathVariable String hashKey) {
 		HttpSession session = request.getSession();
 		String a = null;
-
+		String key = (String) session.getAttribute("generatedKey");
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteInstituteInfo/{instId}", "showInstituteInfoList", "0", "0", "0",
+		Info view = AccessControll.checkAccess("deleteInstituteInfo/{instId}/{hashKey}", "showInstituteInfoList", "0", "0", "0",
 				"1", newModuleList);
 		try {
-			if (view.isError() == true) {
+			if (hashKey.trim().equals(key.trim())) {
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true) {
 
-			}
+					a = "redirect:/accessDenied";
 
-			else {
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (instId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("instIds");
-					// System.out.println("id are" + instIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String instIdList = sb.toString();
-					instIdList = instIdList.substring(0, instIdList.length() - 1);
-
-					map.add("instIdList", instIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("instIdList", instId);
 				}
+ 				else {
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (instId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("instIds");
+						// System.out.println("id are" + instIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String instIdList = sb.toString();
+						instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+						map.add("instIdList", instIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("instIdList", instId);
+					}
+					a = "redirect:/showInstituteInfoList";
+					Info errMsg = rest.postForObject(Constants.url + "deleteInstituteInfo", map, Info.class);
+				}
+			} else {
 				a = "redirect:/showInstituteInfoList";
-				Info errMsg = rest.postForObject(Constants.url + "deleteInstituteInfo", map, Info.class);
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteInstituteInfo at Master Contr " + e.getMessage());
-
-			e.printStackTrace();
+ 			e.printStackTrace();
 
 		}
 
