@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.model.prodetail.AlumniDetail;
 import com.ats.rusasoft.master.model.prodetail.GetAlumni;
 import com.ats.rusasoft.model.EContentDevFacility;
@@ -412,15 +413,19 @@ public class InfraStructureModController {
 
 	// deleteInfraArea
 
-	@RequestMapping(value = "/deleteInfraArea/{instInfraAreaId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteInfraArea/{instInfraAreaId}/{token}", method = RequestMethod.GET)
 	public String deleteaccOff(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int instInfraAreaId) {
+			@PathVariable int instInfraAreaId, @PathVariable String token) {
 		String redirect = null;
 		try {
+			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			HttpSession session = request.getSession();
+			
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
@@ -455,10 +460,15 @@ public class InfraStructureModController {
 
 				redirect = "redirect:/showInstInfraAreawise";
 			}
+
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
+			
 			System.err.println(" Exception In deleteInstInfraArea at Master Contr " + e.getMessage());
-
 			e.printStackTrace();
 
 		}
@@ -679,24 +689,26 @@ public class InfraStructureModController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteEContent/{contentId}", method = RequestMethod.GET)
-	public String deleteEContent(@PathVariable("contentId") int contentId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteEContent/{contentId}/{token}", method = RequestMethod.GET)
+	public String deleteEContent(@PathVariable("contentId") int contentId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 		String a = null;
 		try {
-
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+
+			
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			Info view = AccessControll.checkAccess("deleteEContent/{contentId}", "econtentDevelopment", "0", "0", "0",
+			Info view = AccessControll.checkAccess("deleteEContent/{contentId}/{token}", "econtentDevelopment", "0", "0", "0",
 					"1", newModuleList);
 
 			if (view.isError() == true)
 
 			{
-
 				a = "redirect:/accessDenied";
-
 			}
 
 			else {
@@ -707,8 +719,13 @@ public class InfraStructureModController {
 						EContentDevFacility.class);
 				a = "redirect:/econtentDevelopment";
 			}
-		} catch (Exception e) {
 
+			}else {				
+				a = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}

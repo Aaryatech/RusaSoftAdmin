@@ -3,6 +3,10 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -99,133 +103,22 @@
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
-									<%-- <form class="form-horizontal"
-										action="${pageContext.request.contextPath}/insertInstInfraArea"
-										method="post" name="form_sample_2" id="form_sample_2">
-
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="page_order">Area
-												Type <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<select id="area_type" name="area_type" class="form-control"
-													onchange="showAreaName()">
-
-													<c:forEach items="${areaTypeList}" var="areaTypes">
-														<c:choose>
-															<c:when
-																test="${areaTypes.designationId == editFaculty.currentDesignationId}">
-																<option value="${makeList.designationId}"
-																	selected="selected">${makeList.designationName}</option>
-															</c:when>
-															<c:otherwise>
-														<option value="${areaTypes.infraAreaTypeId}">${areaTypes.areaTypeName}</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-
-												</select> <span class="error_form text-danger" id="area_type_field"
-													style="display: none;">Please select area type</span>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="page_order">Area
-												Name <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<select id="area_name" name="area_name" class="form-control"
-													onchange="showDiv()">
-
-													<c:forEach items="${areaTypeList}" var="areaTypes">
-														<c:choose>
-															<c:when
-																test="${areaTypes.designationId == editFaculty.currentDesignationId}">
-																<option value="${makeList.designationId}"
-																	selected="selected">${makeList.designationName}</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${areaTypes.infraAreaTypeId}">${areaTypes.areaTypeName}</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-
-												</select> <span class="error_form text-danger" id="area_name_field"
-													style="display: none;">Please select Area Type</span>
-											</div>
-										</div>
-
-										<div class="form-group" style="display: none"
-											id="area_name_div">
-											<label class="control-label col-sm-2" for="other_area">Other
-												Area Name <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" maxlength="200"
-													onchange="trim(this)" id="other_area" name="other_area"
-													autocomplete="off" placeholder="Enter Area Location">
-												<span class="error_form text-danger" id="other_area_field"
-													style="display: none;">Please enter other area name</span>
-
-											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="loc_of_area">Location
-												Of Area <span class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" maxlength="200"
-													onchange="trim(this)" id="loc_of_area" name="loc_of_area"
-													autocomplete="off" placeholder="Enter Area Location">
-												<span class="error_form text-danger" id="loc_of_area_field"
-													style="display: none;">Please enter location of area</span>
-
-											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="control-label col-sm-2"
-												for="quality_initiative_name">Area in Sq. M. <span
-												class="text-danger">*</span>
-											</label>
-											<div class="col-sm-6">
-												<input type="text" class="form-control" maxlength="200"
-													onchange="trim(this)" id="area_in_sqm" name="area_in_sqm"
-													autocomplete="off" placeholder="Enter Area In Square Meter">
-												<span class="error_form text-danger" id="area_in_sqm_field"
-													style="display: none;">Please enter area in square
-													meter</span>
-
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
-												<button type="submit" id="sub1" class="btn btn-primary"
-													onclick="submit_f(1)">
-													<i class="${sessionScope.saveIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Save
-												</button>
-												<!-- <input
-													type="submit" class="btn btn-primary" onclick="submit_f(0)"
-													value="Save &
-																		Next"> -->
-
-											</div>
-										</div>
-										<input type="hidden" id="instInfraAreaId"
-											name="instInfraAreaId" value="0"> <input
-											type="hidden" id="is_view" name="is_view" value="0">
-									</form>
- --%>
 
 									<div class="form-group">
 										<form
 											action="${pageContext.request.contextPath}/deleteInfraArea/0"
 											method="get" id="insListForm">
+											
+											<%
+		UUID uuid = UUID.randomUUID();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+		BigInteger number = new BigInteger(1, messageDigest);
+		String hashtext = number.toString(16);
+		session = request.getSession();
+		session.setAttribute("generatedKey", hashtext);
+	%>
+											
 											<input type="hidden" value="0" id="instInfraAreaId" name="instInfraAreaId">
 
 											<table class="table table-striped dt-responsive display"
@@ -269,7 +162,7 @@
 																		rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 															</c:if> <c:if test="${deleteAccess==0}">
 																	<a
-																		href="${pageContext.request.contextPath}/deleteInfraArea/${instInfraArea.instInfraAreaId}"
+																		href="${pageContext.request.contextPath}/deleteInfraArea/${instInfraArea.instInfraAreaId}/<%out.println(hashtext);%>"
 																		onClick="return confirm('Are you sure want to delete this record');"
 																		rel="tooltip" data-color-class="danger" title="Delete"
 																		data-animate=" animated fadeIn " data-toggle="tooltip"
@@ -297,8 +190,8 @@
 											
 										</form>
 									</div>
-									<p class="desc text-danger fontsize11">Notice : * Fields
-										are mandatory.</p>
+									<!-- <p class="desc text-danger fontsize11">Notice : * Fields
+										are mandatory.</p> -->
 
 								</div>
 							</div>
