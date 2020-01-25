@@ -96,7 +96,15 @@
 
 						</header>
 
-
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
@@ -106,15 +114,7 @@
 											action="${pageContext.request.contextPath}/insertLinkageMaster"
 											method="post" name="form_sample_2" id="form_sample_2">
 
-											<%
-												UUID uuid = UUID.randomUUID();
-													MessageDigest md = MessageDigest.getInstance("MD5");
-													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-													BigInteger number = new BigInteger(1, messageDigest);
-													String hashtext = number.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey", hashtext);
-											%>
+
 											<input type="hidden" value="<%out.println(hashtext);%>"
 												name="token" id="token">
 
@@ -169,7 +169,7 @@
 
 									<div class="form-group">
 										<form
-											action="${pageContext.request.contextPath}/deleteLinkages/0"
+											action="${pageContext.request.contextPath}/deleteLinkages/0/<%out.println(hashtext);%>"
 											method="get" id="libListForm">
 											<table class="table table-striped dt-responsive display"
 												id="example-1">
@@ -213,7 +213,7 @@
 																		data-animate=" animated fadeIn " rel="tooltip"></span></a>
 																</c:if> <c:if test="${deleteAccess == 0}">
 																&nbsp;&nbsp;&nbsp;&nbsp; <a
-																		href="${pageContext.request.contextPath}/deleteLinkages/${colList.linknameId}"
+																		href="${pageContext.request.contextPath}/deleteLinkages/${colList.linknameId}/<%out.println(hashtext);%>"
 																		onClick="return confirm('Are you sure want to delete this record');"
 																		rel="tooltip" data-color-class="danger" title="Delete"
 																		data-original-title="Delete"

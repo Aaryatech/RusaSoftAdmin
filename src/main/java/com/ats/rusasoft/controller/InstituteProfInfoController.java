@@ -28,6 +28,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.FacultyEmpowerment;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.GetStudentDetail;
@@ -1301,7 +1302,9 @@ public class InstituteProfInfoController {
 				System.err.println("in else");
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("EXCE in linkMasterInsertRes " + e.getMessage());
 			e.printStackTrace();
 
@@ -1390,56 +1393,63 @@ public class InstituteProfInfoController {
 
 	}
 
-	@RequestMapping(value = "/deleteLinkages/{linkId}", method = RequestMethod.GET)
-	public String deleteLinkages(HttpServletRequest request, HttpServletResponse response, @PathVariable int linkId) {
+	@RequestMapping(value = "/deleteLinkages/{linkId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteLinkages(HttpServletRequest request, HttpServletResponse response, @PathVariable int linkId,
+			@PathVariable String hashKey) {
 		HttpSession session = request.getSession();
 		String a = null;
+		String key = (String) session.getAttribute("generatedKey");
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteLinkages/{linkId}", "showMasterCollaborationLinkages", "0", "0",
-				"0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("deleteLinkages/{linkId}/{hashKey}", "showMasterCollaborationLinkages",
+				"0", "0", "0", "1", newModuleList);
 
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			}
+					a = "redirect:/accessDenied";
 
-			else {
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (linkId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] linknameIds = request.getParameterValues("linknameIds");
-					// System.out.println("id are" + "linknameIds");
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < linknameIds.length; i++) {
-						sb = sb.append(linknameIds[i] + ",");
-
-					}
-					String linknameIdList = sb.toString();
-					linknameIdList = linknameIdList.substring(0, linknameIdList.length() - 1);
-
-					map.add("linknameIdList", linknameIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("linknameIdList", linkId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteLinkName", map, Info.class);
+				else {
 
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (linkId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] linknameIds = request.getParameterValues("linknameIds");
+						// System.out.println("id are" + "linknameIds");
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < linknameIds.length; i++) {
+							sb = sb.append(linknameIds[i] + ",");
+
+						}
+						String linknameIdList = sb.toString();
+						linknameIdList = linknameIdList.substring(0, linknameIdList.length() - 1);
+
+						map.add("linknameIdList", linknameIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("linknameIdList", linkId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteLinkName", map, Info.class);
+
+					a = "redirect:/showMasterCollaborationLinkages";
+
+				}
+			} else {
 				a = "redirect:/showMasterCollaborationLinkages";
-
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
 
 			e.printStackTrace();

@@ -31,6 +31,7 @@ import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Commons;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.Journal;
 import com.ats.rusasoft.model.AccOfficer;
 import com.ats.rusasoft.model.Dept;
@@ -1305,54 +1306,62 @@ public class MasterController {
 
 	// Approve Inst
 
-	@RequestMapping(value = "/approveInstitutes/{instId}", method = RequestMethod.GET)
-	public String approveInstitutes(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int instId) {
+	@RequestMapping(value = "/approveInstitutes/{instId}/{hashKey}", method = RequestMethod.GET)
+	public String approveInstitutes(HttpServletRequest request, HttpServletResponse response, @PathVariable int instId,
+			@PathVariable String hashKey) {
 
 		String redirect = null;
+		HttpSession session = request.getSession();
+		String key = (String) session.getAttribute("generatedKey");
 		try {
-			HttpSession session = request.getSession();
 
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			if (hashKey.trim().equals(key.trim())) {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			Info addAccess = AccessControll.checkAccess("approveInstitutes/{instId}", "showInstituteList", "1", "0",
-					"0", "0", newModuleList);
+				Info addAccess = AccessControll.checkAccess("approveInstitutes/{instId}/{hashKey}", "showInstituteList", "1", "0",
+						"0", "0", newModuleList);
 
-			if (addAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (instId == 0) {
-
-					System.err.println("Multiple records approve ");
-					String[] instIds = request.getParameterValues("instIds");
-					//// System.out.println("id are" + instIds);
-
-					StringBuilder sb = new StringBuilder();
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String instIdList = sb.toString();
-					instIdList = instIdList.substring(0, instIdList.length() - 1);
-
-					map.add("instIdList", instIdList);
-					map.add("aprUserId", userObj.getUserId());
+				if (addAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
 				} else {
-					map.add("aprUserId", userObj.getUserId());
 
-					System.err.println("Single Record delete ");
-					map.add("instIdList", instId);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (instId == 0) {
+
+						System.err.println("Multiple records approve ");
+						String[] instIds = request.getParameterValues("instIds");
+						//// System.out.println("id are" + instIds);
+
+						StringBuilder sb = new StringBuilder();
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String instIdList = sb.toString();
+						instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+						map.add("instIdList", instIdList);
+						map.add("aprUserId", userObj.getUserId());
+					} else {
+						map.add("aprUserId", userObj.getUserId());
+
+						System.err.println("Single Record delete ");
+						map.add("instIdList", instId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "approveInstitutes", map, Info.class);
+					redirect = "redirect:/showInstituteList";
 				}
-
-				Info errMsg = rest.postForObject(Constants.url + "approveInstitutes", map, Info.class);
+			} else {
+				
 				redirect = "redirect:/showInstituteList";
 			}
+			
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
 
 			e.printStackTrace();
@@ -1490,8 +1499,9 @@ public class MasterController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save dept  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -1540,50 +1550,60 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/deleteDepts/{deptId}", method = RequestMethod.GET)
-	public String deleteDepts(HttpServletRequest request, HttpServletResponse response, @PathVariable int deptId) {
+	@RequestMapping(value = "/deleteDepts/{deptId}/{keyHash}", method = RequestMethod.GET)
+	public String deleteDepts(HttpServletRequest request, HttpServletResponse response, @PathVariable int deptId,
+			@PathVariable String keyHash) {
 
 		String redirect = null;
 		try {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
 			HttpSession session = request.getSession();
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info deleteAccess = AccessControll.checkAccess("showEditDept", "showDeptList", "0", "0", "0", "1",
-					newModuleList);
-			if (deleteAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
-				if (deptId == 0) {
+			if (keyHash.equals(key.trim())) {
 
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("deptIds");
-					//// System.out.println("id are" + instIds);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-					StringBuilder sb = new StringBuilder();
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
-
-					}
-					String deptIdList = sb.toString();
-					deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
-
-					map.add("deptIdList", deptIdList);
+				Info deleteAccess = AccessControll.checkAccess("deleteDepts/{deptId}/{keyHash}", "showDeptList", "0",
+						"0", "0", "1", newModuleList);
+				if (deleteAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
 				} else {
+					if (deptId == 0) {
 
-					System.err.println("Single Record delete ");
-					map.add("deptIdList", deptId);
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("deptIds");
+						//// System.out.println("id are" + instIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String deptIdList = sb.toString();
+						deptIdList = deptIdList.substring(0, deptIdList.length() - 1);
+
+						map.add("deptIdList", deptIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("deptIdList", deptId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteDepts", map, Info.class);
+					redirect = "redirect:/showDeptList";
 				}
+			} else {
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteDepts", map, Info.class);
 				redirect = "redirect:/showDeptList";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteDepts at Master Contr " + e.getMessage());
 
 			e.printStackTrace();

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.model.Dept;
 import com.ats.rusasoft.model.Designation;
 import com.ats.rusasoft.model.Info;
@@ -150,7 +151,6 @@ public class PrincipalController {
 					facultyId = 0;
 				}
 
-			 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				int instituteId = (int) session.getAttribute("instituteId");
 
@@ -336,9 +336,9 @@ public class PrincipalController {
 						session.setAttribute("successMsg", "Record Not Updated");
 					}
 				}
-
+				SessionKeyGen.changeSessionKey(request);
 			} catch (Exception e) {
-
+				SessionKeyGen.changeSessionKey(request);
 				System.err.println("exception In showRegPrincipal at Principal Contr" + e.getMessage());
 				e.printStackTrace();
 
