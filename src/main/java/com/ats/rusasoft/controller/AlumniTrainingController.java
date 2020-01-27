@@ -789,8 +789,9 @@ public class AlumniTrainingController {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save insertTrainPlace  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -1171,8 +1172,9 @@ public class AlumniTrainingController {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save insertHigherEduDetail  " + e.getMessage());
 			e.printStackTrace();
 		}
