@@ -432,54 +432,62 @@ public class AlumniTrainingController {
 
 	// deleteAlum
 
-	@RequestMapping(value = "/deleteAlum/{alumniId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteAlum/{alumniId}/{token}", method = RequestMethod.GET)
 	public String deleteInstitutes(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int alumniId) {
+			@PathVariable int alumniId, @PathVariable String token) {
 		String a = null;
 		try {
-
 			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			if (token.trim().equals(key.trim())) {
+				
 
-			Info delAccess = AccessControll.checkAccess("deleteAlum", "showAlumini", "0", "0", "0", "1", newModuleList);
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			if (delAccess.isError() == false) {
-				RestTemplate restTemplate = new RestTemplate();
+				Info delAccess = AccessControll.checkAccess("deleteAlum", "showAlumini", "0", "0", "0", "1",
+						newModuleList);
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (alumniId == 0) {
+				if (delAccess.isError() == false) {
+					RestTemplate restTemplate = new RestTemplate();
 
-					System.err.println("Multiple records delete ");
-					String[] instIds = request.getParameterValues("instIds");
-					// System.out.println("id are" + instIds);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (alumniId == 0) {
 
-					StringBuilder sb = new StringBuilder();
+						System.err.println("Multiple records delete ");
+						String[] instIds = request.getParameterValues("instIds");
+						// System.out.println("id are" + instIds);
 
-					for (int i = 0; i < instIds.length; i++) {
-						sb = sb.append(instIds[i] + ",");
+						StringBuilder sb = new StringBuilder();
 
+						for (int i = 0; i < instIds.length; i++) {
+							sb = sb.append(instIds[i] + ",");
+
+						}
+						String instIdList = sb.toString();
+						instIdList = instIdList.substring(0, instIdList.length() - 1);
+
+						map.add("alumniIds", instIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("alumniIds", alumniId);
 					}
-					String instIdList = sb.toString();
-					instIdList = instIdList.substring(0, instIdList.length() - 1);
 
-					map.add("alumniIds", instIdList);
+					Info errMsg = restTemplate.postForObject(Constants.url + "deleteAlumni", map, Info.class);
+
+					a = "redirect:/showAlumini";
 				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("alumniIds", alumniId);
+					a = "redirect:/accessDenied";
 				}
-
-				Info errMsg = restTemplate.postForObject(Constants.url + "deleteAlumni", map, Info.class);
-
-				a = "redirect:/showAlumini";
 			} else {
 				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 
 			System.err.println(" Exception In deleteAlum at Alum Contr " + e.getMessage());
-
 			e.printStackTrace();
 
 		}

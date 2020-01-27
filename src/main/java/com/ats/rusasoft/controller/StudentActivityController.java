@@ -1916,13 +1916,18 @@ public class StudentActivityController {
 
 	}
 
-	@RequestMapping(value = "/deleteStudPerform/{studperId}", method = RequestMethod.GET)
-	public String deleteTExtActivity(@PathVariable("studperId") int studperId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteStudPerform/{studperId}/{token}", method = RequestMethod.GET)
+	public String deleteTExtActivity(@PathVariable("studperId") int studperId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		String a = null;
 		try {
-			String a = null;
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+			
+		
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info view = AccessControll.checkAccess("/deleteStudPerform/{studperId}", "showStudPerformInFinlYr", "0",
@@ -1931,9 +1936,7 @@ public class StudentActivityController {
 			if (view.isError() == true)
 
 			{
-
 				a = "redirect:/accessDenied";
-
 			}
 
 			else {
@@ -1942,13 +1945,19 @@ public class StudentActivityController {
 
 				StudPerformFinalYr delAct = restTemplate.postForObject(Constants.url + "/deleteStudPerformanceById",
 						map, StudPerformFinalYr.class);
+				
+				a="redirect:/showStudPerformInFinlYr";
 			}
+			}else {				
+				a = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
 
 			e.printStackTrace();
 
 		}
-		return "redirect:/showStudPerformInFinlYr";
+		return a;
 
 	}
 
