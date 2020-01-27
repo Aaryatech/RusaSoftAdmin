@@ -1013,6 +1013,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
+					 window.location.reload(true);
 					 
 				});
 
@@ -1066,7 +1067,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			 
@@ -1148,7 +1149,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table2 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			} else {
@@ -1197,7 +1198,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table2 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			 
@@ -1279,7 +1280,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table3 tbody').append(tr); 
 					}
-					
+					window.location.reload(true);
 				});
 
 			} else {
@@ -1331,7 +1332,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table3 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			 
@@ -1413,7 +1414,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table4 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			} else {
@@ -1463,7 +1464,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table4 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			 
@@ -1543,7 +1544,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table5 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			} else {
@@ -1593,7 +1594,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table5 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			 
@@ -1642,10 +1643,6 @@
 							[ 10, 25, 50, 100, "All" ] ]
 				});
 	</script>
-
-
-
-
 
 </body>
 </html>
