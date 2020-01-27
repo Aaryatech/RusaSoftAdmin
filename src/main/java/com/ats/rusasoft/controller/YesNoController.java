@@ -502,9 +502,9 @@ public class YesNoController {
 	@RequestMapping(value = "/addTransperent", method = RequestMethod.GET)
 	public @ResponseBody List<InstituteYesNo> addTransperent(HttpServletRequest request, HttpServletResponse response) {
 
+		HttpSession session = request.getSession();
 		try {
 
-			HttpSession session = request.getSession();
 			String token = request.getParameter("token");
 			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
@@ -576,6 +576,7 @@ public class YesNoController {
 			e.printStackTrace();
 
 		}
+		System.err.println("key"+session.getAttribute("generatedKey"));
 
 		return instituteYesNoTab1List;
 

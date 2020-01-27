@@ -131,15 +131,15 @@
 
 							<%-- </c:if> --%>
 						</header>
-<%
-													UUID uuid = UUID.randomUUID();
-													MessageDigest md = MessageDigest.getInstance("MD5");
-													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-													BigInteger number = new BigInteger(1, messageDigest);
-													String hashtext = number.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey", hashtext);
-												%>
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 
 						<div class="content-body">
 							<div class="row">
@@ -170,7 +170,7 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Institute Vission?');">
 
-												
+
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token" id="token">
 												<div class="row">
@@ -295,7 +295,7 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Mission?');">
-												 
+
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token1" id="token1">
 												<div class="row">
@@ -434,10 +434,13 @@
 
 	<script type="text/javascript">
 		function saveInstituteVission() {
+			
+			 
 
 			var instVisionText = document.getElementById("inst_vision_text").value; 
 			var instituteVissionId = document.getElementById("instVisionId").value;
 			var token = document.getElementById("token").value;
+		//	alert("token"+token+instVisionText+instituteVissionId);
 			
 			if (instVisionText.trim().length>0) {
 				//$('#example-1 td').remove(); 
@@ -453,6 +456,7 @@
 					ajax : 'true'
 
 				}, function(data) {
+					//alert("saved");
 				 
 					$('#table1 td').remove();
 					$("#loader1").hide();
@@ -525,7 +529,7 @@
 		function deleteInstituteVission(instVisionId) {
 			var token = document.getElementById("token").value;
 				//$('#example-1 td').remove();
-				
+				alert("delete");
 				var x=confirm("Are you sure want to delete this record")
 				if(x==true){
 					$("#loader1").show();
@@ -537,6 +541,7 @@
 					ajax : 'true'
 
 				}, function(data) {
+					alert("deleted");
 				 
 					$("#loader1").hide();
 					$('#table1 td').remove();
@@ -568,6 +573,8 @@
 		}
 		
 		function editInstituteVission(instVisionId) {
+			
+		 
 			$("#loader1").show();
 				$.getJSON('${editInstituteVission}',
 
@@ -576,6 +583,9 @@
 					ajax : 'true'
 
 				}, function(data) {
+					
+					
+					
 					$("#loader1").hide();
 					document.getElementById("instVisionId").value=data.instVisionId;
 					 document.getElementById("inst_vision_text").value=data.instVisionText; 
@@ -590,11 +600,13 @@
 
 	<script type="text/javascript">
 		function saveInstituteMission() {
+			
+			alert("save mission");
 
 			var instMissionText = document.getElementById("inst_mission_text").value; 
 			var instMissionId = document.getElementById("instMissionId").value;
 			var token1 = document.getElementById("token1").value;
-			
+			alert("token1"+token1);
 			if (instMissionText.trim().length>0) {
 				//$('#example-1 td').remove(); 
 				document.getElementById("saveMission").disabled=true;
@@ -609,6 +621,9 @@
 					ajax : 'true'
 
 				}, function(data) {
+					alert("saved  ");
+					
+					alert(JSON.stringify(data));
 				 
 					$('#table2 td').remove();
 					$("#loader2").hide();

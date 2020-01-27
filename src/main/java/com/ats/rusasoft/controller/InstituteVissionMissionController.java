@@ -53,6 +53,7 @@ public class InstituteVissionMissionController {
 
 			InstitueMission[] institueMission = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
 					InstitueMission[].class);
+			System.err.println("institueMission"+institueMission.toString());
 			model.addObject("institueMissionList", institueMission);
 			model.addObject("msgSucss", Constants.sucess_msg);
 			model.addObject("msgFail", Constants.fail_msg);
@@ -270,7 +271,10 @@ public class InstituteVissionMissionController {
 					map.add("instituteId", userObj.getGetData().getUserInstituteId());
 					InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
 							InstitueMission[].class);
+					
+					
 					List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
+					System.err.println("institueMission"+list.toString());
 					programDetailSaveResponse.setInstitueMissionList(list);
 				}
 			}
@@ -285,6 +289,7 @@ public class InstituteVissionMissionController {
 				InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
 						InstitueMission[].class);
 				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
+				System.err.println("institueMission"+list.toString());
 				programDetailSaveResponse.setInstitueMissionList(list);
 			}
 			SessionKeyGen.changeSessionKey(request);

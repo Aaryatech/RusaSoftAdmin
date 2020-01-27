@@ -128,14 +128,14 @@
 
 						</header>
 						<%
-													UUID uuid = UUID.randomUUID();
-													MessageDigest md = MessageDigest.getInstance("MD5");
-													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-													BigInteger number = new BigInteger(1, messageDigest);
-													String hashtext = number.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey", hashtext);
-												%>
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 
 						<div class="content-body">
 							<div class="row">
@@ -175,7 +175,7 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
-												
+
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token" id="token">
 
@@ -319,7 +319,7 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
-												 
+
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token1" id="token1">
 												<c:if test="${instituteYesNoTab2List.size()==0}">
@@ -462,7 +462,7 @@
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
 
-											 
+
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token2" id="token2">
 												<c:if test="${instituteYesNoTab3List.size()==0}">
@@ -907,10 +907,11 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		function addTransperent() {
+			 
 			transId=document.getElementById("transId").value
 			var id = document.getElementById("transId").value; 
 			var token = document.getElementById("token").value; 
-			
+			 
 			var transperentspeficytext = document.getElementById("transperentspeficytext").value; 
 			 
 			if (transperentspeficytext != "") {
@@ -929,6 +930,8 @@
 					ajax : 'true'
 
 				}, function(data) {
+					
+					 
 				 
 					$('#table1 td').remove();
 					 
@@ -955,7 +958,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
-					
+					window.location.reload(true);
 					 if(data!=null){
 						  $("#sucess_msg").show();
 						 						
@@ -973,7 +976,7 @@
 		
 function editTranspernt(instYesnoId){
 			
-			
+	 
 			$.getJSON('${editTranspernt}',
 
 					{
@@ -1008,7 +1011,7 @@ function editTranspernt(instYesnoId){
 					
 					//var dataTable = $('#example-1').DataTable();
 			 document.getElementById("transId").value="0";
-
+				
 					for(var i=0 ; i<data.length ;i++){
 						 
 						 
@@ -1028,10 +1031,11 @@ function editTranspernt(instYesnoId){
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
+					window.location.reload(true);
 					 
 				});
 
-			 
+				
 
 		} 
 	</script>
@@ -1086,7 +1090,7 @@ function editTranspernt(instYesnoId){
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table2 tbody').append(tr); 
 					}
-					
+					window.location.reload(true);
 					 if(data!=null){
 						 $("#sucess_msg").show();
 					 } else{
@@ -1160,7 +1164,9 @@ function editTimebound(instYesnoId){
 				  	tr.append($('<td ></td>').html(data[i].instYesnoResponse)); 
 				  	tr.append($('<td  ></td>').html(acButton)); 
 					$('#table2 tbody').append(tr); 
+					
 				}
+					window.location.reload(true);
 				 
 			});
 
@@ -1220,7 +1226,7 @@ function editTimebound(instYesnoId){
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table3 tbody').append(tr); 
 					}
-					
+					window.location.reload(true);
 					 if(data!=null){
 						 $("#sucess_msg").show();
 					 } else{
@@ -1290,7 +1296,7 @@ function editEfficient(instYesnoId){
 				  	tr.append($('<td  ></td>').html(acButton)); 
 					$('#table3 tbody').append(tr); 
 				}
-				 
+					window.location.reload(true);
 			});
 
 		 
