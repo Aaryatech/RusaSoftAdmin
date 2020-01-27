@@ -53,7 +53,7 @@ public class InstituteVissionMissionController {
 
 			InstitueMission[] institueMission = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
 					InstitueMission[].class);
-			System.err.println("institueMission"+institueMission.toString());
+		 
 			model.addObject("institueMissionList", institueMission);
 			model.addObject("msgSucss", Constants.sucess_msg);
 			model.addObject("msgFail", Constants.fail_msg);
@@ -152,16 +152,17 @@ public class InstituteVissionMissionController {
 	@RequestMapping(value = "/deleteInstituteVission", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteInstituteVission(HttpServletRequest request,
 			HttpServletResponse response) {
-
+		System.err.println("deleteInstituteVission");
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token");
 			String key = (String) session.getAttribute("generatedKey");
+			System.err.println("deleteInstituteVission"  + token + key);
 
 			if (token.trim().equals(key.trim())) {
-
+				System.err.println("in if");
 				int instVisionId = Integer.parseInt(request.getParameter("instVisionId"));
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -177,6 +178,7 @@ public class InstituteVissionMissionController {
 				List<InstitueVision> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setInstitueVisionList(list);
 			} else {
+				System.err.println("in elae");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				map = new LinkedMultiValueMap<>();
@@ -271,10 +273,9 @@ public class InstituteVissionMissionController {
 					map.add("instituteId", userObj.getGetData().getUserInstituteId());
 					InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
 							InstitueMission[].class);
-					
-					
+
 					List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
-					System.err.println("institueMission"+list.toString());
+					System.err.println("institueMission" + list.toString());
 					programDetailSaveResponse.setInstitueMissionList(list);
 				}
 			}
@@ -289,7 +290,7 @@ public class InstituteVissionMissionController {
 				InstitueMission[] arry = rest.postForObject(Constants.url + "/getInsituteMissionList", map,
 						InstitueMission[].class);
 				List<InstitueMission> list = new ArrayList<>(Arrays.asList(arry));
-				System.err.println("institueMission"+list.toString());
+				System.err.println("institueMission" + list.toString());
 				programDetailSaveResponse.setInstitueMissionList(list);
 			}
 			SessionKeyGen.changeSessionKey(request);

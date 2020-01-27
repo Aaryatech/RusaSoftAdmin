@@ -26,6 +26,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.GetFacultyOutrea;
 import com.ats.rusasoft.faculty.model.GetFacultyOutreach;
 import com.ats.rusasoft.model.Designation;
@@ -267,8 +268,9 @@ public class FacultyPatentController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
 
@@ -316,26 +318,33 @@ public class FacultyPatentController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteFacultyPatent/{patentId}", method = RequestMethod.GET)
-	public String deleteFacultyPatent(@PathVariable("patentId") int patentId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteFacultyPatent/{patentId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteFacultyPatent(@PathVariable("patentId") int patentId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String a = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("deleteFacultyPatent", "showPatentDetailsList", "0", "0", "0", "1",
 				newModuleList);
+		String key = (String) session.getAttribute("generatedKey");
 
-		if (view.isError() == true) {
-			a = "redirect:/accessDenied";
+		if (hashKey.trim().equals(key.trim())) {
+			if (view.isError() == true) {
+				a = "redirect:/accessDenied";
+			} else {
+				Info inf = new Info();
+				// System.out.println("patentId:" + patentId);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("patentId", patentId);
+				Info miqc = rest.postForObject(Constants.url + "/deletePetentFaculty", map, Info.class);
+				a = "redirect:/showPatentDetailsList";
+			}
 		} else {
-			Info inf = new Info();
-			// System.out.println("patentId:" + patentId);
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("patentId", patentId);
-			Info miqc = rest.postForObject(Constants.url + "/deletePetentFaculty", map, Info.class);
 			a = "redirect:/showPatentDetailsList";
 		}
 
+		SessionKeyGen.changeSessionKey(request);
 		return a;
 
 	}
@@ -571,10 +580,11 @@ public class FacultyPatentController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		}
 
 		catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
 			returnString = "redirect:/showAwardDetailsList";
@@ -630,26 +640,32 @@ public class FacultyPatentController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteFacultyAward/{awardId}", method = RequestMethod.GET)
-	public String deleteFacultyAward(@PathVariable("awardId") int awardId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteFacultyAward/{awardId}/{hashKey}", method = RequestMethod.GET)
+	public String deleteFacultyAward(@PathVariable("awardId") int awardId, HttpServletRequest request,
+			@PathVariable String hashKey) {
 		String a = null;
 		HttpSession session = request.getSession();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showAwardDetails", "showAwardDetailsList", "0", "0", "0", "1",
-				newModuleList);
+		Info view = AccessControll.checkAccess("deleteFacultyAward/{awardId}/{hashKey}", "showAwardDetailsList", "0",
+				"0", "0", "1", newModuleList);
+		String key = (String) session.getAttribute("generatedKey");
 
-		if (view.isError() == true) {
-			a = "redirect:/accessDenied";
+		if (hashKey.trim().equals(key.trim())) {
+			if (view.isError() == true) {
+				a = "redirect:/accessDenied";
+			} else {
+				Info inf = new Info();
+				// System.out.println("awardId:" + awardId);
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("awardId", awardId);
+				Info miqc = rest.postForObject(Constants.url + "/deleteAwardFaculty", map, Info.class);
+				a = "redirect:/showAwardDetailsList";
+			}
 		} else {
-			Info inf = new Info();
-			// System.out.println("awardId:" + awardId);
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("awardId", awardId);
-			Info miqc = rest.postForObject(Constants.url + "/deleteAwardFaculty", map, Info.class);
 			a = "redirect:/showAwardDetailsList";
 		}
-
+		SessionKeyGen.changeSessionKey(request);
 		return a;
 
 	}

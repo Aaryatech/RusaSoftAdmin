@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.model.FacultyConsultancy;
 import com.ats.rusasoft.model.GetFacultyConsultancy;
 import com.ats.rusasoft.model.Info;
@@ -46,7 +47,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("showConsultancyList", "showConsultancyList", "1", "0", "0", "0",
 					newModuleList);
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -111,7 +112,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "1", "0", "0",
 					newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 
@@ -142,75 +143,72 @@ public class FacultyConsultancyController {
 
 		try {
 
-			
-			
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token");
-						String key = (String) session.getAttribute("generatedKey");
+			String key = (String) session.getAttribute("generatedKey");
 
-						if (token.trim().equals(key.trim())) {
- 
+			if (token.trim().equals(key.trim())) {
 
- 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "1", "0", "0",
-					newModuleList);
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "1", "0", "0",
+						newModuleList);
 
-			//System.out.println(view);
+				// System.out.println(view);
 
-			if (view.isError() == false) {
-				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-				int acYearId = (Integer) session.getAttribute("acYearId");
+				if (view.isError() == false) {
+					LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+					int acYearId = (Integer) session.getAttribute("acYearId");
 
-				Date date = new Date();
-				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					Date date = new Date();
+					SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-				String nature = request.getParameter("nature");
-				String sponser = request.getParameter("sponser");
-				float amount = Float.parseFloat(request.getParameter("amount"));
-				String conPeriod = request.getParameter("conPeriod");
-				int projComp = Integer.parseInt(request.getParameter("projComp"));
-				int is_view = Integer.parseInt(request.getParameter("is_view"));
-				int consId = Integer.parseInt(request.getParameter("consId"));
+					String nature = request.getParameter("nature");
+					String sponser = request.getParameter("sponser");
+					float amount = Float.parseFloat(request.getParameter("amount"));
+					String conPeriod = request.getParameter("conPeriod");
+					int projComp = Integer.parseInt(request.getParameter("projComp"));
+					int is_view = Integer.parseInt(request.getParameter("is_view"));
+					int consId = Integer.parseInt(request.getParameter("consId"));
 
-				FacultyConsultancy facultyConsultancy = new FacultyConsultancy();
+					FacultyConsultancy facultyConsultancy = new FacultyConsultancy();
 
-				if (consId != 0) {
-					facultyConsultancy.setConsId(consId);
-				}
+					if (consId != 0) {
+						facultyConsultancy.setConsId(consId);
+					}
 
-				facultyConsultancy.setConsNature(XssEscapeUtils.jsoupParse(nature));
-				facultyConsultancy.setConsSponsor(XssEscapeUtils.jsoupParse(sponser));
-				facultyConsultancy.setConsAmount((amount));
-				facultyConsultancy.setConsPeriod(XssEscapeUtils.jsoupParse(conPeriod));
-				facultyConsultancy.setIsConsCompleted(projComp);
-				facultyConsultancy.setFacultyId(userObj.getGetData().getUserDetailId());
-				facultyConsultancy.setMakerUserId(userObj.getUserId());
-				facultyConsultancy.setMakerdatetime(sf.format(date));
-				facultyConsultancy.setDelStatus(1);
-				facultyConsultancy.setIsActive(1);
-				facultyConsultancy.setYearId(acYearId);
+					facultyConsultancy.setConsNature(XssEscapeUtils.jsoupParse(nature));
+					facultyConsultancy.setConsSponsor(XssEscapeUtils.jsoupParse(sponser));
+					facultyConsultancy.setConsAmount((amount));
+					facultyConsultancy.setConsPeriod(XssEscapeUtils.jsoupParse(conPeriod));
+					facultyConsultancy.setIsConsCompleted(projComp);
+					facultyConsultancy.setFacultyId(userObj.getGetData().getUserDetailId());
+					facultyConsultancy.setMakerUserId(userObj.getUserId());
+					facultyConsultancy.setMakerdatetime(sf.format(date));
+					facultyConsultancy.setDelStatus(1);
+					facultyConsultancy.setIsActive(1);
+					facultyConsultancy.setYearId(acYearId);
 
-				FacultyConsultancy resp = restTemplate.postForObject(Constants.url + "saveFacultyConsultancy",
-						facultyConsultancy, FacultyConsultancy.class);
+					FacultyConsultancy resp = restTemplate.postForObject(Constants.url + "saveFacultyConsultancy",
+							facultyConsultancy, FacultyConsultancy.class);
 
-				if (is_view == 1) {
-					returnString = "redirect:/showConsultancyList";
+					if (is_view == 1) {
+						returnString = "redirect:/showConsultancyList";
+					} else {
+						returnString = "redirect:/showAddConsultancy";
+					}
+
 				} else {
-					returnString = "redirect:/showAddConsultancy";
-				}
 
+					returnString = "redirect:/accessDenied";
+
+				}
 			} else {
 
 				returnString = "redirect:/accessDenied";
-
 			}
-						}
-			else {
-			 
-							returnString = "redirect:/accessDenied";
-						}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			returnString = "redirect:/showConsultancyList";
 			e.printStackTrace();
 
@@ -220,9 +218,9 @@ public class FacultyConsultancyController {
 
 	}
 
-	@RequestMapping(value = "/deleteConsultancy/{consId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteConsultancy/{consId}/{hashKey}", method = RequestMethod.GET)
 	public String deleteConsultancy(@PathVariable("consId") int consId, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, @PathVariable String hashKey) {
 
 		String returnString = new String();
 
@@ -230,25 +228,30 @@ public class FacultyConsultancyController {
 
 			HttpSession session = request.getSession();
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteConsultancy", "showConsultancyList", "0", "0", "0", "1",
-					newModuleList);
+			Info view = AccessControll.checkAccess("deleteConsultancy/{consId}/{hashKey}", "showConsultancyList", "0",
+					"0", "0", "1", newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == false) {
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == false) {
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("consId", consId);
-				Info resp = restTemplate.postForObject(Constants.url + "deleteConsultancy", map, Info.class);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("consId", consId);
+					Info resp = restTemplate.postForObject(Constants.url + "deleteConsultancy", map, Info.class);
 
-				returnString = "redirect:/showConsultancyList";
+					returnString = "redirect:/showConsultancyList";
+				} else {
+
+					returnString = "redirect:/accessDenied";
+				}
 			} else {
-
-				returnString = "redirect:/accessDenied";
+				returnString = "redirect:/showConsultancyList";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showFacultyDetails at Master Contr" + e.getMessage());
 
 			e.printStackTrace();
@@ -271,7 +274,7 @@ public class FacultyConsultancyController {
 			Info view = AccessControll.checkAccess("showAddConsultancy", "showConsultancyList", "0", "0", "1", "0",
 					newModuleList);
 
-			//System.out.println(view);
+			// System.out.println(view);
 
 			if (view.isError() == false) {
 

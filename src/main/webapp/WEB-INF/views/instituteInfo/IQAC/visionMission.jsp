@@ -345,65 +345,62 @@
 											<div align="center" id="loader2" style="display: none;">
 												<img
 													src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
-													style="width: 50px; height: 50px;"> v
-												<div class="row">
+													style="width: 50px; height: 50px;">
+											</div>
+											<div class="row">
 
 
-													<div class="col-xs-12">
-														<div class="table-responsive">
-															<table class="table table-bordered" id="table2">
-																<thead>
+												<div class="col-xs-12">
+													<div class="table-responsive">
+														<table class="table table-bordered" id="table2">
+															<thead>
+																<tr>
+																	<th width="10%">Sr No</th>
+																	<th>Mission</th>
+
+																	<th width="10%">Action</th>
+
+																</tr>
+															</thead>
+
+															<tbody>
+																<c:forEach items="${institueMissionList}" var="list"
+																	varStatus="count">
 																	<tr>
-																		<th width="10%">Sr No</th>
-																		<th>Mission</th>
 
-																		<th width="10%">Action</th>
+																		<td style="text-align: center;">${count.index+1}</td>
+																		<td style="word-wrap: break-word; max-width: 200">${list.instMissionText}</td>
+																		<td style="text-align: center;"><a href="#"
+																			onclick="editInstituteMission(${list.instMissionId})"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
+																			<a href="#"
+																			onclick="deleteInstituteMission(${list.instMissionId})"
+																			rel="tooltip" data-color-class="danger"
+																			title="Delete" data-animate=" animated fadeIn "
+																			data-toggle="tooltip"
+																			data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a></td>
 																	</tr>
-																</thead>
+																</c:forEach>
 
-																<tbody>
-																	<c:forEach items="${institueMissionList}" var="list"
-																		varStatus="count">
-																		<tr>
-
-																			<td style="text-align: center;">${count.index+1}</td>
-																			<td style="word-wrap: break-word; max-width: 200">${list.instMissionText}</td>
-																			<td style="text-align: center;"><a href="#"
-																				onclick="editInstituteMission(${list.instMissionId})"><span
-																					class="glyphicon glyphicon-edit" title="Edit"
-																					data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																				<a href="#"
-																				onclick="deleteInstituteMission(${list.instMissionId})"
-																				rel="tooltip" data-color-class="danger"
-																				title="Delete" data-animate=" animated fadeIn "
-																				data-toggle="tooltip"
-																				data-original-title="Delete  record"><span
-																					class="glyphicon glyphicon-remove"></span></a></td>
-																		</tr>
-																	</c:forEach>
-
-																</tbody>
-															</table>
-														</div>
+															</tbody>
+														</table>
 													</div>
-
 												</div>
-
 
 											</div>
 
 
 										</div>
 
-										<!-- 	poo-ps -->
-
-										<!-- 		</form>			 -->
-
-
 
 									</div>
+
+									<!-- 	poo-ps -->
+
+									<!-- 		</form>			 -->
 
 
 
@@ -411,10 +408,14 @@
 
 
 
-								<!--  -->
-
-
 							</div>
+
+
+
+							<!--  -->
+
+
+						</div>
 					</section>
 				</div>
 
@@ -434,9 +435,7 @@
 
 	<script type="text/javascript">
 		function saveInstituteVission() {
-			
 			 
-
 			var instVisionText = document.getElementById("inst_vision_text").value; 
 			var instituteVissionId = document.getElementById("instVisionId").value;
 			var token = document.getElementById("token").value;
@@ -487,6 +486,8 @@
 					document.getElementById("instVisionId").value=0; 
 					 document.getElementById("inst_vision_text").value="";
 					 
+					 window.location.reload(true);
+					 
 					 if(data!=null){
 						 $("#sucess_msg").show();
 					 } else{
@@ -527,10 +528,10 @@
 		}
 		
 		function deleteInstituteVission(instVisionId) {
+		 
 			var token = document.getElementById("token").value;
-				//$('#example-1 td').remove();
-				alert("delete");
-				var x=confirm("Are you sure want to delete this record")
+ 				//$('#example-1 td').remove();
+ 				var x=confirm("Are you sure want to delete this record")
 				if(x==true){
 					$("#loader1").show();
 				$.getJSON('${deleteInstituteVission}',
@@ -541,7 +542,7 @@
 					ajax : 'true'
 
 				}, function(data) {
-					alert("deleted");
+					 
 				 
 					$("#loader1").hide();
 					$('#table1 td').remove();
@@ -565,9 +566,9 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true) 
 				});
-
+				//;
 				}
 
 		}
@@ -583,9 +584,7 @@
 					ajax : 'true'
 
 				}, function(data) {
-					
-					
-					
+					 
 					$("#loader1").hide();
 					document.getElementById("instVisionId").value=data.instVisionId;
 					 document.getElementById("inst_vision_text").value=data.instVisionText; 
@@ -601,12 +600,12 @@
 	<script type="text/javascript">
 		function saveInstituteMission() {
 			
-			alert("save mission");
+			 
 
 			var instMissionText = document.getElementById("inst_mission_text").value; 
 			var instMissionId = document.getElementById("instMissionId").value;
 			var token1 = document.getElementById("token1").value;
-			alert("token1"+token1);
+			 
 			if (instMissionText.trim().length>0) {
 				//$('#example-1 td').remove(); 
 				document.getElementById("saveMission").disabled=true;
@@ -621,9 +620,8 @@
 					ajax : 'true'
 
 				}, function(data) {
-					alert("saved  ");
-					
-					alert(JSON.stringify(data));
+					 
+				 
 				 
 					$('#table2 td').remove();
 					$("#loader2").hide();
@@ -652,7 +650,7 @@
 					
 					document.getElementById("instMissionId").value=0; 
 					 document.getElementById("inst_mission_text").value="";
-					 
+					 window.location.reload(true);
 					 if(data!=null){
 						 $("#sucess_msg").show();
 					 }else{
@@ -709,7 +707,7 @@
 				  	tr.append($('<td  ></td>').html(acButton)); 
 					$('#table2 tbody').append(tr); 
 				}
-				 
+				window.location.reload(true);
 			});
 
 				}
