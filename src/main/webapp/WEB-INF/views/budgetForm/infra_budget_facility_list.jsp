@@ -102,7 +102,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/deleteInfraBudget/0"
+										action="${pageContext.request.contextPath}/deletemMultiInfraBudget/0"
 										method="get" name="form_sample_2" id="form_sample_2">
 										
 										<%
@@ -114,7 +114,8 @@
 		session = request.getSession();
 		session.setAttribute("generatedKey", hashtext);
 	%>
-
+<input type="hidden" value="<%out.println(hashtext);%>"
+				name="token" id="token">
 										<table id="example-1"
 											class="table table-striped dt-responsive display">
 											<thead>

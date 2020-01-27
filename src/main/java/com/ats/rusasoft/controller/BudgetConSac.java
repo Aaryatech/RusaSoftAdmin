@@ -326,8 +326,9 @@ public class BudgetConSac {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save addPersonalDetails  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -403,6 +404,68 @@ public class BudgetConSac {
 			HttpSession session = request.getSession();
 			String key=(String) session.getAttribute("generatedKey");
 			
+			if(token.trim().equals(key.trim())) {
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info deleteAccess = AccessControll.checkAccess("deleteInfraBudget/{infraBudgetId}/{token}", "budgetInfrastructureFacility", "0",
+					"0", "0", "1", newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (infraBudgetId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("infraBudgetId");
+					//System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String infraBudgetIdList = sb.toString();
+					infraBudgetIdList = infraBudgetIdList.substring(0, infraBudgetIdList.length() - 1);
+
+					map.add("infraBudgetIdList", infraBudgetIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("infraBudgetIdList", infraBudgetId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteInfraBudget", map, Info.class);
+				redirect = "redirect:/budgetInfrastructureFacility";
+			}
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+
+			System.err.println(" Exception In deleteDepts at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+
+		return redirect; // "redirect:/showDeptList";
+
+	}
+	
+	@RequestMapping(value = "/deletemMultiInfraBudget/{infraBudgetId}", method = RequestMethod.GET)
+	public String deletemMultiInfraBudget(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int infraBudgetId) {
+
+		String redirect = null;
+		try {
+			
+			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			String token=request.getParameter("token");
 			if(token.trim().equals(key.trim())) {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -674,8 +737,9 @@ public class BudgetConSac {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save insertLibBudget  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -1018,8 +1082,9 @@ public class BudgetConSac {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save insertWasteMngtBudget  " + e.getMessage());
 			e.printStackTrace();
 		}

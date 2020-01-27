@@ -398,8 +398,9 @@ public class BudgetController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save budgetRes  " + e.getMessage());
 			e.printStackTrace();
 		}
