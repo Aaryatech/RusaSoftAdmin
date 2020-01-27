@@ -245,15 +245,10 @@
 										</div>
 
 
-
-
 										<div class="form-group">
 											<label class="control-label col-sm-2" for="isCbse">Is
 												CBCS<span class="text-danger">*</span>
 											</label>
-
-
-
 
 											<div class="col-md-2">
 

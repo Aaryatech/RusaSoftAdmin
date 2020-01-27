@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -69,6 +71,17 @@
 									method="post" name="submitProgramMission"
 									id="submitProgramMission"
 									onsubmit="return confirm('Do you really want to add CO?');">
+									<%
+		UUID uuid = UUID.randomUUID();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+		BigInteger number = new BigInteger(1, messageDigest);
+		String hashtext = number.toString(16);
+		session = request.getSession();
+		session.setAttribute("generatedKey", hashtext);
+	%>
+		<input type="hidden" value="<%out.println(hashtext);%>"
+				name="token" id="token">
 									<div class="col-sm-12">
 
 										<div class="form-group">
@@ -271,7 +284,7 @@
 																data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;
 
 															<a
-															href="${pageContext.request.contextPath}/deleteSubjectCo/${subjectCoList.coId}/${subId}"
+															href="${pageContext.request.contextPath}/deleteSubjectCo/${subjectCoList.coId}/${subId}/<%out.println(hashtext);%>"
 															onClick="return confirm('Are you sure want to delete this record');"
 															rel="tooltip" data-color-class="danger" title="Delete"
 															data-animate=" animated fadeIn " data-toggle="tooltip"

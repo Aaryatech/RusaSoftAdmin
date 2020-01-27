@@ -603,10 +603,14 @@ public class FacultyController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteProject/{projectId}", method = RequestMethod.GET)
-	public String deleteProject(@PathVariable("projectId") int projectId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteProject/{projectId}/{token}", method = RequestMethod.GET)
+	public String deleteProject(@PathVariable("projectId") int projectId, @PathVariable("token") String token, HttpServletRequest request) {
 		String value = null;
-		HttpSession session = request.getSession();
+		try {
+			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("showResearchDetails", "showResearchDetailsList", "0", "0", "0", "1",
 				newModuleList);
@@ -622,6 +626,14 @@ public class FacultyController {
 			map.add("projIdList", projectId);
 			Info miqc = rest.postForObject(Constants.url + "/deleteResearchDetails", map, Info.class);
 			value = "redirect:/showResearchDetailsList";
+		}
+			}else {				
+				value = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		}catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+			System.err.println("exception In deleteProject at Fac Contr" + e.getMessage());
 		}
 		return value;
 
@@ -702,7 +714,7 @@ public class FacultyController {
 
 		ModelAndView model = null;
 		try {
-
+			Subject editSubject = new Subject();
 			HttpSession session = request.getSession();
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -724,6 +736,7 @@ public class FacultyController {
 
 				model.addObject("title", "Add Faculty's Teaching Subject Details");
 				model.addObject("proList", proList);
+				model.addObject("editSubject", editSubject);
 
 			} else {
 				model = new ModelAndView("accessDenied");
@@ -887,25 +900,39 @@ public class FacultyController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteSubject/{subId}", method = RequestMethod.GET)
-	public String deleteSubject(@PathVariable("subId") int subId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteSubject/{subId}/{token}", method = RequestMethod.GET)
+	public String deleteSubject(@PathVariable("subId") int subId, @PathVariable("token") String token, HttpServletRequest request) {
 		String value = null;
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "0", "0", "1",
-				newModuleList);
-		if (view.isError() == true) {
+		try {
 
-			value = "redirect:/accessDenied";
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-		} else {
-			Info inf = new Info();
-			// System.out.println("Id:" + subId);
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "0", "0", "1",
+						newModuleList);
+				if (view.isError() == true) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("subIdList", subId);
-			Info miqc = rest.postForObject(Constants.url + "/deleteSubjects", map, Info.class);
-			value = "redirect:/showSubDetailsList";
+					value = "redirect:/accessDenied";
+
+				} else {
+					Info inf = new Info();
+					// System.out.println("Id:" + subId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("subIdList", subId);
+					Info miqc = rest.postForObject(Constants.url + "/deleteSubjects", map, Info.class);
+					value = "redirect:/showSubDetailsList";
+				}
+
+			} else {
+				value = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		}catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+			System.err.println("exception In deleteSubject at faculty Contr" + e.getMessage());
 		}
 		return value;
 
@@ -959,67 +986,87 @@ public class FacultyController {
 
 	@RequestMapping(value = "submitSubjectCo", method = RequestMethod.POST)
 	public String submitSubjectCo(HttpServletRequest request, HttpServletResponse response) {
-
+		String redirect = null;
 		int subId = Integer.parseInt(request.getParameter("subId"));
 		try {
+
 			HttpSession session = request.getSession();
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
-			Date date = new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			String coName = request.getParameter("coName");
-			int coId = Integer.parseInt(request.getParameter("coId"));
+			if (token.trim().equals(key.trim())) {
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+				Date date = new Date();
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
-			if (coId != 0) {
+				String coName = request.getParameter("coName");
+				int coId = Integer.parseInt(request.getParameter("coId"));
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("coName", coName);
-				map.add("coId", coId);
-				Info info = rest.postForObject(Constants.url + "/updateSubjeCoName", map, Info.class);
+				if (coId != 0) {
 
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("coName", coName);
+					map.add("coId", coId);
+					Info info = rest.postForObject(Constants.url + "/updateSubjeCoName", map, Info.class);
+					redirect = "redirect:/showAddCo/" + subId;
+				} else {
+
+					SubjectCo subjectCo = new SubjectCo();
+					subjectCo.setCoId(coId);
+					subjectCo.setDelStatus(1);
+					subjectCo.setIsActive(1);
+					subjectCo.setMakerEnterDatetime(sf.format(date));
+					subjectCo.setSubId(subId);
+					subjectCo.setFacultyId(userObj.getGetData().getUserDetailId());
+					subjectCo.setMakerUserId(userObj.getUserId());
+					subjectCo.setCoName(coName);
+
+					SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
+					if (arry != null) {
+						redirect = "redirect:/showAddCo/" + subId;
+					} else {
+						redirect = "redirect:/showAddCo/" + subId;
+					}
+				}
 			} else {
-
-				SubjectCo subjectCo = new SubjectCo();
-				subjectCo.setCoId(coId);
-				subjectCo.setDelStatus(1);
-				subjectCo.setIsActive(1);
-				subjectCo.setMakerEnterDatetime(sf.format(date));
-				subjectCo.setSubId(subId);
-				subjectCo.setFacultyId(userObj.getGetData().getUserDetailId());
-				subjectCo.setMakerUserId(userObj.getUserId());
-				subjectCo.setCoName(coName);
-
-				SubjectCo arry = rest.postForObject(Constants.url + "/saveSubjectCo", subjectCo, SubjectCo.class);
+				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
 
-		return "redirect:/showAddCo/" + subId;
+		return redirect;
 
 	}
 
-	@RequestMapping(value = "/deleteSubjectCo/{coId}/{subId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteSubjectCo/{coId}/{subId}/{token}", method = RequestMethod.GET)
 	public String deleteSubjectCo(@PathVariable("coId") int coId, @PathVariable("subId") int subId,
-			HttpServletRequest request, HttpServletResponse response) {
-
+			@PathVariable("token") String token, HttpServletRequest request, HttpServletResponse response) {
+		String redirect = null;
 		try {
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("coId", coId);
-			Info info = rest.postForObject(Constants.url + "/deleteSubjectsCo", map, Info.class);
-			// System.out.println(info);
-
+			if (token.trim().equals(key.trim())) {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("coId", coId);
+				Info info = rest.postForObject(Constants.url + "/deleteSubjectsCo", map, Info.class);
+				// System.out.println(info);
+				redirect = "redirect:/showAddCo/" + subId;
+			} else {
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
 
-		return "redirect:/showAddCo/" + subId;
+		return redirect;
 
 	}
 

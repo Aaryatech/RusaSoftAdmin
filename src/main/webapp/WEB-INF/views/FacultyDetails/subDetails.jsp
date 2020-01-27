@@ -3,7 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -109,7 +111,15 @@
 										name="form_sample_2" id="form_sample_2"
 										onsubmit="return confirm('Do you really want to submit the form?');">
 
-
+<%
+		UUID uuid = UUID.randomUUID();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+		BigInteger number = new BigInteger(1, messageDigest);
+		String hashtext = number.toString(16);
+		session = request.getSession();
+		session.setAttribute("generatedKey", hashtext);
+	%>
 
 
 										<table id="example-1"
@@ -192,7 +202,7 @@
 																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
 															</c:if> <c:if test="${deleteAccess == 0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteSubject/${subject.subId}"
+																	href="${pageContext.request.contextPath}/deleteSubject/${subject.subId}/<%out.println(hashtext);%>"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"
