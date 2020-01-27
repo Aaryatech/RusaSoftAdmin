@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.master.InstituteMaster;
@@ -169,26 +170,26 @@ public class RegController {
 				String curDateTime = dateFormat.format(cal.getTime());
 
 				String aisheCode = request.getParameter("aishe_code");
-				institute.setAisheCode(aisheCode);
+				institute.setAisheCode(XssEscapeUtils.jsoupParse(aisheCode));
 
 				institute.setCheckerDatetime(curDateTime);
 				institute.setCheckerUserId(0);
 
-				institute.setContactNo(request.getParameter("princ_contact"));
+				institute.setContactNo(XssEscapeUtils.jsoupParse(request.getParameter("princ_contact")));
 				institute.setDelStatus(1);
-				institute.setEmail(request.getParameter("princ_email"));
+				institute.setEmail(XssEscapeUtils.jsoupParse(request.getParameter("princ_email")));
 
 				institute.setExInt1(yearId); // academic Year
 				institute.setExInt2(0); // is_approved
 
 				//institute.setExVar1(exVar);
-				institute.setExVar1(request.getParameter("inst_type"));
+				institute.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("inst_type")));
 
-				institute.setExVar2(request.getParameter("autonomy"));
+				institute.setExVar2(XssEscapeUtils.jsoupParse(request.getParameter("autonomy")));
 
-				institute.setInstituteAdd(request.getParameter("inst_add"));
+				institute.setInstituteAdd(XssEscapeUtils.jsoupParse(request.getParameter("inst_add")));
 				institute.setInstituteId(instId);
-				institute.setInstituteName(request.getParameter("inst_name"));
+				institute.setInstituteName(XssEscapeUtils.jsoupParse(request.getParameter("inst_name")));
 
 				institute.setIsActive(1);
 				institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed his/her
@@ -204,24 +205,24 @@ public class RegController {
 				// iqac
 				// and hod to student
 
-				institute.setPresidentName(request.getParameter("pres_name"));
-				institute.setPrincipalName(request.getParameter("princ_name"));
+				institute.setPresidentName(XssEscapeUtils.jsoupParse(request.getParameter("pres_name")));
+				institute.setPrincipalName(XssEscapeUtils.jsoupParse(request.getParameter("princ_name")));
 				if (isReg == 1)
-					institute.setRegDate(request.getParameter("reg_date"));
-				institute.setTrustAdd(request.getParameter("trusty_add"));
+					institute.setRegDate(XssEscapeUtils.jsoupParse(request.getParameter("reg_date")));
+				institute.setTrustAdd(XssEscapeUtils.jsoupParse(request.getParameter("trusty_add")));
 
-				institute.setTrustContactNo(request.getParameter("trusty_con_no"));
-				institute.setTrustName(request.getParameter("trusty_name"));
+				institute.setTrustContactNo(XssEscapeUtils.jsoupParse(request.getParameter("trusty_con_no")));
+				institute.setTrustName(XssEscapeUtils.jsoupParse(request.getParameter("trusty_name")));
 				institute.setUserType(0);// for institute its 0
 
-				institute.setPresidenContact(request.getParameter("pres_contact"));
-				institute.setPresidentEmail(request.getParameter("pres_email"));
+				institute.setPresidenContact(XssEscapeUtils.jsoupParse(request.getParameter("pres_contact")));
+				institute.setPresidentEmail(XssEscapeUtils.jsoupParse(request.getParameter("pres_email")));
 
-				institute.setVillage(request.getParameter("village"));
-				institute.setTaluka(request.getParameter("taluka"));
-				institute.setDistrict(request.getParameter("district"));
-				institute.setState(request.getParameter("state"));
-				institute.setPincode(request.getParameter("pin"));
+				institute.setVillage(XssEscapeUtils.jsoupParse(request.getParameter("village")));
+				institute.setTaluka(XssEscapeUtils.jsoupParse(request.getParameter("taluka")));
+				institute.setDistrict(XssEscapeUtils.jsoupParse(request.getParameter("district")));
+				institute.setState(XssEscapeUtils.jsoupParse(request.getParameter("state")));
+				institute.setPincode(XssEscapeUtils.jsoupParse(request.getParameter("pin")));
 
 				System.out.println("Data institute --------------" + institute.toString());
 
