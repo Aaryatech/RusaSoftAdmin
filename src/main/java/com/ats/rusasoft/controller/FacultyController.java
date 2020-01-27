@@ -180,9 +180,11 @@ public class FacultyController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		}
 
 		catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
 
@@ -304,7 +306,8 @@ public class FacultyController {
 	}
 
 	@RequestMapping(value = "/deleteJournal/{journalId}/{token}", method = RequestMethod.GET)
-	public String deleteIqac(@PathVariable("journalId") int journalId, @PathVariable("token") String token, HttpServletRequest request) {
+	public String deleteIqac(@PathVariable("journalId") int journalId, @PathVariable("token") String token,
+			HttpServletRequest request) {
 		String value = null;
 		try {
 
@@ -313,8 +316,8 @@ public class FacultyController {
 
 			if (token.trim().equals(key.trim())) {
 				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "0", "0", "0", "1",
-						newModuleList);
+				Info view = AccessControll.checkAccess("deleteJournal/{journalId}/{token}", "showJournalPubList", "0",
+						"0", "0", "1", newModuleList);
 				if (view.isError() == true) {
 
 					value = "redirect:/accessDenied";
@@ -332,11 +335,11 @@ public class FacultyController {
 				value = "redirect:/accessDenied";
 			}
 			SessionKeyGen.changeSessionKey(request);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In deleteJournal at Fac Contr" + e.getMessage());
 		}
-		
+
 		return value;
 
 	}
@@ -478,12 +481,13 @@ public class FacultyController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		}
 
 		catch (
 
 		Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
 
@@ -604,34 +608,35 @@ public class FacultyController {
 	}
 
 	@RequestMapping(value = "/deleteProject/{projectId}/{token}", method = RequestMethod.GET)
-	public String deleteProject(@PathVariable("projectId") int projectId, @PathVariable("token") String token, HttpServletRequest request) {
+	public String deleteProject(@PathVariable("projectId") int projectId, @PathVariable("token") String token,
+			HttpServletRequest request) {
 		String value = null;
 		try {
 			HttpSession session = request.getSession();
-			String key=(String) session.getAttribute("generatedKey");
-			
-			if(token.trim().equals(key.trim())) {
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showResearchDetails", "showResearchDetailsList", "0", "0", "0", "1",
-				newModuleList);
-		if (view.isError() == true) {
+			String key = (String) session.getAttribute("generatedKey");
 
-			value = "redirect:/accessDenied";
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteProject/{projectId}/{token}", "showResearchDetailsList",
+						"0", "0", "0", "1", newModuleList);
+				if (view.isError() == true) {
 
-		} else {
-			Info inf = new Info();
-			// System.out.println("Id:" + projectId);
+					value = "redirect:/accessDenied";
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("projIdList", projectId);
-			Info miqc = rest.postForObject(Constants.url + "/deleteResearchDetails", map, Info.class);
-			value = "redirect:/showResearchDetailsList";
-		}
-			}else {				
+				} else {
+					Info inf = new Info();
+					// System.out.println("Id:" + projectId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("projIdList", projectId);
+					Info miqc = rest.postForObject(Constants.url + "/deleteResearchDetails", map, Info.class);
+					value = "redirect:/showResearchDetailsList";
+				}
+			} else {
 				value = "redirect:/accessDenied";
 			}
 			SessionKeyGen.changeSessionKey(request);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In deleteProject at Fac Contr" + e.getMessage());
 		}
@@ -842,9 +847,11 @@ public class FacultyController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		}
 
 		catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("EXCE in vendInsertRes " + e.getMessage());
 			e.printStackTrace();
 
@@ -901,7 +908,8 @@ public class FacultyController {
 	}
 
 	@RequestMapping(value = "/deleteSubject/{subId}/{token}", method = RequestMethod.GET)
-	public String deleteSubject(@PathVariable("subId") int subId, @PathVariable("token") String token, HttpServletRequest request) {
+	public String deleteSubject(@PathVariable("subId") int subId, @PathVariable("token") String token,
+			HttpServletRequest request) {
 		String value = null;
 		try {
 
@@ -910,7 +918,7 @@ public class FacultyController {
 
 			if (token.trim().equals(key.trim())) {
 				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-				Info view = AccessControll.checkAccess("showAddSubDetails", "showSubDetailsList", "0", "0", "0", "1",
+				Info view = AccessControll.checkAccess("deleteSubject/{subId}/{token}", "showSubDetailsList", "0", "0", "0", "1",
 						newModuleList);
 				if (view.isError() == true) {
 
@@ -930,7 +938,7 @@ public class FacultyController {
 				value = "redirect:/accessDenied";
 			}
 			SessionKeyGen.changeSessionKey(request);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In deleteSubject at faculty Contr" + e.getMessage());
 		}
@@ -1508,10 +1516,14 @@ public class FacultyController {
 				List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
 				swocList.addAll(list);
 			}
+			
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (
 
 		Exception e) {
+			
+			SessionKeyGen.changeSessionKey(request);
 
 			e.printStackTrace();
 			info.setError(true);
@@ -1562,10 +1574,10 @@ public class FacultyController {
 			int swocId = Integer.parseInt(request.getParameter("swocId"));
 			int swocType = Integer.parseInt(request.getParameter("swocType"));
 			MultiValueMap<String, Object> map = null;
-			
-			String token=request.getParameter("token");
-			String key=(String) session.getAttribute("generatedKey");
-			
+
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+
 			if (token.trim().equals(key.trim())) {
 				map = new LinkedMultiValueMap<>();
 				map.add("swocId", swocId);
@@ -1586,7 +1598,7 @@ public class FacultyController {
 				swocList.addAll(list);
 				// System.out.println("swocList" + swocList.toString());
 
-			}else {				
+			} else {
 				map = new LinkedMultiValueMap<>();
 				map.add("facultyId", userObj.getGetData().getUserDetailId());
 				map.add("swocType", swocType);

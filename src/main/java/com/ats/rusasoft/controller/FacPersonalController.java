@@ -26,6 +26,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.FacultyAcademic;
 import com.ats.rusasoft.faculty.model.FacultyPersonalDetail;
 import com.ats.rusasoft.faculty.model.FacultyPhdDetails;
@@ -342,8 +343,9 @@ public class FacPersonalController {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save addPersonalDetails  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -568,8 +570,9 @@ public class FacPersonalController {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save saveFacultyPhdDetails  " + e.getMessage());
 			e.printStackTrace();
 		}

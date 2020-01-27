@@ -46,7 +46,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class=" " onload="hideText()" >
+<body class=" " onload="hideText()">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -60,7 +60,7 @@
 		<!-- START CONTENT -->
 		<section id="main-content" class=" ">
 			<section class="wrapper main-wrapper row" style="">
-<%-- 
+				<%-- 
 				<div class="col-xs-12">
 					<div class="page-title">
 
@@ -87,30 +87,33 @@
 							<h2 class="title pull-left">${title}</h2>
 
 							<div class="actions panel_actions pull-right">
-							 <c:if test="${addAccess == 0}">  
-								<a href="${pageContext.request.contextPath}/showPublicationDetails"><button
-										type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a> 
-									</c:if>
+								<c:if test="${addAccess == 0}">
+									<a
+										href="${pageContext.request.contextPath}/showPublicationDetails"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 							</div>
 
 						</header>
 
-
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/delSlectedPublicationDetail/0"
+										action="${pageContext.request.contextPath}/delSlectedPublicationDetail/0/<%out.println(hashtext);%>"
 										method="get" name="form_sample_2" id="form_sample_2">
-<%
-		UUID uuid = UUID.randomUUID();
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-		BigInteger number = new BigInteger(1, messageDigest);
-		String hashtext = number.toString(16);
-		session = request.getSession();
-		session.setAttribute("generatedKey", hashtext);
-	%>
+
 										<!-- <ul class="nav nav-tabs">
 											 <li class="active"><a href="#home" data-toggle="tab">
 													<i class="fa fa-home"></i> Register
@@ -121,102 +124,107 @@
 										<!-- <div class="tab-content">
 											<div class="tab-pane fade in active" id="home"> -->
 
-												<div>
+										<div>
 
 
-													<div class="col-xs-12">
+											<div class="col-xs-12">
 
-														
 
-														<div class="col-xs-12"></div>
-														<!-- <label class="control-label col-sm-3" for="smallheading">Educational
+
+												<div class="col-xs-12"></div>
+												<!-- <label class="control-label col-sm-3" for="smallheading">Educational
 															Qualifications : <span class="text-danger">*</span>
 														</label> -->
-														<div class="col-xs-12">
+												<div class="col-xs-12">
 
 
 
 
-															<table id="example-1"
-																class="table table-striped dt-responsive display">
-																<thead>
-																	<tr>
-																	 <th class="check" style="text-align: center; width: 5%;"><input
-																		type="checkbox" name="selAll" id="selAll"
-																		onClick="selectedInst(this)" /> Select All</th> 
-																	<th>Sr No</th>
-																	<th>Faculty Name</th>
-																	<th>Department Name</th>
-																	<th>Conference Title</th>
-																	<th>Conference Type</th>
-																	<th>Date</th>
-																	<th>Venue</th>
-																	<th>Funding From</th>
-																	<th>Amount (Rs.)</th>
-																	<th>Action</th>	
-																	</tr>
-																</thead>
+													<table id="example-1"
+														class="table table-striped dt-responsive display">
+														<thead>
+															<tr>
+																<th class="check" style="text-align: center; width: 5%;"><input
+																	type="checkbox" name="selAll" id="selAll"
+																	onClick="selectedInst(this)" /> Select All</th>
+																<th>Sr No</th>
+																<th>Faculty Name</th>
+																<th>Department Name</th>
+																<th>Conference Title</th>
+																<th>Conference Type</th>
+																<th>Date</th>
+																<th>Venue</th>
+																<th>Funding From</th>
+																<th>Amount (Rs.)</th>
+																<th>Action</th>
+															</tr>
+														</thead>
 
-															<tbody>
-												<c:forEach items="${facConList}" var="facCon"
-													varStatus="count">
-													<tr>
-														<td><input type="checkbox" class="chk"
-															name="confId" id="confIds${count.index+1}"
-															value="${facCon.confId}" /></td> 
-														<td style="text-align: center; ">${count.index+1}</td>
-														<td>${facCon.facultyFirstName}</td>
-														<td>${facCon.deptName}</td>
-														<td>${facCon.confName}</td>
-														<td>${facCon.confType}</td>
-														<td style="text-align: center; ">${facCon.confDate}</td>
-														<td>${facCon.confVenue}</td>
-														<td>${facCon.confFundFrom}</td>
-														<td style="text-align: right; ">${facCon.confFundAmt}</td>
-														<td style="text-align: center; "><c:if test="${editAccess==0}"> 
-																<a 
-																	href="${pageContext.request.contextPath}/editFacultyConfrnc/${facCon.confId}"><span class="glyphicon glyphicon-edit"  title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-															 </c:if><c:if test="${deleteAccess==0}"> 
-																<a
-																	href="${pageContext.request.contextPath}/deleteFacultyConfrnc/${facCon.confId}/<%out.println(hashtext);%>"
-																	onClick="return confirm('Are you sure want to delete this record');"
-																	rel="tooltip" data-color-class="danger"  title="Delete"
-																	data-animate=" animated fadeIn " data-toggle="tooltip"
-																	data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a>
-														 </c:if></td>
-													</tr>
-												</c:forEach>
+														<tbody>
+															<c:forEach items="${facConList}" var="facCon"
+																varStatus="count">
+																<tr>
+																	<td><input type="checkbox" class="chk"
+																		name="confId" id="confIds${count.index+1}"
+																		value="${facCon.confId}" /></td>
+																	<td style="text-align: center;">${count.index+1}</td>
+																	<td>${facCon.facultyFirstName}</td>
+																	<td>${facCon.deptName}</td>
+																	<td>${facCon.confName}</td>
+																	<td>${facCon.confType}</td>
+																	<td style="text-align: center;">${facCon.confDate}</td>
+																	<td>${facCon.confVenue}</td>
+																	<td>${facCon.confFundFrom}</td>
+																	<td style="text-align: right;">${facCon.confFundAmt}</td>
+																	<td style="text-align: center;"><c:if
+																			test="${editAccess==0}">
+																			<a
+																				href="${pageContext.request.contextPath}/editFacultyConfrnc/${facCon.confId}"><span
+																				class="glyphicon glyphicon-edit" title="Edit"
+																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															 </c:if>
+																		<c:if test="${deleteAccess==0}">
+																			<a
+																				href="${pageContext.request.contextPath}/deleteFacultyConfrnc/${facCon.confId}/<%out.println(hashtext);%>"
+																				onClick="return confirm('Are you sure want to delete this record');"
+																				rel="tooltip" data-color-class="danger"
+																				title="Delete" data-animate=" animated fadeIn "
+																				data-toggle="tooltip"
+																				data-original-title="Delete  record"><span
+																				class="glyphicon glyphicon-remove"></span></a>
+																		</c:if></td>
+																</tr>
+															</c:forEach>
 
-											</tbody>
-															
-
-															</table>
-
-															 <c:if test="${deleteAccess==0}"> 
-										 						<button class="btn btn-primary"
-																id="deleteId" onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-																style="align-content: center; width: 113px; margin-left: 40px;">
-																<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button> 
-										 </c:if>
-										<input type="hidden" id="edit_accOff_id" name="edit_accOff_id"
-											value="0">
-															
-
-														</div>
-
-														
-														
-
-													</div>
+														</tbody>
 
 
-													<div class="clearfix"></div>
+													</table>
+
+													<c:if test="${deleteAccess==0}">
+														<button class="btn btn-primary" id="deleteId"
+															onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+															style="align-content: center; width: 113px; margin-left: 40px;">
+															<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+														</button>
+													</c:if>
+													<input type="hidden" id="edit_accOff_id"
+														name="edit_accOff_id" value="0">
+
 
 												</div>
 
-											<!-- </div>
+
+
+
+											</div>
+
+
+											<div class="clearfix"></div>
+
+										</div>
+
+										<!-- </div>
 										</div> -->
 									</form>
 								</div>
@@ -240,8 +248,8 @@
 	<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	
-<%-- 	
+
+	<%-- 	
 	
 <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal"
 		class="modal fade" style="display: none;">
@@ -370,94 +378,77 @@
 
 
 	<script>
-	function showForm() {
-	//document.getElementById("abc").style = "display:none"
-		var qualType=document.getElementById("qualType").value
-		//alert("qualType::"+qualType);
-		
-		if (qualType == 7) {
+		function showForm() {
+			//document.getElementById("abc").style = "display:none"
+			var qualType = document.getElementById("qualType").value
+			//alert("qualType::"+qualType);
 
-			document.getElementById("abc").style = "visible"
-			
+			if (qualType == 7) {
+
+				document.getElementById("abc").style = "visible"
+
 				//document.getElementById("ex1").style = "display:none"
-					// $("#ex1").prop("disabled", true);
-			
+				// $("#ex1").prop("disabled", true);
+
 				//$('#ex1').attr('disabled', true);
-		} 
-		else{
+			} else {
+				document.getElementById("abc").style = "display:none"
+			}
+
+		}
+		function hideText() {
+			//alert("hii");
 			document.getElementById("abc").style = "display:none"
+
 		}
-	
-	}
-	function hideText() {
-		//alert("hii");
-		document.getElementById("abc").style = "display:none"
-			
-		
-		}
-	
 	</script>
-	
+
 	<script type="text/javascript">
-	
-	
-	function selectedInst(source) {
+		function selectedInst(source) {
 
-		checkboxes = document.getElementsByName('confId');
+			checkboxes = document.getElementsByName('confId');
 
-		for (var i = 0, n = checkboxes.length; i < n; i++) {
-			checkboxes[i].checked = source.checked;
+			for (var i = 0, n = checkboxes.length; i < n; i++) {
+				checkboxes[i].checked = source.checked;
+
+			}
 
 		}
 
-	}
-	
-	
-	function getData() {
-	//alert("hii");
-		var i = parseInt(document.getElementById("index").value);
-		var academicYear=document.getElementById("academicYear").value
-		var qualType=document.getElementById("qualType").value
-		var qualName=document.getElementById("qualName").value
-		//alert(qualName);
-		var passClass=document.getElementById("passClass").value
-		var year=document.getElementById("year").value
-		var university=document.getElementById("university").value
-		var city=document.getElementById("city").value
-		var temp;
-		if (qualType == 7) {
+		function getData() {
+			//alert("hii");
+			var i = parseInt(document.getElementById("index").value);
+			var academicYear = document.getElementById("academicYear").value
+			var qualType = document.getElementById("qualType").value
+			var qualName = document.getElementById("qualName").value
+			//alert(qualName);
+			var passClass = document.getElementById("passClass").value
+			var year = document.getElementById("year").value
+			var university = document.getElementById("university").value
+			var city = document.getElementById("city").value
+			var temp;
+			if (qualType == 7) {
 
-			temp=qualName;
-			//alert(temp);
-		} 
-		else{
-			temp=qualType;
+				temp = qualName;
+				//alert(temp);
+			} else {
+				temp = qualType;
+			}
+
+			var dataTable = $('#example-1').DataTable();
+
+			dataTable.row.add(
+					[ i + 1, academicYear, temp, passClass, university, city,
+							year
+
+					]).draw();
+
+			document.getElementById("index").value = i + 1;
+
 		}
-
-		var dataTable = $('#example-1')
-		.DataTable();
-		
-		dataTable.row
-		.add(
-				[
-					i+1,
-					academicYear,
-					temp,
-					passClass,
-					university,
-					city,
-					year
-					
-						 ])
-		.draw();
-		
-		document.getElementById("index").value = i + 1;
-		
-	}
-
 	</script>
-	
-	
+
+
 
 </body>
 </html>
