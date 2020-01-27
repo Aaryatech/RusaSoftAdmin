@@ -300,8 +300,9 @@ public class InfraStructureModController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save insertInstInfraArea  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -421,6 +422,70 @@ public class InfraStructureModController {
 			HttpSession session = request.getSession();
 			String key=(String) session.getAttribute("generatedKey");
 			
+			if(token.trim().equals(key.trim())) {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			
+
+			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+			Info deleteAccess = AccessControll.checkAccess("deleteInfraArea", "showInstInfraAreawise", "0", "0", "0",
+					"1", newModuleList);
+			if (deleteAccess.isError() == true) {
+				redirect = "redirect:/accessDenied";
+			} else {
+				if (instInfraAreaId == 0) {
+
+					System.err.println("Multiple records delete ");
+					String[] instIds = request.getParameterValues("accOffIds");
+					// System.out.println("id are" + instIds);
+
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < instIds.length; i++) {
+						sb = sb.append(instIds[i] + ",");
+
+					}
+					String hodIdList = sb.toString();
+					hodIdList = hodIdList.substring(0, hodIdList.length() - 1);
+
+					map.add("instInfraAreaIdList", hodIdList);
+				} else {
+
+					System.err.println("Single Record delete ");
+					map.add("instInfraAreaIdList", instInfraAreaId);
+				}
+
+				Info errMsg = rest.postForObject(Constants.url + "deleteInstInfraArea", map, Info.class);
+
+				redirect = "redirect:/showInstInfraAreawise";
+			}
+
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+			
+			System.err.println(" Exception In deleteInstInfraArea at Master Contr " + e.getMessage());
+			e.printStackTrace();
+
+		}
+
+		return redirect;
+
+	}
+	
+	@RequestMapping(value = "/deleteMultiInfraArea/{instInfraAreaId}", method = RequestMethod.GET)
+	public String deleteMultiInfraArea(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int instInfraAreaId) {
+		String redirect = null;
+		try {
+			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			String token=request.getParameter("token");
 			if(token.trim().equals(key.trim())) {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -646,8 +711,9 @@ public class InfraStructureModController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -744,6 +810,12 @@ public class InfraStructureModController {
 				"0", "0", "1", newModuleList);
 
 		try {
+			
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+
 			if (view.isError() == true) {
 
 				a = "redirect:/accessDenied";
@@ -780,7 +852,12 @@ public class InfraStructureModController {
 				a = "redirect:/econtentDevelopment";
 
 			}
+			}else {				
+				a = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 

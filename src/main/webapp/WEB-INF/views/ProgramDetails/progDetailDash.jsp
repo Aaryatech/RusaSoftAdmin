@@ -239,11 +239,11 @@
 											</form>
 
 											<!-- 		</form>			 -->
-											<div align="center" id="loader1" style="display: none;">
+										<div align="center" id="loader1" style="display: none;">
 												<img
 													src="${pageContext.request.contextPath}/resources/assets/images/loader.gif"
 													style="width: 50px; height: 50px;">
-											</div>
+											</div> 
 
 
 											<div class="row">

@@ -106,7 +106,7 @@
 
 									<div class="form-group">
 										<form
-											action="${pageContext.request.contextPath}/deleteInfraArea/0"
+											action="${pageContext.request.contextPath}/deleteMultiInfraArea/0"
 											method="get" id="insListForm">
 											
 											<%
@@ -118,7 +118,8 @@
 		session = request.getSession();
 		session.setAttribute("generatedKey", hashtext);
 	%>
-											
+											<input type="hidden" value="<%out.println(hashtext);%>"
+				name="token" id="token">
 											<input type="hidden" value="0" id="instInfraAreaId" name="instInfraAreaId">
 
 											<table class="table table-striped dt-responsive display"
