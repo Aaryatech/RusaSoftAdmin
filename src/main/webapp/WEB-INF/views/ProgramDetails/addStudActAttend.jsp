@@ -2,15 +2,10 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
  
 <%@ page import="java.util.UUID"%>
 <%@ page import="java.security.MessageDigest"%>
 <%@ page import="java.math.BigInteger"%>
-
-
 
 <!DOCTYPE html>
 <html class=" ">

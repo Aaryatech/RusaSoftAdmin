@@ -114,8 +114,8 @@
 													<td>${list.branch}</td>
 													<td style="text-align: right;">${list.participatedStudent}</td>
 													<td>${list.level}</td>
-													<td>${list.aadharNo}</td>
 													<td>${list.exVar1}</td>
+													<td>${list.aadharNo}</td>													
 													<td>${list.exVar2}</td>
 
 													<td style="text-align: center;"><c:if
