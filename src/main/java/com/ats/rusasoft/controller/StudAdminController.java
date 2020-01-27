@@ -1209,120 +1209,129 @@ public class StudAdminController {
 		String redirect = null;
 		try {
 			HttpSession session = request.getSession();
-			RestTemplate restTemplate = new RestTemplate();
-			int yearId = (int) session.getAttribute("acYearId");
-			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			MultiValueMap<String, Object> map = null;
+			if (token.trim().equals(key.trim())) {
 
-			map = new LinkedMultiValueMap<String, Object>();
-			map.add("instId", userObj.getGetData().getUserInstituteId());
+				RestTemplate restTemplate = new RestTemplate();
+				int yearId = (int) session.getAttribute("acYearId");
+				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 
-			Program[] progTypes = restTemplate.postForObject(Constants.url + "getAllProgramTypeForSanctnIntake", map,
-					Program[].class);
-			List<Program> progList = new ArrayList<>(Arrays.asList(progTypes));
-			// System.err.println("Prog List-----------"+progList);
+				MultiValueMap<String, Object> map = null;
 
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("instId", userObj.getGetData().getUserInstituteId());
 
-			Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
-											// "0",
-			// newModuleList);
+				Program[] progTypes = restTemplate.postForObject(Constants.url + "getAllProgramTypeForSanctnIntake",
+						map, Program[].class);
+				List<Program> progList = new ArrayList<>(Arrays.asList(progTypes));
+				// System.err.println("Prog List-----------"+progList);
 
-			editAccess.setError(false);
-			int isEdit = Integer.parseInt(request.getParameter("isEdit"));
-			if (editAccess.isError() == true) {
-				redirect = "redirect:/accessDenied";
-			} else {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
+				Info editAccess = new Info();// AccessControll.checkAccess("insertAlumni", "showAlumini", "1", "0", "0",
+												// "0",
+				// newModuleList);
 
-				String curDateTime = dateFormat.format(cal.getTime());
-
-				DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-				int exInt1 = 0;
-				String exVar1 = "NA";
-
-				if (isEdit == 0) {
-					// System.err.println("in insert insertProgSanctnIntk");
-					List<ProgSancIntake> prgIntkInsertList = new ArrayList<>();
-
-					for (int i = 0; i < progList.size(); i++) {
-
-						ProgSancIntake prgIntk = new ProgSancIntake();
-						// System.out.println("PrgId-----"+progList.get(i).getProgramId());
-						prgIntk.setProgSancIntakeId(0);
-						prgIntk.setSancIntake((Integer
-								.parseInt(request.getParameter("sancIntake" + progList.get(i).getProgramId()))));
-						prgIntk.setProgramId(progList.get(i).getProgramId());
-						prgIntk.setMakerUserId(userObj.getUserId());// get from Session
-						prgIntk.setAcYearId(yearId);
-						prgIntk.setInstId(userObj.getGetData().getUserInstituteId());// get from Session
-						prgIntk.setDelStatus(1);
-						prgIntk.setIsActive(1);
-						prgIntk.setMakerEnterDatetime(curDateTime);
-						prgIntk.setExInt1(0);
-						prgIntk.setExVar1("NA");
-
-						prgIntkInsertList.add(prgIntk);
-					}
-
-					// System.err.println("prgIntkInsertList " + prgIntkInsertList.toString());
-
-					List<ProgSancIntake> studAdmLocRes = restTemplate.postForObject(Constants.url + "savePrgIntkList",
-							prgIntkInsertList, List.class);
-
+				editAccess.setError(false);
+				int isEdit = Integer.parseInt(request.getParameter("isEdit"));
+				if (editAccess.isError() == true) {
+					redirect = "redirect:/accessDenied";
 				} else {
-					// System.err.println("in insert insertProgSanctnIntk");
-					List<ProgSancIntake> prgIntkInsertList = new ArrayList<>();
 
-					map = new LinkedMultiValueMap<String, Object>();
-					map.add("instId", userObj.getGetData().getUserInstituteId());
-					map.add("yearId", yearId);
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Calendar cal = Calendar.getInstance();
 
-					/*
-					 * ProgSancIntake[] intkArray = restTemplate.postForObject(Constants.url +
-					 * "getAllSanctnIntakeList", map, ProgSancIntake[].class); List<ProgSancIntake>
-					 * intkList = new ArrayList<>(Arrays.asList(intkArray));
-					 */
+					String curDateTime = dateFormat.format(cal.getTime());
 
-					// System.out.println("INTK List-----------"+intkList.toString());
+					DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
 
-					for (int i = 0; i < intkList.size(); i++) {
+					int exInt1 = 0;
+					String exVar1 = "NA";
 
-						ProgSancIntake editPrgIntk = new ProgSancIntake();
+					if (isEdit == 0) {
+						// System.err.println("in insert insertProgSanctnIntk");
+						List<ProgSancIntake> prgIntkInsertList = new ArrayList<>();
 
-						// System.out.println("PrgId-----"+intkList.get(i).getProgramId());
+						for (int i = 0; i < progList.size(); i++) {
 
-						editPrgIntk.setProgSancIntakeId(intkList.get(i).getProgSancIntakeId());
-						editPrgIntk.setSancIntake((Integer
-								.parseInt(request.getParameter("sancIntake" + intkList.get(i).getProgramId()))));
-						editPrgIntk.setProgramId(intkList.get(i).getProgramId());
-						editPrgIntk.setMakerUserId(userObj.getUserId());// get from Session
-						editPrgIntk.setAcYearId(yearId);
-						editPrgIntk.setInstId(userObj.getGetData().getUserInstituteId());// get from Session
-						editPrgIntk.setDelStatus(1);
-						editPrgIntk.setIsActive(1);
-						editPrgIntk.setMakerEnterDatetime(curDateTime);
-						editPrgIntk.setExInt1(0);
-						editPrgIntk.setExVar1("NA");
+							ProgSancIntake prgIntk = new ProgSancIntake();
+							// System.out.println("PrgId-----"+progList.get(i).getProgramId());
+							prgIntk.setProgSancIntakeId(0);
+							prgIntk.setSancIntake((Integer
+									.parseInt(request.getParameter("sancIntake" + progList.get(i).getProgramId()))));
+							prgIntk.setProgramId(progList.get(i).getProgramId());
+							prgIntk.setMakerUserId(userObj.getUserId());// get from Session
+							prgIntk.setAcYearId(yearId);
+							prgIntk.setInstId(userObj.getGetData().getUserInstituteId());// get from Session
+							prgIntk.setDelStatus(1);
+							prgIntk.setIsActive(1);
+							prgIntk.setMakerEnterDatetime(curDateTime);
+							prgIntk.setExInt1(0);
+							prgIntk.setExVar1("NA");
 
-						prgIntkInsertList.add(editPrgIntk);
+							prgIntkInsertList.add(prgIntk);
+						}
+
+						// System.err.println("prgIntkInsertList " + prgIntkInsertList.toString());
+
+						List<ProgSancIntake> studAdmLocRes = restTemplate
+								.postForObject(Constants.url + "savePrgIntkList", prgIntkInsertList, List.class);
+
+					} else {
+						// System.err.println("in insert insertProgSanctnIntk");
+						List<ProgSancIntake> prgIntkInsertList = new ArrayList<>();
+
+						map = new LinkedMultiValueMap<String, Object>();
+						map.add("instId", userObj.getGetData().getUserInstituteId());
+						map.add("yearId", yearId);
+
+						/*
+						 * ProgSancIntake[] intkArray = restTemplate.postForObject(Constants.url +
+						 * "getAllSanctnIntakeList", map, ProgSancIntake[].class); List<ProgSancIntake>
+						 * intkList = new ArrayList<>(Arrays.asList(intkArray));
+						 */
+
+						// System.out.println("INTK List-----------"+intkList.toString());
+
+						for (int i = 0; i < intkList.size(); i++) {
+
+							ProgSancIntake editPrgIntk = new ProgSancIntake();
+
+							// System.out.println("PrgId-----"+intkList.get(i).getProgramId());
+
+							editPrgIntk.setProgSancIntakeId(intkList.get(i).getProgSancIntakeId());
+							editPrgIntk.setSancIntake((Integer
+									.parseInt(request.getParameter("sancIntake" + intkList.get(i).getProgramId()))));
+							editPrgIntk.setProgramId(intkList.get(i).getProgramId());
+							editPrgIntk.setMakerUserId(userObj.getUserId());// get from Session
+							editPrgIntk.setAcYearId(yearId);
+							editPrgIntk.setInstId(userObj.getGetData().getUserInstituteId());// get from Session
+							editPrgIntk.setDelStatus(1);
+							editPrgIntk.setIsActive(1);
+							editPrgIntk.setMakerEnterDatetime(curDateTime);
+							editPrgIntk.setExInt1(0);
+							editPrgIntk.setExVar1("NA");
+
+							prgIntkInsertList.add(editPrgIntk);
+						}
+
+						// System.err.println("prgIntkInsertList " + prgIntkInsertList.toString());
+
+						List<ProgSancIntake> studAdmLocRes = restTemplate
+								.postForObject(Constants.url + "savePrgIntkList", prgIntkInsertList, List.class);
+
 					}
-
-					// System.err.println("prgIntkInsertList " + prgIntkInsertList.toString());
-
-					List<ProgSancIntake> studAdmLocRes = restTemplate.postForObject(Constants.url + "savePrgIntkList",
-							prgIntkInsertList, List.class);
 
 				}
-
+			} else {
+				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-			// System.err.println("Exce in save insertTrainPlace " + e.getMessage());
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 

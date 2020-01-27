@@ -483,7 +483,9 @@ public class ProgramDetailModuleController {
 
 				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save lib  " + e.getMessage());
 			e.printStackTrace();
 		}

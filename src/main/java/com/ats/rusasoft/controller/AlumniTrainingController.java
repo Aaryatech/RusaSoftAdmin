@@ -1794,8 +1794,9 @@ public class AlumniTrainingController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(e.getMessage());
 		}
 		return returnString;
