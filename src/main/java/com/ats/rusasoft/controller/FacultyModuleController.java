@@ -316,12 +316,17 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/deleteFacultyConfrnc/{facId}", method = RequestMethod.GET)
-	public String deleteFacultyConf(@PathVariable("facId") int facId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteFacultyConfrnc/{facId}/{token}", method = RequestMethod.GET)
+	public String deleteFacultyConf(@PathVariable("facId") int facId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView model = null;
 		try {
+			
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("deleteFacultyConfrnc/{facId}", "showAddPublicationDetailsList", "0",
 					"0", "0", "1", newModuleList);
@@ -338,7 +343,12 @@ public class FacultyModuleController {
 				FacultyConference deletfConference = rest.postForObject(Constants.url + "/deleteFacultyConfrncById",
 						map, FacultyConference.class);
 			}
+			}else {				
+				model = new ModelAndView("accessDenied");
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 		return "redirect:/showAddPublicationDetailsList";
@@ -1279,44 +1289,55 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/deleteFacultyMentor/{menId}", method = RequestMethod.GET)
-	public String deleteFacultyMentor(@PathVariable("menId") int menId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteFacultyMentor/{menId}/{token}", method = RequestMethod.GET)
+	public String deleteFacultyMentor(@PathVariable("menId") int menId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		ModelAndView model = null;
-
 		String a = null;
-
 		try {
-			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteFacultyMentor/{menId}", "showStudMentor", "0", "0", "0", "1",
-					newModuleList);
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteFacultyMentor/{menId}", "showStudMentor", "0", "0", "0",
+						"1", newModuleList);
+				if (view.isError() == true) {
+
+					a = "redirect:/accessDenied";
+
+				} else {
+					model = new ModelAndView("FacultyDetails/addStudMentor");
+					// int countid = Integer.parseInt(request.getParameter("menId"));
+					// System.out.println("MID:" + menId);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("mId", menId);
+
+					StudentMentoring studMontr = rest.postForObject(
+							Constants.url + "/deleteFacultyMentoringDetailsById", map, StudentMentoring.class);
+					// System.out.println("Data:" + studMontr);
+
+					model.addObject("title", "Edit Monitoring Details");
+					model.addObject("stud", studMontr);
+
+					a = "redirect:/showStudMentor";
+
+				}
 
 			} else {
-				model = new ModelAndView("FacultyDetails/addStudMentor");
-				// int countid = Integer.parseInt(request.getParameter("menId"));
-				// System.out.println("MID:" + menId);
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-				map.add("mId", menId);
-
-				StudentMentoring studMontr = rest.postForObject(Constants.url + "/deleteFacultyMentoringDetailsById",
-						map, StudentMentoring.class);
-				// System.out.println("Data:" + studMontr);
-
-				model.addObject("title", "Edit Monitoring Details");
-
-				model.addObject("stud", studMontr);
+				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
-		return "redirect:/showStudMentor";
+		return a;
 
 	}
 
@@ -1585,30 +1606,39 @@ public class FacultyModuleController {
 
 	}
 
-	@RequestMapping(value = "/deleteBookPublished/{bookId}", method = RequestMethod.GET)
-	public String deleteBookPublished(@PathVariable("bookId") int bookId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteBookPublished/{bookId}/{token}", method = RequestMethod.GET)
+	public String deleteBookPublished(@PathVariable("bookId") int bookId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView model = null;
 
 		try {
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("deleteBookPublished/{bookId}", "showIqacList", "0", "0", "0", "1",
-					newModuleList);
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			if (view.isError() == true) {
+				Info view = AccessControll.checkAccess("deleteBookPublished/{bookId}", "showIqacList", "0", "0", "0",
+						"1", newModuleList);
 
-				model = new ModelAndView("accessDenied");
+				if (view.isError() == true) {
 
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+					map.add("bookId", bookId);
+
+					FacultyBook pubBook = rest.postForObject(Constants.url + "/deletePubBookById", map,
+							FacultyBook.class);
+				}
 			} else {
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-
-				map.add("bookId", bookId);
-
-				FacultyBook pubBook = rest.postForObject(Constants.url + "/deletePubBookById", map, FacultyBook.class);
+				model = new ModelAndView("accessDenied");
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 		return "redirect:/showBookPubList";

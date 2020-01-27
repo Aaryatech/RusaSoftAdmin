@@ -27,6 +27,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.faculty.model.GetJournal;
 import com.ats.rusasoft.faculty.model.GetSWOC;
 import com.ats.rusasoft.faculty.model.GetSubject;
@@ -302,26 +303,40 @@ public class FacultyController {
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteJournal/{journalId}", method = RequestMethod.GET)
-	public String deleteIqac(@PathVariable("journalId") int journalId, HttpServletRequest request) {
+	@RequestMapping(value = "/deleteJournal/{journalId}/{token}", method = RequestMethod.GET)
+	public String deleteIqac(@PathVariable("journalId") int journalId, @PathVariable("token") String token, HttpServletRequest request) {
 		String value = null;
-		HttpSession session = request.getSession();
-		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "0", "0", "0", "1",
-				newModuleList);
-		if (view.isError() == true) {
+		try {
 
-			value = "redirect:/accessDenied";
+			HttpSession session = request.getSession();
+			String key = (String) session.getAttribute("generatedKey");
 
-		} else {
-			Info inf = new Info();
-			// System.out.println("Id:" + journalId);
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("showJournalPub", "showJournalPubList", "0", "0", "0", "1",
+						newModuleList);
+				if (view.isError() == true) {
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("jouIdList", journalId);
-			Info miqc = rest.postForObject(Constants.url + "/deleteJournals", map, Info.class);
-			value = "redirect:/showJournalPubList";
+					value = "redirect:/accessDenied";
+
+				} else {
+					Info inf = new Info();
+					// System.out.println("Id:" + journalId);
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("jouIdList", journalId);
+					Info miqc = rest.postForObject(Constants.url + "/deleteJournals", map, Info.class);
+					value = "redirect:/showJournalPubList";
+				}
+			} else {
+				value = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		}catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+			System.err.println("exception In deleteJournal at Fac Contr" + e.getMessage());
 		}
+		
 		return value;
 
 	}
