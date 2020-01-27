@@ -1521,30 +1521,38 @@ public class AlumniTrainingController {
 
 	}
 
-	@RequestMapping(value = "/deleteAlumniAssocAct/{almniActivityId}", method = RequestMethod.GET)
-	public String deleteAlumniAssocAct(@PathVariable("almniActivityId") int almniActivityId, HttpServletRequest request,
-			HttpServletResponse response) {
-
+	@RequestMapping(value = "/deleteAlumniAssocAct/{almniActivityId}/{token}", method = RequestMethod.GET)
+	public String deleteAlumniAssocAct(@PathVariable("token") String token, @PathVariable("almniActivityId") int almniActivityId
+			, HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
 		try {
-			ModelAndView model = null;
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("/deleteAlumniAssocAct/{almniActivityId}",
-					"showAlumniAssociationActivity", "0", "0", "0", "1", newModuleList);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == true) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				model = new ModelAndView("accessDenied");
+				Info view = AccessControll.checkAccess("/deleteAlumniAssocAct/{almniActivityId}",
+						"showAlumniAssociationActivity", "0", "0", "0", "1", newModuleList);
 
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("almniActivityId", almniActivityId);
+
+					AlumniAssocAct delIct = rest.postForObject(Constants.url + "/delAlumniAssocActivityById", map,
+							AlumniAssocAct.class);
+				}
 			} else {
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("almniActivityId", almniActivityId);
-
-				AlumniAssocAct delIct = rest.postForObject(Constants.url + "/delAlumniAssocActivityById", map,
-						AlumniAssocAct.class);
+				model = new ModelAndView("accessDenied");
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -2102,30 +2110,38 @@ public class AlumniTrainingController {
 
 	}
 
-	@RequestMapping(value = "/deleteCourse/{courseId}", method = RequestMethod.GET)
-	public String deleteCourse(@PathVariable("courseId") int courseId, HttpServletRequest request,
-			HttpServletResponse response) {
-
+	@RequestMapping(value = "/deleteCourse/{courseId}/{token}", method = RequestMethod.GET)
+	public String deleteCourse(@PathVariable("courseId") int courseId, @PathVariable("token") String token, 
+			HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
 		try {
-			ModelAndView model = null;
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("/deleteCourse/{courseId}", "showValueAddedCourses", "0", "0", "0",
-					"1", newModuleList);
+			if (token.trim().equals(key.trim())) {
 
-			if (view.isError() == true) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				model = new ModelAndView("accessDenied");
+				Info view = AccessControll.checkAccess("/deleteCourse/{courseId}", "showValueAddedCourses", "0", "0",
+						"0", "1", newModuleList);
 
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("courseId", courseId);
+
+					NewCourseInfo delCourseId = rest.postForObject(Constants.url + "/deleteValueAddedCourse", map,
+							NewCourseInfo.class);
+				}
 			} else {
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("courseId", courseId);
-
-				NewCourseInfo delCourseId = rest.postForObject(Constants.url + "/deleteValueAddedCourse", map,
-						NewCourseInfo.class);
+				model = new ModelAndView("accessDenied");
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -2354,13 +2370,16 @@ public class AlumniTrainingController {
 
 	}
 
-	@RequestMapping(value = "/deleteProjectintern/{fieldId}", method = RequestMethod.GET)
-	public String deleteProjectintern(@PathVariable("fieldId") int fieldId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteProjectintern/{fieldId}/{token}", method = RequestMethod.GET)
+	public String deleteProjectintern(@PathVariable("fieldId") int fieldId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
-
+		ModelAndView model = null;
 		try {
-			ModelAndView model = null;
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+			
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info view = AccessControll.checkAccess("/deleteProjectintern/{fieldId}", "showFieldProjectIntern", "0", "0",
@@ -2377,7 +2396,12 @@ public class AlumniTrainingController {
 				FieldProjectsIntern delFeildId = rest.postForObject(Constants.url + "/deleteFieldProjectById", map,
 						FieldProjectsIntern.class);
 			}
+			}else {				
+				model = new ModelAndView("accessDenied");
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -2610,30 +2634,38 @@ public class AlumniTrainingController {
 
 	}
 
-	@RequestMapping(value = "/deleteDisableStudInfo/{studId}", method = RequestMethod.GET)
-	public String deleteDisableStudInfo(@PathVariable("studId") int studId, HttpServletRequest request,
-			HttpServletResponse response) {
-
+	@RequestMapping(value = "/deleteDisableStudInfo/{studId}/{token}", method = RequestMethod.GET)
+	public String deleteDisableStudInfo(@PathVariable("studId") int studId, @PathVariable("token") String token,
+			HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model = null;
 		try {
-			ModelAndView model = null;
+
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("/deleteDisableStudInfo/{studId}", "showDifferentlyAbledStudent",
-					"0", "0", "0", "1", newModuleList);
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			if (view.isError() == true) {
+				Info view = AccessControll.checkAccess("/deleteDisableStudInfo/{studId}", "showDifferentlyAbledStudent",
+						"0", "0", "0", "1", newModuleList);
 
-				model = new ModelAndView("accessDenied");
+				if (view.isError() == true) {
 
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("studId", studId);
+
+					DifrentlyAbledStud delStudId = rest.postForObject(Constants.url + "/deleteDifDisStudById", map,
+							DifrentlyAbledStud.class);
+				}
 			} else {
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("studId", studId);
-
-				DifrentlyAbledStud delStudId = rest.postForObject(Constants.url + "/deleteDifDisStudById", map,
-						DifrentlyAbledStud.class);
+				model = new ModelAndView("accessDenied");
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 

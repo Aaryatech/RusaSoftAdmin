@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 <!DOCTYPE html>
 <html class=" ">
@@ -70,6 +72,15 @@
 						</header>
 						<form action="${pageContext.request.contextPath}/deleteSelectedAlum/0"
 							method="get" id="insListForm">
+							<%
+		UUID uuid = UUID.randomUUID();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+		BigInteger number = new BigInteger(1, messageDigest);
+		String hashtext = number.toString(16);
+		session = request.getSession();
+		session.setAttribute("generatedKey", hashtext);
+	%>
 							<div class="content-body">
 								<div class="row">
 
@@ -117,7 +128,7 @@
 																	data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp; </c:if>
 															<c:if test="${deleteAccess==0}">
 																<a
-																	href="${pageContext.request.contextPath}/deleteAlumniAssocAct/${alum.almAssocActId}"
+																	href="${pageContext.request.contextPath}/deleteAlumniAssocAct/${alum.almAssocActId}/<%out.println(hashtext);%>"
 																	onClick="return confirm('Are you sure want to delete this record');"
 																	rel="tooltip" data-color-class="danger" title="Delete"
 																	data-animate=" animated fadeIn " data-toggle="tooltip"

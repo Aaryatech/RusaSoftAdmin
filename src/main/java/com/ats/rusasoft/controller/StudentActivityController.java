@@ -2270,13 +2270,18 @@ public class StudentActivityController {
 
 	}
 
-	@RequestMapping(value = "/deleteStudQualifyExam/{studExmId}", method = RequestMethod.GET)
-	public String deleteStudQualifyExam(@PathVariable("studExmId") int studExmId, HttpServletRequest request,
+	@RequestMapping(value = "/deleteStudQualifyExam/{studExmId}/{token}", method = RequestMethod.GET)
+	public String deleteStudQualifyExam(@PathVariable("studExmId") int studExmId, @PathVariable("token") String token, HttpServletRequest request,
 			HttpServletResponse response) {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		String a = null;
 		try {
-			String a = null;
+			
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+		
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
 			Info view = AccessControll.checkAccess("/deleteStudQualifyExam/{studExmId}",
@@ -2296,15 +2301,21 @@ public class StudentActivityController {
 
 				StudQualifyingExam delAct = restTemplate.postForObject(Constants.url + "/deleteStudQulifExmByById", map,
 						StudQualifyingExam.class);
+				a = "redirect:/showStudentsQualifyingExamDetails";
 			}
+			}else {				
+				a = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
 
 			e.printStackTrace();
 
 		}
-		return "redirect:/showStudentsQualifyingExamDetails";
+		return a;
 
 	}
+
 
 	@RequestMapping(value = "/delSlectedStudQlifExmDtl/{studQlfExmId}", method = RequestMethod.GET)
 	public String delSlectedStudQlifExmDtl(HttpServletRequest request, HttpServletResponse response,
