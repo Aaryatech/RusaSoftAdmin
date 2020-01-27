@@ -922,10 +922,11 @@ public class FacultyPatentController {
 
 				a = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		}
 
 		catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save lib  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -935,7 +936,8 @@ public class FacultyPatentController {
 	}
 
 	@RequestMapping(value = "/deleteFacOutReach/{outId}", method = RequestMethod.GET)
-	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int outId) {
+	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int outId,
+			@PathVariable String hashKey) {
 		HttpSession session = request.getSession();
 		String a = null;
 
@@ -944,25 +946,33 @@ public class FacultyPatentController {
 		Info view = AccessControll.checkAccess("deleteFacOutReach/{outId}", "showOutReachDetailsList", "0", "0", "0",
 				"1", newModuleList);
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			String key = (String) session.getAttribute("generatedKey");
 
-			}
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			else {
+					a = "redirect:/accessDenied";
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				}
 
-				System.err.println("Single Record delete ");
-				map.add("outreachId", outId);
+				else {
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteOutreachFaculty", map, Info.class);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
+					System.err.println("Single Record delete ");
+					map.add("outreachId", outId);
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteOutreachFaculty", map, Info.class);
+
+					a = "redirect:/showOutReachDetailsList";
+				}
+			} else {
 				a = "redirect:/showOutReachDetailsList";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 
 			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
 

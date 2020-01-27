@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -97,7 +101,15 @@
 							</div>
 
 						</header>
-
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 
 						<div class="content-body">
 							<div class="row">
@@ -164,7 +176,7 @@
 																		</c:if>&nbsp;&nbsp;&nbsp;&nbsp; <c:if
 																			test="${deleteAccess == 0}">
 																			<a
-																				href="${pageContext.request.contextPath}/deleteFacOutReach/${outList.outreachId}"
+																				href="${pageContext.request.contextPath}/deleteFacOutReach/${outList.outreachId}/<%out.println(hashtext);%>"
 																				onClick="return confirm('Are you sure want to delete this record');"
 																				rel="tooltip" data-color-class="danger"
 																				title="Delete" data-original-title="Delete"

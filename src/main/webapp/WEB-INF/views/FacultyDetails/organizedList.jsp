@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
+
 
 <!DOCTYPE html>
 <html class=" ">
@@ -73,113 +77,123 @@
 				<div class="clearfix"></div>
 				<!-- MAIN CONTENT AREA STARTS -->
 
-				<div class="row"> 
+				<div class="row">
 
 
-				<div class="col-lg-12">
-				
-					<section class="box ">
+					<div class="col-lg-12">
 
-						<header class="panel_header">
-							<h2 class="title pull-left">${title}</h2>
+						<section class="box ">
 
-							<div class="actions panel_actions pull-right">
-								<c:if test="${addAccess == 0}">
-									<%-- <a href="${pageContext.request.contextPath}/showOrganized"><button
+							<header class="panel_header">
+								<h2 class="title pull-left">${title}</h2>
+
+								<div class="actions panel_actions pull-right">
+									<c:if test="${addAccess == 0}">
+										<%-- <a href="${pageContext.request.contextPath}/showOrganized"><button
 										type="button" class="btn btn-success">Add</button></a> --%>
-									<a title="Add"
-										href="${pageContext.request.contextPath}/showOrganized"><button
-											type="button" class="btn btn-success">
-											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
-										</button></a>
-								</c:if>
-							</div>
+										<a title="Add"
+											href="${pageContext.request.contextPath}/showOrganized"><button
+												type="button" class="btn btn-success">
+												<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+											</button></a>
+									</c:if>
+								</div>
 
-						</header>
+							</header>
+
+							<%
+								UUID uuid = UUID.randomUUID();
+								MessageDigest md = MessageDigest.getInstance("MD5");
+								byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+								BigInteger number = new BigInteger(1, messageDigest);
+								String hashtext = number.toString(16);
+								session = request.getSession();
+								session.setAttribute("generatedKey", hashtext);
+							%>
+							<div class="content-body">
+								<div class="row">
+									<div class="col-md-12">
+										<form class="form-horizontal"
+											action="${pageContext.request.contextPath}/delOrganizedDetails/0/<%out.println(hashtext);%>"
+											method="get" name="form_sample_2" id="form_sample_2">
 
 
-						<div class="content-body">
-							<div class="row">
-								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/delOrganizedDetails/0"
-										method="get" name="form_sample_2" id="form_sample_2">
 
 
-
-									 
 
 											<div class="row">
 
 
 												<div class="col-xs-12">
 
-<div class="table-responsive1">
-													                            <table id="example-organisedlist"  class="table table-bordered">
+													<div class="table-responsive1">
+														<table id="example-organisedlist"
+															class="table table-bordered">
 
-														<thead>
-															<tr>
-																<th class="check"  ><input
-																	type="checkbox" name="selAll" id="selAll"
-																	onClick="selectedInst(this)" title="Select All" alt="Select All" /> </th>
-																<th>Sr No</th>
-
-																<th>Course Name</th>
-																<th>Name of Activity</th>
-																<th>Faculty Name</th>
-																<th>Department</th>
-																<th>Level</th>
-																<th>Date</th>
-																<th>No. of Participants</th>
-																<th>Funded By</th>
-																<th>Amount Sanctioned</th>
-																<th>Amount Utilized</th>
-
-																<th>Action</th>
-															</tr>
-														</thead>
-
-														<tbody>
-															<c:forEach items="${facActList}" var="facAct"
-																varStatus="count">
+															<thead>
 																<tr>
-																	<td><input type="checkbox" class="chk"
-																		name="activityId" id="activityIds${count.index+1}"
-																		value="${facAct.activityId}" /></td>
-																	<td style="text-align: center;">${count.index+1}</td>
-																	<td>${facAct.typeName}</td>
-																	<td>${facAct.activityName}</td>
-																	<td>${facAct.facultyFirstName}</td>
-																	<td>${facAct.deptName}</td>
-																	<td>${facAct.activityLevel}</td>
-																	<td style="text-align: center;">${facAct.activityDate}</td>
-																	<td style="text-align: right;">${facAct.activityParticipants}</td>
-																	<td>${facAct.activityFundedBy}</td>
-																	<td style="text-align: right;">${facAct.activityAmountSanctioned}</td>
-																	<td style="text-align: right;">${facAct.activityAmountUtilised}</td>
-																	<td style="text-align: center;"><c:if
-																			test="${editAccess==0}">
-																			<a
-																				href="${pageContext.request.contextPath}/editFacultyActivity/${facAct.activityId}"><span
-																				class="glyphicon glyphicon-edit" title="Edit"
-																				data-animate=" animated fadeIn " rel="tooltip"></span></a><br>  
-															 </c:if> <c:if test="${deleteAccess==0}">
-																			<a
-																				href="${pageContext.request.contextPath}/deleteFacultyActivity/${facAct.activityId}"
-																				onClick="return confirm('Are you sure want to delete this record');"
-																				rel="tooltip" data-color-class="danger"
-																				title="Delete" data-animate=" animated fadeIn "
-																				data-toggle="tooltip"
-																				data-original-title="Delete  record"><span
-																				class="glyphicon glyphicon-remove"></span></a>
-																		</c:if></td>
+																	<th class="check"><input type="checkbox"
+																		name="selAll" id="selAll" onClick="selectedInst(this)"
+																		title="Select All" alt="Select All" /></th>
+																	<th>Sr No</th>
+
+																	<th>Course Name</th>
+																	<th>Name of Activity</th>
+																	<th>Faculty Name</th>
+																	<th>Department</th>
+																	<th>Level</th>
+																	<th>Date</th>
+																	<th>No. of Participants</th>
+																	<th>Funded By</th>
+																	<th>Amount Sanctioned</th>
+																	<th>Amount Utilized</th>
+
+																	<th>Action</th>
 																</tr>
-															</c:forEach>
+															</thead>
 
-														</tbody>
+															<tbody>
+																<c:forEach items="${facActList}" var="facAct"
+																	varStatus="count">
+																	<tr>
+																		<td><input type="checkbox" class="chk"
+																			name="activityId" id="activityIds${count.index+1}"
+																			value="${facAct.activityId}" /></td>
+																		<td style="text-align: center;">${count.index+1}</td>
+																		<td>${facAct.typeName}</td>
+																		<td>${facAct.activityName}</td>
+																		<td>${facAct.facultyFirstName}</td>
+																		<td>${facAct.deptName}</td>
+																		<td>${facAct.activityLevel}</td>
+																		<td style="text-align: center;">${facAct.activityDate}</td>
+																		<td style="text-align: right;">${facAct.activityParticipants}</td>
+																		<td>${facAct.activityFundedBy}</td>
+																		<td style="text-align: right;">${facAct.activityAmountSanctioned}</td>
+																		<td style="text-align: right;">${facAct.activityAmountUtilised}</td>
+																		<td style="text-align: center;"><c:if
+																				test="${editAccess==0}">
+																				<a
+																					href="${pageContext.request.contextPath}/editFacultyActivity/${facAct.activityId}"><span
+																					class="glyphicon glyphicon-edit" title="Edit"
+																					data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																				<br>
+																			</c:if> <c:if test="${deleteAccess==0}">
+																				<a
+																					href="${pageContext.request.contextPath}/deleteFacultyActivity/${facAct.activityId}/<%out.println(hashtext);%>"
+																					onClick="return confirm('Are you sure want to delete this record');"
+																					rel="tooltip" data-color-class="danger"
+																					title="Delete" data-animate=" animated fadeIn "
+																					data-toggle="tooltip"
+																					data-original-title="Delete  record"><span
+																					class="glyphicon glyphicon-remove"></span></a>
+																			</c:if></td>
+																	</tr>
+																</c:forEach>
 
-													</table>
-				</div>
+															</tbody>
+
+														</table>
+													</div>
 
 													<c:if test="${deleteAccess==0}">
 														<button class="btn btn-primary" id="deleteId"
@@ -198,19 +212,19 @@
 
 											<div class="clearfix"></div>
 
-									 
 
 
-									</form>
+
+										</form>
+									</div>
+
 								</div>
-
 							</div>
-						</div>
 
-					</section>
+						</section>
+					</div>
+
 				</div>
-
-</div>
 				<!-- MAIN CONTENT AREA ENDS -->
 			</section>
 		</section>
@@ -235,14 +249,13 @@
 			}
 
 		}
-		
-		  $("#example-organisedlist").dataTable({
-              responsive: false,
-              aLengthMenu: [
-                  [100, 250, 500, 1000, -1],
-                  [100, 250, 500, 1000, "All"]
-              ]
-          });
+
+		$("#example-organisedlist").dataTable(
+				{
+					responsive : false,
+					aLengthMenu : [ [ 100, 250, 500, 1000, -1 ],
+							[ 100, 250, 500, 1000, "All" ] ]
+				});
 	</script>
 
 	<script type="text/javascript">
