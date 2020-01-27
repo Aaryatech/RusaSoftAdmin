@@ -684,6 +684,7 @@
 		}
 
 		function deleteSwoc(swocId,swocType) {
+			var token = document.getElementById("token").value;
 			var x=confirm("Are you sure want to delete this record"); 
 			//alert(x);
 			if(x==true){
@@ -715,6 +716,7 @@
 							{
 								swocId : swocId,
 								swocType:swocType,
+								token:token,
 								ajax : 'true'
 
 							},
@@ -793,6 +795,7 @@
 								}
 								document.getElementById("swocId").value = 0;
 								document.getElementById("swocText").value = "";
+								window.location.reload(true);
 
 							});
 

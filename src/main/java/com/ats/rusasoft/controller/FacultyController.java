@@ -1561,27 +1561,42 @@ public class FacultyController {
 
 			int swocId = Integer.parseInt(request.getParameter("swocId"));
 			int swocType = Integer.parseInt(request.getParameter("swocType"));
-			MultiValueMap<String, Object> map2 = new LinkedMultiValueMap<>();
-			map2.add("swocId", swocId);
-			swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map2, SWOC.class);
+			MultiValueMap<String, Object> map = null;
+			
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if (token.trim().equals(key.trim())) {
+				map = new LinkedMultiValueMap<>();
+				map.add("swocId", swocId);
+				swoc = rest.postForObject(Constants.url + "/getSWOCBySwocId", map, SWOC.class);
 
-			// System.out.println("swoc" + swoc.toString());
+				// System.out.println("swoc" + swoc.toString());
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("swocIdList", swocId);
-			info = rest.postForObject(Constants.url + "/deleteSwoc", map, Info.class);
-			// System.out.println(swocId);
-			// System.out.println(info.toString());
+				map.add("swocIdList", swocId);
+				info = rest.postForObject(Constants.url + "/deleteSwoc", map, Info.class);
+				// System.out.println(swocId);
+				// System.out.println(info.toString());
 
-			map = new LinkedMultiValueMap<>();
-			map.add("facultyId", userObj.getGetData().getUserDetailId());
-			map.add("swocType", swocType);
-			SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
-			List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
-			swocList.addAll(list);
-			// System.out.println("swocList" + swocList.toString());
+				map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", swocType);
+				SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
+				swocList.addAll(list);
+				// System.out.println("swocList" + swocList.toString());
+
+			}else {				
+				map = new LinkedMultiValueMap<>();
+				map.add("facultyId", userObj.getGetData().getUserDetailId());
+				map.add("swocType", swocType);
+				SWOC[] arry = rest.postForObject(Constants.url + "/getSWOCByFacultyIdAndType", map, SWOC[].class);
+				List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
+				swocList.addAll(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
