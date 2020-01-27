@@ -970,7 +970,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
-					
+					window.location.reload(true);
 					 if(data!=null){
 						  $("#sucess_msg").show();
 						 						
@@ -1024,7 +1024,7 @@
 					  	tr.append($('<td  ></td>').html(acButton)); 
 						$('#table1 tbody').append(tr); 
 					}
-					 
+					window.location.reload(true);
 				});
 
 			 
@@ -1098,7 +1098,7 @@
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table2 tbody').append(tr); 
 					}
-					
+					window.location.reload(true);
 					 if(data!=null){
 						  $("#sucess_msg").show();
 						 						
@@ -1170,7 +1170,7 @@
 				  	tr.append($('<td  ></td>').html(acButton)); 
 					$('#table2 tbody').append(tr); 
 				}
-				 
+				window.location.reload(true);
 			});
 
 		 
@@ -1230,7 +1230,7 @@
 					  	tr.append($('<td  ></td>').html(acButton));  
 						$('#table3 tbody').append(tr); 
 					}
-					
+					window.location.reload(true);
 					 if(data!=null){
 						  $("#sucess_msg").show();
 						 						
@@ -1305,7 +1305,7 @@
 				  	tr.append($('<td  ></td>').html(acButton)); 
 					$('#table3 tbody').append(tr); 
 				}
-				 
+				window.location.reload(true);
 			});
 
 		 
