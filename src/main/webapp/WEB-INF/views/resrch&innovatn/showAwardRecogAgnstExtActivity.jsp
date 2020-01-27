@@ -84,7 +84,8 @@
 
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
-									<a href="${pageContext.request.contextPath}/newAwrdRecgAgnstExtAct"><button
+									<a
+										href="${pageContext.request.contextPath}/newAwrdRecgAgnstExtAct"><button
 											type="button" class="btn btn-success">
 											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 										</button></a>
@@ -93,22 +94,22 @@
 
 						</header>
 
-
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/deleteSelAwrdRecgExtAct/0"
+										action="${pageContext.request.contextPath}/deleteSelAwrdRecgExtAct/0/<%out.println(hashtext);%>"
 										method="get" name="form_sample_2" id="form_sample_2">
-										<%
-		UUID uuid = UUID.randomUUID();
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-		BigInteger number = new BigInteger(1, messageDigest);
-		String hashtext = number.toString(16);
-		session = request.getSession();
-		session.setAttribute("generatedKey", hashtext);
-	%>
+
 										<div>
 
 											<div class="col-xs-12">
@@ -136,8 +137,9 @@
 															<c:forEach items="${awrdRecg}" var="list"
 																varStatus="count">
 																<tr>
-																	<td align="center"><input type="checkbox" class="chk"
-																		name="exActId" id="exActIds${count.index+1}"
+																	<td align="center"><input type="checkbox"
+																		class="chk" name="exActId"
+																		id="exActIds${count.index+1}"
 																		value="${list.awrdRecgAgnstExtActId}" /></td>
 																	<td style="text-align: center;">${count.index+1}</td>
 																	<td>${list.actName}</td>
@@ -149,8 +151,7 @@
 																				href="${pageContext.request.contextPath}/editAwrdRecg/${list.awrdRecgAgnstExtActId}"><span
 																				class="glyphicon glyphicon-edit" title="Edit"
 																				data-animate=" animated fadeIn " rel="tooltip"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-																			 </c:if>
-																			<c:if test="${deleteAccess==0}">
+																			 </c:if> <c:if test="${deleteAccess==0}">
 																			<a
 																				href="${pageContext.request.contextPath}/deleteAwrdRecg/${list.awrdRecgAgnstExtActId}/<%out.println(hashtext);%>"
 																				onClick="return confirm('Are you sure want to delete this record');"
@@ -219,8 +220,6 @@
 			}
 
 		}
-
-	
 	</script>
 
 </body>

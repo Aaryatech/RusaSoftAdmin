@@ -56,15 +56,17 @@
 							<h2 class="title pull-left">${title}</h2>
 							<div class="actions panel_actions pull-right">
 
-								  <c:if test="${addAccess == 0}"> 
-								<%-- <a
+								<c:if test="${addAccess == 0}">
+									<%-- <a
 									href="${pageContext.request.contextPath}/showAddCollaborationLinkages"><button
 										type="button" class="btn btn-success">Add</button></a>  --%>
-										
-	  <a title="Add"
-											href="${pageContext.request.contextPath}/showAddCollaborationLinkages"><button
-												type="button" class="btn btn-success"><i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add</button></a>		
-									</c:if>
+
+									<a title="Add"
+										href="${pageContext.request.contextPath}/showAddCollaborationLinkages"><button
+											type="button" class="btn btn-success">
+											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										</button></a>
+								</c:if>
 
 								<!--  <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
                     <a class="box_close fa fa-times"></a> -->
@@ -72,17 +74,19 @@
 							</div>
 
 						</header>
-						<form action="${pageContext.request.contextPath}/deleteInstLinkages/0"
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
+						<form
+							action="${pageContext.request.contextPath}/deleteInstLinkages/0/<%out.println(hashtext);%>"
 							method="get" id="libListForm">
-							<%
-		UUID uuid = UUID.randomUUID();
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-		BigInteger number = new BigInteger(1, messageDigest);
-		String hashtext = number.toString(16);
-		session = request.getSession();
-		session.setAttribute("generatedKey", hashtext);
-	%>
+
 							<div class="content-body">
 								<div class="row">
 									<c:if test="${sessionScope.successMsg!=null}">
@@ -111,57 +115,62 @@
 														<th class="check" style="text-align: center; width: 5%;"
 															rowspan="2"><input type="checkbox" name="selAll"
 															id="selAll" onClick="selectedInst(this)" /> Select All</th>
-														
-												<tr>
-													<th style="text-align: center; width:10%">Sr No</th>
-													<th>Name</th>
-													
-													<th>Nature</th>
-													<th>Agency</th>
-													<th>Participants</th>
-													<th>Action</th>
-												</tr>
+													<tr>
+														<th style="text-align: center; width: 10%">Sr No</th>
+														<th>Name</th>
+
+														<th>Nature</th>
+														<th>Agency</th>
+														<th>Participants</th>
+														<th>Action</th>
+													</tr>
 
 												</thead>
 												<tbody>
 													<c:forEach items="${linkageList}" var="linkageList"
 														varStatus="count">
 														<tr>
-															<td style="text-align: center; "><input type="checkbox" class="chk" name="linkIds"
-																id="linkIds${count.index+1}" value="${linkageList.linkId}" /></td>
-															<td style="text-align: center; width:10%">${count.index+1}</td>
+															<td style="text-align: center;"><input
+																type="checkbox" class="chk" name="linkIds"
+																id="linkIds${count.index+1}"
+																value="${linkageList.linkId}" /></td>
+															<td style="text-align: center; width: 10%">${count.index+1}</td>
 															<td>${linkageList.linknameText}</td>
 															<td>${linkageList.linkNature}</td>
 															<td>${linkageList.linkAgency}</td>
-															<td style="text-align: right; ">${linkageList.linkBeneficiaryNos}</td>
-														
-															<td style="text-align: center;">
-																  <c:if test="${editAccess == 0}">  <a
-																href="#" onclick="showEditColLinkage(${linkageList.linkId})"><span
-																	class="glyphicon glyphicon-edit"  title="Edit" data-original-title="Edit"
-																	data-animate=" animated fadeIn " rel="tooltip"></span></a>
-																</c:if> &nbsp;&nbsp;&nbsp;&nbsp;
-																   <c:if test="${deleteAccess == 0}">
-																 <a
-																href="${pageContext.request.contextPath}/deleteInstLinkages/${linkageList.linkId}/<%out.println(hashtext);%>"
-																onClick="return confirm('Are you sure want to delete this record');"
-																rel="tooltip" data-color-class="danger" title="Delete" data-original-title="Delete"
-																data-animate=" animated fadeIn " data-toggle="tooltip"
-																data-original-title="Delete  record"><span
-																	class="glyphicon glyphicon-remove"></span></a> 
-																		</c:if>
-															</td>
+															<td style="text-align: right;">${linkageList.linkBeneficiaryNos}</td>
+
+															<td style="text-align: center;"><c:if
+																	test="${editAccess == 0}">
+																	<a href="#"
+																		onclick="showEditColLinkage(${linkageList.linkId})"><span
+																		class="glyphicon glyphicon-edit" title="Edit"
+																		data-original-title="Edit"
+																		data-animate=" animated fadeIn " rel="tooltip"></span></a>
+																</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <c:if
+																	test="${deleteAccess == 0}">
+																	<a
+																		href="${pageContext.request.contextPath}/deleteInstLinkages/${linkageList.linkId}/<%out.println(hashtext);%>"
+																		onClick="return confirm('Are you sure want to delete this record');"
+																		rel="tooltip" data-color-class="danger" title="Delete"
+																		data-original-title="Delete"
+																		data-animate=" animated fadeIn " data-toggle="tooltip"
+																		data-original-title="Delete  record"><span
+																		class="glyphicon glyphicon-remove"></span></a>
+																</c:if></td>
 														</tr>
 													</c:forEach>
 												</tbody>
 											</table>
 										</div>
 										<div class="col-lg-1">
- 				<c:if test="${deleteAccess==0}">
-											<button class="btn btn-primary" 
-												id="deleteId"
-												onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
-												style="align-content: center; width: 113px; margin-left: 40px;"><i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete</button></c:if>
+											<c:if test="${deleteAccess==0}">
+												<button class="btn btn-primary" id="deleteId"
+													onClick="var checkedVals = $('.chk:checkbox:checked').map(function() { return this.value;}).get();checkedVals=checkedVals.join(',');if(checkedVals==''){alert('No Rows Selected');return false;	}else{   return confirm('Are you sure want to delete record');}"
+													style="align-content: center; width: 113px; margin-left: 40px;">
+													<i class="${sessionScope.deleteIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Delete
+												</button>
+											</c:if>
 											<input type="hidden" id="edit_link_id" name="edit_link_id"
 												value="0">
 
@@ -268,7 +277,7 @@
 		}
 
 	</script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	function hideText() {
 		//alert("hii");
 		var qualType = document.getElementById("MOU_agency").value

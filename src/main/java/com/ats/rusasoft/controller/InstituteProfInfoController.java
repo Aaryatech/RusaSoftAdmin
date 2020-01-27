@@ -269,8 +269,9 @@ public class InstituteProfInfoController {
 				a = "redirect:/showInstProfList";
 
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save redInfo  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -1077,7 +1078,9 @@ public class InstituteProfInfoController {
 				System.err.println("in else");
 				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save redInfo  " + e.getMessage());
 			e.printStackTrace();
 		}
@@ -1624,7 +1627,7 @@ public class InstituteProfInfoController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteAMCS/{amcId}", "showAMC", "0", "0", "0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("deleteAMCS/{amcId}/{hashKey}", "showAMC", "0", "0", "0", "1", newModuleList);
 
 		try {
 
@@ -2096,7 +2099,7 @@ public class InstituteProfInfoController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteBestPrac/{pracId}", "showBestPractice", "0", "0", "0", "1",
+		Info view = AccessControll.checkAccess("deleteBestPrac/{pracId}/{hashKey}", "showBestPractice", "0", "0", "0", "1",
 				newModuleList);
 
 		try {

@@ -94,23 +94,23 @@
 
 						</header>
 
+						<%
+							UUID uuid = UUID.randomUUID();
+							MessageDigest md = MessageDigest.getInstance("MD5");
+							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+							BigInteger number = new BigInteger(1, messageDigest);
+							String hashtext = number.toString(16);
+							session = request.getSession();
+							session.setAttribute("generatedKey", hashtext);
+						%>
 
 						<div class="content-body">
 							<div class="row">
 								<div class="col-md-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/deleteSelExtsnActivities/0"
+										action="${pageContext.request.contextPath}/deleteSelExtsnActivities/0/<%out.println(hashtext);%>"
 										method="get" name="form_sample_2" id="form_sample_2">
-										
-										<%
-		UUID uuid = UUID.randomUUID();
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-		BigInteger number = new BigInteger(1, messageDigest);
-		String hashtext = number.toString(16);
-		session = request.getSession();
-		session.setAttribute("generatedKey", hashtext);
-	%>
+
 										<div>
 
 											<div class="col-xs-12">

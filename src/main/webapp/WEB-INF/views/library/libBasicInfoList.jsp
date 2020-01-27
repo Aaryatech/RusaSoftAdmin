@@ -16,7 +16,7 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class=" " >
+<body class=" ">
 	<!-- START TOPBAR -->
 	<jsp:include page="/WEB-INF/views/include/topbar.jsp"></jsp:include>
 	<!-- END TOPBAR -->
@@ -67,20 +67,20 @@
 										</div>
 									</div>
 								</c:if>
-
+								<%
+									UUID uuid = UUID.randomUUID();
+									MessageDigest md = MessageDigest.getInstance("MD5");
+									byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+									BigInteger number = new BigInteger(1, messageDigest);
+									String hashtext = number.toString(16);
+									session = request.getSession();
+									session.setAttribute("generatedKey", hashtext);
+								%>
 								<div class="col-xs-12">
 									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/delSlectedLibInfo/0"
+										action="${pageContext.request.contextPath}/delSlectedLibInfo/0/<%out.println(hashtext);%>"
 										method="get" name="form_sample_2" id="form_sample_2">
-										<%
-		UUID uuid = UUID.randomUUID();
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-		BigInteger number = new BigInteger(1, messageDigest);
-		String hashtext = number.toString(16);
-		session = request.getSession();
-		session.setAttribute("generatedKey", hashtext);
-	%>
+
 
 										<table id="example-1"
 											class="table table-striped dt-responsive display">
@@ -106,8 +106,9 @@
 												<c:forEach items="${libInfoList}" var="libList"
 													varStatus="count">
 													<tr>
-														<td align="center"><input type="checkbox" class="chk" name="libId"
-															id="libIds${count.index+1}" value="${libList.libInfoId}" /></td>
+														<td align="center"><input type="checkbox" class="chk"
+															name="libId" id="libIds${count.index+1}"
+															value="${libList.libInfoId}" /></td>
 														<td style="text-align: center">${count.index+1}</td>
 
 														<td style="text-align: left"><c:out

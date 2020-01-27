@@ -251,7 +251,9 @@ public class LibraryController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -296,32 +298,32 @@ public class LibraryController {
 	}
 
 	@RequestMapping(value = "/deleteLibInfo/{libInfoId}/{token}", method = RequestMethod.GET)
-	public String deleteLibInfo(@PathVariable("libInfoId") int libInfoId, @PathVariable("token") String token, HttpServletRequest request,
-			HttpServletResponse response) {
+	public String deleteLibInfo(@PathVariable("libInfoId") int libInfoId, @PathVariable("token") String token,
+			HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView("library/libraryBasicInfo");
 		try {
 			HttpSession session = request.getSession();
-			String key=(String) session.getAttribute("generatedKey");
-			
-			if(token.trim().equals(key.trim())) {
-			
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteLibInfo/{libInfoId}", "showLibraryBasicInfo", "0", "0", "0",
-					"1", newModuleList);
+			String key = (String) session.getAttribute("generatedKey");
 
-			if (view.isError() == true) {
+			if (token.trim().equals(key.trim())) {
 
-				model = new ModelAndView("accessDenied");
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteLibInfo/{libInfoId}/{token}", "showLibraryBasicInfo", "0", "0",
+						"0", "1", newModuleList);
 
+				if (view.isError() == true) {
+
+					model = new ModelAndView("accessDenied");
+
+				} else {
+					map = new LinkedMultiValueMap<>();
+					map.add("libInfoId", libInfoId);
+
+					LibraryInfo libInfo = rest.postForObject(Constants.url + "/deletelibBasicInfoById", map,
+							LibraryInfo.class);
+				}
 			} else {
-				map = new LinkedMultiValueMap<>();
-				map.add("libInfoId", libInfoId);
-
-				LibraryInfo libInfo = rest.postForObject(Constants.url + "/deletelibBasicInfoById", map,
-						LibraryInfo.class);
-			}
-			}else {				
 				redirect = "redirect:/accessDenied";
 			}
 			SessionKeyGen.changeSessionKey(request);
@@ -334,54 +336,63 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/delSlectedLibInfo/{libId}", method = RequestMethod.GET)
-	public String deletSelectedStaff(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int libId) {
+	@RequestMapping(value = "/delSlectedLibInfo/{libId}/{hashKey}", method = RequestMethod.GET)
+	public String deletSelectedStaff(HttpServletRequest request, HttpServletResponse response, @PathVariable int libId,
+			@PathVariable String hashKey) {
 		HttpSession session = request.getSession();
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedLibInfo/{libId}", "showLibraryBasicInfo", "0", "0", "0", "1",
-				newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedLibInfo/{libId}/{hashKey}", "showLibraryBasicInfo", "0", "0",
+				"0", "1", newModuleList);
 
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			String key = (String) session.getAttribute("generatedKey");
 
-			}
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			else {
+					a = "redirect:/accessDenied";
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (libId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] libIds = request.getParameterValues("libId");
-					// System.out.println("id are" + libIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < libIds.length; i++) {
-						sb = sb.append(libIds[i] + ",");
-
-					}
-					String libIdList = sb.toString();
-					libIdList = libIdList.substring(0, libIdList.length() - 1);
-
-					map.add("libIdList", libIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("libIdList", libId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteSelLib", map, Info.class);
+				else {
 
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (libId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] libIds = request.getParameterValues("libId");
+						// System.out.println("id are" + libIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < libIds.length; i++) {
+							sb = sb.append(libIds[i] + ",");
+
+						}
+						String libIdList = sb.toString();
+						libIdList = libIdList.substring(0, libIdList.length() - 1);
+
+						map.add("libIdList", libIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("libIdList", libId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteSelLib", map, Info.class);
+
+					a = "redirect:/showLibraryBasicInfo";
+
+				}
+			} else {
 				a = "redirect:/showLibraryBasicInfo";
-
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -522,8 +533,9 @@ public class LibraryController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -567,8 +579,8 @@ public class LibraryController {
 	}
 
 	@RequestMapping(value = "/deleteRareBookInfo/{bookId}/{token}", method = RequestMethod.GET)
-	public String deleteRareBookInfo(@PathVariable("bookId") int bookId, @PathVariable("token") String token, HttpServletRequest request,
-			HttpServletResponse response) {
+	public String deleteRareBookInfo(@PathVariable("bookId") int bookId, @PathVariable("token") String token,
+			HttpServletRequest request, HttpServletResponse response) {
 
 		try {
 			String a = null;
@@ -609,54 +621,63 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/delSlectedRareBook/{rareBookId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delSlectedRareBook/{rareBookId}/{token}", method = RequestMethod.GET)
 	public String delSlectedRareBook(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int rareBookId) {
+			@PathVariable int rareBookId, @PathVariable("token") String token) {
 		HttpSession session = request.getSession();
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedRareBook/{rareBookId}", "showRareBookInfo", "0", "0", "0",
-				"1", newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedRareBook/{rareBookId}/{token}", "showRareBookInfo", "0", "0",
+				"0", "1", newModuleList);
 
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			String key = (String) session.getAttribute("generatedKey");
 
-			}
+			if (token.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			else {
+					a = "redirect:/accessDenied";
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (rareBookId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] rareBookIds = request.getParameterValues("rareBookId");
-					// System.out.println("id are" + rareBookIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < rareBookIds.length; i++) {
-						sb = sb.append(rareBookIds[i] + ",");
-
-					}
-					String rareBookIdList = sb.toString();
-					rareBookIdList = rareBookIdList.substring(0, rareBookIdList.length() - 1);
-
-					map.add("rareBookIdList", rareBookIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("rareBookIdList", rareBookId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteSelRareBooks", map, Info.class);
+				else {
 
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (rareBookId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] rareBookIds = request.getParameterValues("rareBookId");
+						// System.out.println("id are" + rareBookIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < rareBookIds.length; i++) {
+							sb = sb.append(rareBookIds[i] + ",");
+
+						}
+						String rareBookIdList = sb.toString();
+						rareBookIdList = rareBookIdList.substring(0, rareBookIdList.length() - 1);
+
+						map.add("rareBookIdList", rareBookIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("rareBookIdList", rareBookId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteSelRareBooks", map, Info.class);
+
+					a = "redirect:/showRareBookInfo";
+
+				}
+			} else {
 				a = "redirect:/showRareBookInfo";
-
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -808,7 +829,9 @@ public class LibraryController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -851,8 +874,8 @@ public class LibraryController {
 	}
 
 	@RequestMapping(value = "/deleteLibBook/{bookId}/{token}", method = RequestMethod.GET)
-	public String deleteLibBookInfo(@PathVariable("bookId") int bookId, @PathVariable("token") String token, HttpServletRequest request,
-			HttpServletResponse response) {
+	public String deleteLibBookInfo(@PathVariable("bookId") int bookId, @PathVariable("token") String token,
+			HttpServletRequest request, HttpServletResponse response) {
 
 		try {
 			String a = null;
@@ -863,7 +886,7 @@ public class LibraryController {
 
 				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-				Info view = AccessControll.checkAccess("deleteLibBook/{bookId}", "showlibBookPurchased", "0", "0", "0",
+				Info view = AccessControll.checkAccess("/deleteLibBook/{bookId}/{token}", "showlibBookPurchased", "0", "0", "0",
 						"1", newModuleList);
 				if (view.isError() == true) {
 					a = "redirect:/accessDenied";
@@ -888,54 +911,63 @@ public class LibraryController {
 
 	}
 
-	@RequestMapping(value = "/delSlectedPurchasedLibBooks/{libBookId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delSlectedPurchasedLibBooks/{libBookId}/{hashKey}", method = RequestMethod.GET)
 	public String delSlectedPurchasedLibBooks(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int libBookId) {
+			@PathVariable int libBookId, @PathVariable String hashKey) {
 		HttpSession session = request.getSession();
 		String a = null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("delSlectedPurchasedLibBooks/{libBookId}", "showlibBookPurchased", "0",
-				"0", "0", "1", newModuleList);
+		Info view = AccessControll.checkAccess("delSlectedPurchasedLibBooks/{libBookId}/{hashKey}",
+				"showlibBookPurchased", "0", "0", "0", "1", newModuleList);
 
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			String key = (String) session.getAttribute("generatedKey");
 
-			}
+			if (hashKey.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			else {
+					a = "redirect:/accessDenied";
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (libBookId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] libBookIds = request.getParameterValues("libBookId");
-					// System.out.println("id are" + libBookIds);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < libBookIds.length; i++) {
-						sb = sb.append(libBookIds[i] + ",");
-
-					}
-					String libBookIdList = sb.toString();
-					libBookIdList = libBookIdList.substring(0, libBookIdList.length() - 1);
-
-					map.add("libBookIdList", libBookIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("libBookIdList", libBookId);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteSelPurchasedBooks", map, Info.class);
+				else {
 
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (libBookId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] libBookIds = request.getParameterValues("libBookId");
+						// System.out.println("id are" + libBookIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < libBookIds.length; i++) {
+							sb = sb.append(libBookIds[i] + ",");
+
+						}
+						String libBookIdList = sb.toString();
+						libBookIdList = libBookIdList.substring(0, libBookIdList.length() - 1);
+
+						map.add("libBookIdList", libBookIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("libBookIdList", libBookId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteSelPurchasedBooks", map, Info.class);
+
+					a = "redirect:/showlibBookPurchased";
+
+				}
+			} else {
 				a = "redirect:/showlibBookPurchased";
-
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -1347,9 +1379,10 @@ public class LibraryController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("exception In showRegLib at Library Contr" + e.getMessage());
 			e.printStackTrace();
 
@@ -1869,7 +1902,7 @@ public class LibraryController {
 		} catch (Exception e) {
 			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteStudents at Master Contr " + e.getMessage());
- 			e.printStackTrace();
+			e.printStackTrace();
 
 		}
 
@@ -2061,12 +2094,7 @@ public class LibraryController {
 
 	}
 
-
-
-
-
-
-@RequestMapping(value = "/insertInstituteInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertInstituteInfo", method = RequestMethod.POST)
 	public String insertInstituteInfo(HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in insert insertInstituteInfo");
 		ModelAndView model = null;
@@ -2242,8 +2270,8 @@ public class LibraryController {
 		String key = (String) session.getAttribute("generatedKey");
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-		Info view = AccessControll.checkAccess("deleteInstituteInfo/{instId}/{hashKey}", "showInstituteInfoList", "0", "0", "0",
-				"1", newModuleList);
+		Info view = AccessControll.checkAccess("deleteInstituteInfo/{instId}/{hashKey}", "showInstituteInfoList", "0",
+				"0", "0", "1", newModuleList);
 		try {
 			if (hashKey.trim().equals(key.trim())) {
 
@@ -2251,8 +2279,7 @@ public class LibraryController {
 
 					a = "redirect:/accessDenied";
 
-				}
- 				else {
+				} else {
 
 					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 					if (instId == 0) {
@@ -2286,7 +2313,7 @@ public class LibraryController {
 		} catch (Exception e) {
 			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteInstituteInfo at Master Contr " + e.getMessage());
- 			e.printStackTrace();
+			e.printStackTrace();
 
 		}
 

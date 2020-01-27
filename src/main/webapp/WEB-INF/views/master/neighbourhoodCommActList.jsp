@@ -92,15 +92,7 @@
 							</div>
 
 						</header>
-
-
-						<div class="content-body">
-							<div class="row">
-								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/deleteSelNeghbCommActivities/0"
-										method="get" name="form_sample_2" id="form_sample_2">
-										<%
+<%
 		UUID uuid = UUID.randomUUID();
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
@@ -109,6 +101,14 @@
 		session = request.getSession();
 		session.setAttribute("generatedKey", hashtext);
 	%>
+
+						<div class="content-body">
+							<div class="row">
+								<div class="col-md-12">
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/deleteSelNeghbCommActivities/0/<%out.println(hashtext);%>"
+										method="get" name="form_sample_2" id="form_sample_2">
+										
 										<div>
 
 											<div class="col-xs-12">

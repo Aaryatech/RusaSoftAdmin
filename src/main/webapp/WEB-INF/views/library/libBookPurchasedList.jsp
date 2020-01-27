@@ -60,7 +60,15 @@
                 	
                 </div>
               </header> 
-              
+              <%
+		UUID uuid = UUID.randomUUID();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+		BigInteger number = new BigInteger(1, messageDigest);
+		String hashtext = number.toString(16);
+		session = request.getSession();
+		session.setAttribute("generatedKey", hashtext);
+	%>
               
            <div class="content-body">    
             <div class="row">
@@ -71,20 +79,12 @@
                 <strong>Success : </strong> ${sessionScope.successMsg}</div>
         	</div> 
             </c:if>
-            
+            	
         <div class="col-xs-12">
-				<form class="form-horizontal" action="${pageContext.request.contextPath}/delSlectedPurchasedLibBooks/0" method="get"
+				<form class="form-horizontal" action="${pageContext.request.contextPath}/delSlectedPurchasedLibBooks/0/<%out.println(hashtext);%>" method="get"
 						name="form_sample_2" id="form_sample_2">
 						
-							<%
-		UUID uuid = UUID.randomUUID();
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-		BigInteger number = new BigInteger(1, messageDigest);
-		String hashtext = number.toString(16);
-		session = request.getSession();
-		session.setAttribute("generatedKey", hashtext);
-	%>
+						
 		
             <table id="example-1" class="table table-striped dt-responsive display">
                 <thead>
