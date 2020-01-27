@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.model.Program;
 import com.ats.rusasoft.master.model.prodetail.Cast;
 import com.ats.rusasoft.master.model.prodetail.GetStudAdmCatwise;
@@ -601,9 +602,9 @@ public class StudAdminController {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-			// System.err.println("Exce in save insertTrainPlace " + e.getMessage());
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -819,8 +820,9 @@ public class StudAdminController {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			// System.err.println("Exce in save insertTrainPlace " + e.getMessage());
 			e.printStackTrace();
 		}

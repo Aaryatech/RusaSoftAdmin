@@ -787,9 +787,9 @@ public class StudentActivityController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
