@@ -1005,8 +1005,10 @@ public class InfraStructureModController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
+			System.err.println("exception In showItInfrastructure" + e.getMessage());
 		}
 		return redirect;
 	}
@@ -1100,6 +1102,10 @@ public class InfraStructureModController {
 				"0", "0", "0", "1", newModuleList);
 
 		try {
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 			if (view.isError() == true) {
 
 				a = "redirect:/accessDenied";
@@ -1137,8 +1143,13 @@ public class InfraStructureModController {
 
 			}
 
-		} catch (Exception e) {
+			}else {				
+				a = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In delSlectedItInfrastructureInfo" + e.getMessage());
 
 			e.printStackTrace();
@@ -1289,10 +1300,10 @@ public class InfraStructureModController {
 				System.err.println("in else");
 				redirect = "redirect:/accessDenied";
 			}
-			
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 		return redirect;
@@ -1391,6 +1402,11 @@ public class InfraStructureModController {
 				"showAllInternetConnectionInfo", "0", "0", "0", "1", newModuleList);
 
 		try {
+			
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 			if (view.isError() == true) {
 
 				a = "redirect:/accessDenied";
@@ -1427,9 +1443,12 @@ public class InfraStructureModController {
 				a = "redirect:/showAllInternetConnectionInfo";
 
 			}
-
+			}else {				
+				a = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In delSlectedLanCompInfo" + e.getMessage());
 
 			e.printStackTrace();
