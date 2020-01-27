@@ -372,8 +372,9 @@ public class AlumniTrainingController {
 
 				redirect = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println("Exce in save Alumni  " + e.getMessage());
 			e.printStackTrace();
 		}
