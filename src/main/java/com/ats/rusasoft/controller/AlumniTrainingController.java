@@ -1231,13 +1231,16 @@ public class AlumniTrainingController {
 
 	// deleteEduDetail
 
-	@RequestMapping(value = "/deleteEduDetail/{educationDetailId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteEduDetail/{educationDetailId}/{token}", method = RequestMethod.GET)
 	public String deleteEduDetail(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int educationDetailId) {
+			@PathVariable int educationDetailId, @PathVariable String token) {
 		String redirect = null;
 		try {
 
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
 
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
@@ -1277,8 +1280,12 @@ public class AlumniTrainingController {
 				redirect = "redirect:/accessDenied";
 
 			}
+			}else {				
+				redirect = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteEduDetail at AlumTrain  Contr " + e.getMessage());
 
 			e.printStackTrace();

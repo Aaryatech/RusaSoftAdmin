@@ -276,14 +276,17 @@ public class StudentActivityController {
 
 	}
 
-	@RequestMapping(value = "/deleteStudentOrgnizedActivity/{activityId}", method = RequestMethod.GET)
-	public String deleteStudentOrgnizedActivity(@PathVariable("activityId") int activityId, HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = "/deleteStudentOrgnizedActivity/{activityId}/{token}", method = RequestMethod.GET)
+	public String deleteStudentOrgnizedActivity(@PathVariable("activityId") int activityId, @PathVariable("token") String token, 
+			HttpServletRequest request, HttpServletResponse response) {
 
 		String returnString = new String();
 		try {
-
 			HttpSession session = request.getSession();
+			String key=(String) session.getAttribute("generatedKey");
+			
+			if(token.trim().equals(key.trim())) {
+			
 			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 			Info view = AccessControll.checkAccess("deleteStudentOrgnizedActivity", "showStudOrgnizedActivity", "0",
 					"0", "0", "1", newModuleList);
@@ -302,9 +305,12 @@ public class StudentActivityController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			}else {				
+				returnString = "redirect:/accessDenied";
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
@@ -562,35 +568,41 @@ public class StudentActivityController {
 
 	}
 
-	@RequestMapping(value = "/deleteStudentAttendActivity/{activityId}", method = RequestMethod.GET)
-	public String deleteStudentAttendActivity(@PathVariable("activityId") int activityId, HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = "/deleteStudentAttendActivity/{activityId}/{token}", method = RequestMethod.GET)
+	public String deleteStudentAttendActivity(@PathVariable("activityId") int activityId, @PathVariable("token") String token, 
+			HttpServletRequest request, HttpServletResponse response) {
 
 		String returnString = new String();
 		try {
 
 			HttpSession session = request.getSession();
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-			Info view = AccessControll.checkAccess("deleteStudentAttendActivity", "showStudAttendActivity", "0", "0",
-					"0", "1", newModuleList);
+			String key = (String) session.getAttribute("generatedKey");
 
-			// System.out.println(view);
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+				Info view = AccessControll.checkAccess("deleteStudentAttendActivity", "showStudAttendActivity", "0",
+						"0", "0", "1", newModuleList);
 
-			if (view.isError() == false) {
+				// System.out.println(view);
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("activityId", activityId);
-				Info res = restTemplate.postForObject(Constants.url + "/deleteActivity", map, Info.class);
+				if (view.isError() == false) {
 
-				returnString = "redirect:/showStudAttendActivity";
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+					map.add("activityId", activityId);
+					Info res = restTemplate.postForObject(Constants.url + "/deleteActivity", map, Info.class);
 
+					returnString = "redirect:/showStudAttendActivity";
+
+				} else {
+
+					returnString = "redirect:/accessDenied";
+				}
 			} else {
-
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 
 		}
