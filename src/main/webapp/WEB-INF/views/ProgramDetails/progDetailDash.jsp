@@ -117,6 +117,15 @@
 							</div>
 
 						</header>
+						<%
+													UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+												%>
 
 						<div class="content-body">
 							<div class="row">
@@ -188,15 +197,7 @@
 												onsubmit="return confirm('Do you really want to add Program Vision?');">
 
 
-												<%
-													UUID uuid = UUID.randomUUID();
-													MessageDigest md = MessageDigest.getInstance("MD5");
-													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-													BigInteger number = new BigInteger(1, messageDigest);
-													String hashtext = number.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey", hashtext);
-												%>
+												
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token" id="token">
 
@@ -308,15 +309,7 @@
 												<div class="row">
 
 
-													<%
-														UUID uuid1 = UUID.randomUUID();
-														MessageDigest md1 = MessageDigest.getInstance("MD5");
-														byte[] messageDigest1 = md1.digest(String.valueOf(uuid1).getBytes());
-														BigInteger number1 = new BigInteger(1, messageDigest1);
-														String hashtext1 = number1.toString(16);
-														session = request.getSession();
-														session.setAttribute("generatedKey1", hashtext1);
-													%>
+													 
 													<input type="hidden" value="<%out.println(hashtext);%>"
 														name="token1" id="token1"> <input type="hidden"
 														id="programMissionId" name="programMissionId" value="0">
@@ -461,15 +454,7 @@
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Objective?');">
 
-												<%
-													UUID uuid2 = UUID.randomUUID();
-													MessageDigest md2 = MessageDigest.getInstance("MD5");
-													byte[] messageDigest2 = md2.digest(String.valueOf(uuid2).getBytes());
-													BigInteger number2 = new BigInteger(1, messageDigest2);
-													String hashtext2 = number2.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey2", hashtext2);
-												%>
+												 
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token2" id="token2">
 
@@ -615,18 +600,9 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Outcome?');">
-
-												<%
-													UUID uuid3 = UUID.randomUUID();
-													MessageDigest md3 = MessageDigest.getInstance("MD5");
-													byte[] messageDigest3 = md3.digest(String.valueOf(uuid3).getBytes());
-													BigInteger number3 = new BigInteger(1, messageDigest3);
-													String hashtext3 = number3.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey3", hashtext3);
-												%>
-												<input type="hidden" value="<%out.println(hashtext3);%>"
-													name="token1" id="token1">
+ 
+												<input type="hidden" value="<%out.println(hashtext);%>"
+													name="token3" id="token3">
 
 												<div class="row">
 													<input type="hidden" id="poId" name="poId" value="0">
@@ -766,16 +742,8 @@
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Outcome?');">
 
-												<%
-													UUID uuid4 = UUID.randomUUID();
-													MessageDigest md4 = MessageDigest.getInstance("MD5");
-													byte[] messageDigest4 = md4.digest(String.valueOf(uuid4).getBytes());
-													BigInteger number4 = new BigInteger(1, messageDigest4);
-													String hashtext4 = number4.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey4", hashtext4);
-												%>
-												<input type="hidden" value="<%out.println(hashtext4);%>"
+												 
+												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token4" id="token4">
 
 
@@ -1057,7 +1025,8 @@
 		function deleteProgramVission(visionId) {
 
 			var programId = document.getElementById("programId").value;
-			
+			var token = document.getElementById("token").value;
+
 				
 				//$('#example-1 td').remove();
 				$("#loader1").show();
@@ -1067,6 +1036,7 @@
 				{
 					visionId : visionId, 
 					programId : programId,
+					token : token,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1191,6 +1161,7 @@
 
 			var programId = document.getElementById("programId").value;
 				/* $('#example-2 td').remove(); */
+					var token1 = document.getElementById("token1").value;
 				$("#loader2").show();
 				
 				$.getJSON('${deleteProgramMission}',
@@ -1198,6 +1169,7 @@
 				{
 					missionId : missionId, 
 					programId : programId,
+					token1:token1,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1320,6 +1292,8 @@
 
 			var programId = document.getElementById("programId").value;
 				/* $('#example-5 td').remove(); */
+				
+				var token2 = document.getElementById("token2").value;
 				$("#loader3").show();
 				
 				$.getJSON('${deleteProgramPeo}',
@@ -1327,6 +1301,7 @@
 				{
 					peoId : peoId, 
 					programId : programId,
+					token2:token2,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1451,6 +1426,7 @@
 
 			var programId = document.getElementById("programId").value;
 				//$('#example-3 td').remove();
+					var token3 = document.getElementById("token3").value;
 				$("#loader4").show();
 				
 				$.getJSON('${deleteProgramPo}',
@@ -1458,6 +1434,7 @@
 				{
 					poId : poId, 
 					programId : programId,
+					token3:token3,
 					ajax : 'true'
 
 				}, function(data) {
@@ -1578,6 +1555,7 @@
 		function deleteProgramPso(psoId) {
 
 			var programId = document.getElementById("programId").value;
+			var token4 = document.getElementById("token4").value;
 				//$('#example-4 td').remove();
 				$("#loader5").show();
 				
@@ -1587,6 +1565,7 @@
 				{
 					psoId : psoId, 
 					programId : programId,
+					token4:token4,
 					ajax : 'true'
 
 				}, function(data) {

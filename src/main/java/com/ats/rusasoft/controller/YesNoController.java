@@ -692,7 +692,7 @@ public class YesNoController {
 
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token1");
-			String key = (String) session.getAttribute("generatedKey1");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			if (token.trim().equals(key.trim())) {
@@ -775,7 +775,7 @@ public class YesNoController {
 
 			HttpSession session = request.getSession();
 			String token1 = request.getParameter("token1");
-			String key = (String) session.getAttribute("generatedKey1");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
@@ -830,7 +830,7 @@ public class YesNoController {
 
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token2");
-			String key = (String) session.getAttribute("generatedKey2");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			if (token.trim().equals(key.trim())) {
@@ -912,7 +912,7 @@ public class YesNoController {
 
 			HttpSession session = request.getSession();
 			String token2 = request.getParameter("token2");
-			String key = (String) session.getAttribute("generatedKey2");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
@@ -1892,7 +1892,7 @@ public class YesNoController {
 
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token1");
-			String key = (String) session.getAttribute("generatedKey1");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			Date date = new Date();
@@ -1979,7 +1979,7 @@ public class YesNoController {
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			String token1 = request.getParameter("token1");
-			String key = (String) session.getAttribute("generatedKey1");
+			String key = (String) session.getAttribute("generatedKey");
 
 			if (token1.trim().equals(key.trim())) {
 
@@ -2032,7 +2032,7 @@ public class YesNoController {
 
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token2");
-			String key = (String) session.getAttribute("generatedKey2");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			int acYearId = (Integer) session.getAttribute("acYearId");
 			if (token.trim().equals(key.trim())) {
@@ -2118,7 +2118,7 @@ public class YesNoController {
 			int acYearId = (Integer) session.getAttribute("acYearId");
 
 			String token2 = request.getParameter("token2");
-			String key = (String) session.getAttribute("generatedKey2");
+			String key = (String) session.getAttribute("generatedKey");
 
 			if (token2.trim().equals(key.trim())) {
 

@@ -1009,8 +1009,9 @@ public class StudentActivityController {
 				List<ProgramVision> list = new ArrayList<>(Arrays.asList(arry));
 				programDetailSaveResponse.setProgramVissionList(list);
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1028,9 +1029,13 @@ public class StudentActivityController {
 
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
+		int programId = Integer.parseInt(request.getParameter("programId"));
 		try {
-
-			int programId = Integer.parseInt(request.getParameter("programId"));
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
+			if (token.trim().equals(key.trim())) {
+		
 			int visionId = Integer.parseInt(request.getParameter("visionId"));
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -1044,9 +1049,17 @@ public class StudentActivityController {
 					ProgramVision[].class);
 			List<ProgramVision> list = new ArrayList<>(Arrays.asList(arry));
 			programDetailSaveResponse.setProgramVissionList(list);
-
+			}else {
+				MultiValueMap<String, Object> map   = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramVision[] arry = restTemplate.postForObject(Constants.url + "/getProgramVisionList", map,
+						ProgramVision[].class);
+				List<ProgramVision> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramVissionList(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1092,7 +1105,7 @@ public class StudentActivityController {
 
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token1");
-			String key = (String) session.getAttribute("generatedKey1");
+			String key = (String) session.getAttribute("generatedKey");
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			if (token.trim().equals(key.trim())) {
 
@@ -1149,9 +1162,9 @@ public class StudentActivityController {
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1169,10 +1182,13 @@ public class StudentActivityController {
 
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
+		HttpSession session = request.getSession();
 		try {
-
+			String token = request.getParameter("token1");
+			String key = (String) session.getAttribute("generatedKey");
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int missionId = Integer.parseInt(request.getParameter("missionId"));
+			if (token.trim().equals(key.trim())) {
+ 			int missionId = Integer.parseInt(request.getParameter("missionId"));
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("missionId", missionId);
@@ -1185,9 +1201,18 @@ public class StudentActivityController {
 					ProgramMission[].class);
 			List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
 			programDetailSaveResponse.setProgramMissionList(list);
-
+			}else {
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramMission[] arry = restTemplate.postForObject(Constants.url + "/getProgramMissionList", map,
+						ProgramMission[].class);
+				List<ProgramMission> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramMissionList(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1233,7 +1258,7 @@ public class StudentActivityController {
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token2");
-			String key = (String) session.getAttribute("generatedKey2");
+			String key = (String) session.getAttribute("generatedKey");
 
 			if (token.trim().equals(key.trim())) {
 
@@ -1292,9 +1317,10 @@ public class StudentActivityController {
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1312,10 +1338,16 @@ public class StudentActivityController {
 
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
+		
 		try {
-
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int peoId = Integer.parseInt(request.getParameter("peoId"));
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token2");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+ 			int peoId = Integer.parseInt(request.getParameter("peoId"));
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("peoId", peoId);
@@ -1328,9 +1360,17 @@ public class StudentActivityController {
 					Constants.url + "/getProgramEducationObjectiveList", map, ProgramEducationObjective[].class);
 			List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
 			programDetailSaveResponse.setProgramEducationObjectiveList(list);
-
+			}else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramEducationObjective[] arry = restTemplate.postForObject(
+						Constants.url + "/getProgramEducationObjectiveList", map, ProgramEducationObjective[].class);
+				List<ProgramEducationObjective> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramEducationObjectiveList(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1376,7 +1416,7 @@ public class StudentActivityController {
 		try {
 
 			HttpSession session = request.getSession();
-			String token = request.getParameter("token");
+			String token = request.getParameter("token3");
 			String key = (String) session.getAttribute("generatedKey");
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			if (token.trim().equals(key.trim())) {
@@ -1433,9 +1473,9 @@ public class StudentActivityController {
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1450,13 +1490,17 @@ public class StudentActivityController {
 	@RequestMapping(value = "/deleteProgramPo", method = RequestMethod.GET)
 	public @ResponseBody ProgramDetailSaveResponse deleteProgramPo(HttpServletRequest request,
 			HttpServletResponse response) {
-
+		HttpSession session = request.getSession();
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
-
+			
+			String token = request.getParameter("token3");
+			String key = (String) session.getAttribute("generatedKey");
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int poId = Integer.parseInt(request.getParameter("poId"));
+			if (token.trim().equals(key.trim())) {
+
+ 			int poId = Integer.parseInt(request.getParameter("poId"));
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("poId", poId);
@@ -1469,9 +1513,17 @@ public class StudentActivityController {
 					ProgramOutcome[].class);
 			List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
 			programDetailSaveResponse.setProgramOutcomeList(list);
-
+			}else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramOutcomeList", map,
+						ProgramOutcome[].class);
+				List<ProgramOutcome> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramOutcomeList(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1516,7 +1568,7 @@ public class StudentActivityController {
 		try {
 			int programId = Integer.parseInt(request.getParameter("programId"));
 			HttpSession session = request.getSession();
-			String token = request.getParameter("token");
+			String token = request.getParameter("token4");
 			String key = (String) session.getAttribute("generatedKey");
 
 			if (token.trim().equals(key.trim())) {
@@ -1574,8 +1626,9 @@ public class StudentActivityController {
 				info.setMsg("error while saving");
 				programDetailSaveResponse.setInfo(info);
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");
@@ -1594,9 +1647,13 @@ public class StudentActivityController {
 		ProgramDetailSaveResponse programDetailSaveResponse = new ProgramDetailSaveResponse();
 		Info info = new Info();
 		try {
-
 			int programId = Integer.parseInt(request.getParameter("programId"));
-			int psoId = Integer.parseInt(request.getParameter("psoId"));
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token4");
+			String key = (String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+ 			int psoId = Integer.parseInt(request.getParameter("psoId"));
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("psoId", psoId);
@@ -1609,9 +1666,17 @@ public class StudentActivityController {
 					map, ProgramSpeceficOutcome[].class);
 			List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
 			programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
-
+			}else {
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("programId", programId);
+				ProgramSpeceficOutcome[] arry = restTemplate.postForObject(Constants.url + "/getProgramSpeceficOutcomeList",
+						map, ProgramSpeceficOutcome[].class);
+				List<ProgramSpeceficOutcome> list = new ArrayList<>(Arrays.asList(arry));
+				programDetailSaveResponse.setProgramSpeceficOutcomeList(list);
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 			info.setError(true);
 			info.setMsg("error while saving");

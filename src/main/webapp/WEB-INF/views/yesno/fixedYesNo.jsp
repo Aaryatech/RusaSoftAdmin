@@ -127,6 +127,15 @@
 							</div> --%>
 
 						</header>
+						<%
+													UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+												%>
 
 						<div class="content-body">
 							<div class="row">
@@ -166,15 +175,7 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
-												<%
-													UUID uuid = UUID.randomUUID();
-													MessageDigest md = MessageDigest.getInstance("MD5");
-													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-													BigInteger number = new BigInteger(1, messageDigest);
-													String hashtext = number.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey", hashtext);
-												%>
+												
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token" id="token">
 
@@ -318,16 +319,8 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
-												<%
-													UUID uuid1 = UUID.randomUUID();
-													MessageDigest md1 = MessageDigest.getInstance("MD5");
-													byte[] messageDigest1 = md1.digest(String.valueOf(uuid1).getBytes());
-													BigInteger number1 = new BigInteger(1, messageDigest1);
-													String hashtext1 = number1.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey1", hashtext1);
-												%>
-												<input type="hidden" value="<%out.println(hashtext1);%>"
+												 
+												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token1" id="token1">
 												<c:if test="${instituteYesNoTab2List.size()==0}">
 													<div class="row">
@@ -469,16 +462,8 @@
 												onsubmit="return confirm('Do you really want to add Program Vission?');">
 
 
-												<%
-													UUID uuid2 = UUID.randomUUID();
-													MessageDigest md2 = MessageDigest.getInstance("MD5");
-													byte[] messageDigest2 = md2.digest(String.valueOf(uuid2).getBytes());
-													BigInteger number2 = new BigInteger(1, messageDigest2);
-													String hashtext2 = number2.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey2", hashtext2);
-												%>
-												<input type="hidden" value="<%out.println(hashtext1);%>"
+											 
+												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token2" id="token2">
 												<c:if test="${instituteYesNoTab3List.size()==0}">
 													<div class="row">

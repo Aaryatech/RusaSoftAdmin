@@ -233,7 +233,7 @@ public class InstituteVissionMissionController {
 
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token1");
-			String key = (String) session.getAttribute("generatedKey1");
+			String key = (String) session.getAttribute("generatedKey");
 			LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 			if (token.trim().equals(key.trim())) {
 
@@ -310,7 +310,7 @@ public class InstituteVissionMissionController {
 		try {
 			HttpSession session = request.getSession();
 			String token = request.getParameter("token1");
-			String key = (String) session.getAttribute("generatedKey1");
+			String key = (String) session.getAttribute("generatedKey");
 			if (token.trim().equals(key.trim())) {
 				int instMissionId = Integer.parseInt(request.getParameter("instMissionId"));
 

@@ -131,7 +131,15 @@
 
 							<%-- </c:if> --%>
 						</header>
-
+<%
+													UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+												%>
 
 						<div class="content-body">
 							<div class="row">
@@ -162,15 +170,7 @@
 												name="submitProgramVission" id="submitProgramVission"
 												onsubmit="return confirm('Do you really want to add Institute Vission?');">
 
-												<%
-													UUID uuid = UUID.randomUUID();
-													MessageDigest md = MessageDigest.getInstance("MD5");
-													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
-													BigInteger number = new BigInteger(1, messageDigest);
-													String hashtext = number.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey", hashtext);
-												%>
+												
 												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token" id="token">
 												<div class="row">
@@ -295,16 +295,8 @@
 												action="${pageContext.request.contextPath}/#" method="post"
 												name="submitProgramMission" id="submitProgramMission"
 												onsubmit="return confirm('Do you really want to add Program Mission?');">
-												<%
-													UUID uuid1 = UUID.randomUUID();
-													MessageDigest md1 = MessageDigest.getInstance("MD5");
-													byte[] messageDigest1 = md1.digest(String.valueOf(uuid1).getBytes());
-													BigInteger number1 = new BigInteger(1, messageDigest1);
-													String hashtext1 = number1.toString(16);
-													session = request.getSession();
-													session.setAttribute("generatedKey1", hashtext1);
-												%>
-												<input type="hidden" value="<%out.println(hashtext1);%>"
+												 
+												<input type="hidden" value="<%out.println(hashtext);%>"
 													name="token1" id="token1">
 												<div class="row">
 
