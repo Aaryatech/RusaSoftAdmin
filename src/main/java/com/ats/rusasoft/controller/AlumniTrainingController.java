@@ -1476,8 +1476,10 @@ public class AlumniTrainingController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
+			SessionKeyGen.changeSessionKey(request);
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -1569,53 +1571,60 @@ public class AlumniTrainingController {
 		HttpSession session = request.getSession();
 		String a = null;
 		try {
-			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+			
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			Info view = AccessControll.checkAccess("/deleteSelectedAlum/{alumni}", "showAlumniAssociationActivity", "0",
-					"0", "0", "1", newModuleList);
+			if (token.trim().equals(key.trim())) {
+				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 
-			if (view.isError() == true) {
+				Info view = AccessControll.checkAccess("/deleteSelectedAlum/{alumni}", "showAlumniAssociationActivity",
+						"0", "0", "0", "1", newModuleList);
 
-				a = "redirect:/accessDenied";
+				if (view.isError() == true) {
 
-			}
+					a = "redirect:/accessDenied";
 
-			else {
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (alumni == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] alumnis = request.getParameterValues("alumni");
-					// System.out.println("id are" + alumnis);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < alumnis.length; i++) {
-						sb = sb.append(alumnis[i] + ",");
-
-					}
-					String alumniList = sb.toString();
-					alumniList = alumniList.substring(0, alumniList.length() - 1);
-
-					map.add("alumniList", alumniList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("alumniList", alumni);
 				}
 
-				Info errMsg = rest.postForObject(Constants.url + "deleteSelAlumni", map, Info.class);
+				else {
 
-				a = "redirect:/showAlumniAssociationActivity";
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (alumni == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] alumnis = request.getParameterValues("alumni");
+						// System.out.println("id are" + alumnis);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < alumnis.length; i++) {
+							sb = sb.append(alumnis[i] + ",");
+
+						}
+						String alumniList = sb.toString();
+						alumniList = alumniList.substring(0, alumniList.length() - 1);
+
+						map.add("alumniList", alumniList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("alumniList", alumni);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "deleteSelAlumni", map, Info.class);
+
+					a = "redirect:/showAlumniAssociationActivity";
+				}
+			} else {
+				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 
 		} catch (Exception e) {
-
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(" Exception In deleteSelectedAlum at Institute Contr " + e.getMessage());
-
 			e.printStackTrace();
-
 		}
 		return a;
 	}
@@ -2066,8 +2075,9 @@ public class AlumniTrainingController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(e.getMessage());
 		}
 		return returnString;
@@ -2320,7 +2330,9 @@ public class AlumniTrainingController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(e.getMessage());
 		}
 		return returnString;
@@ -2585,8 +2597,9 @@ public class AlumniTrainingController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			System.err.println(e.getMessage());
 		}
 		return returnString;

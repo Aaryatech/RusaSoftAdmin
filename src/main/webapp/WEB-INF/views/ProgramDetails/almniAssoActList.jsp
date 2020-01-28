@@ -81,6 +81,8 @@
 		session = request.getSession();
 		session.setAttribute("generatedKey", hashtext);
 	%>
+	<input type="hidden" value="<%out.println(hashtext);%>"
+				name="token" id="token">
 							<div class="content-body">
 								<div class="row">
 

@@ -1827,12 +1827,12 @@ public class StudentActivityController {
 		ModelAndView model = null;
 
 		try {
-
 			HttpSession session = request.getSession();
+			/*
 			String token = request.getParameter("token");
 			String key = (String) session.getAttribute("generatedKey");
 
-			if (token.trim().equals(key.trim())) {
+			if (token.trim().equals(key.trim())) {*/
 
 				LoginResponse userObj = (LoginResponse) session.getAttribute("userObj");
 				List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
@@ -1861,10 +1861,10 @@ public class StudentActivityController {
 
 					model.addObject("studPer", passedStud);
 				}
-			} else {
-
-				model = new ModelAndView("accessDenied");
-			}
+//			} else {
+//
+//				model = new ModelAndView("accessDenied");
+//			}
 
 		} catch (Exception e) {
 
@@ -1931,8 +1931,10 @@ public class StudentActivityController {
 
 				returnString = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
+			SessionKeyGen.changeSessionKey(request);
+			System.out.println("Excp in insertStudPerformInFinalYr : "+e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -2036,43 +2038,55 @@ public class StudentActivityController {
 				"0", "0", "1", newModuleList);
 
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			}
+			if (token.trim().equals(key.trim())) {
 
-			else {
+				if (view.isError() == true) {
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (studInfo == 0) {
+					a = "redirect:/accessDenied";
 
-					System.err.println("Multiple records delete ");
-					String[] studInfos = request.getParameterValues("studInfo");
-					// System.out.println("id are" + studInfo);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < studInfos.length; i++) {
-						sb = sb.append(studInfos[i] + ",");
-
-					}
-					String studInfoList = sb.toString();
-					studInfoList = studInfoList.substring(0, studInfoList.length() - 1);
-
-					map.add("studInfoList", studInfoList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("studInfoList", studInfo);
 				}
 
-				Info errMsg = restTemplate.postForObject(Constants.url + "deleteSelStudperformnc", map, Info.class);
+				else {
 
-				a = "redirect:/showStudPerformInFinlYr";
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (studInfo == 0) {
 
+						System.err.println("Multiple records delete ");
+						String[] studInfos = request.getParameterValues("studInfo");
+						// System.out.println("id are" + studInfo);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < studInfos.length; i++) {
+							sb = sb.append(studInfos[i] + ",");
+
+						}
+						String studInfoList = sb.toString();
+						studInfoList = studInfoList.substring(0, studInfoList.length() - 1);
+
+						map.add("studInfoList", studInfoList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("studInfoList", studInfo);
+					}
+
+					Info errMsg = restTemplate.postForObject(Constants.url + "deleteSelStudperformnc", map, Info.class);
+
+					a = "redirect:/showStudPerformInFinlYr";
+
+				}
+			} else {
+				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
+
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
@@ -2226,9 +2240,10 @@ public class StudentActivityController {
 
 				returnString = "redirect:/accessDenied";
 			}
-
+			SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
+			SessionKeyGen.changeSessionKey(request);
+			System.out.println(e.getMessage());
 		}
 		return returnString;
 	}
@@ -2328,43 +2343,55 @@ public class StudentActivityController {
 				"showStudentsQualifyingExamDetails", "0", "0", "0", "1", newModuleList);
 
 		try {
-			if (view.isError() == true) {
 
-				a = "redirect:/accessDenied";
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			}
+			if (token.trim().equals(key.trim())) {
+				if (view.isError() == true) {
 
-			else {
+					a = "redirect:/accessDenied";
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				if (studQlfExmId == 0) {
-
-					System.err.println("Multiple records delete ");
-					String[] studQlfExmIds = request.getParameterValues("studQlfExmId");
-					// System.out.println("id are" + studQlfExmId);
-
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < studQlfExmIds.length; i++) {
-						sb = sb.append(studQlfExmIds[i] + ",");
-
-					}
-					String studQlfExmIdList = sb.toString();
-					studQlfExmIdList = studQlfExmIdList.substring(0, studQlfExmIdList.length() - 1);
-
-					map.add("studQlfExmIdList", studQlfExmIdList);
-				} else {
-
-					System.err.println("Single Record delete ");
-					map.add("studQlfExmIdList", studQlfExmId);
 				}
 
-				Info errMsg = restTemplate.postForObject(Constants.url + "deleteSelStudQulifiedExm", map, Info.class);
+				else {
 
-				a = "redirect:/showStudentsQualifyingExamDetails";
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (studQlfExmId == 0) {
 
+						System.err.println("Multiple records delete ");
+						String[] studQlfExmIds = request.getParameterValues("studQlfExmId");
+						// System.out.println("id are" + studQlfExmId);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < studQlfExmIds.length; i++) {
+							sb = sb.append(studQlfExmIds[i] + ",");
+
+						}
+						String studQlfExmIdList = sb.toString();
+						studQlfExmIdList = studQlfExmIdList.substring(0, studQlfExmIdList.length() - 1);
+
+						map.add("studQlfExmIdList", studQlfExmIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("studQlfExmIdList", studQlfExmId);
+					}
+
+					Info errMsg = restTemplate.postForObject(Constants.url + "deleteSelStudQulifiedExm", map,
+							Info.class);
+
+					a = "redirect:/showStudentsQualifyingExamDetails";
+
+				}
+			} else {
+				a = "redirect:/accessDenied";
 			}
+			SessionKeyGen.changeSessionKey(request);
+
 		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();
 		}
 
