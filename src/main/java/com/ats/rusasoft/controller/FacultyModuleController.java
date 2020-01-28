@@ -1429,6 +1429,73 @@ public class FacultyModuleController {
 		}
 		return a;
 	}
+	
+	@RequestMapping(value = "/delSlectedMultiStudmentr/{menId}", method = RequestMethod.GET)
+	public String delSlectedMultiStudmentr(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable int menId) {
+		HttpSession session = request.getSession();
+		String a = null;
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+
+		Info view = AccessControll.checkAccess("delSlectedStudmentr/{menId}", "showStudMentor", "0", "0", "0",
+				"1", newModuleList);
+
+		try {			
+			String token=request.getParameter("token");
+			String key=(String) session.getAttribute("generatedKey");
+
+			if (token.trim().equals(key.trim())) {
+
+				if (view.isError() == true) {
+
+					a = "redirect:/accessDenied";
+
+				}
+
+				else {
+
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					if (menId == 0) {
+
+						System.err.println("Multiple records delete ");
+						String[] menIds = request.getParameterValues("menId");
+						// System.out.println("id are" + menIds);
+
+						StringBuilder sb = new StringBuilder();
+
+						for (int i = 0; i < menIds.length; i++) {
+							sb = sb.append(menIds[i] + ",");
+
+						}
+						String menIdList = sb.toString();
+						menIdList = menIdList.substring(0, menIdList.length() - 1);
+
+						map.add("menIdList", menIdList);
+					} else {
+
+						System.err.println("Single Record delete ");
+						map.add("menIdList", menId);
+					}
+
+					Info errMsg = rest.postForObject(Constants.url + "delSlectedStudMentor", map, Info.class);
+
+					a = "redirect:/showStudMentor";
+
+				}
+			} else {
+				a = "redirect:/showStudMentor";
+			}
+			SessionKeyGen.changeSessionKey(request);
+		} catch (Exception e) {
+			SessionKeyGen.changeSessionKey(request);
+			System.err.println(" Exception In deleteInstitutes at Master Contr " + e.getMessage());
+
+			e.printStackTrace();
+
+		}
+		return a;
+	}
 
 	/************************************
 	 * Book Publication

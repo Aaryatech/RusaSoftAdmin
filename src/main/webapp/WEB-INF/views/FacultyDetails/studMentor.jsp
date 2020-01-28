@@ -94,7 +94,14 @@
 							</div>
 
 						</header>
-						<%
+						
+						<div class="content-body">
+							<div class="row">
+								<div class="col-md-12">
+									<form class="form-horizontal"
+										action="${pageContext.request.contextPath}/delSlectedMultiStudmentr/0"
+										method="get" name="form_sample_2" id="form_sample_2">
+<%
 							UUID uuid = UUID.randomUUID();
 							MessageDigest md = MessageDigest.getInstance("MD5");
 							byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
@@ -103,13 +110,8 @@
 							session = request.getSession();
 							session.setAttribute("generatedKey", hashtext);
 						%>
-						<div class="content-body">
-							<div class="row">
-								<div class="col-md-12">
-									<form class="form-horizontal"
-										action="${pageContext.request.contextPath}/delSlectedStudmentr/0/<%out.println(hashtext);%>"
-										method="get" name="form_sample_2" id="form_sample_2">
-
+						<input type="hidden" value="<%out.println(hashtext);%>"
+				name="token" id="token">
 										<div class="col-xs-12">
 											<table id="example-1"
 												class="table table-striped dt-responsive display">
