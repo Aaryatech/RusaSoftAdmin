@@ -9,6 +9,11 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
+	
+	<context-param>
+<param-name>defaultHtmlEscape</param-name>
+<param-value>true</param-value>
+</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
@@ -24,6 +29,26 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+ <filter>
+      <filter-name>addHeaderFilter</filter-name>
+      <filter-class>com.ats.rusasoft.AddHeaderFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>addHeaderFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    
+    <filter>
+		<filter-name>XSS</filter-name>
+		<filter-class>com.ats.rusasoft.CrossScriptingFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>XSS</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
@@ -39,5 +64,12 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<error-page>
+<error-code>404</error-code>
+<location>/errors</location>
+</error-page>
+
+
 
 </web-app>

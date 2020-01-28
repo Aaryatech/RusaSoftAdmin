@@ -48,6 +48,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.rusasoft.commons.Constants;
+import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.master.State;
 import com.ats.rusasoft.model.LoginResponse;
 import com.ats.rusasoft.model.Staff;
@@ -126,7 +127,7 @@ public class HomeController {
 			AcademicYear[] quolArray = restTemplate.postForObject(Constants.url + "getAcademicYearListByTypeId", map,
 					AcademicYear[].class);
 			List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-			//System.err.println("acaYearList " + acaYearList.toString());
+			// System.err.println("acaYearList " + acaYearList.toString());
 
 			model.addObject("acaYearList", acaYearList);
 
@@ -213,18 +214,17 @@ public class HomeController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			String hashtext = new String();
-			
+
 			try {
 				MessageDigest md = MessageDigest.getInstance("MD5");
 				byte[] messageDigest = md.digest(password.getBytes());
 				BigInteger number = new BigInteger(1, messageDigest);
 				hashtext = number.toString(16);
-				
-			}catch(Exception e) {
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
+
 			map.add("password", hashtext);
 			map.add("userId", userId);
 
@@ -288,6 +288,9 @@ public class HomeController {
 
 	}
 
+	LinkedHashMap<String, Integer> tempMap = new LinkedHashMap<>();
+	LinkedHashMap<String, Calendar> userTimeMap = new LinkedHashMap<>();
+
 	@RequestMapping("/loginProcess")
 	public String helloWorld(HttpServletRequest request, HttpServletResponse res, Model model) throws IOException {
 		Instant start = Instant.now();
@@ -317,8 +320,8 @@ public class HomeController {
 		try {
 			String captcha = session.getAttribute("captcha_security").toString();
 			String verifyCaptcha = request.getParameter("captcha");
-
-			if (captcha.equals(verifyCaptcha)) {
+//captcha.equals(verifyCaptcha)
+			if (captcha.trim().equals(verifyCaptcha.trim())) {
 
 				if (name.equalsIgnoreCase("") || password.equalsIgnoreCase("") || name == null || password == null) {
 
@@ -327,302 +330,351 @@ public class HomeController {
 
 				} else {
 
-					MessageDigest md = MessageDigest.getInstance("MD5");
-					byte[] messageDigest = md.digest(password.getBytes());
-					BigInteger number = new BigInteger(1, messageDigest);
-					String hashtext = number.toString(16);
-					System.err.println("hashtext " +hashtext);
-					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-					map.add("username", name);
-					map.add("password", hashtext);
-					map.add("isBlock", 1);
+					int validLogin = 0;
+					Calendar time = Calendar.getInstance();
+					time = DateConvertor.getCurTime();
+					try {
+						time = userTimeMap.get(name);
+					} catch (Exception e) {
+						time = DateConvertor.getCurTime();
+						System.err.println("in catch " + e.getMessage());
+						e.printStackTrace();
+					}
+					System.err
+							.println("time " + time + "DateConvertor.getCurTime()  time " + DateConvertor.getCurTime());
 
-					LoginResponse userObj = restTemplate.postForObject(Constants.url + "login", map,
-							LoginResponse.class);
+					if (userTimeMap.get(name) == null) {
+						validLogin = 1;
 
-					String loginResponseMessage = "";
+					} else if (DateConvertor.getCurTime().getTime().after(time.getTime())) {
+						System.err.println("time exceed");
+						validLogin = 1;
+					}else {
+						model.addAttribute("msg",
+								"Your have crossed no. of invalid login attempts. Account blocked for some time!!");
+				
+						validLogin =0;
+					}
 
-					if (userObj != null) {
+					if (validLogin == 1) {
 
-						int a = userObj.getStaff().getIsEnrolled();
+						MessageDigest md = MessageDigest.getInstance("MD5");
+						byte[] messageDigest = md.digest(password.getBytes());
+						BigInteger number = new BigInteger(1, messageDigest);
+						String hashtext = number.toString(16);
+						System.err.println("hashtext " + hashtext);
+						MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+						map.add("username", name);
+						map.add("password", hashtext);
+						map.add("isBlock", 1);
 
-						if (a == 1) {
-							mav = "redirect:/dashboard";
+						LoginResponse userObj = restTemplate.postForObject(Constants.url + "login", map,
+								LoginResponse.class);
+
+						String loginResponseMessage = "";
+
+						if (userObj != null) {
+
+							int a = userObj.getStaff().getIsEnrolled();
+
+							if (a == 1) {
+								mav = "redirect:/dashboard";
+								tempMap.remove(userObj.getStaff().getEmail());
+								map = new LinkedMultiValueMap<String, Object>();
+								map.add("type", 1);
+
+								AcademicYear[] quolArray = restTemplate.postForObject(
+										Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
+								List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
+								// mav.addObject("acaYearList", acaYearList);
+								session.setAttribute("acaYearList", acaYearList);
+
+							} else {
+								mav = "changePassword";
+								tempMap.remove(userObj.getStaff().getEmail());
+							}
+
+							DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							Calendar cal = Calendar.getInstance();
+
+							String curDateTime = dateFormat.format(cal.getTime());
+
+							DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
+
+							String curDate = dateFormatStr.format(new Date());
+
+							InetAddress addr = InetAddress.getByName(request.getRemoteAddr());
+							String hostName = addr.getHostName();
+							String userAgent = request.getHeader("User-Agent");
+
+							LoginLog llog = new LoginLog();
+
+							llog.setIpAddress(String.valueOf(addr));
+							llog.setUserAgent(userAgent);
+							llog.setUserId(userObj.getUserId());
+
+							llog.setLoginDate(curDateTime);
+
+							llog.setDelStatus(1);
+							llog.setExInt1(1);
+							llog.setExInt2(1);
+							llog.setExVar1("NA");
+							llog.setExVar2("NA");
+
+							RestTemplate rest = new RestTemplate();
+							LoginLog editInst = rest.postForObject(Constants.url + "saveLoginLog", llog,
+									LoginLog.class);
+
+							session.setAttribute("userName", name);
+							session.setAttribute("password", password);
+
+							session.setAttribute("userObj", userObj);
+
+							int instituteId = userObj.getGetData().getUserInstituteId();
+							session.setAttribute("instituteId", instituteId);
+
+							int userId = userObj.getUserId();
+							session.setAttribute("userId", userId);
+
+							session.setAttribute("addIcon", "fa fa-plus-square-o");
+							session.setAttribute("saveIcon", "fa fa-floppy-o");
+							session.setAttribute("cancelIcon", "fa fa-backward");
+							session.setAttribute("forwardIcon", "fa fa-forward");
+							session.setAttribute("deleteIcon", "fa fa-times");
 
 							map = new LinkedMultiValueMap<String, Object>();
-							map.add("type", 1);
+							int typeId = userObj.getUserType();
+							map.add("typeId", typeId);
+
+							/*
+							 * map =new LinkedMultiValueMap<String, Object>(); map.add("userId", userId); //
+							 * System.out.println("Before web service"); try {
+							 * ParameterizedTypeReference<List<ModuleJson>> typeRef = new
+							 * ParameterizedTypeReference<List<ModuleJson>>() { };
+							 * ResponseEntity<List<ModuleJson>> responseEntity =
+							 * restTemplate.exchange(Constants.url + "getRoleJson", HttpMethod.POST, new
+							 * HttpEntity<>(map), typeRef);
+							 * 
+							 * List<ModuleJson> newModuleList = responseEntity.getBody();
+							 */
+							// session.setAttribute("newModuleList", newModuleList);
+							map = new LinkedMultiValueMap<String, Object>();
+							map.add("type", userObj.getUserType());
 
 							AcademicYear[] quolArray = restTemplate.postForObject(
 									Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
 							List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-							// mav.addObject("acaYearList", acaYearList);
-							session.setAttribute("acaYearList", acaYearList);
+							// System.err.println("acaYearList " + acaYearList.toString());
 
-						} else {
-							mav = "changePassword";
-						}
-
-						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-						Calendar cal = Calendar.getInstance();
-
-						String curDateTime = dateFormat.format(cal.getTime());
-
-						DateFormat dateFormatStr = new SimpleDateFormat("yyyy-MM-dd");
-
-						String curDate = dateFormatStr.format(new Date());
-
-						InetAddress addr = InetAddress.getByName(request.getRemoteAddr());
-						String hostName = addr.getHostName();
-						String userAgent = request.getHeader("User-Agent");
-
-						LoginLog llog = new LoginLog();
-
-						llog.setIpAddress(String.valueOf(addr));
-						llog.setUserAgent(userAgent);
-						llog.setUserId(userObj.getUserId());
-
-						llog.setLoginDate(curDateTime);
-
-						llog.setDelStatus(1);
-						llog.setExInt1(1);
-						llog.setExInt2(1);
-						llog.setExVar1("NA");
-						llog.setExVar2("NA");
-
-						RestTemplate rest = new RestTemplate();
-						LoginLog editInst = rest.postForObject(Constants.url + "saveLoginLog", llog, LoginLog.class);
-
-						session.setAttribute("userName", name);
-						session.setAttribute("password", password);
-
-						session.setAttribute("userObj", userObj);
-
-						int instituteId = userObj.getGetData().getUserInstituteId();
-						session.setAttribute("instituteId", instituteId);
-
-						int userId = userObj.getUserId();
-						session.setAttribute("userId", userId);
-
-						session.setAttribute("addIcon", "fa fa-plus-square-o");
-						session.setAttribute("saveIcon", "fa fa-floppy-o");
-						session.setAttribute("cancelIcon", "fa fa-backward");
-						session.setAttribute("forwardIcon", "fa fa-forward");
-						session.setAttribute("deleteIcon", "fa fa-times");
-
-						map = new LinkedMultiValueMap<String, Object>();
-						int typeId = userObj.getUserType();
-						map.add("typeId", typeId);
-
-						/*
-						 * map =new LinkedMultiValueMap<String, Object>(); map.add("userId", userId); //
-						 * System.out.println("Before web service"); try {
-						 * ParameterizedTypeReference<List<ModuleJson>> typeRef = new
-						 * ParameterizedTypeReference<List<ModuleJson>>() { };
-						 * ResponseEntity<List<ModuleJson>> responseEntity =
-						 * restTemplate.exchange(Constants.url + "getRoleJson", HttpMethod.POST, new
-						 * HttpEntity<>(map), typeRef);
-						 * 
-						 * List<ModuleJson> newModuleList = responseEntity.getBody();
-						 */
-						// session.setAttribute("newModuleList", newModuleList);
-						map = new LinkedMultiValueMap<String, Object>();
-						map.add("type", userObj.getUserType());
-
-						AcademicYear[] quolArray = restTemplate.postForObject(
-								Constants.url + "getAcademicYearListByTypeId", map, AcademicYear[].class);
-						List<AcademicYear> acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-						// System.err.println("acaYearList " + acaYearList.toString());
-
-						// session.setAttribute("acaYearList", acaYearList);
-						// ac yadded in sesion
-
-						map = new LinkedMultiValueMap<String, Object>();
-						map.add("isCurrent", 1);
-						// System.err.println("Map " + map.toString());
-						AcademicYear acYear1 = new AcademicYear();
-
-						acYear1 = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map,
-								AcademicYear.class);
-						// System.err.println("acYear current " + acYear1.toString());
-
-						session.setAttribute("acYearId", acYear1.getYearId());
-						session.setAttribute("acYearValue", acYear1.getAcademicYear());
-						// System.err.println("Session date year Id " +
-						// session.getAttribute("acYearId"));
-
-						// getAcademicYearByYearId
-						/*
-						 * map =new LinkedMultiValueMap<String, Object>(); map.add("yearId",
-						 * loginAcYearId); AcademicYear acYear =
-						 * restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map,
-						 * AcademicYear.class); session.setAttribute("acYearValue",
-						 * acYear.getAcademicYear());
-						 */
-
-						map = new LinkedMultiValueMap<String, Object>();
-						map.add("instituteId", userObj.getGetData().getUserInstituteId());
-						// getInstitute
-						Institute instituteInfo = rest.postForObject(Constants.url + "getInstitute", map,
-								Institute.class);
-						session.setAttribute("instituteInfo", instituteInfo);
-						// List<Integer> roleIdList=new ArrayList<>();
-
-						List<Integer> roleIdList = Stream.of(userObj.getStaff().getRoleIds().split(","))
-								.map(Integer::parseInt).collect(Collectors.toList());
-
-						// roleIdList.add(13);
-						// roleIdList.add(1);
-						// roleIdList.add(14);
-						Collections.sort(roleIdList);
-
-						LinkedHashMap<Integer, List<ModuleJson>> moduleHashMap = new LinkedHashMap<Integer, List<ModuleJson>>();
-
-						String time1 = dateFormat.format(cal.getTime());
-
-						for (int i = 0; i < roleIdList.size(); i++) {
+							// session.setAttribute("acaYearList", acaYearList);
+							// ac yadded in sesion
 
 							map = new LinkedMultiValueMap<String, Object>();
-							map.add("roleId", roleIdList.get(i));
+							map.add("isCurrent", 1);
+							// System.err.println("Map " + map.toString());
+							AcademicYear acYear1 = new AcademicYear();
 
-							try {
-								ParameterizedTypeReference<List<ModuleJson>> typeRef = new ParameterizedTypeReference<List<ModuleJson>>() {
-								};
-								ResponseEntity<List<ModuleJson>> responseEntity = restTemplate.exchange(
-										Constants.url + "getRoleJsonByRoleId", HttpMethod.POST, new HttpEntity<>(map),
-										typeRef);
+							acYear1 = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map,
+									AcademicYear.class);
+							// System.err.println("acYear current " + acYear1.toString());
 
-								List<ModuleJson> newModuleList = responseEntity.getBody();
+							session.setAttribute("acYearId", acYear1.getYearId());
+							session.setAttribute("acYearValue", acYear1.getAcademicYear());
+							// System.err.println("Session date year Id " +
+							// session.getAttribute("acYearId"));
 
-								moduleHashMap.put(i, newModuleList);
+							// getAcademicYearByYearId
+							/*
+							 * map =new LinkedMultiValueMap<String, Object>(); map.add("yearId",
+							 * loginAcYearId); AcademicYear acYear =
+							 * restTemplate.postForObject(Constants.url + "getAcademicYearByYearId", map,
+							 * AcademicYear.class); session.setAttribute("acYearValue",
+							 * acYear.getAcademicYear());
+							 */
 
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						} // end of for roleIdList;
+							map = new LinkedMultiValueMap<String, Object>();
+							map.add("instituteId", userObj.getGetData().getUserInstituteId());
+							// getInstitute
+							Institute instituteInfo = rest.postForObject(Constants.url + "getInstitute", map,
+									Institute.class);
+							session.setAttribute("instituteInfo", instituteInfo);
+							// List<Integer> roleIdList=new ArrayList<>();
 
-						List<ModuleJson> newModuleList = moduleHashMap.get(0);
+							List<Integer> roleIdList = Stream.of(userObj.getStaff().getRoleIds().split(","))
+									.map(Integer::parseInt).collect(Collectors.toList());
 
-						for (int i = 1; i < moduleHashMap.size(); i++) {
+							// roleIdList.add(13);
+							// roleIdList.add(1);
+							// roleIdList.add(14);
+							Collections.sort(roleIdList);
 
-							List<ModuleJson> list = moduleHashMap.get(i);
+							LinkedHashMap<Integer, List<ModuleJson>> moduleHashMap = new LinkedHashMap<Integer, List<ModuleJson>>();
 
-							for (int j = 0; j < list.size(); j++) {
+							String time1 = dateFormat.format(cal.getTime());
 
-								int findModuleId = 0;
+							for (int i = 0; i < roleIdList.size(); i++) {
 
-								for (int k = 0; k < newModuleList.size(); k++) {
-									// System.err.println("mod Id " + newModuleList.get(k).getModuleId());
+								map = new LinkedMultiValueMap<String, Object>();
+								map.add("roleId", roleIdList.get(i));
 
-									if (newModuleList.get(k).getModuleId() == list.get(j).getModuleId()) {
-										if (newModuleList.get(k).getModuleId() == 4) {
-											// System.err.println("mod Id 4 sub modules "
-											// + newModuleList.get(k).getSubModuleJsonList().toString());
-										}
+								try {
+									ParameterizedTypeReference<List<ModuleJson>> typeRef = new ParameterizedTypeReference<List<ModuleJson>>() {
+									};
+									ResponseEntity<List<ModuleJson>> responseEntity = restTemplate.exchange(
+											Constants.url + "getRoleJsonByRoleId", HttpMethod.POST,
+											new HttpEntity<>(map), typeRef);
 
-										for (int m = 0; m < list.get(j).getSubModuleJsonList().size(); m++) {
+									List<ModuleJson> newModuleList = responseEntity.getBody();
 
-											int findSubModId = 0;
+									moduleHashMap.put(i, newModuleList);
 
-											for (int l = 0; l < newModuleList.get(k).getSubModuleJsonList()
-													.size(); l++) {
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							} // end of for roleIdList;
 
-												if (newModuleList.get(k).getSubModuleJsonList().get(l)
-														.getSubModuleId() == list.get(j).getSubModuleJsonList().get(m)
-																.getSubModuleId()) {
-													findSubModId = 1;
+							List<ModuleJson> newModuleList = moduleHashMap.get(0);
+
+							for (int i = 1; i < moduleHashMap.size(); i++) {
+
+								List<ModuleJson> list = moduleHashMap.get(i);
+
+								for (int j = 0; j < list.size(); j++) {
+
+									int findModuleId = 0;
+
+									for (int k = 0; k < newModuleList.size(); k++) {
+										// System.err.println("mod Id " + newModuleList.get(k).getModuleId());
+
+										if (newModuleList.get(k).getModuleId() == list.get(j).getModuleId()) {
+											if (newModuleList.get(k).getModuleId() == 4) {
+												// System.err.println("mod Id 4 sub modules "
+												// + newModuleList.get(k).getSubModuleJsonList().toString());
+											}
+
+											for (int m = 0; m < list.get(j).getSubModuleJsonList().size(); m++) {
+
+												int findSubModId = 0;
+
+												for (int l = 0; l < newModuleList.get(k).getSubModuleJsonList()
+														.size(); l++) {
 
 													if (newModuleList.get(k).getSubModuleJsonList().get(l)
-															.getAddApproveConfig().equals("0")) {
-														newModuleList.get(k).getSubModuleJsonList().get(l)
-																.setAddApproveConfig(list.get(j).getSubModuleJsonList()
-																		.get(m).getAddApproveConfig());
-													}
+															.getSubModuleId() == list.get(j).getSubModuleJsonList()
+																	.get(m).getSubModuleId()) {
+														findSubModId = 1;
 
-													if (newModuleList.get(k).getSubModuleJsonList().get(l)
-															.getEditReject().equals("0")) {
-														newModuleList.get(k).getSubModuleJsonList().get(l)
-																.setEditReject(list.get(j).getSubModuleJsonList().get(m)
-																		.getEditReject());
-													}
+														if (newModuleList.get(k).getSubModuleJsonList().get(l)
+																.getAddApproveConfig().equals("0")) {
+															newModuleList.get(k).getSubModuleJsonList().get(l)
+																	.setAddApproveConfig(
+																			list.get(j).getSubModuleJsonList().get(m)
+																					.getAddApproveConfig());
+														}
 
-													if (newModuleList.get(k).getSubModuleJsonList().get(l)
-															.getDeleteRejectApprove().equals("0")) {
-														newModuleList.get(k).getSubModuleJsonList().get(l)
-																.setDeleteRejectApprove(
-																		list.get(j).getSubModuleJsonList().get(m)
-																				.getDeleteRejectApprove());
-													}
+														if (newModuleList.get(k).getSubModuleJsonList().get(l)
+																.getEditReject().equals("0")) {
+															newModuleList.get(k).getSubModuleJsonList().get(l)
+																	.setEditReject(list.get(j).getSubModuleJsonList()
+																			.get(m).getEditReject());
+														}
 
-													break;
+														if (newModuleList.get(k).getSubModuleJsonList().get(l)
+																.getDeleteRejectApprove().equals("0")) {
+															newModuleList.get(k).getSubModuleJsonList().get(l)
+																	.setDeleteRejectApprove(
+																			list.get(j).getSubModuleJsonList().get(m)
+																					.getDeleteRejectApprove());
+														}
+
+														break;
+													}
+												}
+
+												if (findSubModId == 0) {
+
+													newModuleList.get(k).getSubModuleJsonList()
+															.add(list.get(j).getSubModuleJsonList().get(m));
 												}
 											}
 
-											if (findSubModId == 0) {
-
-												newModuleList.get(k).getSubModuleJsonList()
-														.add(list.get(j).getSubModuleJsonList().get(m));
-											}
+											findModuleId = 1;
+											break;
 										}
 
-										findModuleId = 1;
-										break;
+									}
+
+									if (findModuleId == 0) {
+
+										newModuleList.add(list.get(j));
+
 									}
 
 								}
 
-								if (findModuleId == 0) {
+							}
 
-									newModuleList.add(list.get(j));
+							String time2 = dateFormat.format(cal.getTime().getTime());
 
+							for (int i = 0; i < newModuleList.size(); i++) {
+
+								Collections.sort(newModuleList.get(i).getSubModuleJsonList(),
+										new Comparator<SubModuleJson>() {
+											public int compare(SubModuleJson c1, SubModuleJson c2) {
+												if (c1.getOrderBy() > c2.getOrderBy())
+													return 1;
+												if (c1.getOrderBy() < c2.getOrderBy())
+													return -1;
+												return 0;
+											}
+										});
+
+							}
+
+							Collections.sort(newModuleList, new Comparator<ModuleJson>() {
+								public int compare(ModuleJson c1, ModuleJson c2) {
+									if (c1.getOrderBy() > c2.getOrderBy())
+										return 1;
+									if (c1.getOrderBy() < c2.getOrderBy())
+										return -1;
+									return 0;
 								}
+							});
 
-							}
+							session.setAttribute("newModuleList", newModuleList);
 
+							State[] stateArray = restTemplate.getForObject(Constants.url + "getStateList",
+									State[].class);
+							List<State> stateList = new ArrayList<>(Arrays.asList(stateArray));
+
+							session.setAttribute("stateList", stateList);
 						}
-
-						String time2 = dateFormat.format(cal.getTime().getTime());
-
-						for (int i = 0; i < newModuleList.size(); i++) {
-
-							Collections.sort(newModuleList.get(i).getSubModuleJsonList(),
-									new Comparator<SubModuleJson>() {
-										public int compare(SubModuleJson c1, SubModuleJson c2) {
-											if (c1.getOrderBy() > c2.getOrderBy())
-												return 1;
-											if (c1.getOrderBy() < c2.getOrderBy())
-												return -1;
-											return 0;
-										}
-									});
-
-						}
-
-						Collections.sort(newModuleList, new Comparator<ModuleJson>() {
-							public int compare(ModuleJson c1, ModuleJson c2) {
-								if (c1.getOrderBy() > c2.getOrderBy())
-									return 1;
-								if (c1.getOrderBy() < c2.getOrderBy())
-									return -1;
-								return 0;
-							}
-						});
-
-						session.setAttribute("newModuleList", newModuleList);
-
-						State[] stateArray = restTemplate.getForObject(Constants.url + "getStateList", State[].class);
-						List<State> stateList = new ArrayList<>(Arrays.asList(stateArray));
-
-						session.setAttribute("stateList", stateList);
-					}
-
-				}
-			} else {
+					} // end of if valid login ==1
+				} // end of else for null user, pass
+			} // end of if valid captcha matching
+			else {
 				mav = "login";
 				model.addAttribute("msg", "Invalid Text");
 				Random randChars = new Random();
 				String sImageCode = (Long.toString(Math.abs(randChars.nextLong()), 36)).substring(0, 6);
-				session.setAttribute("captcha_security", sImageCode); 
+				session.setAttribute("captcha_security", sImageCode);
+
+				if (tempMap.containsKey(name)) {
+					tempMap.put(name, tempMap.get(name) + 1);
+				} else {
+					tempMap.put(name, 1);
+				}
+
+				if (tempMap.get(name) > 4) {
+					userTimeMap.put(name, DateConvertor.getTimePlus30Min());
+
+					model.addAttribute("msg",
+							"Your have crossed no. of invalid login attempts. Account blocked for some time!!");
+				}
+
+				System.err.println("map " + tempMap.toString());
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 
