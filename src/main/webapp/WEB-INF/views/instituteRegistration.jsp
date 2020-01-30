@@ -3,6 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ page import="java.util.UUID"%>
+<%@ page import="java.security.MessageDigest"%>
+<%@ page import="java.math.BigInteger"%>
 
 
 <!DOCTYPE html>
@@ -94,7 +97,17 @@
 									<form class="form-horizontal"
 										action="${pageContext.request.contextPath}/insertInstituteDemo"
 										method="post" name="form_sample_2" id="form_sample_2">
-
+<%
+												UUID uuid = UUID.randomUUID();
+													MessageDigest md = MessageDigest.getInstance("MD5");
+													byte[] messageDigest = md.digest(String.valueOf(uuid).getBytes());
+													BigInteger number = new BigInteger(1, messageDigest);
+													String hashtext = number.toString(16);
+													session = request.getSession();
+													session.setAttribute("generatedKey", hashtext);
+											%>
+											<input type="hidden" value="<%out.println(hashtext);%>"
+												name="token" id="token">
 										<input type="hidden" id="inst_id" name="inst_id"
 											value="${editInst.instituteId}">
 
@@ -463,8 +476,11 @@
 														 <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="radio" id="autonomy" name="autonomy" value="1" ${editInst.exVar2==1 ? 'checked' : ''}> Yes &nbsp;&nbsp;&nbsp;&nbsp; 
-														<input type="radio"	id="autonomy" name="autonomy" value="0" ${editInst.exVar2==0 ? 'checked' : ''}> No 
+														<input type="radio" id="autonomy" name="autonomy"  value="1" ${editInst.exVar2==1 ? 'checked' : ''}> Yes &nbsp;&nbsp;&nbsp;&nbsp; 
+														<input type="radio"	id="autonomy" name="autonomy" value="0" ${editInst.exVar2==0 ? 'checked' : ''}> No
+														<span
+															class="error_form text-danger" id="autonomy_error"
+															style="display: none;">Please select autonomy.</span> 
 													</div>
 												</div>
 
@@ -474,11 +490,14 @@
 														Type <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
-														<input type="radio" id="inst_type" name="inst_type" ${editInst.exVar1==1 ? 'checked' : ''}
+														<input type="radio"  id="inst_type" name="inst_type" ${editInst.exVar1==1 ? 'checked' : ''}
 															value="1"> Government &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
 															id="inst_type" name="inst_type" value="2" ${editInst.exVar1==2 ? 'checked' : ''}> Aided &nbsp;&nbsp;&nbsp;&nbsp;
 															<input type="radio"
 															id="inst_type" name="inst_type" ${editInst.exVar1==3 ? 'checked' : ''} value="3"> Non-Aided
+															<span
+															class="error_form text-danger" id="inst_type_error"
+															style="display: none;">Please select institute type.</span> 
 													</div>
 												</div>
 												<div class="form-group">
@@ -811,7 +830,33 @@ $('#aishe_code').on('input', function() {
 
 												//var x = $("#is_registration")
 														//.val();
+												var y=$('input[name=autonomy]:checked').val();
+												if (parseInt(y) == 1 || parseInt(y)==0){
+													
+													$("#autonomy_error")
+													.hide()
+												}else{
+													isError = true;
+													$("#autonomy")
+													.addClass(
+															"has-error")
+											$("#autonomy_error")
+													.show()
+												}
 												
+												var z=$('input[name=inst_type]:checked').val();
+												if (parseInt(y) == 1 || parseInt(z)==2 || parseInt(z)==3){
+													$("#inst_type_error")
+													.hide()
+												}else{
+													isError = true;
+													$("#inst_type")
+													.addClass(
+															"has-error")
+											$("#inst_type_error")
+													.show()
+												}
+
 												var x=$('input[name=is_registration]:checked').val();
 
 												//alert("x " +x);

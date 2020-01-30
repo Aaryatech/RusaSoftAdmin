@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
+import com.ats.rusasoft.commons.FormValidation;
 import com.ats.rusasoft.master.InstituteMaster;
 import com.ats.rusasoft.master.model.prodetail.NameIdBean;
 import com.ats.rusasoft.model.AcademicYear;
@@ -41,11 +42,11 @@ import com.ats.rusasoft.model.accessright.AssignRoleDetailList;
 public class RegController {
 	LinkedHashMap<String, Institute> instHashMap = new LinkedHashMap<String, Institute>();
 	LinkedHashMap<String, String> otpKeyValue = new LinkedHashMap<String, String>();
-	LinkedHashMap<Integer, String> temp = new LinkedHashMap< >();
+	LinkedHashMap<Integer, String> temp = new LinkedHashMap<>();
 	LinkedHashMap<String, Staff> staffHashMap = new LinkedHashMap<String, Staff>();
 	RestTemplate rest = new RestTemplate();
-	Instant start=null;
-	public Instant pricipalOtpStart=null;
+	Instant start = null;
+	public Instant pricipalOtpStart = null;
 
 	@RequestMapping(value = "/getInstituteMasterByAishe", method = RequestMethod.GET)
 	public @ResponseBody InstituteMaster getInstituteMasterByAishe(HttpServletRequest request,
@@ -147,97 +148,178 @@ public class RegController {
 		HttpSession session = request.getSession();
 
 		ModelAndView model = new ModelAndView("confirmInstReg");
-		int instId = Integer.parseInt(request.getParameter("inst_id"));
+		int instId = 0;
+		try {
+			instId = Integer.parseInt(request.getParameter("inst_id"));
+		} catch (Exception e) {
+			instId = 0;
+		}
 		String redirect = null;
 		try {
 
-			RestTemplate restTemplate = new RestTemplate();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			if (token.trim().equals(key.trim())) {
+				RestTemplate restTemplate = new RestTemplate();
 
-			map.add("isCurrent", 1);
-			AcademicYear acYear1 = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map,
-					AcademicYear.class);
-			int yearId = acYear1.getYearId();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			String exVar = "";
-			if (instId == 0) {
-				Institute institute = new Institute();
-
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-
-				String curDateTime = dateFormat.format(cal.getTime());
+				map.add("isCurrent", 1);
+				AcademicYear acYear1 = restTemplate.postForObject(Constants.url + "getAcademicYearByIsCurrent", map,
+						AcademicYear.class);
+				int yearId = acYear1.getYearId();
 
 				String aisheCode = request.getParameter("aishe_code");
-				institute.setAisheCode(XssEscapeUtils.jsoupParse(aisheCode));
+				String pricplContact = request.getParameter("princ_contact");
+				String princplEmail = request.getParameter("princ_email");
+				String instAdd = request.getParameter("inst_add");
+				String instName = request.getParameter("inst_name");
 
-				institute.setCheckerDatetime(curDateTime);
-				institute.setCheckerUserId(0);
+				String prsidName = request.getParameter("pres_name");
+				String princplName = request.getParameter("princ_name");
+				String trustyAdd = request.getParameter("trusty_add");
+				String trustyCont = request.getParameter("trusty_con_no");
+				String trustyName = request.getParameter("trusty_name");
+				String presContact = request.getParameter("pres_contact");
+				String presEmail = request.getParameter("pres_email");
 
-				institute.setContactNo(XssEscapeUtils.jsoupParse(request.getParameter("princ_contact")));
-				institute.setDelStatus(1);
-				institute.setEmail(XssEscapeUtils.jsoupParse(request.getParameter("princ_email")));
+				String village = request.getParameter("village");
+				String taluka = request.getParameter("taluka");
+				String district = request.getParameter("district");
+				String state = request.getParameter("state");
+				String pin = request.getParameter("pin");
 
-				institute.setExInt1(yearId); // academic Year
-				institute.setExInt2(0); // is_approved
+				String regDate1 = request.getParameter("reg_date");
 
-				//institute.setExVar1(exVar);
-				institute.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("inst_type")));
+				String isReg1 = request.getParameter("is_registration");
 
-				institute.setExVar2(XssEscapeUtils.jsoupParse(request.getParameter("autonomy")));
+				String exVar1 = request.getParameter("inst_type");
 
-				institute.setInstituteAdd(XssEscapeUtils.jsoupParse(request.getParameter("inst_add")));
-				institute.setInstituteId(instId);
-				institute.setInstituteName(XssEscapeUtils.jsoupParse(request.getParameter("inst_name")));
+				String exVar2 = request.getParameter("autonomy");
 
-				institute.setIsActive(1);
-				institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed his/her
-												// pass.
-												// Initially its zero
-				int isReg = Integer.parseInt(request.getParameter("is_registration"));
-				institute.setIsRegistration(isReg);
+				Boolean error = false;
 
-				institute.setLastUpdatedDatetime(curDateTime);
-				institute.setMakerEnterDatetime(curDateTime);
-				institute.setMakerUserId(0);// user id who is creating this record for ex principal is
-											// user who creates
-				// iqac
-				// and hod to student
+				if (FormValidation.Validaton(aisheCode, "") == true
+						|| FormValidation.Validaton(pricplContact, "mobile") == true
+						|| FormValidation.Validaton(princplEmail, "email") == true
+						|| FormValidation.Validaton(instAdd, "") == true
+						|| FormValidation.Validaton(prsidName, "") == true
+						|| FormValidation.Validaton(princplName, "") == true
+						|| FormValidation.Validaton(trustyAdd, "") == true
+						|| FormValidation.Validaton(trustyCont, "") == true
+						|| FormValidation.Validaton(trustyName, "") == true
+						|| FormValidation.Validaton(instName, "") == true
 
-				institute.setPresidentName(XssEscapeUtils.jsoupParse(request.getParameter("pres_name")));
-				institute.setPrincipalName(XssEscapeUtils.jsoupParse(request.getParameter("princ_name")));
-				if (isReg == 1)
-					institute.setRegDate(XssEscapeUtils.jsoupParse(request.getParameter("reg_date")));
-				institute.setTrustAdd(XssEscapeUtils.jsoupParse(request.getParameter("trusty_add")));
+						|| FormValidation.Validaton(presContact, "") == true
+						|| FormValidation.Validaton(presEmail, "email") == true
 
-				institute.setTrustContactNo(XssEscapeUtils.jsoupParse(request.getParameter("trusty_con_no")));
-				institute.setTrustName(XssEscapeUtils.jsoupParse(request.getParameter("trusty_name")));
-				institute.setUserType(0);// for institute its 0
+						|| FormValidation.Validaton(village, "") == true || FormValidation.Validaton(taluka, "") == true
 
-				institute.setPresidenContact(XssEscapeUtils.jsoupParse(request.getParameter("pres_contact")));
-				institute.setPresidentEmail(XssEscapeUtils.jsoupParse(request.getParameter("pres_email")));
+						|| FormValidation.Validaton(district, "") == true || FormValidation.Validaton(state, "") == true
 
-				institute.setVillage(XssEscapeUtils.jsoupParse(request.getParameter("village")));
-				institute.setTaluka(XssEscapeUtils.jsoupParse(request.getParameter("taluka")));
-				institute.setDistrict(XssEscapeUtils.jsoupParse(request.getParameter("district")));
-				institute.setState(XssEscapeUtils.jsoupParse(request.getParameter("state")));
-				institute.setPincode(XssEscapeUtils.jsoupParse(request.getParameter("pin")));
+						|| FormValidation.Validaton(isReg1, "") == true || FormValidation.Validaton(pin, "") == true
 
-				System.out.println("Data institute --------------" + institute.toString());
+						|| FormValidation.Validaton(exVar1, "") == true
+						|| FormValidation.Validaton(exVar2, "") == true) {
 
-				// Institute info = restTemplate.postForObject(Constants.url + "saveInstitute",
-				// institute,
-				// Institute.class);
+					error = true;
+				}
+				if (Integer.parseInt(isReg1) == 1) {
+					if (FormValidation.Validaton(regDate1, "date") == true) {
+						error = true;
+					}
+				}
 
-				instHashMap.put(institute.getContactNo(), institute);
-				model.addObject("editInst", institute);
-				System.err.println("instHashMap  size  " + instHashMap.size());
+				if (error == false) {
+
+					String exVar = "";
+					if (instId == 0) {
+						Institute institute = new Institute();
+
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						Calendar cal = Calendar.getInstance();
+
+						String curDateTime = dateFormat.format(cal.getTime());
+
+						// String aisheCode = request.getParameter("aishe_code");
+						institute.setAisheCode(XssEscapeUtils.jsoupParse(aisheCode));
+
+						institute.setCheckerDatetime(curDateTime);
+						institute.setCheckerUserId(0);
+
+						institute.setContactNo(XssEscapeUtils.jsoupParse(request.getParameter("princ_contact")));
+						institute.setDelStatus(1);
+						institute.setEmail(XssEscapeUtils.jsoupParse(request.getParameter("princ_email")));
+
+						institute.setExInt1(yearId); // academic Year
+						institute.setExInt2(0); // is_approved
+
+						// institute.setExVar1(exVar);
+						institute.setExVar1(XssEscapeUtils.jsoupParse(request.getParameter("inst_type")));
+
+						institute.setExVar2(XssEscapeUtils.jsoupParse(request.getParameter("autonomy")));
+
+						institute.setInstituteAdd(XssEscapeUtils.jsoupParse(request.getParameter("inst_add")));
+						institute.setInstituteId(instId);
+						institute.setInstituteName(XssEscapeUtils.jsoupParse(request.getParameter("inst_name")));
+
+						institute.setIsActive(1);
+						institute.setIsEnrollSystem(0);// set to 1 when user loged in for first time and changed his/her
+														// pass.
+														// Initially its zero
+						int isReg = Integer.parseInt(request.getParameter("is_registration"));
+						institute.setIsRegistration(isReg);
+
+						institute.setLastUpdatedDatetime(curDateTime);
+						institute.setMakerEnterDatetime(curDateTime);
+						institute.setMakerUserId(0);// user id who is creating this record for ex principal is
+													// user who creates
+						// iqac
+						// and hod to student
+
+						institute.setPresidentName(XssEscapeUtils.jsoupParse(request.getParameter("pres_name")));
+						institute.setPrincipalName(XssEscapeUtils.jsoupParse(request.getParameter("princ_name")));
+						if (isReg == 1)
+							institute.setRegDate(XssEscapeUtils.jsoupParse(request.getParameter("reg_date")));
+						institute.setTrustAdd(XssEscapeUtils.jsoupParse(request.getParameter("trusty_add")));
+
+						institute.setTrustContactNo(XssEscapeUtils.jsoupParse(request.getParameter("trusty_con_no")));
+						institute.setTrustName(XssEscapeUtils.jsoupParse(request.getParameter("trusty_name")));
+						institute.setUserType(0);// for institute its 0
+
+						institute.setPresidenContact(XssEscapeUtils.jsoupParse(request.getParameter("pres_contact")));
+						institute.setPresidentEmail(XssEscapeUtils.jsoupParse(request.getParameter("pres_email")));
+
+						institute.setVillage(XssEscapeUtils.jsoupParse(request.getParameter("village")));
+						institute.setTaluka(XssEscapeUtils.jsoupParse(request.getParameter("taluka")));
+						institute.setDistrict(XssEscapeUtils.jsoupParse(request.getParameter("district")));
+						institute.setState(XssEscapeUtils.jsoupParse(request.getParameter("state")));
+						institute.setPincode(XssEscapeUtils.jsoupParse(request.getParameter("pin")));
+
+						System.out.println("Data institute --------------" + institute.toString());
+
+						// Institute info = restTemplate.postForObject(Constants.url + "saveInstitute",
+						// institute,
+						// Institute.class);
+
+						instHashMap.put(institute.getContactNo(), institute);
+						model.addObject("editInst", institute);
+						System.err.println("instHashMap  size  " + instHashMap.size());
+
+					} else {
+
+					}
+				} // end of if isError=false
+				else {
+					model = new ModelAndView("improperData");
+				}
 
 			} else {
 
-			}
+				model = new ModelAndView("accessDenied");
 
+			}
 		} catch (Exception e) {
 
 			System.err.println(" Exception In insertInstituteDemo at Reg Contr " + e.getMessage());
@@ -291,7 +373,7 @@ public class RegController {
 			String princ_contact = request.getParameter("princ_contact");
 			int instId = Integer.parseInt(request.getParameter("instId"));
 			String princ_email = request.getParameter("princ_email");
-			String roleId=Constants.Princ_Role;
+			String roleId = Constants.Princ_Role;
 
 			Staff staff = new Staff();
 
@@ -369,9 +451,9 @@ public class RegController {
 
 			int isBack = Integer.parseInt(request.getParameter("is_back"));
 			String otpNo = request.getParameter("otp_no");
-			
+
 			if (isBack == 0) {
-				
+
 				System.err.println("in If.  Its Confirm Button Pressed");
 
 				model = new ModelAndView("ask_otp_chPrinci");
@@ -392,36 +474,33 @@ public class RegController {
 				 * res = restTemplate.postForObject(
 				 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
 				 */
-				
+
 				map.add("username", "rusamah-wb");
 				map.add("password", "Rus@@123456");
 				map.add("senderid", "MHRUSA");
 				map.add("mobileno", otpNo.trim());
-				map.add("content", msg); 
-				map.add("smsservicetype", "singlemsg"); 
-				String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
-				map, String.class);
-				
-				
-			
-			  System.err.println("in showOtpPageForChangePrinci  time start  is "+start);
+				map.add("content", msg);
+				map.add("smsservicetype", "singlemsg");
+				String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest", map,
+						String.class);
+
+				System.err.println("in showOtpPageForChangePrinci  time start  is " + start);
 
 				otpKeyValue.put(otpKey, otp);
 
 				model.addObject("otpk", otpKey);
 				model.addObject("otpNo", otpNo);
-				  pricipalOtpStart = Instant.now();
-			 System.out.println();
-				System.err.println("in start submit time   is "+start);
+				pricipalOtpStart = Instant.now();
+				System.out.println();
+				System.err.println("in start submit time   is " + start);
 
 			} else {
-				
 
 				model = new ModelAndView("showChangePrincipalForm");
 				Staff editInst = staffHashMap.get(otpNo);
-				 String aisheCode =temp.get(1);
-				 String inst_name =temp.get(2);
-				 System.err.println("in Else  its Back button Pressed "+editInst.toString() );
+				String aisheCode = temp.get(1);
+				String inst_name = temp.get(2);
+				System.err.println("in Else  its Back button Pressed " + editInst.toString());
 				model.addObject("editInst", editInst);
 				model.addObject("aishe", aisheCode);
 				model.addObject("instName", inst_name);
@@ -438,7 +517,7 @@ public class RegController {
 	@RequestMapping(value = "/verifyOtpAndChangePrincipal", method = RequestMethod.POST)
 	public ModelAndView verifyOtpAndChangePrincipal(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
-		
+
 		try {
 			String enteredOtp = request.getParameter("entered_otp");
 			String otpk = request.getParameter("otpk");
@@ -447,31 +526,28 @@ public class RegController {
 			String storedOtp = otpKeyValue.get(otpk);
 			if (enteredOtp.equals(storedOtp)) {
 				System.err.println("Otp Matched ");
-				
+
 				Instant end = Instant.now();
-				System.err.println("in final submit time end  is "+end);
-				System.err.println("start was " +start);
+				System.err.println("in final submit time end  is " + end);
+				System.err.println("start was " + start);
 
 				Duration timeElapsed = Duration.between(pricipalOtpStart, end);
 
 				Staff editInst = staffHashMap.get(otpNo);
-				System.out.println("Time taken: OTPVerification "+ timeElapsed.getSeconds() +" seconds");
-				if(timeElapsed.getSeconds()<=120) {
-				Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editInst, Staff.class);
-				model = new ModelAndView("login");
+				System.out.println("Time taken: OTPVerification " + timeElapsed.getSeconds() + " seconds");
+				if (timeElapsed.getSeconds() <= 120) {
+					Staff hod = rest.postForObject(Constants.url + "/addNewStaff", editInst, Staff.class);
+					model = new ModelAndView("login");
 
-				model.addObject("msg", "Pricipal Change Requested Sucessfully");
-				}
-				else {
+					model.addObject("msg", "Pricipal Change Requested Sucessfully");
+				} else {
 					model = new ModelAndView("ask_otp_chPrinci");
 					model.addObject("otpk", otpk);
 					model.addObject("otpNo", otpNo);
 					model.addObject("expFlag", 1);
-					
-				 
+
 					model.addObject("msg", "Time out! Regenerate OTP");
 				}
-			  
 
 			} else {
 
@@ -496,13 +572,13 @@ public class RegController {
 	}
 
 	@RequestMapping(value = "/reGenOtpForChangePrincipal", method = RequestMethod.GET)
-	public @ResponseBody NameIdBean reGenOtpForChangePrincipal(HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody NameIdBean reGenOtpForChangePrincipal(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		NameIdBean bean = new NameIdBean();
 
 		try {
 			String otpk = request.getParameter("otpk");
-			
 
 			RestTemplate restTemplate = new RestTemplate();
 
@@ -511,7 +587,7 @@ public class RegController {
 			String otp = getNumericOtp(6);
 			String otpKey = otpk;
 
-			String msg = " OTP for  Change Principal is " + otp + " (test message)";
+			String msg = " OTP for  Change Principal is " + otp + "";
 
 			/*
 			 * map.add("senderID", "RUSAMH"); map.add("user",
@@ -520,15 +596,15 @@ public class RegController {
 			 * res = restTemplate.postForObject(
 			 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
 			 */
-			
+
 			map.add("username", "rusamah-wb");
 			map.add("password", "Rus@@123456");
 			map.add("senderid", "MHRUSA");
 			map.add("mobileno", otpNo.trim());
-			map.add("content", msg); 
-			map.add("smsservicetype", "singlemsg"); 
-			String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
-			map, String.class);
+			map.add("content", msg);
+			map.add("smsservicetype", "singlemsg");
+			String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest", map,
+					String.class);
 
 			bean.setName(otp);
 			otpKeyValue.put(otpKey, otp);
@@ -549,65 +625,76 @@ public class RegController {
 
 		ModelAndView model = new ModelAndView("ask_otp");
 		try {
-
-			int isBack = Integer.parseInt(request.getParameter("is_back"));
+			int isBack = 1;
+			isBack = Integer.parseInt(request.getParameter("is_back"));
 			String otpNo = request.getParameter("otp_no");
+			Boolean error = false;
 
-			if (isBack == 0) {
-				System.err.println("in If.  Its Confirm Button Pressed");
+			if (FormValidation.Validaton(otpNo, "") == true) {
 
-				model = new ModelAndView("ask_otp");
-				RestTemplate restTemplate = new RestTemplate();
+				error = true;
+			}
 
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				String otp = getNumericOtp(6);
-				String otpKey = getIntegerKey(4);
-				System.err.println("OTP is " + otp);
+			if (error == false) {
+				if (isBack == 0) {
+					System.err.println("in If.  Its Confirm Button Pressed");
 
-				String msg = " OTP for  Institute Registration is " + otp
-						+ ". Do not share OTP with anyone. RUSA Maharashtra";
+					model = new ModelAndView("ask_otp");
+					RestTemplate restTemplate = new RestTemplate();
 
-				/*
-				 * map.add("senderID", "RUSAMH"); map.add("user",
-				 * "spdrusamah@gmail.com:Cyber@mva"); map.add("receipientno", otpNo.trim());
-				 * map.add("dcs", "0"); map.add("msgtxt", msg); map.add("state", "4"); String
-				 * res = restTemplate.postForObject(
-				 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
-				 */
-				
-				
-				map.add("username", "rusamah-wb");
-				map.add("password", "Rus@@123456");
-				map.add("senderid", "MHRUSA");
-				map.add("mobileno", otpNo.trim());
-				map.add("content", msg); 
-				map.add("smsservicetype", "singlemsg"); 
-				String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
-				map, String.class);
+					MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+					String otp = getNumericOtp(6);
+					String otpKey = getIntegerKey(4);
+					System.err.println("OTP is " + otp);
 
-				otpKeyValue.put(otpKey, otp);
+					String msg = " OTP for  Institute Registration is " + otp
+							+ ". Do not share OTP with anyone. RUSA Maharashtra";
 
-				model.addObject("otpk", otpKey);
-				model.addObject("otpNo", otpNo);
+					/*
+					 * map.add("senderID", "RUSAMH"); map.add("user",
+					 * "spdrusamah@gmail.com:Cyber@mva"); map.add("receipientno", otpNo.trim());
+					 * map.add("dcs", "0"); map.add("msgtxt", msg); map.add("state", "4"); String
+					 * res = restTemplate.postForObject(
+					 * "http://api.mVaayoo.com/mvaayooapi/MessageCompose", map, String.class);
+					 */
 
-				//// System.out.println(res);
-			} else {
-				System.err.println("in Else  its Back button Pressed ");
+					map.add("username", "rusamah-wb");
+					map.add("password", "Rus@@123456");
+					map.add("senderid", "MHRUSA");
+					map.add("mobileno", otpNo.trim());
+					map.add("content", msg);
+					map.add("smsservicetype", "singlemsg");
+					String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest", map,
+							String.class);
 
-				model = new ModelAndView("instituteRegistration");
-				Institute editInst = instHashMap.get(otpNo);
+					otpKeyValue.put(otpKey, otp);
 
-				model.addObject("isEdit", 1);
+					model.addObject("otpk", otpKey);
+					model.addObject("otpNo", otpNo);
 
-				try {
-					editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
-				} catch (Exception e) {
+					//// System.out.println(res);
+				} else {
+					System.err.println("in Else  its Back button Pressed ");
+
+					model = new ModelAndView("instituteRegistration");
+					Institute editInst = instHashMap.get(otpNo);
+
+					model.addObject("isEdit", 1);
+
+					try {
+						editInst.setRegDate(DateConvertor.convertToDMY(editInst.getRegDate()));
+					} catch (Exception e) {
+
+					}
+
+					model.addObject("editInst", editInst);
 
 				}
 
-				model.addObject("editInst", editInst);
-
+			} else {
+				model = new ModelAndView("improperData");
 			}
+
 		} catch (Exception e) {
 
 			System.err.println("Exce in showing otp page " + e.getMessage());
@@ -632,8 +719,8 @@ public class RegController {
 				System.err.println("Otp Matched ");
 
 				Institute editInst = instHashMap.get(otpNo);
-				if(editInst.getIsRegistration()==1)
-				editInst.setRegDate(DateConvertor.convertToYMD(editInst.getRegDate()));
+				if (editInst.getIsRegistration() == 1)
+					editInst.setRegDate(DateConvertor.convertToYMD(editInst.getRegDate()));
 
 				Institute info = rest.postForObject(Constants.url + "saveInstitute", editInst, Institute.class);
 
@@ -687,7 +774,6 @@ public class RegController {
 
 		try {
 			String otpk = request.getParameter("otpk");
-			
 
 			RestTemplate restTemplate = new RestTemplate();
 
@@ -696,7 +782,7 @@ public class RegController {
 			String otp = getNumericOtp(6);
 			String otpKey = otpk;
 
-			String msg = " OTP for  Institute Registration is " + otp + " (test message)";
+			String msg = " OTP for  Institute Registration is " + otp + "";
 
 			/*
 			 * map.add("senderID", "RUSAMH"); map.add("user",
@@ -710,11 +796,11 @@ public class RegController {
 			map.add("password", "Rus@@123456");
 			map.add("senderid", "MHRUSA");
 			map.add("mobileno", otpNo.trim());
-			map.add("content", msg); 
-			map.add("smsservicetype", "singlemsg"); 
-			String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest",
-			map, String.class);
-			
+			map.add("content", msg);
+			map.add("smsservicetype", "singlemsg");
+			String sms = restTemplate.postForObject("https://msdgweb.mgov.gov.in/esms/sendsmsrequest", map,
+					String.class);
+
 			bean.setName(otp);
 			otpKeyValue.put(otpKey, otp);
 
