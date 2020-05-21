@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.AccessControll;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.SessionKeyGen;
@@ -894,8 +895,8 @@ public class AccessRightController {
 
 		}
 		model.addObject("moduleJsonList", newModuleList);
-		model.addObject("userName", userName);
-		model.addObject("roleName", roleName);
+		model.addObject("userName", XssEscapeUtils.jsoupParse(userName));
+		model.addObject("roleName", XssEscapeUtils.jsoupParse(roleName));
 		model.addObject("roleId", roleId);
 		model.addObject("title", "View Access Role");
 

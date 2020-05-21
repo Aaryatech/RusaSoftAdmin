@@ -3695,9 +3695,15 @@ jQuery(function($) {
         CMPLTADMIN_SETTINGS.widgetSparklineChart();
     });
 
-    $(window).load(function() {
+/* $(window).load(function() {
         CMPLTADMIN_SETTINGS.isotopeGallery();
         CMPLTADMIN_SETTINGS.loginPage();
     });
+*/
+
+		$(window).on('load', function() {
+			CMPLTADMIN_SETTINGS.isotopeGallery();
+			CMPLTADMIN_SETTINGS.loginPage();
+		});
 
 });

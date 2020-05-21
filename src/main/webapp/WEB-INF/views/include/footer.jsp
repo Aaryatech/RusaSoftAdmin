@@ -3,13 +3,18 @@
  
 
 <!-- CORE JS FRAMEWORK - START --> 
-<script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.11.2.min.js" type="text/javascript"></script> 
+ 
+<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js" type="text/javascript"></script> 
 <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.easing.min.js" type="text/javascript"></script> 
+<script src="${pageContext.request.contextPath}/resources/assets/js/popper.min.js" type="text/javascript"></script> 
+ 
 <script src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
+ 
+
 <script src="${pageContext.request.contextPath}/resources/assets/plugins/pace/pace.min.js" type="text/javascript"></script>  
 <script src="${pageContext.request.contextPath}/resources/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script> 
 <script src="${pageContext.request.contextPath}/resources/assets/plugins/viewport/viewportchecker.js" type="text/javascript"></script>  
-<script>window.jQuery||document.write('<script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.11.2.min.js"><\/script>');</script>
+<!-- <script>window.jQuery||document.write('<script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.11.2.min.js"><\/script>');</script> -->
 <!-- CORE JS FRAMEWORK - END --> 
 
 
@@ -43,8 +48,7 @@
 
  
 <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END --> 
-<script src="${pageContext.request.contextPath}/resources/assets/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
-
+<!-- Here CK editor included -->
 
 
 <script src="${pageContext.request.contextPath}/resources/assets/plugins/jquery-ui/smoothness/jquery-ui.min.js" type="text/javascript"></script>
@@ -52,8 +56,7 @@
 <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END --> 
 
 
-<script src="${pageContext.request.contextPath}/resources/assets/plugins/dropzone/dropzone.min.js" type="text/javascript"></script>
-
+<!-- dropzone file  -->
 <!-- CORE TEMPLATE JS - START --> 
 <script src="${pageContext.request.contextPath}/resources/assets/js/scripts.js" type="text/javascript"></script> 
 <!-- END CORE TEMPLATE JS - END --> 

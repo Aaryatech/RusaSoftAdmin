@@ -152,7 +152,7 @@ html {
 
 					</p>
 					<div class="capcha-img">
-						<img src="${pageContext.request.contextPath }/captcha"
+						<img src="${pageContext.request.contextPath}/captcha"
 							id='captchaImage'>
 						<button id="captchaRef" type="button" class="repeat-btn">
 							<div class="repeat">
@@ -224,12 +224,13 @@ html {
 	<!-- CORE JS FRAMEWORK - START -->
 
 
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.11.2.min.js"
-		type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js" type="text/javascript"></script> 
+
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/jquery.easing.min.js"
 		type="text/javascript"></script>
+				<script src="${pageContext.request.contextPath}/resources/assets/js/popper.min.js" type="text/javascript"></script> 
+		
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/plugins/bootstrap/js/bootstrap.min.js"
 		type="text/javascript"></script>

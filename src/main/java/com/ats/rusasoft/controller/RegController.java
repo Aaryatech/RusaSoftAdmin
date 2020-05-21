@@ -29,6 +29,7 @@ import com.ats.rusasoft.XssEscapeUtils;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.commons.FormValidation;
+import com.ats.rusasoft.commons.SessionKeyGen;
 import com.ats.rusasoft.master.InstituteMaster;
 import com.ats.rusasoft.master.model.prodetail.NameIdBean;
 import com.ats.rusasoft.model.AcademicYear;
@@ -361,83 +362,90 @@ public class RegController {
 
 		try {
 
-			int facultyId = 0;
+			HttpSession session = request.getSession();
+			String token = request.getParameter("token");
+			String key = (String) session.getAttribute("generatedKey");
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			String curDateTime = dateFormat.format(cal.getTime());
-			// System.out.println("Data:" + facultyId);
-			String aisheCode = request.getParameter("aishe_code");
-			String inst_name = request.getParameter("inst_name");
-			String princ_name = request.getParameter("princ_name");
-			String princ_contact = request.getParameter("princ_contact");
-			int instId = Integer.parseInt(request.getParameter("instId"));
-			String princ_email = request.getParameter("princ_email");
-			String roleId = Constants.Princ_Role;
+			if (token.trim().equals(key.trim())) {
 
-			Staff staff = new Staff();
+				int facultyId = 0;
 
-			staff.setEmail(princ_email);
-			staff.setDeptId("0");
-			staff.setFacultyFirstName(princ_name);
-			staff.setFacultyMiddelName("");
-			staff.setFacultyLastName("");
-			staff.setFacultyId(facultyId);
-			staff.setHighestQualification(0);
-			staff.setHightestQualificationYear("");
-			staff.setIsAccOff(0);
-			staff.setIsDean(0);
-			staff.setIsFaculty(1);
-			staff.setIsHod(0);
-			staff.setIsIqac(0);
-			staff.setIsLibrarian(0);
-			staff.setIsPrincipal(1);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String curDateTime = dateFormat.format(cal.getTime());
+				// System.out.println("Data:" + facultyId);
+				String aisheCode = request.getParameter("aishe_code");
+				String inst_name = request.getParameter("inst_name");
+				String princ_name = request.getParameter("princ_name");
+				String princ_contact = request.getParameter("princ_contact");
+				int instId = Integer.parseInt(request.getParameter("instId"));
+				String princ_email = request.getParameter("princ_email");
+				String roleId = Constants.Princ_Role;
 
-			staff.setIsStudent(0);
-			staff.setIsWorking(1);
-			staff.setJoiningDate(curDateTime);
-			staff.setLastUpdatedDatetime(curDateTime);
-			staff.setMakerEnterDatetime(curDateTime);
+				Staff staff = new Staff();
 
-			staff.setPassword("");
-			staff.setRealivingDate(null);
-			staff.setRoleIds(roleId);
-			staff.setTeachingTo(0);
-			staff.setType(1);
+				staff.setEmail(XssEscapeUtils.jsoupParse(princ_email));
+				staff.setDeptId("0");
+				staff.setFacultyFirstName(XssEscapeUtils.jsoupParse(princ_name));
+				staff.setFacultyMiddelName("");
+				staff.setFacultyLastName("");
+				staff.setFacultyId(facultyId);
+				staff.setHighestQualification(0);
+				staff.setHightestQualificationYear("");
+				staff.setIsAccOff(0);
+				staff.setIsDean(0);
+				staff.setIsFaculty(1);
+				staff.setIsHod(0);
+				staff.setIsIqac(0);
+				staff.setIsLibrarian(0);
+				staff.setIsPrincipal(1);
 
-			staff.setInstituteId(instId);
-			staff.setJoiningDate(curDateTime);
-			staff.setContactNo(princ_contact);
-			staff.setEmail(princ_email);
-			staff.setDelStatus(0);
-			staff.setIsActive(0);
-			staff.setMakerUserId(0);
-			staff.setMakerEnterDatetime(curDateTime);
-			staff.setCheckerUserId(0);
-			staff.setCheckerDatetime(curDateTime);
-			staff.setLastUpdatedDatetime(curDateTime);
-			staff.setIsEnrolled(0);
+				staff.setIsStudent(0);
+				staff.setIsWorking(1);
+				staff.setJoiningDate(curDateTime);
+				staff.setLastUpdatedDatetime(curDateTime);
+				staff.setMakerEnterDatetime(curDateTime);
 
-			staff.setIsSame(0);
+				staff.setPassword("");
+				staff.setRealivingDate(null);
+				staff.setRoleIds(roleId);
+				staff.setTeachingTo(0);
+				staff.setType(1);
 
-			staff.setExtravarchar1("NA");
+				staff.setInstituteId(instId);
+				staff.setJoiningDate(curDateTime);
+				staff.setContactNo(XssEscapeUtils.jsoupParse(princ_contact));
+				staff.setEmail(XssEscapeUtils.jsoupParse(princ_email));
+				staff.setDelStatus(0);
+				staff.setIsActive(0);
+				staff.setMakerUserId(0);
+				staff.setMakerEnterDatetime(curDateTime);
+				staff.setCheckerUserId(0);
+				staff.setCheckerDatetime(curDateTime);
+				staff.setLastUpdatedDatetime(curDateTime);
+				staff.setIsEnrolled(0);
 
-			staffHashMap.put(staff.getContactNo(), staff);
-			temp.put(1, aisheCode);
-			temp.put(2, inst_name);
+				staff.setIsSame(0);
 
-			// System.out.println("Staff*********:" + staff.toString());
-			model.addObject("editInst", staff);
-			model.addObject("aishe", aisheCode);
-			model.addObject("instName", inst_name);
+				staff.setExtravarchar1("NA");
 
+				staffHashMap.put(staff.getContactNo(), staff);
+				temp.put(1, XssEscapeUtils.jsoupParse(aisheCode));
+				temp.put(2, XssEscapeUtils.jsoupParse(inst_name));
+
+				// System.out.println("Staff*********:" + staff.toString());
+				model.addObject("editInst", staff);
+				model.addObject("aishe", XssEscapeUtils.jsoupParse(aisheCode));
+				model.addObject("instName", XssEscapeUtils.jsoupParse(inst_name));
+			} else {
+				model = new ModelAndView("accessDenied");
+			}
+			SessionKeyGen.changeSessionKey(request);
 		} catch (
 
 		Exception e) {
-
 			System.err.println("exception In showRegPrincipal at Principal Contr" + e.getMessage());
 			e.printStackTrace();
-
 		}
 		return model;
 
@@ -519,9 +527,11 @@ public class RegController {
 		ModelAndView model = null;
 
 		try {
-			String enteredOtp = request.getParameter("entered_otp");
-			String otpk = request.getParameter("otpk");
-			String otpNo = request.getParameter("otpNo");
+			String enteredOtp = XssEscapeUtils.jsoupParse(request.getParameter("entered_otp"));
+			String otpk = XssEscapeUtils.jsoupParse(request.getParameter("otpk"));
+			String otpNo = XssEscapeUtils.jsoupParse(request.getParameter("otpNo"));
+			otpk=otpk.replaceAll("\\(.*?\\)" ,"");
+			otpNo=otpNo.replaceAll("\\(.*?\\)" ,"");
 
 			String storedOtp = otpKeyValue.get(otpk);
 			if (enteredOtp.equals(storedOtp)) {
@@ -578,7 +588,7 @@ public class RegController {
 		NameIdBean bean = new NameIdBean();
 
 		try {
-			String otpk = request.getParameter("otpk");
+			String otpk = XssEscapeUtils.jsoupParse(request.getParameter("otpk"));
 
 			RestTemplate restTemplate = new RestTemplate();
 
@@ -627,7 +637,7 @@ public class RegController {
 		try {
 			int isBack = 1;
 			isBack = Integer.parseInt(request.getParameter("is_back"));
-			String otpNo = request.getParameter("otp_no");
+			String otpNo = XssEscapeUtils.jsoupParse(request.getParameter("otp_no"));
 			Boolean error = false;
 
 			if (FormValidation.Validaton(otpNo, "") == true) {
@@ -710,9 +720,9 @@ public class RegController {
 		ModelAndView model = null;
 		String redirect = null;
 		try {
-			String enteredOtp = request.getParameter("entered_otp");
-			String otpk = request.getParameter("otpk");
-			String otpNo = request.getParameter("otpNo");
+			String enteredOtp = XssEscapeUtils.jsoupParse(request.getParameter("entered_otp"));
+			String otpk = XssEscapeUtils.jsoupParse(request.getParameter("otpk"));
+			String otpNo = XssEscapeUtils.jsoupParse(request.getParameter("otpNo"));
 
 			String storedOtp = otpKeyValue.get(otpk);
 			if (enteredOtp.equals(storedOtp)) {

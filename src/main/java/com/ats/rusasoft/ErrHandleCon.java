@@ -42,6 +42,8 @@ public class ErrHandleCon {
 	}
 
 	private int getErrorCode(HttpServletRequest httpRequest) {
+		System.err.println("Hi");
+		
 	return (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
 	}
 

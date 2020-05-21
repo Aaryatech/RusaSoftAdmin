@@ -20,6 +20,7 @@ public class XssEscapeUtils {
 	// in both project
 	public static String jsoupParse(String str) {
 		str = str.replaceAll("\\<.*?\\>", "");
+		
 		return Jsoup.parse(str).text();
 	}
 
