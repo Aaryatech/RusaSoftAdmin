@@ -213,20 +213,20 @@
 					</c:choose>
 
 					<p >
-						<label for="user_pass">OTP1<br /> <input type="password"
+						<label for="user_pass">OTP1<br /> <input type="text"
 							name="otp" id="otp" class="input" value=""
 							placeholder="Enter OTP Sent on Your Registered Number/Email" size="20" /></label>
 					</p>
 					
 					
-						<input type="text" id="username" name="username" value="${username}">
+						<input type="hidden" id="username" name="username" value="${username}">
 					<!--  <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>
                 </p>
  -->
 <p class="forgetmenot">
                     <label class="icheck-label form-label" for="rememberme">
-                    	<input type="checkbox" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
+                    	<input type="checkbox" style="display: none;" onclick="viewPassword()"><span style="color: black;">Show OTP</span>
                     	<br>
                     	<c:if test="${expFlag!=1}">
                     	<span id="countdown" style="color: red; font-size: 10px;"></span></c:if>
@@ -345,7 +345,7 @@ form.action = ("reGenOtp1");
 form.submit();
 
 		 var username = document.getElementById("username").value;
-		 alert(username);
+		// alert(username);
 		
 		$
 				.getJSON(
@@ -358,7 +358,7 @@ form.submit();
 						},
 						function(data) {
 
-								alert("Data  " +JSON.stringify(data));
+								//alert("Data  " +JSON.stringify(data));
 						location.reload(true);
 							
 						});

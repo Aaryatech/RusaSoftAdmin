@@ -188,7 +188,7 @@
 																</c:choose>
 
 															</c:forEach>
-															<option value="0">NA</option>
+															<!-- <option value="0">NA</option> -->
 														</select>
 													</div>
 												</div>

@@ -47,6 +47,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ats.rusasoft.commons.Commons;
 import com.ats.rusasoft.commons.Constants;
 import com.ats.rusasoft.commons.DateConvertor;
 import com.ats.rusasoft.master.State;
@@ -774,6 +775,7 @@ public class HomeController {
 
 	RestTemplate rest = new RestTemplate();
 	Instant start = null;
+	LinkedHashMap<String, String> userOtpMap = new LinkedHashMap<>();
 
 	@RequestMapping(value = "/forgotPas", method = RequestMethod.POST)
 	public ModelAndView checkUniqueField(HttpServletRequest request, HttpServletResponse response) {
@@ -804,6 +806,10 @@ public class HomeController {
 			} else {
 				model = new ModelAndView("verifyOTP");
 				// c= "redirect:/showVerifyOTP";
+				char[] genOTP1= Commons.OTP(6);
+				String genOTP=info.getMsg();//String.valueOf(genOTP1);
+System.err.println("forgotPas OTP "+genOTP);
+				userOtpMap.put(inputValue, genOTP);
 				model.addObject("username", inputValue);
 				model.addObject("expFlag", 0);
 
@@ -842,7 +848,7 @@ public class HomeController {
 			info = rest.postForObject(Constants.url + "checkUserName", map, Info.class);
 			System.err.println("Info Response  " + info.toString());
 
-			if (info.isError() == true) {
+			if (inputValue==null || inputValue=="") {
 				model = new ModelAndView("forgotPassword");
 				// c="redirect:/showforgotPassForm";
 				model.addObject("msg", "Invalid User Name");
@@ -850,8 +856,12 @@ public class HomeController {
 			} else {
 				model = new ModelAndView("verifyOTP");
 				model.addObject("expFlag", 0);
-				// c= "redirect:/showVerifyOTP";
-				model.addObject("username", info.getMsg());
+				char[] genOTP1= Commons.OTP(6);
+				String genOTP=info.getMsg();//String.valueOf(genOTP1);
+				System.err.println("reGenOtp1 OTP "+genOTP);
+
+				userOtpMap.put(inputValue, genOTP);
+				model.addObject("username", inputValue);
 				model.addObject("msg", "OTP Resent Please check");
 				start = Instant.now();
 			}
@@ -870,7 +880,7 @@ public class HomeController {
 
 		ModelAndView model = null;
 		try {
-
+System.err.println("In showVerifyOTP ");
 			model = new ModelAndView("verifyOTP");
 
 		} catch (Exception e) {
@@ -897,52 +907,34 @@ public class HomeController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			String otp = request.getParameter("otp");
-
+			String username = request.getParameter("username");
+			
 			map.add("otp", otp);
 			Instant end = Instant.now();
 			Duration timeElapsed = Duration.between(start, end);
 			System.out.println("Time taken: OTPVerification " + timeElapsed.toMinutes() + " minutes");
 			if (timeElapsed.toMinutes() <= 2) {
 				Staff staff = rest.postForObject(Constants.url + "VerifyOTP", map, Staff.class);
-				/*
-				 * System.err.println("hashRes Response  " + hashRes.toString());
-				 * 
-				 * Staff staff=hashRes.get(1); System.err.println("hashRes Response  " +
-				 * hashRes.get(1));
-				 */
+				if (userOtpMap.get(username).equals(otp)) {
+					System.err.println("Staff" + staff);
+					model = new ModelAndView("changePassword");
+					model.addObject("userId", staff.getFacultyId());
+				}
 
-				if (staff == null) {
+				else {
 					model = new ModelAndView("verifyOTP");
 					model.addObject("expFlag", 0);
 					// c="redirect:/showforgotPassForm";
 					model.addObject("msg", "Incorrect OTP");
+					model.addObject("username", username);
 
-				} else {
-
-					// Info errMsg = restTemplate.postForObject(Constants.url + "changePass", map,
-					// Info.class);
-					System.err.println("Staff" + staff);
-					// model = new ModelAndView("login");
-					model = new ModelAndView("changePassword");
-					model.addObject("userId", staff.getFacultyId());
-
-					// c= "redirect:/showVerifyOTP";
-					/*
-					 * BG
-					 * 
-					 * map =new LinkedMultiValueMap<String, Object>(); map.add("type", 1);
-					 * model.addObject("msg","Password Sent on Your Phone Number"); AcademicYear[]
-					 * quolArray = restTemplate.postForObject(Constants.url +
-					 * "getAcademicYearListByTypeId", map, AcademicYear[].class); List<AcademicYear>
-					 * acaYearList = new ArrayList<>(Arrays.asList(quolArray));
-					 * model.addObject("acaYearList", acaYearList);
-					 */
-				}
+				} 
 			} else {
 				model = new ModelAndView("verifyOTP");
 				// c="redirect:/showforgotPassForm";
 				model.addObject("expFlag", 1);
 				model.addObject("msg", "Time out! Regenerate OTP");
+				model.addObject("username", username);
 
 			}
 
