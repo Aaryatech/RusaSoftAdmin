@@ -337,6 +337,7 @@
 				var radioValue = $("input[name='isPhdGuide']:checked").val();
 				//alert(radioValue);
 				if (radioValue == 0) {
+					$("#sub2").click();
 					isError = true;
 
 					$("#isPhdGuide").addClass("has-error")

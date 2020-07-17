@@ -430,7 +430,7 @@ table.blueTable thead th:first-child {
 				Confirmation</h4>
 		</div>
 			<div class="col-md-12" align="center">
-				<form role="form"
+				<form role="form" onsubmit="callme()"
 					action="${pageContext.request.contextPath}/showOtpPage"
 					method="POST">
 					<input type="hidden" class="form-control" id="pageId" name="pageId">
@@ -602,7 +602,7 @@ table.blueTable thead th:first-child {
 							</tr>
 							<tr>
 								<td>Email ID :  ${editInst.presidentEmail}</td>
-								<td>Principal Name : ${editInst.principalName}</td>
+								<td>Principal/University Authority/Director Name : ${editInst.principalName}</td>
 							</tr>
 							<tr>
 								<td>Contact No : ${editInst.contactNo}</td>
@@ -626,7 +626,7 @@ table.blueTable thead th:first-child {
 					</table>
 					<br>
 					<div align="center">
-						<button type="submit" class="btn btn-primary">Confirm</button>
+						<button type="submit" id="btnId" class="btn btn-primary">Confirm</button>
 						<button type="submit" onclick="setIsBack()" class="btn btn-primary">Cancel</button>
 						
 					</div>
@@ -643,6 +643,12 @@ table.blueTable thead th:first-child {
 
 
 	<script type="text/javascript">
+	function callme(){
+		document.getElementById("btnId").disabled=true;
+		//alert("HHH")
+		 return true;
+	}
+	
 		function showDiv(value) {
 
 			if (value == 1) {
@@ -702,8 +708,7 @@ table.blueTable thead th:first-child {
 			} else {
 				alert("no...");
 				temp = "No";
-				temp1 = "-";
-				$('#reg_date1').html(temp1);
+				temp1 = "-";$('#reg_date1').html(temp1);
 
 			}
 
@@ -733,26 +738,17 @@ table.blueTable thead th:first-child {
 
 		function showIsReg() {
 
-			var x = $
-			{
-				editInst.instituteId
-			}
-			;
+			var x = ${editInst.instituteId};
 
 			if (x > 0) {
 
-				var isReg = $
-				{
-					editInst.isRegistration
-				}
-				;
+				var isReg = ${editInst.isRegistration};
 
 				//alert("Is Reg " +isReg);
 				if (isReg == 0) {
 
 					document.getElementById("abc").style.display = "none";
-					document.getElementById("reg_date").removeAttribute(
-							"required");
+					document.getElementById("reg_date").removeAttribute("required");
 
 				} else {
 					document.getElementById("abc").style.display = "block";
@@ -785,11 +781,7 @@ table.blueTable thead th:first-child {
 		function checkUnique(inputValue, valueType) {
 			//alert(inputValue);
 
-			var primaryKey = $
-			{
-				editInst.instituteId
-			}
-			;
+			var primaryKey = ${editInst.instituteId};
 			//alert("Primary key"+primaryKey);
 			var isEdit = 0;
 			if (primaryKey > 0) {
@@ -835,14 +827,12 @@ table.blueTable thead th:first-child {
 									//alert("Data  " +JSON.stringify(data));
 									if (data.error == true) {
 										if (valueType == 2) {
-											document
-													.getElementById("princ_email").value = "";
+											document.getElementById("princ_email").value = "";
 
 											alert("This Email Id is Already Exist in Database. Please Login with Your Credential.");
 
 										} else {
-											document
-													.getElementById("princ_contact").value = "";
+											document.getElementById("princ_contact").value = "";
 
 											alert("This Mobile No is Already Exist in Database. Please Login with Your Credential.");
 										}

@@ -116,7 +116,7 @@ html {
 				<h4 class="login_head">
 					<!-- <a href="#" title="Login Page" tabindex="-1">RUSA</a> -->
 
-					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Institute Login
+					<i class="fa fa-unlock-alt" aria-hidden="true"></i> Institute Login <p style="font-size: 12px;">(For All Members of Registered Institute)</p>
 
 
 				</h4>
@@ -198,7 +198,7 @@ html {
 				<p id="nav">
 					<a class="pull-right login_forgot" href="showChangePrincipalForm"
 						title="Change Principal" style="text-align: center;">Change
-						Principal</a>
+						Principal/University Authority/Director</a>
 				</p>
 				<br /> <label class="pull-left" for="page_name"
 					style="text-align: left;"><b

@@ -190,30 +190,44 @@
 																<option value="First">First</option>
 																<option value="Second">Second</option>
 																<option value="Pass">Pass</option>
+																<option value="NA">NA</option>
 															</c:when>
 															<c:when test="${editFacAcad.fClass eq 'First'}">
 																<option value="Distinction">Distinction</option>
 																<option selected value="First">First</option>
 																<option value="Second">Second</option>
 																<option value="Pass">Pass</option>
+																<option value="NA">NA</option>
 															</c:when>
 															<c:when test="${editFacAcad.fClass eq 'Second'}">
 																<option value="Distinction">Distinction</option>
 																<option value="First">First</option>
 																<option selected value="Second">Second</option>
 																<option value="Pass">Pass</option>
+																<option value="NA">NA</option>
 															</c:when>
 															<c:when test="${editFacAcad.fClass eq 'Pass'}">
 																<option value="Distinction">Distinction</option>
 																<option value="First">First</option>
 																<option value="Second">Second</option>
 																<option selected value="Pass">Pass</option>
+																<option value="NA">NA</option>
 															</c:when>
+															
+															<c:when test="${editFacAcad.fClass eq 'NA'}">
+																<option value="Distinction">Distinction</option>
+																<option value="First">First</option>
+																<option value="Second">Second</option>
+																<option  value="Pass">Pass</option>
+																<option selected value="NA">NA</option>
+															</c:when>
+															
 															<c:otherwise>
 																<option value="Distinction">Distinction</option>
 																<option value="First">First</option>
 																<option value="Second">Second</option>
 																<option value="Pass">Pass</option>
+																<option value="NA">NA</option>
 															</c:otherwise>
 
 														</c:choose>

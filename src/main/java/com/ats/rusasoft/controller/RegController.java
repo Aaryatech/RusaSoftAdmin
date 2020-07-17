@@ -736,8 +736,8 @@ public class RegController {
 
 				model = new ModelAndView("login");
 
-				model.addObject("msg", "Registration Successfull");
-
+				model.addObject("msg", "Registration Successful- (Wait for RUSA Approval/Contact RUSA)");
+				instHashMap.remove(otpNo);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 				map = new LinkedMultiValueMap<String, Object>();
@@ -770,7 +770,7 @@ public class RegController {
 			e.printStackTrace();
 
 		}
-
+		
 		return model;
 
 	}
@@ -846,7 +846,7 @@ public class RegController {
 	static String getIntegerKey(int n) {
 
 		// chose a Character random from this String
-		String AlphaNumericString = "a0123456789P";
+		String AlphaNumericString = "*a012345(6789P&#";
 
 		// create StringBuffer size of AlphaNumericString
 		StringBuilder sb = new StringBuilder(n);
