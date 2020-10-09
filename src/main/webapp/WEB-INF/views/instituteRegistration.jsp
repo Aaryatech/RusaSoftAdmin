@@ -418,7 +418,7 @@
 
 												<div class="form-group">
 													<label class="control-label col-sm-3" for="page_order">
-														Principal/University Authority/Director Name <span class="text-danger">*</span>
+														Principal/Director/University Authority Name <span class="text-danger">*</span>
 													</label>
 													<div class="col-sm-7">
 														<input type="text" maxlength="100" onchange="trim(this)"

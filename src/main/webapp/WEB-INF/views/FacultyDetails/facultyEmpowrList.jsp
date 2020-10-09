@@ -79,7 +79,7 @@
 								 <c:if test="${isAdd==1}"> 
 										<a
 											href="${pageContext.request.contextPath}/addFacultyEmpower"
-											data-toggle="modal"><button type="submit"
+											><button type="submit"
 												class="btn btn-success">
 												<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 											</button></a>

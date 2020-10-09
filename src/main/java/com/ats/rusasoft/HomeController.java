@@ -276,6 +276,8 @@ public class HomeController {
 
 			DashBoardCounts dashBoardCounts = restTemplate.postForObject(Constants.url + "/getPrincipalDashCounts", map,
 					DashBoardCounts.class);
+			
+			System.err.println("dashBoardCounts " +dashBoardCounts.toString());
 			model.addObject("dashBoardCounts", dashBoardCounts);
 		} catch (Exception e) {
 

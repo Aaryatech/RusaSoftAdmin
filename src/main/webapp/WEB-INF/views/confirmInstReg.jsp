@@ -602,7 +602,7 @@ table.blueTable thead th:first-child {
 							</tr>
 							<tr>
 								<td>Email ID :  ${editInst.presidentEmail}</td>
-								<td>Principal/University Authority/Director Name : ${editInst.principalName}</td>
+								<td>Principal/Director/University Authority : ${editInst.principalName}</td>
 							</tr>
 							<tr>
 								<td>Contact No : ${editInst.contactNo}</td>

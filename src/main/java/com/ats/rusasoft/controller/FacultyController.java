@@ -1517,7 +1517,7 @@ public class FacultyController {
 				swocList.addAll(list);
 			}
 			
-			SessionKeyGen.changeSessionKey(request);
+			//SessionKeyGen.changeSessionKey(request);
 
 		} catch (
 
@@ -1606,7 +1606,7 @@ public class FacultyController {
 				List<SWOC> list = new ArrayList<>(Arrays.asList(arry));
 				swocList.addAll(list);
 			}
-			SessionKeyGen.changeSessionKey(request);
+			//SessionKeyGen.changeSessionKey(request);
 		} catch (Exception e) {
 			SessionKeyGen.changeSessionKey(request);
 			e.printStackTrace();

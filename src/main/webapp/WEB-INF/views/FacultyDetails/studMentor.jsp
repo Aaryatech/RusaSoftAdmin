@@ -86,7 +86,7 @@
 							<div class="actions panel_actions pull-right">
 								<c:if test="${addAccess == 0}">
 									<a href="${pageContext.request.contextPath}/showAddStudMentor"
-										data-toggle="modal"><button type="submit"
+										><button type="submit"
 											class="btn btn-info">
 											<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 										</button></a>

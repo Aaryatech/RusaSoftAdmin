@@ -78,7 +78,7 @@
 									<c:if test="${trainnig_type==1}">
 										<a
 											href="${pageContext.request.contextPath}/showAddProfDevelopment"
-											data-toggle="modal"><button type="submit"
+											><button type="submit"
 												class="btn btn-success">
 												<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 											</button></a>
@@ -86,7 +86,7 @@
 									<c:if test="${trainnig_type==2}">
 										<a
 											href="${pageContext.request.contextPath}/showAddAdminDevelopment"
-											data-toggle="modal"><button type="submit"
+											><button type="submit"
 												class="btn btn-success">
 												<i class="${sessionScope.addIcon}" aria-hidden="true"></i>&nbsp;&nbsp;Add
 											</button></a>

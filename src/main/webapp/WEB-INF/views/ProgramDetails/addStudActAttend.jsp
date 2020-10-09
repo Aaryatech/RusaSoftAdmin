@@ -310,7 +310,7 @@
 													</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control datepicker" onchange="return trim(this)"
-															id="date" value="${editProgramActivity.date}"
+														data-format="dd-mm-yyyy"	id="date" value="${editProgramActivity.date}"
 															placeholder="dd-mm-yyyy" name="date"  onkeypress='return restrictAlphabets(event)'
 															autocomplete="off">
 															<span
@@ -546,7 +546,7 @@ function clearDefault(a){
 		</script>
 		
 		<script type="text/javascript">
-		$(function() {
+		/* $(function() {
 
 			$('.datepicker').datepicker({
 				autoclose : true,
@@ -555,7 +555,7 @@ function clearDefault(a){
 				changeMonth : true
 
 			});
-		});
+		}); */
 
 		$(function() {
 

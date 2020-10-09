@@ -159,7 +159,7 @@
 
 																<td align="center"><c:if test="${editAccess==0}">
 																		<a
-																			href="${pageContext.request.contextPath}/editActivity/${activList.instActivityId}">
+																			href="${pageContext.request.contextPath}/editActivity/${activList.instActivityId}/<%out.println(hashtext);%>">
 																			<span class="glyphicon glyphicon-edit" title="Edit"
 																			data-animate=" animated fadeIn " rel="tooltip"></span>
 																		</a>&nbsp;&nbsp;&nbsp;&nbsp;

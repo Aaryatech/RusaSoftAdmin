@@ -935,7 +935,7 @@ public class FacultyPatentController {
 
 	}
 
-	@RequestMapping(value = "/deleteFacOutReach/{outId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteFacOutReach/{outId}/{hashKey}", method = RequestMethod.GET)
 	public String deleteLibrarians(HttpServletRequest request, HttpServletResponse response, @PathVariable int outId,
 			@PathVariable String hashKey) {
 		HttpSession session = request.getSession();

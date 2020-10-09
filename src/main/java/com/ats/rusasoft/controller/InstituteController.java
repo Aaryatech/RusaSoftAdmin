@@ -762,7 +762,7 @@ public class InstituteController {
 		return redirect;
 	}
 
-	@RequestMapping(value = "/editActivity/{instActvId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/editActivity/{instActvId}/{hashKey}", method = RequestMethod.GET)
 	public ModelAndView editActivity(@PathVariable("instActvId") int instActvId, HttpServletRequest request,
 			HttpServletResponse response, @PathVariable String hashKey) {
 
