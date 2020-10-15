@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.RoundingMode;
 import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -156,7 +157,6 @@ public class ReportController {
 
 			Cast[] catsArray = restTemplate.getForObject(Constants.url + "getAllCastCategory", Cast[].class);
 			List<Cast> castList = new ArrayList<>(Arrays.asList(catsArray));
-			System.err.println("castList " + castList.toString());
 
 			model.addObject("castList", castList);
 
@@ -441,6 +441,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Curricular Aspects:No of Certificate-Diploma Programs";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -456,11 +458,7 @@ public class ReportController {
 				}
 
 			} catch (DocumentException ex) {
-
-				// System.out.println("Pdf Generation Error: " + ex.getMessage());
-
 				ex.printStackTrace();
-
 			}
 
 		} catch (Exception e) {
@@ -828,6 +826,9 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						
+						reportName = "Curricular Aspects:Per of Participation in various University Bodies";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -1006,9 +1007,15 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					String tempprcnt = decimalFormat
+					String tempprcnt="0";
+					try {
+					if((prog.getNoCurrentAdmitedStnt()>0 && prog.getTotalSanctIntake()>0) ) {
+					 tempprcnt = decimalFormat
 							.format(prog.getNoCurrentAdmitedStnt() / prog.getTotalSanctIntake() * 100);
-
+					}
+					}catch (Exception e) {
+						 tempprcnt="0";
+					}
 					// System.out.println("prog.getNoCurrentAdmitedStnt()" +
 					// prog.getNoCurrentAdmitedStnt()
 					// + "prog.getTotalSanctIntake()" + prog.getTotalSanctIntake());
@@ -1103,8 +1110,15 @@ public class ReportController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
-						String tempprcnt = decimalFormat.format(progList.get(i).getNoCurrentAdmitedStnt()
-								/ progList.get(i).getTotalSanctIntake() * 100);
+						String tempprcnt="0";
+						try {
+							if(progList.get(i).getNoCurrentAdmitedStnt()>0&&progList.get(i).getTotalSanctIntake()>0) {
+							 tempprcnt = decimalFormat.format(progList.get(i).getNoCurrentAdmitedStnt()
+									/ progList.get(i).getTotalSanctIntake() * 100);
+							}
+							}catch (Exception e) {
+								tempprcnt="0";
+							}
 						rowData.add("" + (i + 1));
 
 						rowData.add("" + progList.get(i).getAcademicYear());
@@ -1130,6 +1144,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teaching-Learing and Evaluation:Average Enrollment Percentage";
+						
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -1571,6 +1587,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teaching-Learing and Evaluation:Average per of Students from other States-Countries Yearwise";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -1858,6 +1876,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teaching-Learing and Evaluation:Teachers Using ICT";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -2026,7 +2046,7 @@ public class ReportController {
 					if (prog.getTotalFacMentor() == 0.0) {
 						tempprcnt = "0";
 					} else {
-						tempprcnt = decimalFormat.format(prog.getTotalStudMentoring() / prog.getTotalFacMentor() * 100);
+						tempprcnt = decimalFormat.format(prog.getTotalStudMentoring() / prog.getTotalFacMentor());
 					}
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -2051,7 +2071,7 @@ public class ReportController {
 				 */
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
-				document.add(new Paragraph("For Academic Year :" + temp_ac_year + ""));
+				document.add(new Paragraph("Current Academic Year "));
 				document.add(new Paragraph("\n"));
 				document.add(table);
 
@@ -2121,7 +2141,7 @@ public class ReportController {
 							tempprcnt = "0";
 						} else {
 							tempprcnt = decimalFormat.format(progList.get(i).getTotalStudMentoring()
-									/ progList.get(i).getTotalFacMentor() * 100);
+									/ progList.get(i).getTotalFacMentor());
 						}
 
 						rowData.add("" + tempprcnt);
@@ -2138,10 +2158,12 @@ public class ReportController {
 
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
-								"Academic Year:" + temp_ac_year + " ", "", 'D');
+								"Current Academic Year "+ " ", "", 'D');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teaching-Learing and Evaluation:Total No of Mentors- No of Students Assigned";
+						
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -2300,11 +2322,13 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 					table.addCell(cell);
-
+try {
 					ProgramName = prog.getProgramName();
+}catch (Exception e) {
+	ProgramName="-";
+}
 
 				}
-				System.out.println("pro************" + ProgramName);
 				document.open();
 				Font hf = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLACK);
 
@@ -2388,8 +2412,12 @@ public class ReportController {
 
 						// System.out.println("Excel List :" + exportToExcelList.toString());
 
-						String leaveSum = "Program: " + progList.get(0).getProgramName() + "";
-						String leaveSum1 = ",Program Type: " + temp_prog_name + "";
+						String leaveSum = "";//"Program: " + progList.get(0).getProgramName() + "";
+						try {
+						leaveSum = "Program: " + progList.get(0).getProgramName() + "";
+						}catch (Exception e) {
+							leaveSum ="-";
+						}						String leaveSum1 = ",Program Type: " + temp_prog_name + "";
 
 						String reportSummary = leaveSum + "" + leaveSum1;
 
@@ -2399,6 +2427,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teaching-Learing and Evaluation:Students Performance Learning Outcomes";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -2576,9 +2606,14 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
-
-					String tempprcnt = decimalFormat.format(prog.getCatTotStudent() / prog.getSeatsAvaailable() * 100);
-
+					String tempprcnt="0";
+					try {
+					if(prog.getCatTotStudent()>0 && prog.getSeatsAvaailable()>0) {
+					 tempprcnt = decimalFormat.format(prog.getCatTotStudent() / prog.getSeatsAvaailable() * 100);
+					}
+					}catch (Exception e) {
+						tempprcnt="0";
+					}
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -2600,7 +2635,7 @@ public class ReportController {
 				document.add(name);
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
-				document.add(new Paragraph("  Academic Year :" + temp_ac_year + ""));
+				document.add(new Paragraph("  Academic Year :" + temp_ac_year + " - " +progList.get(0).getCastName()));
 				document.add(new Paragraph("\n"));
 				document.add(table);
 				document.add(new Paragraph("\n"));
@@ -2665,9 +2700,17 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getAcademicYear());
 						rowData.add("" + progList.get(i).getCatTotStudent());
 						rowData.add("" + progList.get(i).getSeatsAvaailable());
-
-						String tempprcnt = decimalFormat.format(
+						
+						String tempprcnt="0";
+						
+						try {
+							if(progList.get(i).getCatTotStudent()>0 &&  progList.get(i).getSeatsAvaailable()>0 ) {
+						 tempprcnt = decimalFormat.format(
 								progList.get(i).getCatTotStudent() / progList.get(i).getSeatsAvaailable() * 100);
+							}
+						}catch (Exception e) {
+							tempprcnt="0";
+						}
 						rowData.add("" + tempprcnt);
 
 						expoExcel.setRowData(rowData);
@@ -2684,13 +2727,15 @@ public class ReportController {
 
 						String reportSummary = leaveSum + "" + leaveSum1;
 						double reportSummary1 = rslt / 5;
-
+					decimalFormat.format(reportSummary1);
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName, reportSummary,
-								"Average%:" + String.valueOf(reportSummary1), 'E');
+								"Average%:" + String.valueOf(decimalFormat.format(reportSummary1)), 'E');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teaching-Learing and Evaluation:Admissions feeds against reservation category";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -2965,6 +3010,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Infrastructure and Learning Resources:Library Automation and ILMS Information";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -3248,6 +3295,7 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -3709,9 +3757,14 @@ public class ReportController {
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 					table.addCell(cell);
+					try {
+						if(prog.getNoOfFullTimeFaculty()>0) {
 					n1 = ((prog.getAvgStudent() + prog.getAvgTeacher())
 							/ (prog.getNoOfFullTimeFaculty() + prog.getNoOfCurrentAdmitedStnt())) * 100;
-
+						}
+					}catch (Exception e) {
+						n1=0;
+					}
 					cell = new PdfPCell(new Phrase("" + decimalFormat.format(n1), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -3872,6 +3925,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Infrastructure and Learning Resources:No of Students and Teachers using Library Per Day";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -4149,13 +4204,14 @@ public class ReportController {
 							rep = "-";
 
 						}
-						System.err.println("rep  " + rep);
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,
 								"Academic Year:" + temp_ac_year + " ", " ", 'E');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Average No of Training Programmes Organized for Teachers and Non Teaching staff (Professional Development- Administrative)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -4423,6 +4479,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Governance Leadership and Management:E-Governance-Areas of Operation";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -4719,6 +4777,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Financial Support to Professional Membership-Conference-Workshop";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -5015,6 +5075,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Governance Leadership and Management Funds-Grants Received from Non-Government Organisation Individuals Other Agencies(in Cr)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -5174,7 +5236,14 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					String tempprcnt = decimalFormat.format(prog.getNofFacSupport() / prog.getTotalFaculty() * 100);
+					String tempprcnt ="0";// decimalFormat.format(prog.getNofFacSupport() / prog.getTotalFaculty() * 100);
+					try {
+						if( prog.getTotalFaculty()>0 && prog.getNofFacSupport()>0) {
+					tempprcnt = decimalFormat.format(prog.getNofFacSupport() / prog.getTotalFaculty() * 100);
+					}
+				}catch (Exception e) {
+					tempprcnt ="0";
+				}
 					cell = new PdfPCell(new Phrase("" + tempprcnt, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -5254,8 +5323,14 @@ public class ReportController {
 					for (int i = 0; i < progList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
-						String tempprcnt = decimalFormat
+						String tempprcnt ="0";
+						try {
+							if(progList.get(i).getNofFacSupport()>0 && progList.get(i).getTotalFaculty()>0)
+						 tempprcnt = decimalFormat
 								.format(progList.get(i).getNofFacSupport() / progList.get(i).getTotalFaculty() * 100);
+						}catch (Exception e) {
+							tempprcnt ="0";
+						}
 						cnt = cnt + i;
 						rowData.add("" + (i + 1));
 						rowData.add("" + progList.get(i).getAcademicYear());
@@ -5286,6 +5361,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No of Faculty Financial support to Professional Membership-Conference-Workshop ";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -5581,6 +5658,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Training programmes organized for Teachers (Professional Development)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -5876,6 +5955,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Governance Leadership and Management:Training programmes organized for Teachers (Administrative Development) ";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -6146,6 +6227,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Institutional Vision-Mission";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -6394,6 +6477,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Governance Leadership and Management:Quality Asssurance Initiative";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -6674,6 +6759,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Governance Leadership and Management:Quality Initiative by IQAC";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -7206,6 +7293,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No of Gender Equality Program";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -7483,6 +7572,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Gender sensitivity in Providing Facility";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -7517,7 +7608,7 @@ public class ReportController {
 	@RequestMapping(value = "/showAlternativeEnergyIniReport", method = RequestMethod.POST)
 	public void showAlternativeEnergyIniReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Institutional Values and Best Practices : Alternative Energy Initiative\n" + "";
+		String reportName = "Institutional Values and Best Practices : Alternative Energy Initiative";
 
 		ModelAndView model = null;
 		try {
@@ -7632,8 +7723,8 @@ public class ReportController {
 					
 
 					EGovernenceOperation prog = progList.get(i);
-					 System.err.println("data  " + progList.toString());
-					 System.err.println("I*** " + prog.getInstYesnoResponse());
+					// System.err.println("data  " + progList.toString());
+					 //System.err.println("I*** " + prog.getInstYesnoResponse());
 
 					
 					if (prog.getYesnoTitle().equalsIgnoreCase("Total Power requirement")) {
@@ -7760,14 +7851,18 @@ public class ReportController {
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
 						if (progList.get(i).getYesnoTitle().equalsIgnoreCase("Total Power requirement")) {
+							if(!progList.get(i).getInstYesnoResponse().equalsIgnoreCase("na")) 
 							temp_tot1 = Double.parseDouble(progList.get(i).getInstYesnoResponse());
+							else
+								temp_tot1=0;
 						}
 						rowData.add("" + (i + 1));
 						rowData.add("" + progList.get(i).getAcademicYear());
 						rowData.add("" + progList.get(i).getYesnoTitle());
 						rowData.add("" + progList.get(i).getInstYesnoResponse());
 
-						if (progList.get(i).getInstYesnoResponse().equals("-")) {
+						if (progList.get(i).getInstYesnoResponse().equals("-")|| 
+								progList.get(i).getInstYesnoResponse().equalsIgnoreCase("na")) {
 							val1 = "-";
 						} else {
 							val1 = String.valueOf(
@@ -7834,8 +7929,8 @@ public class ReportController {
 	@RequestMapping(value = "/showPowerReqThroughLEDReport", method = RequestMethod.POST)
 	public void showPowerReqThroughLEDReport(HttpServletRequest request, HttpServletResponse response) {
 
-		String reportName = "Governance,Leadership and Management : Power Requirement met through LED Bulbs for Lighting\n"
-				+ "";
+		String reportName = "Governance,Leadership and Management : Power Requirement met through LED Bulbs for Lighting";
+				
 
 		ModelAndView model = null;
 		try {
@@ -8096,6 +8191,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Power Requirement met through LED Bulbs for Lighting";
+						
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -8348,6 +8445,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Initiative to Engage and Contribute Local Community";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -8641,6 +8740,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Promotion of Universal Values";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -8893,6 +8994,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No of Promotion of Universal Values";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -9180,6 +9283,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Govt Scholership Scheme";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -9489,6 +9594,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Institutional Financial Support besides Govt";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -9791,6 +9898,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Institutional Financial Support besides Govt";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10066,6 +10175,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "List of Distinguished Alumni";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10327,6 +10438,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Alumni Engagement ";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10610,6 +10723,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = " Organization of Sports and Cultural Activities-Competitions(Organized)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10893,6 +11008,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Students Outstanding Performance (Sport and Cultural)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -11176,6 +11293,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Capability Enhancement and Development Schemes";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -11590,6 +11709,7 @@ public class ReportController {
 
 				int index = 0;
 				double result = 0.0;
+				DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
 				for (int i = 0; i < progList.size(); i++) {
 					// System.err.println("I " + i);
@@ -11628,7 +11748,7 @@ public class ReportController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + prog.getPrcnt(), headFontData));
+					cell = new PdfPCell(new Phrase("" + decimalFormat.format(prog.getPrcnt()), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
@@ -11688,7 +11808,7 @@ public class ReportController {
 						}
 					}
 				} else {
-
+					result=0;
 					List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
 
 					ExportToExcel expoExcel = new ExportToExcel();
@@ -11717,13 +11837,13 @@ public class ReportController {
 						rowData.add("" + progList.get(i).getNameQualifExam());
 						rowData.add("" + progList.get(i).getNoStudAppeared());
 						rowData.add("" + progList.get(i).getNoStudQualified());
-						rowData.add("" + progList.get(i).getPrcnt());
+						rowData.add("" + decimalFormat.format(progList.get(i).getPrcnt()));
 
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
 						result = result + progList.get(i).getPrcnt();
 					}
-					double x2 = result1 / 5;
+					double x2 = result / 5;
 					XSSFWorkbook wb = null;
 					try {
 
@@ -11739,10 +11859,12 @@ public class ReportController {
 						System.err.println("rep  " + rep);
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,
-								"Academic Year:" + temp_ac_year + " ", "Avg%" + x2 + " ", 'F');
+								"Academic Year:" + temp_ac_year + " ", "Avg%" + decimalFormat.format(x2) + " ", 'F');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Students qualifying State-National-Internationa Exams per year ";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -12011,6 +12133,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Alumni Association Meeting Details";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -12288,6 +12412,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Human Values and Professional Ethics";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -12490,7 +12616,7 @@ public class ReportController {
 						new Paragraph("Total No of Students Participating in Extension Activity in Last Five Years :"
 								+ totStud + ""));
 				document.add(new Paragraph("Total No of Students in Institute  in Last Five Years :" + totTeach + ""));
-				document.add(new Paragraph("% of Students Participating in Extra-Curricular Activities :" + x1 + ""));
+				document.add(new Paragraph("% of Students Participating in Extra-Curricular Activities :" + decimalFormat.format(x1) + ""));
 
 				int totalPages = writer.getPageNumber();
 
@@ -12582,7 +12708,7 @@ public class ReportController {
 						String leaveSum = "Total No of Students Participating in Extension Activity in Last Five Years : "
 								+ totStud1 + "";
 						String leaveSum1 = "Total No of Students in Institute  in Last Five Years : " + totTeach1 + "";
-						String leaveSum2 = "% of Students Participating in Extra-Curricular Activities :" + x2 + "";
+						String leaveSum2 = "% of Students Participating in Extra-Curricular Activities :" + decimalFormat.format(x2) + "";
 
 						String reportSummary = leaveSum + "" + leaveSum1 + "" + leaveSum2;
 
@@ -12593,6 +12719,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No of Student-Teachers Participation in Extension Activity";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -12840,6 +12968,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Research Innovation and Extension :No of Linkages";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -13109,6 +13239,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No of Recognition-Awards";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -13405,6 +13537,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Book and Chapter Publication by Teachers and Papers in Conference Proceedings";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -13677,6 +13811,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No Book and Chapter Publication by Teachers and Papers in Conference Proceedings";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -14003,6 +14139,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "PhD Awarded Information";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -14323,6 +14461,8 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Plagarism and Code of Ethics";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -14385,7 +14525,7 @@ public class ReportController {
 
 			map.add("instId", instituteId);
 			map.add("acYearList", ac_year);
-			map.add("programId", programType);
+			map.add("programId", 0/*programType*/);
 			StudEnrooledForProgramReport[] resArray = rest.postForObject(Constants.url + "getStudEnrooledForProgram",
 					map, StudEnrooledForProgramReport[].class);
 			List<StudEnrooledForProgramReport> progList = new ArrayList<>(Arrays.asList(resArray));
@@ -14514,7 +14654,7 @@ public class ReportController {
 					if (prog.getTotalStud() == 0) {
 						avg = 0;
 					} else {
-						avg = prog.getProgStudEnrolled() / prog.getTotalStud();
+						avg = prog.getProgStudEnrolled() / prog.getTotalStud()*100;
 					}
 
 					cell = new PdfPCell(new Phrase("" + decimalFormat.format(avg), headFontData));
@@ -14535,8 +14675,8 @@ public class ReportController {
 
 				DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
 				document.add(new Paragraph("Academic Year:" + temp_ac_year + ""));
-				document.add(new Paragraph("Program Name :" + progList.get(0).getProgramName() + ""));
-				document.add(new Paragraph("Program Type :" + temp_prog_name + ""));
+				//document.add(new Paragraph("Program Name :" + progList.get(0).getProgramName() + ""));
+				//document.add(new Paragraph("Program Type :" + temp_prog_name + ""));
 				document.add(new Paragraph("\n"));
 				document.add(table);
 				document.add(new Paragraph("Average% :" + x1 + ""));
@@ -14634,7 +14774,7 @@ public class ReportController {
 						} else {
 							avg = progList.get(i).getProgStudEnrolled() / progList.get(i).getTotalStud();
 						}
-						rowData.add("" + avg);
+						rowData.add("" + decimalFormat.format(avg));
 
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
@@ -14646,8 +14786,8 @@ public class ReportController {
 
 						// System.out.println("Excel List :" + exportToExcelList.toString());
 
-						String leaveSum = "Program: " + progList.get(0).getProgramName() + "";
-						String leaveSum1 = ",Program Type: " + temp_prog_name + "";
+						String leaveSum = "";//"Program: " + progList.get(0).getProgramName() + "";
+						String leaveSum1 = "";//",Program Type: " + temp_prog_name + "";
 						String leaveSum2 = ",Academic Year: " + temp_ac_year + "";
 
 						String reportSummary = leaveSum + "" + leaveSum1 + "" + leaveSum2;
@@ -14658,7 +14798,10 @@ public class ReportController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName="Stud Enrolled in Add On-";
+
 						response.setHeader("Content-disposition",
+								
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
 

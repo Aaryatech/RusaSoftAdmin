@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -516,13 +518,14 @@ public class RusaReportsController {
 				table.addCell(hcell);
 
 				int index = 0;
-				int postPer = 0;
+				float postPer = 0;
 
 				for (int i = 0; i < postList.size(); i++) {
 					// System.err.println("I " + i);
 					FacAgnstSanctnPost post = postList.get(i);
 					try {
-						postPer = post.getNoOfFulltimeFaculty() / post.getSanctionedPost() * 100;
+						postPer = ((float)post.getNoOfFulltimeFaculty() / (float)post.getSanctionedPost()) * 100;
+						postPer=roundUp(postPer);
 					} catch (Exception e) {
 						System.err.println("Invalid Values---" + e.getMessage());
 					}
@@ -644,14 +647,14 @@ public class RusaReportsController {
 					exportToExcelList.add(expoExcel);
 
 					int cnt = 1;
-					int str = 0;
+					float str = 0;
 					String acYear = null;
 					for (int i = 0; i < postList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
-						str = postList.get(i).getNoOfFulltimeFaculty() / postList.get(i).getSanctionedPost() * 100;
+						str = ((float)postList.get(i).getNoOfFulltimeFaculty() / (float)postList.get(i).getSanctionedPost()) * 100;
 						cnt = cnt + i;
-						
+						str=roundUp(str);
 						rowData.add("" + (i + 1));
 
 						rowData.add("" + postList.get(i).getAcademicYear());
@@ -830,14 +833,18 @@ public class RusaReportsController {
 				table.addCell(hcell);
 
 				int index = 0;
-				int studPer = 0;
+				float studPer = 0;
 
 				for (int i = 0; i < studList.size(); i++) {
 					// System.err.println("I " + i);
 					DifferentlyAbldStudReport stud = studList.get(i);
+					studPer = 0;
 					try {
-						studPer = stud.getNoOfPwdStud() * 100 / stud.getTotalStudEnrolled();
+						if(stud.getNoOfPwdStud()>0 && stud.getTotalStudEnrolled()>0)
+						studPer = ((float)stud.getNoOfPwdStud() * 100 )/ (float)stud.getTotalStudEnrolled();
+						studPer=roundUp(studPer);
 					} catch (Exception e) {
+						studPer = 0;
 						System.err.println("Invalid Values---" + e.getMessage());
 					}
 					index++;
@@ -958,11 +965,18 @@ public class RusaReportsController {
 					exportToExcelList.add(expoExcel);
 
 					int cnt = 1;
-					int str = 0;
+					float str = 0;
 					for (int i = 0; i < studList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
-						str = studList.get(i).getNoOfPwdStud() * 100 / studList.get(i).getTotalStudEnrolled();
+						 str = 0;
+						try {
+							if(studList.get(i).getNoOfPwdStud()>0 &&studList.get(i).getTotalStudEnrolled()>0 )
+						str = ((float)studList.get(i).getNoOfPwdStud() * 100) /  (float)studList.get(i).getTotalStudEnrolled();
+						str=roundUp(str);
+						}catch (Exception e) {
+							str = 0;
+						}
 						cnt = cnt + i;
 
 						rowData.add("" + (i + 1));
@@ -1143,14 +1157,17 @@ public class RusaReportsController {
 				table.addCell(hcell);
 
 				int index = 0;
-				int facPer = 0;
+				float facPer = 0;
 
 				for (int i = 0; i < facList.size(); i++) {
 					// System.err.println("I " + i);
 					FacAgnstSanctnPostOthrState fac = facList.get(i);
+					facPer=0;
 					try {
-						facPer = (fac.getNoOfOtherStateFac() / fac.getSanctionedPost()) * 100;
+						if(fac.getNoOfOtherStateFac()>0 &&fac.getSanctionedPost()>0 )
+						facPer = ((float)fac.getNoOfOtherStateFac() / (float)fac.getSanctionedPost()) * 100;
 						//System.out.println("Cal"+facPer);
+						facPer=roundUp(facPer);
 					} catch (Exception e) {
 						
 						System.err.println("Invalid Values---" + e.getMessage());
@@ -1273,12 +1290,14 @@ public class RusaReportsController {
 					exportToExcelList.add(expoExcel);
 
 					int cnt = 1;
-					int str = 0;
+					float str = 0;
 					for (int i = 0; i < facList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						try {
-							str = facList.get(i).getNoOfOtherStateFac() / facList.get(i).getSanctionedPost() * 100;
+						if(facList.get(i).getNoOfOtherStateFac()>0 &&facList.get(i).getSanctionedPost()>0 )
+							str = ((float)facList.get(i).getNoOfOtherStateFac() / (float)facList.get(i).getSanctionedPost()) * 100;
+							str=roundUp(str);
 						} catch (Exception e) {
 							System.err.println("Invalid Values---" + e.getMessage());
 						}
@@ -1658,6 +1677,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teaching Experience of Full Time Faculty(Current Data)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -1939,6 +1960,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Full Time Faculty Available With PhDs";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -2558,6 +2581,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Students Performance in Final Year";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -2850,6 +2875,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "ICT Enabled Facilities";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -3190,6 +3217,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Expenditure on Purchase of Books and Journals";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -3345,7 +3374,9 @@ public class RusaReportsController {
 					// System.err.println("I " + i);
 					BudgetInfraAugmntn budget = budgetList.get(i);
 					try {
-						bgt = Float.parseFloat(budget.getBudgetUtilized()) * 100 / budget.getExInt1();
+						//bgt = Float.parseFloat(budget.getBudgetAllocated()) * 100 / budget.getExInt1();
+						bgt = (Float.parseFloat(budget.getBudgetUtilized())/Float.parseFloat(budget.getBudgetAllocated()))*100;
+
 
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
@@ -3364,7 +3395,7 @@ public class RusaReportsController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + budget.getBudgetUtilized(), headFontData));
+					cell = new PdfPCell(new Phrase("" + budget.getBudgetAllocated(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -3384,7 +3415,7 @@ public class RusaReportsController {
 					 * table.addCell(cell);
 					 */
 
-					cell = new PdfPCell(new Phrase("" + bgt, headFontData));
+					cell = new PdfPCell(new Phrase("" + df.format(bgt), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -3423,11 +3454,12 @@ public class RusaReportsController {
 				document.add(new Paragraph("\n"));
 				//System.out.println("Ttl Bugt %-----" + ttlBugtPer);
 				//System.out.println("Avg Bugt %-----" + avgPerOnBugt);
-				document.add(new Paragraph("Average % of Budget on Infrastructure Augmentation : " + avgPerOnBugt));
+				DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+				document.add(new Paragraph("Average % of Budget on Infrastructure Augmentation : " + decimalFormat.format(avgPerOnBugt)));
 				int totalPages = writer.getPageNumber();
 
 				//System.out.println("Page no " + totalPages);
-
 				document.close();
 				int p = Integer.parseInt(request.getParameter("p"));
 				System.err.println("p " + p);
@@ -3487,8 +3519,8 @@ public class RusaReportsController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						try {
-							bgtPer = Float.parseFloat(budgetList.get(i).getBudgetUtilized()) * 100
-									/ budgetList.get(i).getExInt1();
+							bgtPer = (Float.parseFloat(budgetList.get(i).getBudgetUtilized())/Float.parseFloat(budgetList.get(i).getBudgetAllocated())) * 100;
+
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
@@ -3497,10 +3529,10 @@ public class RusaReportsController {
 
 						rowData.add("" + (i + 1));
 						rowData.add("" + budgetList.get(i).getFinYear());
-						rowData.add("" + budgetList.get(i).getBudgetUtilized());
+						rowData.add("" + budgetList.get(i).getBudgetAllocated());
 						rowData.add("" + budgetList.get(i).getExInt1());
 						// rowData.add("" + budgetList.get(i).getInstituteName());
-						rowData.add("" + bgtPer);
+						rowData.add("" + df.format(bgtPer));
 
 						try {
 							ttlBgtper = bgtPer + ttlBgtper;
@@ -3525,13 +3557,15 @@ public class RusaReportsController {
 							rep = "-";
 
 						}
-						String avg = String.valueOf(avgBgtPer);
+						String avg = String.valueOf(decimalFormat.format(avgBgtPer));
 						System.err.println("headingName  " + headingName);
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,"Academic Year : "+temp_ac_year, "Average % of Budget on Infrastructure Augmentation : "+avg,'D');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Budget on Infrastructure Augmentation";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -3670,14 +3704,14 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				hcell = new PdfPCell(new Phrase("% of Budget on Infrastructure Augmentation", tableHeaderFont));
+				hcell = new PdfPCell(new Phrase("Usage %", tableHeaderFont));
 				hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				hcell.setBackgroundColor(Constants.baseColorTableHeader);
 
 				table.addCell(hcell);
 
 				int index = 0;
-				double studcompratio = 0;
+				float studcompratio = 0;
 
 				for (int i = 0; i < studCompList.size(); i++) {
 					// System.err.println("I " + i);
@@ -3685,7 +3719,8 @@ public class RusaReportsController {
 					try {
 						System.err.println("I------- " + stdCmpRatioList.getNoOfComputers()+"---------"+stdCmpRatioList.getNoOfStudUtilizing());
 						
-						studcompratio = stdCmpRatioList.getNoOfComputers()/stdCmpRatioList.getNoOfStudUtilizing();
+						studcompratio = (float)stdCmpRatioList.getNoOfComputers()/(float)stdCmpRatioList.getNoOfStudUtilizing();
+						studcompratio=roundUp(studcompratio);
 						System.err.println("Rtio------- " +studcompratio);
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
@@ -3809,19 +3844,20 @@ public class RusaReportsController {
 					rowData.add("Purchase Date");
 					rowData.add("Purchase Amount");
 					rowData.add("No. of Student Utilising");					
-					rowData.add("% of Budget on Infrastructure Augmentation");
+					rowData.add("Usage %");
 
 					expoExcel.setRowData(rowData);
 					exportToExcelList.add(expoExcel);
 
 					int cnt = 1;
 
-					double ratio = 0;
+					float ratio = 0;
 					for (int i = 0; i < studCompList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						try {
-							ratio = studCompList.get(i).getNoOfComputers()/studCompList.get(i).getNoOfStudUtilizing();
+							ratio = (float)studCompList.get(i).getNoOfComputers()/(float)studCompList.get(i).getNoOfStudUtilizing();
+							ratio=roundUp(ratio);
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
@@ -3858,6 +3894,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Student-Computer Ratio";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -4179,6 +4217,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "E-Content Development Facilities";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -4449,6 +4489,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Internet Connection Information";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -4593,7 +4635,10 @@ public class RusaReportsController {
 					// System.err.println("I " + i);
 					ExpndturOnPhysclAcademicSupprt expd = expndList.get(i);
 					try {
-					expdPer = expd.getExpdOnPhyAcad()*100/expd.getTtlExpd();
+					//expdPer = ((float)expd.getExpdOnPhyAcad()*100)/(float)expd.getTtlExpd();
+						expdPer = ((float)expd.getExpdOnPhyAcad()/(float)expd.getBudgetAllocated()) * 100 ;
+
+					expdPer=roundUp(expdPer);
 					}catch (Exception e) {
 						System.err.println("Dividr By Zero : "+e.getMessage());
 					}
@@ -4715,7 +4760,13 @@ public class RusaReportsController {
 					for (int i = 0; i < expndList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
-						expndPer = expndList.get(i).getExpdOnPhyAcad()*100/expndList.get(i).getTtlExpd();
+						expndPer = 0;
+						try {
+						expndPer = ((float)expndList.get(i).getExpdOnPhyAcad()*100)/(float)expndList.get(i).getTtlExpd();
+						expndPer=roundUp(expndPer);
+						}catch (Exception e) {
+							expndPer=0;
+						}
 						cnt = cnt + i;
 
 						rowData.add("" + (i + 1));
@@ -4747,6 +4798,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Expenditure on Physical and Academic Support Facilities";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -5089,6 +5142,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Expenditure on Green Initiatives-Waste Management";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -5322,7 +5377,7 @@ public class RusaReportsController {
 					rowData.add("Sr. No");
 					rowData.add("Academic Year");
 					rowData.add("Name of Initiative");
-					rowData.add("Beneficiary if initiative");
+					rowData.add("Beneficiary of initiative");
 					
 					expoExcel.setRowData(rowData);
 					exportToExcelList.add(expoExcel);
@@ -5364,6 +5419,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Initiative to Address Locational Advantages-Disadvantages";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -5621,6 +5678,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No of Initiative to Address Locational Advantages Disadvantages";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -6161,6 +6220,9 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName =  "No of Linkages";
+
+						
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -6726,6 +6788,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Functional MoUs R&D";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -6996,6 +7060,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Award-Recognition for Extension Activity";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -7257,6 +7323,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No Award-Recognition for Extension Activity";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -7560,6 +7628,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Intellectual Property Rights and Industry Institute Initiatives";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -7842,10 +7912,10 @@ public class RusaReportsController {
 				
 				if(temp_ac_year.equals("Last Five Years")) {
 					document.add(new Paragraph("\n"));
-					document.add(new Paragraph("Avg. % of Placement for Last Five Year :" + AvgPlcmntFiveYr + ""));
+					document.add(new Paragraph("Avg. % of Placement for Last Five Year :" + df.format(AvgPlcmntFiveYr) + ""));
 				}else {
 				document.add(new Paragraph("\n"));
-				document.add(new Paragraph("% of Placement Pre Year :" + perPlacmntPreYr + ""));
+				document.add(new Paragraph("% of Placement Per Year :" + df.format(perPlacmntPreYr) + ""));
 				}
 				
 
@@ -7951,6 +8021,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Avg per of Placement (Last Five Years)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -8277,6 +8349,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "per of Students Progression (Higher Education):(Current YearData)";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -8594,6 +8668,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teachers Recognition-Awards and Incentives Information";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -8917,6 +8993,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teacher Research Paper-Journal Information";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -9102,7 +9180,10 @@ public class RusaReportsController {
 				//System.out.println("TTlNo Publication-----"+ttlPublcatn);
 				resrchPprPerTechr = ttlPublcatn/avgTech;
 				//System.out.println("Research Paper Per Teacher-------"+resrchPprPerTechr);
+				DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
 				
+
 				document.open();
 				Font hf = new Font(FontFamily.TIMES_ROMAN, 12.0f, Font.UNDERLINE, BaseColor.BLACK);
 
@@ -9124,7 +9205,7 @@ public class RusaReportsController {
 				
 				document.add(new Paragraph("\n"));
 				if(temp_ac_year.equals("Last Five Years")) {
-				document.add(new Paragraph("No. of Research Papers per Teacher :" + resrchPprPerTechr + ""));
+				document.add(new Paragraph("No. of Research Papers per Teacher :" + decimalFormat.format(resrchPprPerTechr) + ""));
 				document.add(new Paragraph("\n"));
 				}
 				
@@ -9207,19 +9288,21 @@ public class RusaReportsController {
 						// "Academic Year :" + temp_ac_year + " ");
 						
 						if(temp_ac_year.equals("Last Five Years")) {
-						String resrchPaper="No. of Research Papers per Teacher :"+String.valueOf(resrchPprPerTechr);
+						String resrchPaper="No. of Research Papers per Teacher :"+String.valueOf(decimalFormat.format(resrchPprPerTechr));
 					
 						wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
 								"Academic Year:" + temp_ac_year + " ",resrchPaper, 'F');
 						}
 						else {
-							String resrchPaper=String.valueOf(resrchPprPerTechr);
+							String resrchPaper=String.valueOf(decimalFormat.format(resrchPprPerTechr));
 							wb = ExceUtil.createWorkbook(exportToExcelList, headingName, reportName,
 									"Academic Year:" + temp_ac_year + " ","", 'F');
 						}
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Teacher Research Paper-Journal Information";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -9541,6 +9624,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Research Project Grants";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -9818,6 +9903,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "No of Full Time Teachers as Research Guide";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -9860,12 +9947,12 @@ public class RusaReportsController {
 			model = new ModelAndView("report/ratio_report1");
 
 			HttpSession session = request.getSession();
-			String temp_ac_year = request.getParameter("temp_ac_year");
+			String temp_ac_year ="Last Five Years"; // request.getParameter("temp_ac_year");
 			String ac_year = request.getParameter("ac_year");
 			int instituteId = (int) session.getAttribute("instituteId");
 
 			map = new LinkedMultiValueMap<>();
-			map.add("acYearList", ac_year);
+			map.add("acYearList", "-5");
 			map.add("instId", instituteId);
 
 			PerNewCource[] resArray = rest.postForObject(Constants.url + "/getPerNewCource", map,
@@ -9925,7 +10012,8 @@ public class RusaReportsController {
 						noCourse = lastFiveYrList.get(0).getNoCoursesInLast5(); 		//---------------Courses of Last 5 Years
 						ttlNoCourse = lastFiveYrList.get(1).getNoCoursesInLast5();		//---------------Total No. of Courses until now
 						perCourseIntro = (noCourse*100)/ttlNoCourse;
-						
+						perCourseIntro= roundUp(perCourseIntro);
+
 					} catch (Exception e) {
 						System.err.println("Invalid Values---" + e.getMessage());
 					}
@@ -10031,6 +10119,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Per of New Courses Introduced";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10248,6 +10338,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Per of Programs with CBCS-Elective courses";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10553,6 +10645,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Fields Project-Internships";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10895,6 +10989,8 @@ public class RusaReportsController {
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+						reportName = "Feedback Received from Stakeholders";
+
 						response.setHeader("Content-disposition",
 								"attachment; filename=" + reportName + "-" + date + ".xlsx");
 						wb.write(response.getOutputStream());
@@ -10925,5 +11021,10 @@ public class RusaReportsController {
 		}
 
 	}	
+	
+	private float roundUp(float inputValue) {
+		BigDecimal bd = new BigDecimal(inputValue).setScale(2, RoundingMode.HALF_UP);
+		return inputValue= bd.floatValue();
+		}
 }
 
