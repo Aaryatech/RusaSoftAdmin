@@ -221,6 +221,7 @@ public class RusaReportsController {
 					try {
 							studTchrRato = ratio.getNoCurrentAdmitedStnt() / ratio.getNoOfFulltimeFaculty();
 					}catch (Exception e) {
+						studTchrRato = 0;
 						e.printStackTrace();
 					}
 					index++;
@@ -337,7 +338,11 @@ public class RusaReportsController {
 					for (int i = 0; i < ratioList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
+						try {
 						str = ratioList.get(i).getNoCurrentAdmitedStnt() / ratioList.get(i).getNoOfFulltimeFaculty();
+						}catch (Exception e) {
+							str = 0;
+						}
 						cnt = cnt + i;
 						
 						rowData.add("" + (i + 1));
@@ -527,7 +532,7 @@ public class RusaReportsController {
 						postPer = ((float)post.getNoOfFulltimeFaculty() / (float)post.getSanctionedPost()) * 100;
 						postPer=roundUp(postPer);
 					} catch (Exception e) {
-						System.err.println("Invalid Values---" + e.getMessage());
+						postPer=0.0f;System.err.println("Invalid Values---" + e.getMessage());
 					}
 					index++;
 					PdfPCell cell;
@@ -652,7 +657,11 @@ public class RusaReportsController {
 					for (int i = 0; i < postList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
+						try {
 						str = ((float)postList.get(i).getNoOfFulltimeFaculty() / (float)postList.get(i).getSanctionedPost()) * 100;
+						}catch (Exception e) {
+							str = 0;
+						}
 						cnt = cnt + i;
 						str=roundUp(str);
 						rowData.add("" + (i + 1));
@@ -1169,7 +1178,7 @@ public class RusaReportsController {
 						//System.out.println("Cal"+facPer);
 						facPer=roundUp(facPer);
 					} catch (Exception e) {
-						
+						facPer=0;
 						System.err.println("Invalid Values---" + e.getMessage());
 					}
 					index++;
@@ -1299,7 +1308,7 @@ public class RusaReportsController {
 							str = ((float)facList.get(i).getNoOfOtherStateFac() / (float)facList.get(i).getSanctionedPost()) * 100;
 							str=roundUp(str);
 						} catch (Exception e) {
-							System.err.println("Invalid Values---" + e.getMessage());
+							str = 0;System.err.println("Invalid Values---" + e.getMessage());
 						}
 						cnt = cnt + i;
 
@@ -1494,16 +1503,19 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				int index = 0;
+				int index = 1;
 				float expCount = 0;
 
 				for (int i = 0; i < facList.size(); i++) {
 					// System.err.println("I " + i);
 					TeacExpFullTimFac fac = facList.get(i);
-
+					try {
 					expCount = Float.parseFloat(fac.getCurExp()) + expCount;
+					}catch (Exception e) {
+						expCount = 0;
+					}
 
-					index++;
+					
 					PdfPCell cell;
 					cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -1549,12 +1561,17 @@ public class RusaReportsController {
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
-
+					index++;
 				}
 				//System.out.println("Faculty Count-----" + index);
 				//System.out.println("Exp Count----" + expCount);
 
-				float teachingExp = expCount / index;
+				float teachingExp =0;// expCount / index;
+				try {
+					teachingExp = expCount / index;
+				}catch (Exception e) {
+					 teachingExp =0;
+				}
 				//System.out.println("Teaching Experience----" + teachingExp);
 
 				document.open();
@@ -1641,7 +1658,11 @@ public class RusaReportsController {
 					for (int i = 0; i < facList.size(); i++) {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
+						try {
 						expCnt = Float.parseFloat(facList.get(i).getCurExp()) + expCount;
+						}catch (Exception e) {
+							expCnt = 0;
+						}
 						cnt = cnt + i;
 
 						rowData.add("" + (i + 1));
@@ -3111,7 +3132,13 @@ public class RusaReportsController {
 				document.add(table);
 
 				document.add(new Paragraph("\n"));
-				document.add(new Paragraph("Average Annual Expenditure in Last 5-Years : " + avgAnulExpd / 5));
+				float av=0;
+				try{
+					av=avgAnulExpd / 5;
+				}catch (Exception e) {
+					 av=0;
+				}
+				document.add(new Paragraph("Average Annual Expenditure in Last 5-Years : " +roundUp(av) ));
 				int totalPages = writer.getPageNumber();
 
 				//System.out.println("Page no " + totalPages);
@@ -3188,13 +3215,19 @@ public class RusaReportsController {
 						
 						try {
 							ttlBgtper = bookList.get(i).getTotalExpenditures() + ttlBgtper;
-							avgBgtPer = ttlBgtper/5;
+							
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
 
+					}
+					
+					try {
+					avgBgtPer = ttlBgtper/5;
+					}catch (Exception e) {
+						avgBgtPer=0;
 					}
 					//System.out.println("AVG Budget = " + avgBgtPer);
 					XSSFWorkbook wb = null;
@@ -3365,7 +3398,7 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				int index = 0;
+				int index = 1;
 				float bgt = 0;
 				float ttlBugtPer = 0;
 				float avgPerOnBugt = 0;
@@ -3375,14 +3408,14 @@ public class RusaReportsController {
 					BudgetInfraAugmntn budget = budgetList.get(i);
 					try {
 						//bgt = Float.parseFloat(budget.getBudgetAllocated()) * 100 / budget.getExInt1();
-						bgt = (Float.parseFloat(budget.getBudgetUtilized())/Float.parseFloat(budget.getBudgetAllocated()))*100;
+						bgt = (Float.parseFloat(budget.getBudgetAllocated())/(float)(budget.getExInt1()))*100;
 
 
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
 
-					index++;
+					
 					PdfPCell cell;
 					cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -3420,15 +3453,17 @@ public class RusaReportsController {
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
-
+					index++;
 					try {
 						ttlBugtPer = bgt + ttlBugtPer;
-						avgPerOnBugt = ttlBugtPer / index;
+					
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
 				}
-
+				
+				avgPerOnBugt = ttlBugtPer / index;
+				
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -3519,13 +3554,13 @@ public class RusaReportsController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						try {
-							bgtPer = (Float.parseFloat(budgetList.get(i).getBudgetUtilized())/Float.parseFloat(budgetList.get(i).getBudgetAllocated())) * 100;
+							bgtPer = (Float.parseFloat(budgetList.get(i).getBudgetAllocated())/(float)(budgetList.get(i).getExInt1())) * 100;
 
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
 
-						cnt = cnt + i;
+						
 
 						rowData.add("" + (i + 1));
 						rowData.add("" + budgetList.get(i).getFinYear());
@@ -3536,13 +3571,18 @@ public class RusaReportsController {
 
 						try {
 							ttlBgtper = bgtPer + ttlBgtper;
-							avgBgtPer = ttlBgtper / cnt;
+							
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
 						expoExcel.setRowData(rowData);
 						exportToExcelList.add(expoExcel);
-
+						cnt = cnt + i;
+					}
+					try {
+					avgBgtPer = ttlBgtper / cnt;
+					}catch (Exception e) {
+						avgBgtPer=0;
 					}
 					//System.out.println("AVG Budget = " + avgBgtPer);
 					XSSFWorkbook wb = null;
@@ -3718,7 +3758,6 @@ public class RusaReportsController {
 					StudCompRatioReport stdCmpRatioList = studCompList.get(i);
 					try {
 						System.err.println("I------- " + stdCmpRatioList.getNoOfComputers()+"---------"+stdCmpRatioList.getNoOfStudUtilizing());
-						
 						studcompratio = (float)stdCmpRatioList.getNoOfComputers()/(float)stdCmpRatioList.getNoOfStudUtilizing();
 						studcompratio=roundUp(studcompratio);
 						System.err.println("Rtio------- " +studcompratio);
@@ -4446,7 +4485,7 @@ public class RusaReportsController {
 
 					// rowData.add("E-Content Development");
 					rowData.add("Total Bandwidth(Leased Line)");
-					rowData.add("Bandwidth for Library Abd E-Resources");
+					rowData.add("Bandwidth for Library And E-Resources");
 					rowData.add("");
 
 					expoExcel.setRowData(rowData);
@@ -4636,7 +4675,7 @@ public class RusaReportsController {
 					ExpndturOnPhysclAcademicSupprt expd = expndList.get(i);
 					try {
 					//expdPer = ((float)expd.getExpdOnPhyAcad()*100)/(float)expd.getTtlExpd();
-						expdPer = ((float)expd.getExpdOnPhyAcad()/(float)expd.getBudgetAllocated()) * 100 ;
+						expdPer = ((float)expd.getBudgetAllocated()/(float)expd.getTtlExpd()) * 100 ;
 
 					expdPer=roundUp(expdPer);
 					}catch (Exception e) {
@@ -4656,7 +4695,7 @@ public class RusaReportsController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + expd.getExpdOnPhyAcad(), headFontData));
+					cell = new PdfPCell(new Phrase("" + expd.getBudgetAllocated(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -4762,7 +4801,7 @@ public class RusaReportsController {
 						rowData = new ArrayList<String>();
 						expndPer = 0;
 						try {
-						expndPer = ((float)expndList.get(i).getExpdOnPhyAcad()*100)/(float)expndList.get(i).getTtlExpd();
+						expndPer = ((float)expndList.get(i).getBudgetAllocated()*100)/(float)expndList.get(i).getTtlExpd();
 						expndPer=roundUp(expndPer);
 						}catch (Exception e) {
 							expndPer=0;
@@ -4946,7 +4985,7 @@ public class RusaReportsController {
 
 				table.addCell(hcell);
 
-				int index = 0;
+				int index = 1;
 				float bgt = 0;
 				float ttlBugtPer = 0;
 				float avgPerOnBugt = 0;
@@ -4955,13 +4994,13 @@ public class RusaReportsController {
 					// System.err.println("I " + i);
 					ExpndGreenInitveWsteMgmt budget = expndGrnList.get(i);
 					try {
-						bgt = budget.getBudgetUtilized() * 100 / budget.getTtlExpnd();
+						bgt = ((float)budget.getBudgetAllocated() / (float)budget.getTtlExpnd())*100;
 
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
 
-					index++;
+					
 					PdfPCell cell;
 					cell = new PdfPCell(new Phrase(String.valueOf(index), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -4974,7 +5013,7 @@ public class RusaReportsController {
 
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase("" + budget.getBudgetUtilized(), headFontData));
+					cell = new PdfPCell(new Phrase("" + budget.getBudgetAllocated(), headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -4994,7 +5033,7 @@ public class RusaReportsController {
 					 * table.addCell(cell);
 					 */
 
-					cell = new PdfPCell(new Phrase("" + bgt, headFontData));
+					cell = new PdfPCell(new Phrase("" +df.format(bgt) , headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -5002,12 +5041,13 @@ public class RusaReportsController {
 
 					try {
 						ttlBugtPer = bgt + ttlBugtPer;
-						avgPerOnBugt = ttlBugtPer / index;
+						
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
+					index++;
 				}
-
+				avgPerOnBugt = ttlBugtPer / index;
 				document.open();
 				Font reportNameFont = Constants.reportNameFont;// new Font(FontFamily.TIMES_ROMAN, 14.0f,
 																// Font.UNDERLINE, BaseColor.BLACK);
@@ -5033,7 +5073,7 @@ public class RusaReportsController {
 				document.add(new Paragraph("\n"));
 				//System.out.println("Ttl Bugt %-----" + ttlBugtPer);
 				//System.out.println("Avg Bugt %-----" + avgPerOnBugt);
-				document.add(new Paragraph("Average % of Green Initiatives & Waste Management : " + avgPerOnBugt));
+				document.add(new Paragraph("Average % of Green Initiatives & Waste Management : " + roundUp(avgPerOnBugt)));
 				int totalPages = writer.getPageNumber();
 
 				//System.out.println("Page no " + totalPages);
@@ -5097,8 +5137,8 @@ public class RusaReportsController {
 						expoExcel = new ExportToExcel();
 						rowData = new ArrayList<String>();
 						try {
-							bgtPer = expndGrnList.get(i).getBudgetUtilized() * 100
-									/ expndGrnList.get(i).getTtlExpnd();
+							bgtPer = ((float)expndGrnList.get(i).getBudgetAllocated() 
+									/ (float)expndGrnList.get(i).getTtlExpnd())*100;
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
@@ -5107,14 +5147,14 @@ public class RusaReportsController {
 
 						rowData.add("" + (i + 1));
 						rowData.add("" + expndGrnList.get(i).getFinYear());
-						rowData.add("" + expndGrnList.get(i).getBudgetUtilized());
+						rowData.add("" + expndGrnList.get(i).getBudgetAllocated());
 						rowData.add("" + expndGrnList.get(i).getTtlExpnd());
 						// rowData.add("" + budgetList.get(i).getInstituteName());
-						rowData.add("" + bgtPer);
+						rowData.add("" + df.format(bgtPer));
 
 						try {
 							ttlBgtper = bgtPer + ttlBgtper;
-							avgBgtPer = ttlBgtper / cnt;
+							
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
@@ -5122,6 +5162,7 @@ public class RusaReportsController {
 						exportToExcelList.add(expoExcel);
 
 					}
+					avgBgtPer = ttlBgtper / cnt;
 					//System.out.println("AVG Budget = " + avgBgtPer);
 					XSSFWorkbook wb = null;
 					try {
@@ -5135,10 +5176,9 @@ public class RusaReportsController {
 							rep = "-";
 
 						}
-						String avg = String.valueOf(avgBgtPer);
 						System.err.println("headingName  " + headingName);
 						// String excelName = (String) session.getAttribute("excelName");
-						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,"Academic Year : "+temp_ac_year, "Average % of of Green Initiatives & Waste Management : "+avg,'D');
+						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,"Academic Year : "+temp_ac_year, "Average % of of Green Initiatives & Waste Management : "+roundUp(avgBgtPer),'D');
 						ExceUtil.autoSizeColumns(wb, 3);
 						response.setContentType("application/vnd.ms-excel");
 						String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -7054,7 +7094,6 @@ public class RusaReportsController {
 							rep = "-";
 
 						}
-						System.err.println("headingName  " + headingName);
 						// String excelName = (String) session.getAttribute("excelName");
 						wb = ExceUtil.createWorkbook(exportToExcelList, rep, reportName,"Academic Year : "+temp_ac_year," ", 'C');
 						ExceUtil.autoSizeColumns(wb, 3);
@@ -7880,11 +7919,17 @@ public class RusaReportsController {
 				
 				//System.out.println("Add="+ttlStudPlaced);
 				//System.out.println("VVV"+ttlstudPassed+" / "+ttlstudPassed);
-				
+				try {
 				perPlacmntPreYr = (ttlStudPlaced/ttlstudPassed)*100;
+				}catch (Exception e) {
+					perPlacmntPreYr=0;// TODO: handle exception
+				}
 				//System.out.println("perPlacmntPreYr "+perPlacmntPreYr);
+				try {
 				AvgPlcmntFiveYr = perPlacmntPreYr/5;
-				
+				}catch (Exception e) {
+					AvgPlcmntFiveYr=0;
+				}
 				//System.out.println("AVG %="+perPlacmntPreYr+" "+AvgPlcmntFiveYr);
 				
 				document.open();
@@ -8180,9 +8225,11 @@ public class RusaReportsController {
 					try {
 						studPass = stud.getNoStudPass();
 						noStud = stud.getNoStudent();
-						
+						try {
 						studProg = (noStud/studPass)*100;
-						
+						}catch (Exception e) {
+							studProg=0;
+						}
 						//studProg = (stud.getNoStudent()/stud.getNoStudPass())*100;
 						
 						
@@ -8965,7 +9012,11 @@ public class RusaReportsController {
 						cnt = cnt + i;
 
 						rowData.add("" + (i + 1));
-
+						if(resrchInfoList.get(i).getJournalType()==0) {
+							flag="Yes";
+						}else {
+							flag="No";
+						}
 						rowData.add("" + resrchInfoList.get(i).getFacultyFirstName()+" "+resrchInfoList.get(i).getCoAuthor());
 						rowData.add("" + resrchInfoList.get(i).getDeptName());
 						rowData.add("" + resrchInfoList.get(i).getTitle());
@@ -9175,7 +9226,11 @@ public class RusaReportsController {
 				}
 				
 				//System.out.println("Totl Teacher----------"+ttlTechr);
+				try {
 				avgTech=ttlTechr/5;
+				}catch (Exception e) {
+					avgTech=0;// TODO: handle exception
+				}
 				//System.out.println("Avg Last yr------------"+avgTech);
 				//System.out.println("TTlNo Publication-----"+ttlPublcatn);
 				resrchPprPerTechr = ttlPublcatn/avgTech;
@@ -9790,8 +9845,11 @@ public class RusaReportsController {
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 
 					table.addCell(cell);
-					
+					try {
 					perResrchGuide=(guide.getNoResearchGuide()/guide.getFullTimeTeacher())*100;
+					}catch (Exception e) {
+						perResrchGuide=0;// TODO: handle exception
+					}
 					
 					cell = new PdfPCell(new Phrase("" + perResrchGuide, headFontData));
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -9877,6 +9935,11 @@ public class RusaReportsController {
 						rowData = new ArrayList<String>();
 						cnt = cnt + i;
 
+						try {
+							perResrchGuide=(rsrchGuidList.get(i).getNoResearchGuide()/rsrchGuidList.get(i).getFullTimeTeacher())*100;
+							}catch (Exception e) {
+								perResrchGuide=0;// TODO: handle exception
+							}
 						rowData.add("" + (i + 1));
 
 						rowData.add("" + rsrchGuidList.get(i).getFullTimeTeacher());
@@ -10151,7 +10214,6 @@ public class RusaReportsController {
 		}
 
 	}
-
 	@RequestMapping(value = "/showPerProgCbseElecticwCourse", method = RequestMethod.POST)
 	public void showPerProgCbseElecticwCourse(HttpServletRequest request, HttpServletResponse response) {
 
@@ -10232,7 +10294,7 @@ public class RusaReportsController {
 						noProgm = courseList.get(0).getCount1(); 		//---------------No. of Programs with CBSE/Elective courses implemented.
 						ttlNoProgm = courseList.get(1).getCount1();		//---------------Total No. of Program offered.
 						perProgmCourse = (noProgm*100)/ttlNoProgm;
-						
+						perProgmCourse=roundUp(perProgmCourse);
 					} catch (Exception e) {
 						System.err.println("Invalid Values---" + e.getMessage());
 					}
