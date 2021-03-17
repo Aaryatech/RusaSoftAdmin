@@ -259,7 +259,7 @@
 																			value="${fn:substring(tempVision,0,130)}"></c:set>
 
 																		<td title="${list.instVisionText}"
-																			style="word-wrap: break-word; max-width: 200">${list.instVisionText}</td>
+																			>${list.instVisionText}</td>
 																		<td style="text-align: center;"><a href="#"
 																			onclick="editInstituteVission(${list.instVisionId})"><span
 																				class="glyphicon glyphicon-edit" title="Edit"

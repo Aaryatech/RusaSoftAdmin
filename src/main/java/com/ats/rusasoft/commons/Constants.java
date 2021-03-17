@@ -6,11 +6,11 @@ import com.itextpdf.text.Font.FontFamily;
 
 public class Constants {
 
-	public static final String url = "http://localhost:8094/"; //10.9.63.3;http://
-	//public static final String url = "http://115.124.111.55:8080/rusasoftapi/";
-	//public static final String REPORT_SAVE = "/opt/tomcat/webapps/report/rusa_report.pdf";
+	//public static final String url = "http://localhost:8094/"; //10.9.63.3;http://
+public static final String url = "http://10.9.63.3:8080/rusasoftapitest/";
+	public static final String REPORT_SAVE = "/opt/tomcat/webapps/report/rusa_report.pdf";
 
-	public static final String REPORT_SAVE = "/home/ubuntu/Downloads/saii.pdf";
+	//public static final String REPORT_SAVE = "/home/ubuntu/Downloads/saii.pdf";
 
 	
 	//Role Constants to get role Ids

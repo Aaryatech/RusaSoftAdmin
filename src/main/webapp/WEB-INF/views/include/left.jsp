@@ -11,7 +11,7 @@
 			<div class="profile-info row">
 				<div class="profile-image col-xs-4">
 					<a href="#"> <img alt=""
-						src="../data/profile/profile.jpg"
+						src="${pageContext.request.contextPath}/resources/assets/images/favicon.png"
 						class="img-responsive img-circle">
 					</a>
 				</div>
